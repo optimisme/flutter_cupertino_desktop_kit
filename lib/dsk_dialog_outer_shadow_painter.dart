@@ -83,20 +83,21 @@ class DSKDialogOuterShadowPainter extends CustomPainter {
     return path;
   }
 
-  static Path createContourPathArrowed(Rect rect) {
+  static Path createContourPathArrowed(Rect rect, double arrowDiffX, bool arrowAtTop) {
     const Radius radius = Radius.circular(8);
     final path = Path();
-
-    Offset arrowMidPoint = Offset(rect.center.dx, rect.top - 8);
-    Offset arrowLeft = Offset(arrowMidPoint.dx - 8, rect.top);
-    Offset arrowRight = Offset(arrowMidPoint.dx + 8, rect.top);
 
     path.moveTo(rect.left + radius.x, rect.top);
 
     // Flexta superior
-    path.lineTo(arrowLeft.dx, arrowLeft.dy);
-    path.lineTo(arrowMidPoint.dx, arrowMidPoint.dy);
-    path.lineTo(arrowRight.dx, arrowRight.dy);
+    if (arrowAtTop) {
+      Offset arrowMidPoint = Offset(rect.center.dx + arrowDiffX, rect.top - 8);
+      Offset arrowLeft = Offset(arrowMidPoint.dx - 8, rect.top);
+      Offset arrowRight = Offset(arrowMidPoint.dx + 8, rect.top);
+      path.lineTo(arrowLeft.dx, arrowLeft.dy);
+      path.lineTo(arrowMidPoint.dx, arrowMidPoint.dy);
+      path.lineTo(arrowRight.dx, arrowRight.dy);
+    }
 
     path.lineTo(rect.right - radius.x, rect.top);
     path.arcToPoint(Offset(rect.right, rect.top + radius.y),
@@ -105,6 +106,19 @@ class DSKDialogOuterShadowPainter extends CustomPainter {
     path.lineTo(rect.right, rect.bottom - radius.y);
     path.arcToPoint(Offset(rect.right - radius.x, rect.bottom),
         radius: radius, clockwise: true);
+
+    // Flexta inferior
+    if (!arrowAtTop) {
+      Offset arrowMidPoint = Offset(rect.center.dx + arrowDiffX, rect.bottom + 8);
+      Offset arrowLeft = Offset(arrowMidPoint.dx - 8, rect.bottom);
+      Offset arrowRight = Offset(arrowMidPoint.dx + 8, rect.bottom);
+            path.lineTo(arrowRight.dx, arrowRight.dy);
+
+      path.lineTo(arrowMidPoint.dx, arrowMidPoint.dy);
+            path.lineTo(arrowLeft.dx, arrowLeft.dy);
+
+    }
+
     path.lineTo(rect.left + radius.x, rect.bottom);
     path.arcToPoint(Offset(rect.left, rect.bottom - radius.y),
         radius: radius, clockwise: true);

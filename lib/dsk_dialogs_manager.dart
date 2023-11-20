@@ -141,12 +141,12 @@ class DSKDialogsManager {
     Function onHide = _defaultFunction,
     required Widget child,
   }) {
-    if (_activeDraggableKeys.containsKey(anchorKey)) {
+    if (_activePopoverKeys.containsKey(anchorKey)) {
       moveDraggableToTop(context, anchorKey);
       return;
     }
 
-    _activeDraggableKeys[anchorKey] = key;
+    _activePopoverKeys[anchorKey] = key;
 
     OverlayEntry? overlayEntry;
     overlayEntry = OverlayEntry(
@@ -158,7 +158,13 @@ class DSKDialogsManager {
         onHide: () {
           onHide();
           overlayEntry?.remove();
-          _activeDraggableKeys.remove(anchorKey);
+          _activePopoverKeys.remove(anchorKey);
+          // Close all other popovers
+          while (_activePopoverKeys.isNotEmpty) {
+            var refKey = _activePopoverKeys.values.first;
+            var state = refKey.currentState as DSKDialogPopoverState;
+            state.hide();
+          }
         },
         child: child,
       ),

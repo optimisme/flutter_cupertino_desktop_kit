@@ -73,7 +73,7 @@ class DSKDialogPopoverArrowedState extends State<DSKDialogPopoverArrowed>
           final childSize = childRenderBox.size;
 
           width = childSize.width;
-          height = childSize.height;
+          height = childSize.height + 8; // 8 To give space for the shadow if at top
 
           screenSize = MediaQuery.of(context).size;
 
@@ -87,37 +87,43 @@ class DSKDialogPopoverArrowedState extends State<DSKDialogPopoverArrowed>
             width = maxWidth;
           }
 
-          var leftPosition =
+          double leftPosition =
               anchorPosition.dx + (anchorSize.width / 2) - width! / 2;
-          var topPosition = anchorPosition.dy + anchorSize.height + 4;
+          double topPosition = anchorPosition.dy + anchorSize.height + 4;
+          double arrowDiff = 0.0;
+          bool arrowAtBottom = true;
 
           if (leftPosition + width! > screenSize!.width - screenPadding) {
-            leftPosition = screenSize!.width - width! - screenPadding;
+            var tmp = screenSize!.width - width! - screenPadding;
+            arrowDiff = leftPosition - tmp;
+            leftPosition = tmp;
           }
           if (leftPosition < screenPadding) {
+            var tmp = screenPadding;
+            arrowDiff = leftPosition - tmp;
             leftPosition = screenPadding;
           }
 
           if (topPosition + height! > screenSize!.height - screenPadding) {
-            topPosition = screenSize!.height - height! - screenPadding;
+            topPosition = topPosition - height! - anchorSize.height - 8;
+            arrowAtBottom = false;
           }
 
           if (topPosition < screenPadding) {
             topPosition = screenPadding;
           }
 
+          if (!arrowAtBottom) {
+            topPosition = topPosition + 8;
+          }
+
           position = Offset(leftPosition, topPosition);
-          /* TODO position arrow properly
-          Offset arrowCenter = Offset(
-              (anchorPosition.dx + anchorSize.width / 2) - position.dx,
-              (anchorPosition.dy + anchorSize.height / 2) - position.dy);
-          */
-          final rectContour = Rect.fromLTWH(8, 8, width!, height!);
+          final rectContour = Rect.fromLTWH(8, 8, width!, height! - 8); // -8 To give space for the shadow if at top
           pathContour =
-              DSKDialogOuterShadowPainter.createContourPathArrowed(rectContour);
-          final rectClip = Rect.fromLTWH(0, 0, width!, height!);
+              DSKDialogOuterShadowPainter.createContourPathArrowed(rectContour, arrowDiff, arrowAtBottom);
+          final rectClip = Rect.fromLTWH(0, 0, width!, height! - 8); // -8 To give space for the shadow if at top
           pathClip =
-              DSKDialogOuterShadowPainter.createContourPathArrowed(rectClip);
+              DSKDialogOuterShadowPainter.createContourPathArrowed(rectClip, arrowDiff, arrowAtBottom);
 
           isSizeDetermined = true;
         });
