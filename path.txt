@@ -6,3 +6,5 @@ cd example
 flutter build web
 flutter build web --base-href "/flutter_desktop_cupertino/public/example/"
 cp -r ./build/web/* ../public/example
+
+python3 -m http.server 9000

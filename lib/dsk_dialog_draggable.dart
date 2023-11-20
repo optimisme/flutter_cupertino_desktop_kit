@@ -4,6 +4,7 @@ import 'dsk_dialog_outer_shadow_painter.dart';
 import 'dsk_dialog_popover_clipper.dart';
 import 'dsk_dialogs_manager.dart';
 import 'dsk_theme_colors.dart';
+import 'dsk_theme_manager.dart';
 
 class DSKDialogDraggable extends StatefulWidget {
   final GlobalKey anchorKey;
@@ -146,7 +147,9 @@ class DSKDialogDraggableState extends State<DSKDialogDraggable>
 
     Color backgroundColor = !widget.isTranslucent
         ? DSKColors.backgroundSecondary0
-        : DSKColors.transparent;
+        : DSKThemeManager.isLight
+            ? DSKColors.backgroundSecondary0.withOpacity(0.25)
+            : DSKColors.backgroundSecondary0.withOpacity(0.5);
 
     Widget dialogContents = Container(
       key: childKey,
