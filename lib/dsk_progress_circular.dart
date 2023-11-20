@@ -129,6 +129,8 @@ class DSKProgressCircularState extends State<DSKProgressCircular>
       builder: (context, child) {
         return CustomPaint(
           painter: ProgressCircularPainter(
+              actionColor: DSKColors.accent,
+              backgroundColor: DSKColors.backgroundSecondary1,
               progress: widget.isIndeterminate
                   ? _controller.value
                   : _progressAnimation.value,
@@ -144,16 +146,19 @@ class DSKProgressCircularState extends State<DSKProgressCircular>
 }
 
 class ProgressCircularPainter extends CustomPainter {
+  final Color actionColor;
+  final Color backgroundColor;
   final double progress;
   final bool isIndeterminate;
   final bool isIndeterminateAnimating;
   final bool hasAppFocus;
-
-  ProgressCircularPainter(
-      {required this.progress,
-      required this.isIndeterminate,
-      this.isIndeterminateAnimating = false,
-      this.hasAppFocus = true});
+  ProgressCircularPainter({
+    required this.actionColor,
+    required this.backgroundColor,
+    required this.progress,
+    required this.isIndeterminate,
+    this.isIndeterminateAnimating = false,
+    this.hasAppFocus = true});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -180,7 +185,7 @@ class ProgressCircularPainter extends CustomPainter {
         final double lineAngle = i * angleIncrement;
 
         // Calcula el color de la línia basat en l'animació
-        Color lineColor = DSKColors.backgroundSecondary1;
+        Color lineColor = backgroundColor;
         if (isIndeterminateAnimating) {
           final double normalizedProgress = (progress * 8) % 8;
           double diff = (normalizedProgress - i).abs();
@@ -216,7 +221,7 @@ class ProgressCircularPainter extends CustomPainter {
         ..style = PaintingStyle.fill;
 
       Paint progressPaint = Paint()
-        ..color = hasAppFocus ? DSKColors.accent : DSKColors.grey
+        ..color = hasAppFocus ? actionColor : DSKColors.grey
         ..style = PaintingStyle.fill;
 
       // Center the circle within the canvas
@@ -263,9 +268,12 @@ class ProgressCircularPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant ProgressCircularPainter oldDelegate) {
-    return oldDelegate.progress != progress ||
-        oldDelegate.hasAppFocus != hasAppFocus ||
-        oldDelegate.isIndeterminate != isIndeterminate ||
-        oldDelegate.isIndeterminateAnimating != isIndeterminateAnimating;
+      return 
+      oldDelegate.actionColor != actionColor ||
+      oldDelegate.backgroundColor != backgroundColor ||
+      oldDelegate.progress != progress ||
+      oldDelegate.hasAppFocus != hasAppFocus ||
+      oldDelegate.isIndeterminate != isIndeterminate ||
+      oldDelegate.isIndeterminateAnimating != isIndeterminateAnimating;
   }
 }

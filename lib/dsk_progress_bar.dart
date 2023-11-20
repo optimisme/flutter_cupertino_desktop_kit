@@ -128,6 +128,8 @@ class DSKProgressBarState extends State<DSKProgressBar>
       builder: (context, child) {
         return CustomPaint(
           painter: ProgressBarPainter(
+            actionColor: DSKColors.accent,
+            backgroundColor: DSKColors.backgroundSecondary1,
               progress: widget.isIndeterminate
                   ? _controller.value
                   : _progressAnimation.value,
@@ -143,25 +145,29 @@ class DSKProgressBarState extends State<DSKProgressBar>
 }
 
 class ProgressBarPainter extends CustomPainter {
+  final Color actionColor;
+  final Color backgroundColor;
   final double progress;
   final bool isIndeterminate;
   final bool isIndeterminateAnimating;
   final bool hasAppFocus;
 
-  ProgressBarPainter(
-      {required this.progress,
-      required this.isIndeterminate,
-      this.isIndeterminateAnimating = false,
-      this.hasAppFocus = true});
+  ProgressBarPainter({
+    required this.actionColor,
+    required this.backgroundColor,
+    required this.progress,
+    required this.isIndeterminate,
+    this.isIndeterminateAnimating = false,
+    this.hasAppFocus = true});
 
   @override
   void paint(Canvas canvas, Size size) {
     Paint backgroundPaint = Paint()
-      ..color = DSKColors.backgroundSecondary1
+      ..color = backgroundColor
       ..style = PaintingStyle.fill;
 
     Paint progressPaint = Paint()
-      ..color = hasAppFocus ? DSKColors.accent : DSKColors.grey
+      ..color = hasAppFocus ? actionColor : DSKColors.grey
       ..style = PaintingStyle.fill;
 
     // Calcula l'alçada i la posició vertical centrada de la barra
@@ -221,9 +227,12 @@ class ProgressBarPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant ProgressBarPainter oldDelegate) {
-    return oldDelegate.progress != progress ||
-        oldDelegate.hasAppFocus != hasAppFocus ||
-        oldDelegate.isIndeterminate != isIndeterminate ||
-        oldDelegate.isIndeterminateAnimating != isIndeterminateAnimating;
+    return 
+      oldDelegate.actionColor != actionColor ||
+      oldDelegate.backgroundColor != backgroundColor ||
+      oldDelegate.progress != progress ||
+      oldDelegate.hasAppFocus != hasAppFocus ||
+      oldDelegate.isIndeterminate != isIndeterminate ||
+      oldDelegate.isIndeterminateAnimating != isIndeterminateAnimating;
   }
 }
