@@ -1,2 +1,7 @@
 Exemple de path:
 export PATH="$PATH:${HOME}/Documents/Projects/flutter/flutter/bin/"
+
+Example web build:
+cd example
+flutter build web
+cp -r ./build/web/* ../public/example
