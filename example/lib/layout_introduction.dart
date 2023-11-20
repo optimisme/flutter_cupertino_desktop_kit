@@ -67,69 +67,7 @@ class _LayoutIntroductionState extends State<LayoutIntroduction> {
                                       color: DSKColors.accent,
                                     )))
                           ]))),
-              Padding(
-                  padding: const EdgeInsets.fromLTRB(32, 32, 32, 8),
-                  child: Row(
-                      mainAxisSize: MainAxisSize.min, // Això és clau
-                      children: [
-                        const Text("Theme color: ",
-                            style: TextStyle(fontSize: 14)),
-                        DSKButtonsColors(
-                          colors: DSKColors.systemColors,
-                          selectedColor: DSKThemeManager.themeColor,
-                          onColorChanged: (String colorName) {
-                            App.of(context)?.setActiveColor(colorName);
-                          },
-                        )
-                      ])),
-              Padding(
-                  padding: const EdgeInsets.fromLTRB(32, 8, 32, 0),
-                  child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        DSKButtonRadio(
-                          label: "Light theme",
-                          isSelected: selectedRadio == "light",
-                          onSelected: (bool? isSelected) {
-                            setState(() {
-                              selectedRadio = "light";
-                              App.of(context)?.setAppearance("light");
-                            });
-                          },
-                        ),
-                      ])),
-              Padding(
-                  padding: const EdgeInsets.fromLTRB(32, 8, 32, 0),
-                  child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        DSKButtonRadio(
-                          label: "Dark theme",
-                          isSelected: selectedRadio == "dark",
-                          onSelected: (bool? isSelected) {
-                            setState(() {
-                              selectedRadio = "dark";
-                              App.of(context)?.setAppearance("dark");
-                            });
-                          },
-                        ),
-                      ])),
-              Padding(
-                  padding: const EdgeInsets.fromLTRB(32, 8, 32, 0),
-                  child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        DSKButtonRadio(
-                          label: "System theme",
-                          isSelected: selectedRadio == "system",
-                          onSelected: (bool? isSelected) {
-                            setState(() {
-                              selectedRadio = "system";
-                              App.of(context)?.setAppearance("system");
-                            });
-                          },
-                        ),
-                      ])),
+              
               const SizedBox(height: 50),
             ])));
   }

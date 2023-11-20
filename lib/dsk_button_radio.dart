@@ -36,6 +36,7 @@ class DSKButtonRadioState extends State<DSKButtonRadio> {
           CustomPaint(
             size: Size(boxSize, boxSize),
             painter: VNTButtonRadioPainter(
+              actionColor: DSKColors.accent,
               isSelected: widget.isSelected,
               hasAppFocus: DSKThemeManager.isAppFocused,
               size: boxSize,
@@ -57,11 +58,13 @@ class DSKButtonRadioState extends State<DSKButtonRadio> {
 }
 
 class VNTButtonRadioPainter extends CustomPainter {
+  final Color actionColor;
   final bool isSelected;
   final bool hasAppFocus;
   final double size;
 
   VNTButtonRadioPainter({
+    required this.actionColor,
     required this.isSelected,
     required this.hasAppFocus,
     required this.size,
@@ -154,7 +157,7 @@ class VNTButtonRadioPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant VNTButtonRadioPainter oldDelegate) {
-    return oldDelegate.isSelected != isSelected ||
+    return oldDelegate.actionColor != actionColor || oldDelegate.isSelected != isSelected ||
         oldDelegate.hasAppFocus != hasAppFocus ||
         oldDelegate.size != size;
   }

@@ -29,6 +29,7 @@ class DSKButtonCheckBoxState extends State<DSKButtonCheckBox> {
         child: CustomPaint(
           size: Size(boxSize, boxSize),
           painter: VNTButtonCheckBoxPainter(
+            actionColor: DSKColors.accent,
             isSelected: widget.value,
             hasAppFocus: DSKThemeManager.isAppFocused,
             size: boxSize,
@@ -38,11 +39,13 @@ class DSKButtonCheckBoxState extends State<DSKButtonCheckBox> {
 }
 
 class VNTButtonCheckBoxPainter extends CustomPainter {
+  final Color actionColor;
   final bool isSelected;
   final bool hasAppFocus;
   final double size;
 
   VNTButtonCheckBoxPainter({
+    required this.actionColor,
     required this.isSelected,
     required this.hasAppFocus,
     required this.size,
@@ -150,7 +153,7 @@ class VNTButtonCheckBoxPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant VNTButtonCheckBoxPainter oldDelegate) {
-    return oldDelegate.isSelected != isSelected ||
+    return oldDelegate.actionColor != actionColor || oldDelegate.isSelected != isSelected ||
         oldDelegate.hasAppFocus != hasAppFocus ||
         oldDelegate.size != size;
   }

@@ -61,33 +61,17 @@ class LayoutButtonsState extends State<LayoutSidebarLeft> {
             }),
           ),
           const SizedBox(height: 25),
-          Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
-            DSKButtonRadio(
-              label: "Light theme",
-              isSelected: selectedRadio == "light",
-              onSelected: (bool? isSelected) {
-                setState(() {
-                  selectedRadio = "light";
-                  App.of(context)?.setAppearance("light");
-                });
-              },
-            ),
-          ]),
-          Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
-            DSKButtonRadio(
-              label: "Dark theme",
-              isSelected: selectedRadio == "dark",
-              onSelected: (bool? isSelected) {
-                setState(() {
-                  selectedRadio = "dark";
-                  App.of(context)?.setAppearance("dark");
-                });
-              },
-            ),
-          ]),
-          Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
-            DSKButtonRadio(
-              label: "Sytem theme",
+          Padding(
+                  padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+          const Text("Theme: ",
+                            style: TextStyle(fontSize: 14)),
+          const SizedBox(height: 8),
+          DSKButtonRadio(
+              label: "Sytem",
               isSelected: selectedRadio == "system",
               onSelected: (bool? isSelected) {
                 setState(() {
@@ -96,7 +80,39 @@ class LayoutButtonsState extends State<LayoutSidebarLeft> {
                 });
               },
             ),
-          ]),
-        ]));
+          const SizedBox(height: 8),
+          DSKButtonRadio(
+              label: "Light",
+              isSelected: selectedRadio == "light",
+              onSelected: (bool? isSelected) {
+                setState(() {
+                  selectedRadio = "light";
+                  App.of(context)?.setAppearance("light");
+                });
+              },
+            ),
+          const SizedBox(height: 8),
+          DSKButtonRadio(
+              label: "Dark",
+              isSelected: selectedRadio == "dark",
+              onSelected: (bool? isSelected) {
+                setState(() {
+                  selectedRadio = "dark";
+                  App.of(context)?.setAppearance("dark");
+                });
+              },
+            ),
+          const SizedBox(height: 16),
+          const Text("Primary color: ",
+                            style: TextStyle(fontSize: 14)),
+          const SizedBox(height: 8),
+          DSKButtonsColors(
+                colors: DSKColors.systemColors,
+                selectedColor: DSKThemeManager.themeColor,
+                onColorChanged: (String colorName) {
+                  App.of(context)?.setActiveColor(colorName);
+                },
+              ),
+        ]))]));
   }
 }

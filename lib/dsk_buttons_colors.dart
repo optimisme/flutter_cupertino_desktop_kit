@@ -21,6 +21,7 @@ class DSKButtonsColors extends StatefulWidget {
 class DSKButtonsColorsState extends State<DSKButtonsColors> {
   @override
   Widget build(BuildContext context) {
+  int index = -1;
     return Row(
       children: widget.colors.entries.map((entry) {
         final String colorName = entry.key;
@@ -32,6 +33,7 @@ class DSKButtonsColorsState extends State<DSKButtonsColors> {
         } else {
           colorBorder = DSKColors.adjustColor(color, 1, 1.25);
         }
+        index = index + 1;
         return GestureDetector(
           onTap: () {
             widget.onColorChanged(
@@ -40,7 +42,7 @@ class DSKButtonsColorsState extends State<DSKButtonsColors> {
           child: Container(
             width: 16,
             height: 16,
-            margin: const EdgeInsets.symmetric(horizontal: 4),
+            margin: index == 0 ? null : const EdgeInsets.only(left: 6),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: color,
@@ -56,6 +58,7 @@ class DSKButtonsColorsState extends State<DSKButtonsColors> {
                 : Container(),
           ),
         );
+        print(index);
       }).toList(),
     );
   }
