@@ -4,4 +4,5 @@ export PATH="$PATH:${HOME}/Documents/Projects/flutter/flutter/bin/"
 Example web build:
 cd example
 flutter build web
-rsync -av --exclude='index.html' ./build/web/ ../public/example/
+flutter build web --base-href "/flutter_desktop_cupertino/public/example/"
+cp -r ./build/web/* ../public/example
