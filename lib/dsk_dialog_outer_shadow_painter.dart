@@ -116,7 +116,6 @@ class DSKDialogOuterShadowPainter extends CustomPainter {
 
       path.lineTo(arrowMidPoint.dx, arrowMidPoint.dy);
             path.lineTo(arrowLeft.dx, arrowLeft.dy);
-
     }
 
     path.lineTo(rect.left + radius.x, rect.bottom);
