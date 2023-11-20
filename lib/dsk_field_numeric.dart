@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'dsk_field_text.dart';
+import 'dsk_buttons_up_down.dart';
 
 class DSKFieldNumeric extends StatefulWidget {
+  final double? textSize;
   final double defaultValue;
   final double min;
   final double max;
@@ -12,11 +14,12 @@ class DSKFieldNumeric extends StatefulWidget {
 
   const DSKFieldNumeric({
     Key? key,
-    required this.defaultValue,
-    required this.min,
-    required this.max,
-    required this.increment,
-    this.decimals = 0, // Valor per defecte, sense decimals si no s'especifica
+    this.textSize = 12,
+    this.defaultValue = 0.0,
+    this.min = -double.infinity,
+    this.max = double.infinity,
+    this.increment = double.infinity, // If infinity, buttons are hidden
+    this.decimals = 1, // Valor per defecte, sense decimals si no s'especifica
     this.onChanged,
   }) : super(key: key);
 
@@ -33,63 +36,70 @@ class DSKFieldNumericState extends State<DSKFieldNumeric> {
     super.initState();
     _controller = TextEditingController(
         text: widget.defaultValue.toStringAsFixed(widget.decimals));
-    decimalRegex = RegExp(r'^\d+\.?\d{0,' + widget.decimals.toString() + r'}$');
+    decimalRegex = RegExp(r'^\d+\.?\d*');
     _controller.addListener(_onTextChanged);
   }
 
   void _onTextChanged() {
     String text = _controller.text;
-    if (decimalRegex.hasMatch(text)) {
-      double? currentValue = double.tryParse(text);
-      if (currentValue != null) {
-        widget.onChanged?.call(currentValue);
-      }
-    } else {
-      _controller.text =
-          double.tryParse(text)?.toStringAsFixed(widget.decimals) ?? '';
-      _controller.selection = TextSelection.fromPosition(
-          TextPosition(offset: _controller.text.length));
+
+    // Comprova si el text compleix amb el patró decimal.
+    if (!decimalRegex.hasMatch(text)) {
+      // Si no compleix, simplement retorna sense fer canvis.
+      return;
+    }
+
+    // Si el text compleix amb el patró, intenta convertir-lo a double.
+    double? currentValue = double.tryParse(text);
+    if (currentValue != null) {
+      widget.onChanged?.call(currentValue);
+      
     }
   }
 
   void _incrementValue() {
     double currentValue = double.parse(_controller.text);
-    currentValue =
-        (currentValue + widget.increment).clamp(widget.min, widget.max);
+    currentValue = (currentValue + widget.increment);
+    if (currentValue < widget.min) currentValue = widget.min;
+    if (currentValue > widget.max) currentValue = widget.max;
     _controller.text = currentValue.toStringAsFixed(widget.decimals);
+    setState(() {});
   }
 
   void _decrementValue() {
     double currentValue = double.parse(_controller.text);
-    currentValue =
-        (currentValue - widget.increment).clamp(widget.min, widget.max);
+    currentValue = (currentValue - widget.increment);
+    if (currentValue < widget.min) currentValue = widget.min;
+    if (currentValue > widget.max) currentValue = widget.max;
     _controller.text = currentValue.toStringAsFixed(widget.decimals);
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: <Widget>[
-        CupertinoButton(
-          padding: EdgeInsets.zero,
-          onPressed: _decrementValue,
-          child: const Icon(CupertinoIcons.minus_circled),
-        ),
         Expanded(
           child: DSKFieldText(
             controller: _controller,
+            textSize: widget.textSize,
             keyboardType:
                 TextInputType.numberWithOptions(decimal: widget.decimals > 0),
             inputFormatters: [
               FilteringTextInputFormatter.allow(decimalRegex),
+
             ],
-            // Añadir otras propiedades y callbacks según sea necesario
           ),
         ),
-        CupertinoButton(
-          padding: EdgeInsets.zero,
-          onPressed: _incrementValue,
-          child: const Icon(CupertinoIcons.add_circled),
+        widget.increment == double.infinity
+            ? Container()
+            : SizedBox(width: 4), 
+        widget.increment == double.infinity
+            ? Container()
+            : DSKButtonsUpDown(
+          isDisabled: widget.increment == double.infinity,
+          onUpPressed: _incrementValue,
+          onDownPressed: _decrementValue,
         ),
       ],
     );

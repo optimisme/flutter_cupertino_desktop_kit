@@ -59,11 +59,11 @@ class _LayoutFieldsState extends State<LayoutFields> {
                 Padding(
                     padding: const EdgeInsets.all(8),
                     child: SizedBox(
-                        width: 300,
+                        width: 100,
                         child: DSKFieldNumeric(
+                          textSize: 12,
                           defaultValue: 5.0,
-                          min: 0.0,
-                          max: 10.0,
+
                           increment: 0.15,
                           onChanged: (double value) {
                             // ignore: avoid_print

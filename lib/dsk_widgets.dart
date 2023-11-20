@@ -11,6 +11,7 @@ export 'dsk_button_select.dart';
 export 'dsk_button_switch.dart';
 export 'dsk_buttons_bar.dart';
 export 'dsk_buttons_colors.dart';
+export 'dsk_buttons_up_down.dart';
 export 'dsk_dialog_popover.dart';
 export 'dsk_dialog_popover_arrowed.dart';
 export 'dsk_dialog_draggable.dart';
