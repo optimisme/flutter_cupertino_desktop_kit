@@ -42,7 +42,7 @@ class _LayoutIntroductionState extends State<LayoutIntroduction> {
               const Padding(
                   padding: EdgeInsets.symmetric(vertical: 16, horizontal: 32),
                   child: Text(
-                      'This project defines Flutter Widgets for Desktop, with a macOS Sonoma-style aesthetic, using Cupertino as a foundation.')),
+                      'This project defines Flutter Widgets for Desktop, with a macOS-style aesthetic, using Cupertino as a foundation.')),
               const Padding(
                   padding: EdgeInsets.symmetric(vertical: 16, horizontal: 32),
                   child: Text(
