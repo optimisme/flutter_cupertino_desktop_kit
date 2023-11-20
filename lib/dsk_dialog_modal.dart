@@ -123,7 +123,6 @@ class DSKDialogModalState extends State<DSKDialogModal>
     Widget dialogContents = Container(
       key: childKey,
       decoration: BoxDecoration(
-        color: backgroundColor,
         borderRadius: BorderRadius.circular(8.0),
       ),
       child: widget.child,

@@ -158,7 +158,6 @@ class DSKDialogPopoverState extends State<DSKDialogPopover>
     Widget dialogContents = Container(
       key: childKey,
       decoration: BoxDecoration(
-        color: backgroundColor,
         borderRadius: BorderRadius.circular(8.0),
       ),
       child: widget.child,
