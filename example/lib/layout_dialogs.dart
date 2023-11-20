@@ -210,6 +210,22 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
             color: DSKColors.background,
             child: ListView(children: [
               const SizedBox(height: 8),
+              Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: RichText(
+                    text: const TextSpan(
+                      style: TextStyle(fontSize: 12, color: DSKColors.black),
+                      children: <TextSpan>[
+                        TextSpan(
+                            text: '*Important! ',
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        TextSpan(
+                            text:
+                                'The shadow of translucent dialogs is not drawn properly on the web.'),
+                      ],
+                    ),
+                  )),
+              const SizedBox(height: 8),
               const Padding(
                   padding: EdgeInsets.all(8), child: Text('DSKDialogPopover:')),
               Wrap(children: [
