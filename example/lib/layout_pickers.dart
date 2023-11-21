@@ -10,23 +10,7 @@ class LayoutPickers extends StatefulWidget {
 }
 
 class _LayoutPickersState extends State<LayoutPickers> {
-  bool _isRunning = false;
-  double _progress = 0.0;
-
-  void _toggleIndeterminate() {
-    setState(() {
-      _isRunning = !_isRunning;
-    });
-  }
-
-  void _increaseProgress() {
-    setState(() {
-      _progress = (_progress + 0.1);
-      if (_progress > 1) {
-        _progress = 0.0;
-      }
-    });
-  }
+  double _angle = 0.0;
 
   @override
   Widget build(BuildContext context) {
@@ -51,44 +35,19 @@ class _LayoutPickersState extends State<LayoutPickers> {
             child: ListView(children: [
               const SizedBox(height: 8),
               const Padding(
-                  padding: EdgeInsets.all(8), child: Text('DSKProgressBar:')),
-              Wrap(children: [
+                  padding: EdgeInsets.all(8), child: Text('DSKPicker360:')),
+              Wrap(crossAxisAlignment: WrapCrossAlignment.center, children: [
                 Padding(
                     padding: const EdgeInsets.all(8),
-                    child: SizedBox(
-                        width: 250,
-                        child: DSKProgressBar(
-                          progress: _progress,
-                        ))),
-                Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: DSKButton(
-                      style: DSKButtonStyle.normal,
-                      onPressed: () {
-                        _increaseProgress();
+                    child: DSKPicker360(
+                      size: 16,
+                      onChanged: (angle) {
+                        _angle = angle;
+                        setState(() {});
                       },
-                      child: const Text('Increase'),
                     )),
-              ]),
-              Wrap(children: [
-                Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: SizedBox(
-                        width: 250,
-                        child: DSKProgressBar(
-                          progress: _progress,
-                          isIndeterminate: true,
-                          isRunning: _isRunning,
-                        ))),
-                Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: DSKButton(
-                      style: DSKButtonStyle.normal,
-                      onPressed: () {
-                        _toggleIndeterminate();
-                      },
-                      child: const Text('Toggle running'),
-                    )),
+                Text(_angle.toStringAsFixed(2),
+                    style: const TextStyle(fontSize: 12)),
               ]),
               const SizedBox(height: 50),
             ])));

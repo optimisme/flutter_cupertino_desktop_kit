@@ -94,8 +94,26 @@ class _LayoutFieldsState extends State<LayoutFields> {
                           enabled: false,
                           onChanged: (double value) {
                             // ignore: avoid_print
-                            print("Numeric A: $value");
+                            print("Numeric B: $value");
                           },
+                        ))),
+              ]),
+              const Padding(
+                  padding: EdgeInsets.all(8), child: Text('DSKField360:')),
+              Wrap(children: [
+                Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: SizedBox(
+                        width: 75,
+                        child: DSKField360(
+                          defaultValue: 270,
+                          onChanged: (double value) {
+                            // ignore: avoid_print
+                            print("Field360: $value");
+                          },
+                          /*
+                          textSize: 12,
+                          },*/
                         ))),
               ]),
               const SizedBox(height: 50),

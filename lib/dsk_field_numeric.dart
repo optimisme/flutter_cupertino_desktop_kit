@@ -104,6 +104,12 @@ class DSKFieldNumericState extends State<DSKFieldNumeric> {
     setState(() {});
   }
 
+  void setValue(double value) {
+    setState(() {
+      _controller.text = value.toStringAsFixed(widget.decimals);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     double value = double.parse(_controller.text);

@@ -60,7 +60,7 @@ class DSKFieldTextState extends State<DSKFieldText> {
   Widget build(BuildContext context) {
     final BorderRadius borderRadius = widget.isRounded
         ? BorderRadius.circular(25.0)
-        : BorderRadius.circular(2.0);
+        : BorderRadius.circular(4.0);
 
     return CupertinoTextField(
       enabled: widget.enabled,

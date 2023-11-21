@@ -25,15 +25,15 @@ class DSKColors {
   static Color accent = CupertinoColors.systemBlue;
   static Color accent500 = const Color(0xff056ee0);
   static Color accent600 = const Color(0xff0562c7);
-  static Color grey50 = const Color(0xffe7e7e8);
-  static Color grey75 = const Color(0xffd8d8da);
-  static Color grey100 = const Color(0xffbababd);
-  static Color grey200 = const Color(0xffacacaf);
-  static Color grey300 = const Color(0xff9d9da1);
-  static Color grey = CupertinoColors.systemGrey;
-  static Color grey500 = const Color(0xff7f7f85);
-  static Color grey600 = const Color(0xff717176);
-  static Color grey700 = const Color(0xff636367);
+  static const Color grey50 = Color(0xffe7e7e8);
+  static const Color grey75 = Color(0xffd8d8da);
+  static const Color grey100 = Color(0xffbababd);
+  static const Color grey200 = Color(0xffacacaf);
+  static const Color grey300 = Color(0xff9d9da1);
+  static const Color grey = CupertinoColors.systemGrey;
+  static const Color grey500 = Color(0xff7f7f85);
+  static const Color grey600 = Color(0xff717176);
+  static const Color grey700 = Color(0xff636367);
 
   static const Map<String, Color> systemColors = {
     "systemBlue": CupertinoColors.systemBlue,
