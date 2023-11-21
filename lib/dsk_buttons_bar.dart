@@ -17,7 +17,7 @@ class DSKButtonsBar extends StatefulWidget {
   @override
   DSKButtonsBarState createState() => DSKButtonsBarState();
 
-  static void _defaultOnChanged(bool value) {}
+  static void _defaultOnChanged(List<bool> values) {}
 }
 
 class DSKButtonsBarState extends State<DSKButtonsBar> {
