@@ -3,15 +3,17 @@ import 'dsk_theme_manager.dart';
 import 'dsk_theme_colors.dart';
 
 class DSKButtonsUpDown extends StatefulWidget {
+  final bool enabledUp;
+  final bool enabledDown;
   final VoidCallback onUpPressed;
   final VoidCallback onDownPressed;
-  final bool isDisabled;
 
   const DSKButtonsUpDown({
     Key? key,
+    this.enabledUp = true,
+    this.enabledDown = true,
     required this.onUpPressed,
     required this.onDownPressed,
-    this.isDisabled = false,
   }) : super(key: key);
 
   @override
@@ -76,44 +78,47 @@ class DSKButtonsUpDownState extends State<DSKButtonsUpDown> {
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         GestureDetector(
-          onTapDown: widget.isDisabled
+          onTapDown: !widget.enabledUp
               ? null
               : (details) => setState(() => _isPressedUp = true),
-          onTapUp: widget.isDisabled
+          onTapUp: !widget.enabledUp
               ? null
               : (details) => setState(() => _isPressedUp = false),
-          onTapCancel: widget.isDisabled
+          onTapCancel: !widget.enabledUp
               ? null
               : () => setState(() => _isPressedUp = false),
-          onTap: widget.isDisabled ? null : widget.onUpPressed,
+          onTap: !widget.enabledUp ? null : widget.onUpPressed,
           child: IntrinsicWidth(
               child: DecoratedBox(
             decoration: decorationUp,
-            child: const Padding(
-              padding: EdgeInsets.fromLTRB(2, 1, 2, 0),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(2, 1, 2, 0),
               child: Icon(CupertinoIcons.chevron_up,
-                  size: 9, color: DSKColors.black),
+                  size: 9,
+                  color: widget.enabledUp ? DSKColors.black : DSKColors.grey75),
             ),
           )),
         ),
         GestureDetector(
-          onTapDown: widget.isDisabled
+          onTapDown: !widget.enabledDown
               ? null
               : (details) => setState(() => _isPressedDown = true),
-          onTapUp: widget.isDisabled
+          onTapUp: !widget.enabledDown
               ? null
               : (details) => setState(() => _isPressedDown = false),
-          onTapCancel: widget.isDisabled
+          onTapCancel: !widget.enabledDown
               ? null
               : () => setState(() => _isPressedDown = false),
-          onTap: widget.isDisabled ? null : widget.onDownPressed,
+          onTap: !widget.enabledDown ? null : widget.onDownPressed,
           child: IntrinsicWidth(
               child: DecoratedBox(
             decoration: decorationDown,
-            child: const Padding(
-              padding: EdgeInsets.fromLTRB(2, 0, 2, 1),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(2, 1, 2, 0),
               child: Icon(CupertinoIcons.chevron_down,
-                  size: 9, color: DSKColors.black),
+                  size: 9,
+                  color:
+                      widget.enabledDown ? DSKColors.black : DSKColors.grey75),
             ),
           )),
         ),

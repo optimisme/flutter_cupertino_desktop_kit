@@ -84,6 +84,19 @@ class _LayoutFieldsState extends State<LayoutFields> {
                             print("Numeric A: $value");
                           },
                         ))),
+                Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: SizedBox(
+                        width: 100,
+                        child: DSKFieldNumeric(
+                          textSize: 12,
+                          defaultValue: 5.0,
+                          enabled: false,
+                          onChanged: (double value) {
+                            // ignore: avoid_print
+                            print("Numeric A: $value");
+                          },
+                        ))),
               ]),
               const SizedBox(height: 50),
             ])));

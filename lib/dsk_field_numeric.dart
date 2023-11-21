@@ -9,7 +9,8 @@ class DSKFieldNumeric extends StatefulWidget {
   final double min;
   final double max;
   final double increment;
-  final int decimals; // Nou paràmetre per limitar el número de decimals
+  final int decimals;
+  final bool enabled;
   final Function(double)? onChanged;
 
   const DSKFieldNumeric({
@@ -20,6 +21,7 @@ class DSKFieldNumeric extends StatefulWidget {
     this.max = double.infinity,
     this.increment = double.infinity, // If infinity, buttons are hidden
     this.decimals = 1, // Valor per defecte, sense decimals si no s'especifica
+    this.enabled = true,
     this.onChanged,
   }) : super(key: key);
 
@@ -104,11 +106,16 @@ class DSKFieldNumericState extends State<DSKFieldNumeric> {
 
   @override
   Widget build(BuildContext context) {
+    double value = double.parse(_controller.text);
+    bool enabledUp = value < widget.max;
+    bool enabledDown = value > widget.min;
+
     return Row(
       children: <Widget>[
         Expanded(
           child: DSKFieldText(
             controller: _controller,
+            enabled: widget.enabled,
             textSize: widget.textSize,
             keyboardType: TextInputType.numberWithOptions(
                 signed: true, decimal: widget.decimals > 0),
@@ -123,7 +130,8 @@ class DSKFieldNumericState extends State<DSKFieldNumeric> {
         widget.increment == double.infinity
             ? Container()
             : DSKButtonsUpDown(
-                isDisabled: widget.increment == double.infinity,
+                enabledUp: widget.enabled && enabledUp,
+                enabledDown: widget.enabled && enabledDown,
                 onUpPressed: _incrementValue,
                 onDownPressed: _decrementValue,
               ),

@@ -12,9 +12,9 @@ class DSKFieldText extends StatefulWidget {
   final FocusNode? focusNode;
   final double? textSize;
   final IconData? prefixIcon;
-  final TextInputType? keyboardType; // Nuevo: Tipo de teclado
-  final List<TextInputFormatter>?
-      inputFormatters; // Nuevo: Formateadores de entrada
+  final TextInputType? keyboardType;
+  final List<TextInputFormatter>? inputFormatters;
+  final bool enabled;
 
   const DSKFieldText({
     Key? key,
@@ -26,8 +26,9 @@ class DSKFieldText extends StatefulWidget {
     this.focusNode,
     this.textSize,
     this.prefixIcon,
-    this.keyboardType, // Nuevo
-    this.inputFormatters, // Nuevo
+    this.keyboardType,
+    this.inputFormatters,
+    this.enabled = true,
   }) : super(key: key);
 
   @override
@@ -44,6 +45,13 @@ class DSKFieldTextState extends State<DSKFieldText> {
     _internalFocusNode.addListener(_handleFocusChanged);
   }
 
+  @override
+  void dispose() {
+    _internalFocusNode.removeListener(_handleFocusChanged);
+    _internalFocusNode.dispose();
+    super.dispose();
+  }
+
   void _handleFocusChanged() {
     setState(() {});
   }
@@ -55,6 +63,7 @@ class DSKFieldTextState extends State<DSKFieldText> {
         : BorderRadius.circular(4.0);
 
     return CupertinoTextField(
+      enabled: widget.enabled,
       controller: widget.controller,
       focusNode: _internalFocusNode,
       onChanged: widget.onChanged,
@@ -64,7 +73,7 @@ class DSKFieldTextState extends State<DSKFieldText> {
           color: DSKColors.background,
           borderRadius: borderRadius,
           border: Border.all(
-            color: CupertinoColors.systemGrey.withOpacity(0.5),
+            color: widget.enabled ? DSKColors.grey300 : DSKColors.grey75,
             width: 1,
           ),
           boxShadow: _internalFocusNode.hasFocus
@@ -80,20 +89,14 @@ class DSKFieldTextState extends State<DSKFieldText> {
                 ]
               : []),
       placeholder: widget.placeholder,
-      style: TextStyle(fontSize: widget.textSize),
+      style: TextStyle(
+          fontSize: widget.textSize,
+          color: widget.enabled ? DSKColors.black : DSKColors.grey100),
       prefix: widget.prefixIcon == null
           ? null
-          : Icon(widget.prefixIcon, color: CupertinoColors.systemGrey),
-      keyboardType: widget.keyboardType, // Aplicar el tipo de teclado
-      inputFormatters:
-          widget.inputFormatters, // Aplicar formateadores de entrada
+          : Icon(widget.prefixIcon, color: DSKColors.grey),
+      keyboardType: widget.keyboardType,
+      inputFormatters: widget.inputFormatters,
     );
-  }
-
-  @override
-  void dispose() {
-    _internalFocusNode.removeListener(_handleFocusChanged);
-    _internalFocusNode.dispose();
-    super.dispose();
   }
 }
