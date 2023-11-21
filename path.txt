@@ -4,7 +4,8 @@ export PATH="$PATH:${HOME}/Documents/Projects/flutter/flutter/bin/"
 Example publicar a github pages:
 cd example
 git checkout -b gh-pages
-flutter build web --web-renderer canvaskit --base-href "/flutter_desktop_cupertino/public/example/build/web/"
+flutter build web --web-renderer canvaskit --base-href "/flutter_desktop_cupertino/gh-pages/example/"
+cp -r ./build/web/* ../gh-pages/example/
 git push origin gh-pages
 git checkout main
 
