@@ -10,6 +10,16 @@ class LayoutFields extends StatefulWidget {
 }
 
 class _LayoutFieldsState extends State<LayoutFields> {
+  late TextEditingController _textController;
+  late TextEditingController _passController;
+
+  @override
+  void initState() {
+    super.initState();
+    _textController = TextEditingController(text: 'Initial text');
+    _passController = TextEditingController(text: '1234');
+  }
+
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
@@ -40,6 +50,7 @@ class _LayoutFieldsState extends State<LayoutFields> {
                     child: SizedBox(
                         width: 100,
                         child: DSKFieldText(
+                          controller: _textController,
                           isRounded: false,
                           onChanged: (value) {
                             // ignore: avoid_print
@@ -56,7 +67,24 @@ class _LayoutFieldsState extends State<LayoutFields> {
                     child: SizedBox(
                         width: 100,
                         child: DSKFieldText(
-                          defaultValue: '1234',
+                          placeholder: 'Placeholder',
+                          isRounded: false,
+                          onChanged: (value) {
+                            // ignore: avoid_print
+                            print("Value changed: $value");
+                          },
+                          onSubmitted: (value) {
+                            // ignore: avoid_print
+                            print("Value submitted: $value");
+                          },
+                          focusNode: FocusNode(),
+                        ))),
+                Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: SizedBox(
+                        width: 100,
+                        child: DSKFieldText(
+                          controller: _passController,
                           obscureText: true,
                           isRounded: false,
                           onChanged: (value) {

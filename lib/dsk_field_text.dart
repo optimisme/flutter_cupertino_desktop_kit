@@ -65,6 +65,7 @@ class DSKFieldTextState extends State<DSKFieldText> {
         : BorderRadius.circular(4.0);
 
     return CupertinoTextField(
+
       obscureText: widget.obscureText,
       enabled: widget.enabled,
       controller: widget.controller,
