@@ -71,10 +71,10 @@ class _LayoutFieldsState extends State<LayoutFields> {
                     child: SizedBox(
                         width: 100,
                         child: DSKFieldNumeric(
-                          defaultValue: -2.0,
+                          defaultValue: -1.0,
                           decimals: 2,
-                          min: -10,
-                          max: 10,
+                          min: -2,
+                          max: 1.5,
                           increment: 0.15,
                           onChanged: (double value) {
                             // ignore: avoid_print
