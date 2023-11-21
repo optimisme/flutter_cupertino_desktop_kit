@@ -5,10 +5,14 @@ import 'dsk_picker_360.dart';
 
 class DSKField360 extends StatefulWidget {
   final double defaultValue;
+  final double textSize;
+  final bool enabled;
   final Function(double)? onChanged;
   const DSKField360({
     Key? key,
     this.defaultValue = 0.0,
+    this.textSize = 12,
+    this.enabled = true,
     this.onChanged,
   }) : super(key: key);
 
@@ -35,7 +39,8 @@ class DSKField360State extends State<DSKField360> {
         DSKPicker360(
           key: keyPicker,
           defaultValue: _currentAngle,
-          size: 20,
+          size: widget.textSize + 8,
+          enabled: widget.enabled,
           onChanged: (angle) {
             setState(() {
               keyNumeric.currentState?.setValue(angle);
@@ -48,10 +53,12 @@ class DSKField360State extends State<DSKField360> {
           child: DSKFieldNumeric(
             key: keyNumeric,
             defaultValue: _currentAngle,
+            textSize: widget.textSize,
             min: 0,
             max: 360,
             increment: 1,
             decimals: 0,
+            enabled: widget.enabled,
             onChanged: (value) {
               setState(() {
                 keyPicker.currentState?.setValue(value);

@@ -40,7 +40,6 @@ class _LayoutFieldsState extends State<LayoutFields> {
                     child: SizedBox(
                         width: 100,
                         child: DSKFieldText(
-                          textSize: 12,
                           isRounded: false,
                           onChanged: (value) {
                             // ignore: avoid_print
@@ -61,7 +60,6 @@ class _LayoutFieldsState extends State<LayoutFields> {
                     child: SizedBox(
                         width: 100,
                         child: DSKFieldNumeric(
-                          textSize: 12,
                           defaultValue: 5.0,
                           onChanged: (double value) {
                             // ignore: avoid_print
@@ -73,7 +71,6 @@ class _LayoutFieldsState extends State<LayoutFields> {
                     child: SizedBox(
                         width: 100,
                         child: DSKFieldNumeric(
-                          textSize: 12,
                           defaultValue: -2.0,
                           decimals: 2,
                           min: -10,
@@ -89,7 +86,6 @@ class _LayoutFieldsState extends State<LayoutFields> {
                     child: SizedBox(
                         width: 100,
                         child: DSKFieldNumeric(
-                          textSize: 12,
                           defaultValue: 5.0,
                           enabled: false,
                           onChanged: (double value) {
@@ -111,9 +107,17 @@ class _LayoutFieldsState extends State<LayoutFields> {
                             // ignore: avoid_print
                             print("Field360: $value");
                           },
-                          /*
-                          textSize: 12,
-                          },*/
+                        ))),
+                Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: SizedBox(
+                        width: 75,
+                        child: DSKField360(
+                          enabled: false,
+                          onChanged: (double value) {
+                            // ignore: avoid_print
+                            print("Field360: $value");
+                          },
                         ))),
               ]),
               const SizedBox(height: 50),

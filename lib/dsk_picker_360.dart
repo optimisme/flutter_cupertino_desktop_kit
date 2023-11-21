@@ -6,11 +6,16 @@ import 'dsk_theme_colors.dart';
 
 class DSKPicker360 extends StatefulWidget {
   final double defaultValue;
-  final Function(double)? onChanged;
   final double size;
+  final bool enabled;
+  final Function(double)? onChanged;
 
   const DSKPicker360(
-      {Key? key, this.defaultValue = 0, this.size = 16, this.onChanged})
+      {Key? key,
+      this.defaultValue = 0,
+      this.enabled = true,
+      this.size = 16,
+      this.onChanged})
       : super(key: key);
 
   @override
@@ -35,12 +40,12 @@ class DSKPicker360State extends State<DSKPicker360> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onPanUpdate: _onPanUpdate,
+      onPanUpdate: !widget.enabled ? null : _onPanUpdate,
       child: CustomPaint(
         painter: DSKPicker360Painter(
             _currentAngle,
             DSKColors.backgroundSecondary0,
-            DSKColors.text,
+            widget.enabled ? DSKColors.text : DSKColors.grey,
             DSKThemeManager.isLight ? DSKColors.grey100 : DSKColors.grey),
         size: Size(widget.size, widget.size),
       ),
@@ -94,7 +99,7 @@ class DSKPicker360Painter extends CustomPainter {
 
     final paintBorder = Paint()
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 1
+      ..strokeWidth = 0.75
       ..color = borderColor;
     canvas.drawCircle(center, radius, paintBorder);
 

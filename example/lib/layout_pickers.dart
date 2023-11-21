@@ -40,7 +40,6 @@ class _LayoutPickersState extends State<LayoutPickers> {
                 Padding(
                     padding: const EdgeInsets.all(8),
                     child: DSKPicker360(
-                      size: 16,
                       onChanged: (angle) {
                         _angle = angle;
                         setState(() {});

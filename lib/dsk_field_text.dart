@@ -24,7 +24,7 @@ class DSKFieldText extends StatefulWidget {
     this.onSubmitted,
     this.controller,
     this.focusNode,
-    this.textSize,
+    this.textSize = 12,
     this.prefixIcon,
     this.keyboardType,
     this.inputFormatters,
