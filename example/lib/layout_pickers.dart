@@ -48,6 +48,27 @@ class _LayoutPickersState extends State<LayoutPickers> {
                 Text(_angle.toStringAsFixed(2),
                     style: const TextStyle(fontSize: 12)),
               ]),
+              const SizedBox(height: 8),
+               Padding(
+                  padding: EdgeInsets.all(8), child: Text('DSKPickerDisclosure:')),
+              Wrap(crossAxisAlignment: WrapCrossAlignment.center, children: [
+                Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: DSKPickerDisclosure(
+                      sideWidget: Text('Show/Hide'),
+                      bottomWidget: SizedBox(
+                        width: 300, 
+                        height: 150, 
+                        child:Container(
+                          color: DSKColors.backgroundSecondary1, 
+                          child: Text('Expandible disclosure'))),
+                      onChanged: (bool value) {
+                        setState(() {});
+                      }),
+                    ),
+              ]),
+              Padding(
+                  padding: EdgeInsets.all(8), child: Text('---')),
               const SizedBox(height: 50),
             ])));
   }
