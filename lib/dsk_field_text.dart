@@ -91,7 +91,8 @@ class DSKFieldTextState extends State<DSKFieldText> {
       placeholder: widget.placeholder,
       style: TextStyle(
           fontSize: widget.textSize,
-          color: widget.enabled ? DSKColors.black : DSKColors.grey100),
+          color:
+              widget.enabled ? DSKColors.text : DSKColors.backgroundSecondary1),
       prefix: widget.prefixIcon == null
           ? null
           : Icon(widget.prefixIcon, color: DSKColors.grey),
