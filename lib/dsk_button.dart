@@ -9,7 +9,7 @@ class DSKButton extends StatefulWidget {
   final Widget child;
   final DSKButtonStyle style;
   final bool isLarge;
-  final bool isDisabled;
+  final bool enabled;
 
   const DSKButton({
     Key? key,
@@ -17,7 +17,7 @@ class DSKButton extends StatefulWidget {
     required this.child,
     this.style = DSKButtonStyle.normal,
     this.isLarge = false,
-    this.isDisabled = false,
+    this.enabled = true,
   }) : super(key: key);
 
   @override
@@ -39,7 +39,7 @@ class DSKButtonState extends State<DSKButton> {
       offset: const Offset(0, 1),
     );
 
-    if (widget.isDisabled) {
+    if (!widget.enabled) {
       switch (widget.style) {
         case DSKButtonStyle.action:
           decoration = BoxDecoration(
@@ -143,15 +143,15 @@ class DSKButtonState extends State<DSKButton> {
     }
 
     return GestureDetector(
-      onTapDown: widget.isDisabled
+      onTapDown: !widget.enabled
           ? null
           : (details) => setState(() => _isPressed = true),
-      onTapUp: widget.isDisabled
+      onTapUp: !widget.enabled
           ? null
           : (details) => setState(() => _isPressed = false),
       onTapCancel:
-          widget.isDisabled ? null : () => setState(() => _isPressed = false),
-      onTap: widget.isDisabled ? null : widget.onPressed,
+          !widget.enabled ? null : () => setState(() => _isPressed = false),
+      onTap: !widget.enabled ? null : widget.onPressed,
       child: IntrinsicWidth(
           child: DecoratedBox(
         decoration: decoration,

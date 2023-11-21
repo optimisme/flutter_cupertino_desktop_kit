@@ -235,7 +235,6 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
                       key: _anchorPopover0,
                       style: DSKButtonStyle.normal,
                       isLarge: false,
-                      isDisabled: false,
                       onPressed: () {
                         _showPopover(
                             context, _anchorPopover0, false, false, false);
@@ -248,7 +247,6 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
                       key: _anchorPopover1,
                       style: DSKButtonStyle.normal,
                       isLarge: false,
-                      isDisabled: false,
                       onPressed: () {
                         _showPopover(
                             context, _anchorPopover1, true, false, true);
@@ -261,7 +259,6 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
                       key: _anchorPopover2,
                       style: DSKButtonStyle.normal,
                       isLarge: false,
-                      isDisabled: false,
                       onPressed: () {
                         _showPopover(
                             context, _anchorPopover2, true, true, false);
@@ -274,7 +271,6 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
                       key: _anchorPopover3,
                       style: DSKButtonStyle.normal,
                       isLarge: false,
-                      isDisabled: false,
                       onPressed: () {
                         _showPopover(
                             context, _anchorPopover3, true, true, true);
@@ -290,7 +286,6 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
                     child: DSKButton(
                       style: DSKButtonStyle.normal,
                       isLarge: false,
-                      isDisabled: false,
                       onPressed: () {
                         _showModal(context, false, false);
                       },
@@ -301,7 +296,6 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
                     child: DSKButton(
                       style: DSKButtonStyle.normal,
                       isLarge: false,
-                      isDisabled: false,
                       onPressed: () {
                         _showModal(context, true, false);
                       },
@@ -312,7 +306,6 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
                     child: DSKButton(
                       style: DSKButtonStyle.normal,
                       isLarge: false,
-                      isDisabled: false,
                       onPressed: () {
                         _showModal(context, false, true);
                       },
@@ -323,7 +316,6 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
                     child: DSKButton(
                       style: DSKButtonStyle.normal,
                       isLarge: false,
-                      isDisabled: false,
                       onPressed: () {
                         _showModal(context, true, true);
                       },
@@ -340,7 +332,6 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
                       key: _anchorDraggable0,
                       style: DSKButtonStyle.normal,
                       isLarge: false,
-                      isDisabled: false,
                       onPressed: () {
                         _showDraggable(
                             context, _anchorDraggable0, false, false);
@@ -353,7 +344,6 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
                       key: _anchorDraggable1,
                       style: DSKButtonStyle.normal,
                       isLarge: false,
-                      isDisabled: false,
                       onPressed: () {
                         _showDraggable(context, _anchorDraggable1, true, false);
                       },
@@ -365,7 +355,6 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
                       key: _anchorDraggable2,
                       style: DSKButtonStyle.normal,
                       isLarge: false,
-                      isDisabled: false,
                       onPressed: () {
                         _showDraggable(context, _anchorDraggable2, false, true);
                       },
@@ -377,7 +366,6 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
                       key: _anchorDraggable3,
                       style: DSKButtonStyle.normal,
                       isLarge: false,
-                      isDisabled: false,
                       onPressed: () {
                         _showDraggable(context, _anchorDraggable3, true, true);
                       },
@@ -393,7 +381,6 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
                       key: _anchorArrowed0,
                       style: DSKButtonStyle.normal,
                       isLarge: false,
-                      isDisabled: false,
                       onPressed: () {
                         _showPopoverArrowed(
                             context, _anchorArrowed0, false, false);
@@ -406,7 +393,6 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
                       key: _anchorArrowed1,
                       style: DSKButtonStyle.normal,
                       isLarge: false,
-                      isDisabled: false,
                       onPressed: () {
                         _showPopoverArrowed(
                             context, _anchorArrowed1, true, false);
@@ -419,7 +405,6 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
                       key: _anchorArrowed2,
                       style: DSKButtonStyle.normal,
                       isLarge: false,
-                      isDisabled: false,
                       onPressed: () {
                         _showPopoverArrowed(
                             context, _anchorArrowed2, false, true);
@@ -432,7 +417,6 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
                       key: _anchorArrowed3,
                       style: DSKButtonStyle.normal,
                       isLarge: false,
-                      isDisabled: false,
                       onPressed: () {
                         _showPopoverArrowed(
                             context, _anchorArrowed3, true, true);

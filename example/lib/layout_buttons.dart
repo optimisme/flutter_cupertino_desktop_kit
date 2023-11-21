@@ -43,7 +43,6 @@ class _LayoutButtonsState extends State<LayoutButtons> {
                     child: DSKButton(
                       style: DSKButtonStyle.action,
                       isLarge: true,
-                      isDisabled: false,
                       onPressed: () {},
                       child: const Text('Action large'),
                     )),
@@ -52,7 +51,6 @@ class _LayoutButtonsState extends State<LayoutButtons> {
                     child: DSKButton(
                       style: DSKButtonStyle.action,
                       isLarge: false,
-                      isDisabled: false,
                       onPressed: () {},
                       child: const Text('Action'),
                     )),
@@ -61,7 +59,6 @@ class _LayoutButtonsState extends State<LayoutButtons> {
                     child: DSKButton(
                       style: DSKButtonStyle.destructive,
                       isLarge: false,
-                      isDisabled: false,
                       onPressed: () {},
                       child: const Text('Destructive'),
                     )),
@@ -70,7 +67,6 @@ class _LayoutButtonsState extends State<LayoutButtons> {
                     child: DSKButton(
                       style: DSKButtonStyle.normal,
                       isLarge: false,
-                      isDisabled: false,
                       onPressed: () {},
                       child: const Text('Normal'),
                     )),
@@ -79,7 +75,7 @@ class _LayoutButtonsState extends State<LayoutButtons> {
                     child: DSKButton(
                       style: DSKButtonStyle.action,
                       isLarge: false,
-                      isDisabled: true,
+                      enabled: false,
                       onPressed: () {},
                       child: const Text('Action disabled'),
                     )),
@@ -88,7 +84,7 @@ class _LayoutButtonsState extends State<LayoutButtons> {
                     child: DSKButton(
                       style: DSKButtonStyle.destructive,
                       isLarge: false,
-                      isDisabled: true,
+                      enabled: false,
                       onPressed: () {},
                       child: const Text('Destructive disabled'),
                     )),
@@ -97,7 +93,7 @@ class _LayoutButtonsState extends State<LayoutButtons> {
                     child: DSKButton(
                       style: DSKButtonStyle.normal,
                       isLarge: false,
-                      isDisabled: true,
+                      enabled: false,
                       onPressed: () {},
                       child: const Text('Normal disabled'),
                     )),
