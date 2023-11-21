@@ -78,32 +78,29 @@ class DSKButtonIconState extends State<DSKButtonIcon> {
                     color: backgroundColor,
                     borderRadius: BorderRadius.circular(widget.size)),
                 child: Container(
-                  width: widget.size,
-                  height: widget.size,
-                  alignment: Alignment.center,
-                  child: Icon(
-                    widget.icon,
-                    color: widget.isSelected && DSKThemeManager.isAppFocused
-                        ? DSKColors.accent
-                        : DSKColors.text,
-                    size: widget.isCircle
-                        ? widget.size * 0.5
-                        : widget.size, // Icona més petita que el botó
-                  ),
-                ),
+                    width: widget.size,
+                    height: widget.size,
+                    alignment: Alignment.center,
+                    child: Icon(
+                      widget.icon,
+                      color: widget.isSelected && DSKThemeManager.isAppFocused
+                          ? DSKColors.accent
+                          : DSKColors.text,
+                      size: widget.size * 0.5, // Icona més petita que el botó
+                    )),
               )
             : DecoratedBox(
                 decoration: BoxDecoration(
                     color: backgroundColor,
                     borderRadius: BorderRadius.circular(8)),
-                child: Padding(
-                    padding: const EdgeInsets.fromLTRB(6, 2, 6, 2),
+                child: Container(
+                    width: widget.size,
+                    height: widget.size,
+                    alignment: Alignment.center,
                     child: Icon(
                       widget.icon,
                       color: DSKColors.text,
-                      size: widget.isCircle
-                          ? widget.size * 0.5
-                          : widget.size, // Icona més petita que el botó
+                      size: widget.size * 0.75,
                     )),
               ),
       ),
