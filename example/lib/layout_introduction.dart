@@ -1,4 +1,3 @@
-import 'package:example/app.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_desktop_cupertino/dsk_widgets.dart';
@@ -14,7 +13,6 @@ class LayoutIntroduction extends StatefulWidget {
 class _LayoutIntroductionState extends State<LayoutIntroduction> {
   @override
   Widget build(BuildContext context) {
-    String selectedRadio = DSKThemeManager.appearanceConfig;
     return CupertinoPageScaffold(
         navigationBar: CupertinoNavigationBar(
           backgroundColor: DSKColors.backgroundSecondary0.withOpacity(0.5),
@@ -67,7 +65,6 @@ class _LayoutIntroductionState extends State<LayoutIntroduction> {
                                       color: DSKColors.accent,
                                     )))
                           ]))),
-              
               const SizedBox(height: 50),
             ])));
   }

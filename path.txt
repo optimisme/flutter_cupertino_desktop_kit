@@ -4,7 +4,7 @@ export PATH="$PATH:${HOME}/Documents/Projects/flutter/flutter/bin/"
 Example web build:
 cd example
 flutter build web
-flutter build web --base-href "/flutter_desktop_cupertino/public/example/"
+flutter build web --web-renderer html --base-href "/flutter_desktop_cupertino/public/example/"
 cp -r ./build/web/* ../public/example
 
 python3 -m http.server 9000

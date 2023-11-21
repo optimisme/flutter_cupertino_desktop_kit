@@ -215,13 +215,13 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
                   child: RichText(
                     text: TextSpan(
                       style: TextStyle(fontSize: 14, color: DSKColors.text),
-                      children: <TextSpan>[
+                      children: const <TextSpan>[
                         TextSpan(
                             text: '*Important! ',
                             style: TextStyle(fontWeight: FontWeight.bold)),
                         TextSpan(
                             text:
-                                'The shadow of translucent dialogs is not drawn properly on the web.'),
+                                'The shadow of translucent dialogs is not drawn properly on the web with canvaskit renderer.'),
                       ],
                     ),
                   )),

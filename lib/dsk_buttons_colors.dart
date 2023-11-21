@@ -21,7 +21,7 @@ class DSKButtonsColors extends StatefulWidget {
 class DSKButtonsColorsState extends State<DSKButtonsColors> {
   @override
   Widget build(BuildContext context) {
-  int index = -1;
+    int index = -1;
     return Row(
       children: widget.colors.entries.map((entry) {
         final String colorName = entry.key;
@@ -58,7 +58,6 @@ class DSKButtonsColorsState extends State<DSKButtonsColors> {
                 : Container(),
           ),
         );
-        print(index);
       }).toList(),
     );
   }
