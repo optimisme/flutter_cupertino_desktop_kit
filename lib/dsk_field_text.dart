@@ -84,7 +84,7 @@ class DSKFieldTextState extends State<DSKFieldText> {
               ? [
                   BoxShadow(
                     color: DSKThemeManager.isAppFocused
-                        ? DSKColors.accent100
+                        ? DSKColors.accent200
                         : DSKColors.transparent,
                     spreadRadius: 1.5,
                     blurRadius: 0.7,
