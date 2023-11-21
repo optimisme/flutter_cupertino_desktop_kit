@@ -8,6 +8,7 @@ git merge main
 flutter build web --web-renderer canvaskit --base-href "/flutter_desktop_cupertino/gh-pages/example/"
 cp -r ./build/web/* ../gh-pages/example/
 git push origin gh-pages
+git push
 git checkout main
 
 python3 -m http.server 9000
