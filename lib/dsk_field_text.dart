@@ -60,7 +60,7 @@ class DSKFieldTextState extends State<DSKFieldText> {
   Widget build(BuildContext context) {
     final BorderRadius borderRadius = widget.isRounded
         ? BorderRadius.circular(25.0)
-        : BorderRadius.circular(4.0);
+        : BorderRadius.circular(2.0);
 
     return CupertinoTextField(
       enabled: widget.enabled,
@@ -73,7 +73,7 @@ class DSKFieldTextState extends State<DSKFieldText> {
           color: DSKColors.background,
           borderRadius: borderRadius,
           border: Border.all(
-            color: widget.enabled ? DSKColors.grey300 : DSKColors.grey75,
+            color: widget.enabled ? DSKColors.grey200 : DSKColors.grey75,
             width: 1,
           ),
           boxShadow: _internalFocusNode.hasFocus
@@ -82,8 +82,8 @@ class DSKFieldTextState extends State<DSKFieldText> {
                     color: DSKThemeManager.isAppFocused
                         ? DSKColors.accent100
                         : DSKColors.transparent,
-                    spreadRadius: 2,
-                    blurRadius: 1,
+                    spreadRadius: 1.5,
+                    blurRadius: 0.7,
                     offset: const Offset(0, 0),
                   )
                 ]
