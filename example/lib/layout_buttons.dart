@@ -50,7 +50,6 @@ class _LayoutButtonsState extends State<LayoutButtons> {
                     padding: const EdgeInsets.all(8),
                     child: DSKButton(
                       style: DSKButtonStyle.action,
-                      isLarge: false,
                       onPressed: () {},
                       child: const Text('Action'),
                     )),
@@ -58,7 +57,6 @@ class _LayoutButtonsState extends State<LayoutButtons> {
                     padding: const EdgeInsets.all(8),
                     child: DSKButton(
                       style: DSKButtonStyle.destructive,
-                      isLarge: false,
                       onPressed: () {},
                       child: const Text('Destructive'),
                     )),
@@ -66,7 +64,6 @@ class _LayoutButtonsState extends State<LayoutButtons> {
                     padding: const EdgeInsets.all(8),
                     child: DSKButton(
                       style: DSKButtonStyle.normal,
-                      isLarge: false,
                       onPressed: () {},
                       child: const Text('Normal'),
                     )),
@@ -74,16 +71,13 @@ class _LayoutButtonsState extends State<LayoutButtons> {
                     padding: const EdgeInsets.all(8),
                     child: DSKButton(
                       style: DSKButtonStyle.normal,
-                      isLarge: false,
                       onPressed: () {},
-                      child: Icon(CupertinoIcons.add,
-                          color: DSKColors.text, size: 14),
+                      child: const Icon(CupertinoIcons.bookmark),
                     )),
                 Padding(
                     padding: const EdgeInsets.all(8),
                     child: DSKButton(
                       style: DSKButtonStyle.action,
-                      isLarge: false,
                       enabled: false,
                       onPressed: () {},
                       child: const Text('Action disabled'),
@@ -92,7 +86,6 @@ class _LayoutButtonsState extends State<LayoutButtons> {
                     padding: const EdgeInsets.all(8),
                     child: DSKButton(
                       style: DSKButtonStyle.destructive,
-                      isLarge: false,
                       enabled: false,
                       onPressed: () {},
                       child: const Text('Destructive disabled'),
@@ -101,10 +94,17 @@ class _LayoutButtonsState extends State<LayoutButtons> {
                     padding: const EdgeInsets.all(8),
                     child: DSKButton(
                       style: DSKButtonStyle.normal,
-                      isLarge: false,
                       enabled: false,
                       onPressed: () {},
                       child: const Text('Normal disabled'),
+                    )),
+                Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: DSKButton(
+                      style: DSKButtonStyle.normal,
+                      enabled: false,
+                      onPressed: () {},
+                      child: const Icon(CupertinoIcons.bookmark),
                     )),
               ]),
               const Padding(

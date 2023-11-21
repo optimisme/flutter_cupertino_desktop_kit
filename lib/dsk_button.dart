@@ -31,7 +31,9 @@ class DSKButtonState extends State<DSKButton> {
   @override
   Widget build(BuildContext context) {
     BoxDecoration decoration;
+    Color color;
     TextStyle textStyle;
+    IconThemeData iconTheme;
     BoxShadow shadow = BoxShadow(
       color: DSKColors.black.withOpacity(0.1),
       spreadRadius: 0,
@@ -48,12 +50,14 @@ class DSKButtonState extends State<DSKButton> {
                   : DSKColors.grey200,
               borderRadius: BorderRadius.circular(6.0),
               boxShadow: [shadow]);
+          color = DSKThemeManager.isAppFocused
+              ? DSKColors.accent600
+              : DSKColors.grey;
           textStyle = TextStyle(
             fontSize: _fontSize,
-            color: DSKThemeManager.isAppFocused
-                ? DSKColors.accent600
-                : DSKColors.grey,
+            color: color,
           );
+          iconTheme = IconThemeData(color: color, size: _fontSize + 2);
           break;
 
         case DSKButtonStyle.normal:
@@ -62,10 +66,12 @@ class DSKButtonState extends State<DSKButton> {
               color: DSKColors.backgroundSecondary0,
               borderRadius: BorderRadius.circular(6.0),
               boxShadow: [shadow]);
+          color = DSKColors.grey;
           textStyle = TextStyle(
             fontSize: _fontSize,
-            color: DSKColors.grey,
+            color: color,
           );
+          iconTheme = IconThemeData(color: color, size: _fontSize + 2);
           break;
       }
     } else {
@@ -82,10 +88,12 @@ class DSKButtonState extends State<DSKButton> {
                 ),
                 borderRadius: BorderRadius.circular(6.0),
                 boxShadow: [shadow]);
+            color = _isPressed ? DSKColors.accent50 : DSKColors.white;
             textStyle = TextStyle(
               fontSize: _fontSize,
-              color: _isPressed ? DSKColors.accent50 : DSKColors.white,
+              color: color,
             );
+            iconTheme = IconThemeData(color: color, size: _fontSize + 2);
           } else {
             decoration = BoxDecoration(
                 color: _isPressed
@@ -94,10 +102,12 @@ class DSKButtonState extends State<DSKButton> {
                 border: Border.all(color: DSKColors.backgroundSecondary1),
                 borderRadius: BorderRadius.circular(6.0),
                 boxShadow: [shadow]);
-            textStyle = const TextStyle(
+            color = DSKColors.black;
+            textStyle = TextStyle(
               fontSize: _fontSize,
-              color: DSKColors.black,
+              color: color,
             );
+            iconTheme = IconThemeData(color: color, size: _fontSize + 2);
           }
           break;
 
@@ -115,10 +125,12 @@ class DSKButtonState extends State<DSKButton> {
                   : Border.all(color: DSKColors.grey600),
               borderRadius: BorderRadius.circular(6.0),
               boxShadow: [shadow]);
-          textStyle = const TextStyle(
+          color = DSKColors.red;
+          textStyle = TextStyle(
             fontSize: _fontSize,
-            color: DSKColors.red,
+            color: color,
           );
+          iconTheme = IconThemeData(color: color, size: _fontSize + 2);
           break;
 
         default:
@@ -135,10 +147,12 @@ class DSKButtonState extends State<DSKButton> {
                   : Border.all(color: DSKColors.grey600),
               borderRadius: BorderRadius.circular(6.0),
               boxShadow: [shadow]);
+          color = DSKColors.text;
           textStyle = TextStyle(
             fontSize: _fontSize,
-            color: DSKColors.text,
+            color: color,
           );
+          iconTheme = IconThemeData(color: color, size: _fontSize + 2);
       }
     }
 
@@ -161,10 +175,14 @@ class DSKButtonState extends State<DSKButton> {
               : widget.child is Text
                   ? const EdgeInsets.fromLTRB(8, 3, 8, 5)
                   : const EdgeInsets.fromLTRB(8, 4, 8, 4),
-          child: DefaultTextStyle(
-            style: textStyle,
-            child: widget.child,
-          ),
+          child: widget.child is Text
+              ? DefaultTextStyle(
+                  style: textStyle,
+                  child: widget.child,
+                )
+              : widget.child is Icon
+                  ? IconTheme.merge(data: iconTheme, child: widget.child)
+                  : widget.child,
         ),
       )),
     );
