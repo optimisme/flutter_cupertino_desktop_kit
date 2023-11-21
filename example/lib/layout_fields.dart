@@ -74,7 +74,7 @@ class _LayoutFieldsState extends State<LayoutFields> {
                         width: 100,
                         child: DSKFieldNumeric(
                           textSize: 12,
-                          defaultValue: 5.0,
+                          defaultValue: -2.0,
                           decimals: 2,
                           min: -10,
                           max: 10,
