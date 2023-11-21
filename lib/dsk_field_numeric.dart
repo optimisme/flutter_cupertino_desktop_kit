@@ -29,32 +29,59 @@ class DSKFieldNumeric extends StatefulWidget {
 
 class DSKFieldNumericState extends State<DSKFieldNumeric> {
   late TextEditingController _controller;
-  late RegExp decimalRegex;
+  late RegExp _decimalRegex;
+  bool _isUpdating = false;
 
   @override
   void initState() {
     super.initState();
     _controller = TextEditingController(
         text: widget.defaultValue.toStringAsFixed(widget.decimals));
-    decimalRegex = RegExp(r'^\d+\.?\d*');
+    if (widget.decimals != double.infinity) {
+      String str = '{0,${widget.decimals}}';
+      _decimalRegex = RegExp(r'^-?\d*\.?\d' + str);
+    } else {
+      _decimalRegex = RegExp(r'^-?\d*\.?\d*');
+    }
+
     _controller.addListener(_onTextChanged);
   }
 
-  void _onTextChanged() {
-    String text = _controller.text;
+  @override
+  void dispose() {
+    _controller.removeListener(_onTextChanged);
+    _controller.dispose();
+    super.dispose();
+  }
 
-    // Comprova si el text compleix amb el patró decimal.
-    if (!decimalRegex.hasMatch(text)) {
-      // Si no compleix, simplement retorna sense fer canvis.
+  void _onTextChanged() {
+    if (_isUpdating) {
       return;
     }
 
-    // Si el text compleix amb el patró, intenta convertir-lo a double.
-    double? currentValue = double.tryParse(text);
-    if (currentValue != null) {
-      widget.onChanged?.call(currentValue);
-      
+    String text = _controller.text;
+
+    // Comprova si el text compleix amb el patró decimal.
+    if (!_decimalRegex.hasMatch(text)) {
+      return;
     }
+
+    double currentValue = double.parse(text);
+    if (currentValue < widget.min || currentValue > widget.max) {
+      _isUpdating = true;
+
+      // Actualitza el valor dins dels límits.
+      currentValue = currentValue.clamp(widget.min, widget.max);
+      _controller.text = currentValue.toStringAsFixed(widget.decimals);
+
+      // Restableix el cursor a la posició correcta.
+      _controller.selection = TextSelection.fromPosition(
+          TextPosition(offset: _controller.text.length));
+
+      _isUpdating = false;
+    }
+
+    widget.onChanged?.call(currentValue);
   }
 
   void _incrementValue() {
@@ -83,32 +110,24 @@ class DSKFieldNumericState extends State<DSKFieldNumeric> {
           child: DSKFieldText(
             controller: _controller,
             textSize: widget.textSize,
-            keyboardType:
-                TextInputType.numberWithOptions(decimal: widget.decimals > 0),
+            keyboardType: TextInputType.numberWithOptions(
+                signed: true, decimal: widget.decimals > 0),
             inputFormatters: [
-              FilteringTextInputFormatter.allow(decimalRegex),
-
+              FilteringTextInputFormatter.allow(_decimalRegex),
             ],
           ),
         ),
         widget.increment == double.infinity
             ? Container()
-            : SizedBox(width: 4), 
+            : const SizedBox(width: 4),
         widget.increment == double.infinity
             ? Container()
             : DSKButtonsUpDown(
-          isDisabled: widget.increment == double.infinity,
-          onUpPressed: _incrementValue,
-          onDownPressed: _decrementValue,
-        ),
+                isDisabled: widget.increment == double.infinity,
+                onUpPressed: _incrementValue,
+                onDownPressed: _decrementValue,
+              ),
       ],
     );
-  }
-
-  @override
-  void dispose() {
-    _controller.removeListener(_onTextChanged);
-    _controller.dispose();
-    super.dispose();
   }
 }

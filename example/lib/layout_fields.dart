@@ -63,7 +63,21 @@ class _LayoutFieldsState extends State<LayoutFields> {
                         child: DSKFieldNumeric(
                           textSize: 12,
                           defaultValue: 5.0,
-
+                          onChanged: (double value) {
+                            // ignore: avoid_print
+                            print("Numeric A: $value");
+                          },
+                        ))),
+                Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: SizedBox(
+                        width: 100,
+                        child: DSKFieldNumeric(
+                          textSize: 12,
+                          defaultValue: 5.0,
+                          decimals: 2,
+                          min: -10,
+                          max: 10,
                           increment: 0.15,
                           onChanged: (double value) {
                             // ignore: avoid_print
