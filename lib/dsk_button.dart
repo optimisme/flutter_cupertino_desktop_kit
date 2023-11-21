@@ -158,7 +158,9 @@ class DSKButtonState extends State<DSKButton> {
         child: Padding(
           padding: widget.isLarge
               ? const EdgeInsets.fromLTRB(8, 8, 8, 10)
-              : const EdgeInsets.fromLTRB(8, 3, 8, 5),
+              : widget.child is Text
+                  ? const EdgeInsets.fromLTRB(8, 3, 8, 5)
+                  : const EdgeInsets.fromLTRB(8, 4, 8, 4),
           child: DefaultTextStyle(
             style: textStyle,
             child: widget.child,

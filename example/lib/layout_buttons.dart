@@ -73,6 +73,15 @@ class _LayoutButtonsState extends State<LayoutButtons> {
                 Padding(
                     padding: const EdgeInsets.all(8),
                     child: DSKButton(
+                      style: DSKButtonStyle.normal,
+                      isLarge: false,
+                      onPressed: () {},
+                      child: Icon(CupertinoIcons.add,
+                          color: DSKColors.text, size: 14),
+                    )),
+                Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: DSKButton(
                       style: DSKButtonStyle.action,
                       isLarge: false,
                       enabled: false,
