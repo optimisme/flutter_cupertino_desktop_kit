@@ -8,7 +8,7 @@ The goal is to be able to develop applications for all desktop systems, includin
 
 The project itself is just a set of libraries that define and manage widgets. However, it includes an example of how to use them. The example can be seen on this website:
 
-[DSK cupertino example](https://optimisme.github.io/flutter_desktop_cupertino/public/example/)
+[DSK cupertino example](https://optimisme.github.io/flutter_desktop_cupertino/gh-pages/example/)
 
 To run the example in a local application:
 
