@@ -51,6 +51,24 @@ class _LayoutFieldsState extends State<LayoutFields> {
                           },
                           focusNode: FocusNode(),
                         ))),
+                Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: SizedBox(
+                        width: 100,
+                        child: DSKFieldText(
+                          defaultValue: '1234',
+                          obscureText: true,
+                          isRounded: false,
+                          onChanged: (value) {
+                            // ignore: avoid_print
+                            print("Password changed: $value");
+                          },
+                          onSubmitted: (value) {
+                            // ignore: avoid_print
+                            print("Password submitted: $value");
+                          },
+                          focusNode: FocusNode(),
+                        ))),
               ]),
               const Padding(
                   padding: EdgeInsets.all(8), child: Text('DSKFieldNumeric:')),

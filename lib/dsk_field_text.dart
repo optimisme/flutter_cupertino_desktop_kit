@@ -5,6 +5,7 @@ import 'dsk_theme_colors.dart';
 
 class DSKFieldText extends StatefulWidget {
   final bool isRounded;
+  final bool obscureText;
   final String placeholder;
   final ValueChanged<String>? onChanged;
   final ValueChanged<String>? onSubmitted;
@@ -19,6 +20,7 @@ class DSKFieldText extends StatefulWidget {
   const DSKFieldText({
     Key? key,
     this.isRounded = false,
+    this.obscureText = false,
     this.placeholder = '',
     this.onChanged,
     this.onSubmitted,
@@ -63,6 +65,7 @@ class DSKFieldTextState extends State<DSKFieldText> {
         : BorderRadius.circular(4.0);
 
     return CupertinoTextField(
+      obscureText: widget.obscureText,
       enabled: widget.enabled,
       controller: widget.controller,
       focusNode: _internalFocusNode,
