@@ -55,13 +55,17 @@ class _LayoutPickersState extends State<LayoutPickers> {
                 Padding(
                     padding: const EdgeInsets.all(8),
                     child: DSKPickerDisclosure(
-                      sideWidget: Text('Show/Hide'),
+                      sideWidget: Text('Show/Hide', style: TextStyle(fontSize: 14)),
                       bottomWidget: SizedBox(
                         width: 300, 
                         height: 150, 
                         child:Container(
-                          color: DSKColors.backgroundSecondary1, 
-                          child: Text('Expandible disclosure'))),
+                            padding: EdgeInsets.all(4.0),
+                            decoration: BoxDecoration(
+                              color: DSKColors.backgroundSecondary1,
+                              borderRadius: BorderRadius.circular(4.0),
+                            ),
+                            child:Text('Expandible disclosure'))),
                       onChanged: (bool value) {
                         setState(() {});
                       }),
