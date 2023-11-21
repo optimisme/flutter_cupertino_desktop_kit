@@ -221,7 +221,7 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
                             style: TextStyle(fontWeight: FontWeight.bold)),
                         TextSpan(
                             text:
-                                'The shadow of translucent dialogs is not drawn properly on the web with canvaskit renderer.'),
+                                'The shadow of translucent dialogs is not drawn properly on the web.'),
                       ],
                     ),
                   )),

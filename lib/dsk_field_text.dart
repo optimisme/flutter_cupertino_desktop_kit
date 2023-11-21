@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_desktop_cupertino/dsk_theme_manager.dart';
 import 'dsk_theme_colors.dart';
 
 class DSKFieldText extends StatefulWidget {
@@ -69,7 +70,9 @@ class DSKFieldTextState extends State<DSKFieldText> {
           boxShadow: _internalFocusNode.hasFocus
               ? [
                   BoxShadow(
-                    color: DSKColors.accent100,
+                    color: DSKThemeManager.isAppFocused
+                        ? DSKColors.accent100
+                        : DSKColors.transparent,
                     spreadRadius: 2,
                     blurRadius: 1,
                     offset: const Offset(0, 0),
