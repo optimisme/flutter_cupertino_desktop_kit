@@ -13,11 +13,13 @@ class DSKPickerDisclosure extends StatefulWidget {
     Key? key,
     required this.sideWidget,
     required this.bottomWidget,
-    required this.onChanged,
+    this.onChanged = _defaultOnChanged,
   }) : super(key: key);
 
   @override
   DSKPickerDisclosureState createState() => DSKPickerDisclosureState();
+
+  static void _defaultOnChanged(bool value) {}
 }
 
 class DSKPickerDisclosureState extends State<DSKPickerDisclosure> with SingleTickerProviderStateMixin {

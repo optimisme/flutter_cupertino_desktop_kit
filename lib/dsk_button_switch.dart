@@ -10,12 +10,14 @@ class DSKButtonSwitch extends StatefulWidget {
   const DSKButtonSwitch({
     Key? key,
     required this.value,
-    required this.onChanged,
+    this.onChanged = _defaultOnChanged,
     this.size = 24.0,
   }) : super(key: key);
 
   @override
   DSKButtonSwitchState createState() => DSKButtonSwitchState();
+
+  static void _defaultOnChanged(bool value) {}
 }
 
 class DSKButtonSwitchState extends State<DSKButtonSwitch> {

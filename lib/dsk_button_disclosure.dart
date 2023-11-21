@@ -9,12 +9,14 @@ class DSKButtonDisclosure extends StatefulWidget {
   const DSKButtonDisclosure({
     Key? key,
     required this.value,
-    required this.onChanged,
-    this.size = 16.0, // Mida per defecte del botó
+    this.onChanged = _defaultOnChanged,
+    this.size = 16.0, 
   }) : super(key: key);
 
   @override
   DSKButtonDisclosureState createState() => DSKButtonDisclosureState();
+
+  static void _defaultOnChanged(bool value) {}
 }
 
 class DSKButtonDisclosureState extends State<DSKButtonDisclosure>

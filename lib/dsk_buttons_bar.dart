@@ -10,12 +10,14 @@ class DSKButtonsBar extends StatefulWidget {
   const DSKButtonsBar({
     Key? key,
     required this.options,
-    required this.onChanged,
+    this.onChanged = _defaultOnChanged,
     this.allowsMultipleSelection = false,
   }) : super(key: key);
 
   @override
   DSKButtonsBarState createState() => DSKButtonsBarState();
+
+  static void _defaultOnChanged(bool value) {}
 }
 
 class DSKButtonsBarState extends State<DSKButtonsBar> {

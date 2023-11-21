@@ -10,12 +10,14 @@ class DSKButtonCheckBox extends StatefulWidget {
   const DSKButtonCheckBox({
     Key? key,
     required this.value,
-    required this.onChanged,
+    this.onChanged = _defaultOnChanged,
     this.size = 16.0,
   }) : super(key: key);
 
   @override
   DSKButtonCheckBoxState createState() => DSKButtonCheckBoxState();
+
+  static void _defaultOnChanged(bool value) {}
 }
 
 class DSKButtonCheckBoxState extends State<DSKButtonCheckBox> {
