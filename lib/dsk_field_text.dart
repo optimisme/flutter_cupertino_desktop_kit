@@ -73,7 +73,11 @@ class DSKFieldTextState extends State<DSKFieldText> {
           color: DSKColors.background,
           borderRadius: borderRadius,
           border: Border.all(
-            color: widget.enabled ? DSKColors.grey200 : DSKColors.grey75,
+            color: widget.enabled
+                ? DSKColors.grey200
+                : DSKThemeManager.isLight
+                    ? DSKColors.grey75
+                    : DSKColors.grey700,
             width: 1,
           ),
           boxShadow: _internalFocusNode.hasFocus
@@ -91,8 +95,11 @@ class DSKFieldTextState extends State<DSKFieldText> {
       placeholder: widget.placeholder,
       style: TextStyle(
           fontSize: widget.textSize,
-          color:
-              widget.enabled ? DSKColors.text : DSKColors.backgroundSecondary1),
+          color: widget.enabled
+              ? DSKColors.text
+              : DSKThemeManager.isLight
+                  ? DSKColors.grey100
+                  : DSKColors.grey700),
       prefix: widget.prefixIcon == null
           ? null
           : Icon(widget.prefixIcon, color: DSKColors.grey),
