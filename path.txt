@@ -1,14 +1,13 @@
 Exemple de path:
 export PATH="$PATH:${HOME}/Documents/Projects/flutter/flutter/bin/"
 
-Example web build:
+Example publicar a github pages:
 cd example
-flutter build web
-flutter build web --web-renderer canvaskit --base-href "/flutter_desktop_cupertino/public/example/"
-flutter build web --web-renderer html --base-href "/flutter_desktop_cupertino/public/example/"
-cp -r ./build/web/* ../public/example
+git checkout -b gh-pages
+flutter build web --web-renderer canvaskit --base-href "/flutter_desktop_cupertino/public/example/build/web/"
+git push origin gh-pages
+git checkout main
 
 python3 -m http.server 9000
-
 
 flutter run -d macos --enable-impeller
