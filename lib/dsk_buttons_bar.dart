@@ -5,9 +5,23 @@ import 'dsk_theme_colors.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
+/// Class `DSKButtonsBar` - A custom widget that creates a bar of buttons.
+///
+/// This widget creates a bar containing multiple buttons. It supports multiple selection and customizable button options.
+///
+/// Parameters:
+/// * `options`: (List<Map<String, dynamic>>) A list of dictionaries defining each button's properties.
+/// * `onChanged`: (Function(List<bool>)?) Callback called when the selection of buttons changes.
+/// * `allowsMultipleSelection`: (bool) Determines if multiple buttons can be selected simultaneously.
+
 class DSKButtonsBar extends StatefulWidget {
-  final List<Map<String, dynamic>> options; // Canviat a llistat de diccionaris
+  // List of button options.
+  final List<Map<String, dynamic>> options; 
+
+  // Callback for selection changes.
   final Function(List<bool>)? onChanged;
+
+  // Flag for multiple selection.
   final bool allowsMultipleSelection;
 
   const DSKButtonsBar({
@@ -21,10 +35,16 @@ class DSKButtonsBar extends StatefulWidget {
   DSKButtonsBarState createState() => DSKButtonsBarState();
 }
 
+/// Class `DSKButtonsBarState` - The state for `DSKButtonsBar`.
+///
+/// Manages the state and rendering of the buttons bar.
 class DSKButtonsBarState extends State<DSKButtonsBar> {
+
+  // Border radius for button edges.
   final double _borderRadius = 4.0;
-  List<Map<String, dynamic>> _selectedStates =
-      []; // Canviat a llistat de diccionaris
+
+  // States of button selections.
+  List<Map<String, dynamic>> _selectedStates = [];
 
   @override
   void initState() {
@@ -32,6 +52,7 @@ class DSKButtonsBarState extends State<DSKButtonsBar> {
     _selectedStates = widget.options.map((option) => Map.of(option)).toList();
   }
 
+  /// Handles tap events on buttons, updating the selection state.
   void _buttonTapped(int index) {
     setState(() {
       if (widget.allowsMultipleSelection) {
