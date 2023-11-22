@@ -17,6 +17,7 @@ class DSKFieldText extends StatefulWidget {
   final List<TextInputFormatter>? inputFormatters;
   final bool enabled;
   final Function? onFocusChanged;
+  final TextAlign textAlign;
 
   const DSKFieldText({
     Key? key,
@@ -33,6 +34,7 @@ class DSKFieldText extends StatefulWidget {
     this.inputFormatters,
     this.enabled = true,
     this.onFocusChanged,
+    this.textAlign = TextAlign.left,
   }) : super(key: key);
 
   @override
@@ -69,6 +71,7 @@ class DSKFieldTextState extends State<DSKFieldText> {
         : BorderRadius.circular(4.0);
 
     return CupertinoTextField(
+      textAlign: widget.textAlign,
       obscureText: widget.obscureText,
       enabled: widget.enabled,
       controller: widget.controller,

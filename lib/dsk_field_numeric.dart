@@ -46,6 +46,7 @@ class DSKFieldNumericState extends State<DSKFieldNumeric> {
       _decimalRegex = RegExp(r'^-?\d*\.?\d' + str);
     } else {
       _decimalRegex = RegExp(r'^-?\d*\.?\d*');
+      //_decimalRegex = RegExp(r'^-?\d*\.?\d*px?$');
     }
 
     _controller.addListener(_onTextChanged);
@@ -138,9 +139,11 @@ class DSKFieldNumericState extends State<DSKFieldNumeric> {
             controller: _controller,
             enabled: widget.enabled,
             textSize: widget.textSize,
+            textAlign: TextAlign.right,
             onFocusChanged: _focusChanged,
             keyboardType: TextInputType.numberWithOptions(
                 signed: true, decimal: widget.decimals > 0),
+            //keyboardType: TextInputType.text,
             inputFormatters: [
               FilteringTextInputFormatter.allow(_decimalRegex),
             ],
