@@ -19,6 +19,7 @@ class DSKPickerDisclosure extends StatefulWidget {
 
 class DSKPickerDisclosureState extends State<DSKPickerDisclosure>
     with SingleTickerProviderStateMixin {
+  final int _animationMillis = 200;
   late AnimationController _controller;
   late Animation<double> _animation;
   bool _isExpanded = false;
@@ -27,7 +28,7 @@ class DSKPickerDisclosureState extends State<DSKPickerDisclosure>
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: const Duration(milliseconds: 200),
+      duration: Duration(milliseconds: _animationMillis),
       vsync: this,
     );
     _animation =
