@@ -15,13 +15,13 @@ import 'dsk_theme_colors.dart';
 /// * `allowsMultipleSelection`: (bool) Determines if multiple buttons can be selected simultaneously.
 
 class DSKButtonsBar extends StatefulWidget {
-  // List of button options.
+  /// List of button options.
   final List<Map<String, dynamic>> options; 
 
-  // Callback for selection changes.
+  /// Callback for selection changes.
   final Function(List<bool>)? onChanged;
 
-  // Flag for multiple selection.
+  /// Flag for multiple selection.
   final bool allowsMultipleSelection;
 
   const DSKButtonsBar({

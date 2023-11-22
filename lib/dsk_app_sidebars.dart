@@ -20,37 +20,16 @@ import 'dsk_theme_colors.dart';
 /// * `sidebarRightWidth`: The width of the right sidebar.
 /// * `sidebarRight`: The widget to display in the right sidebar.
 class DSKAppSidebars extends StatefulWidget {
-  /// The central content widget.
   final Widget central;
-
-  /// Whether the left sidebar is resizable.
   final bool sidebarLeftIsResizable;
-
-  /// Whether the left sidebar is visible by default.
   final bool sidebarLeftDefaultsVisible;
-
-  /// The minimum width of the left sidebar.
   final double sidebarLeftMinWidth;
-
-  /// The maximum width of the left sidebar.
   final double sidebarLeftMaxWidth;
-
-  /// The widget to display in the left sidebar.
   final Widget? sidebarLeft;
-
-  /// Whether the right sidebar is visible by default.
   final bool sidebarRightDefaultsVisible;
-
-  /// The width of the right sidebar.
   final double sidebarRightWidth;
-
-  /// The widget to display in the right sidebar.
   final Widget? sidebarRight;
 
-  /// The state of the `DSKAppSidebars` widget.
-  ///
-  /// This class manages the state of the sidebars, including their visibility
-  /// and width.
   const DSKAppSidebars({
     Key? key,
     required this.central,
@@ -68,43 +47,22 @@ class DSKAppSidebars extends StatefulWidget {
   DSKAppSidebarsState createState() => DSKAppSidebarsState();
 }
 
-/// The state of the `DSKAppSidebars` widget.
-///
-/// This class manages the state of the sidebars, including their visibility
-/// and width.
+  /// The state of the `DSKAppSidebars` widget.
+  ///
+  /// This class manages the state of the sidebars, including their visibility
+  /// and width.
 class DSKAppSidebarsState extends State<DSKAppSidebars> {
-  /// The current cursor for the mouse.
-  MouseCursor _cursor = SystemMouseCursors.basic;
-
-  /// The duration of the sidebar animation.
-  int _animationMillis = 200;
-
-  /// The width of the left sidebar.
-  double _sidebarLeftWidth = 0.0;
-
-  /// Whether the left sidebar is currently being dragged.
-  bool _sidebarLeftDragging = false;
-
-  /// The original position of the left sidebar during dragging.
-  double _sidebarLeftOriginX = 0.0;
-
-  /// The current position of the mouse during dragging.
-  double _sidebarLeftDragX = 0.0;
-
-  /// Whether the left sidebar is visible.
-  bool _sidebarLeftIsVisible = false;
-
-  /// The width of the right sidebar.
-  double _sidebarRightWidth = 0.0;
-
-  /// Whether the right sidebar is visible.
-  bool _sidebarRightIsVisible = false;
-
-  /// Determines whether the left sidebar is visible.
-  bool get isSidebarLeftVisible => _sidebarLeftIsVisible;
-
-  /// Determines whether the right sidebar is visible.
-  bool get isSidebarRightVisible => _sidebarRightIsVisible;
+  MouseCursor _cursor = SystemMouseCursors.basic; // The current cursor for the mouse.
+  int _animationMillis = 200; // The duration of the sidebar animation.
+  double _sidebarLeftWidth = 0.0; // The width of the left sidebar.
+  bool _sidebarLeftDragging = false; // Whether the left sidebar is currently being dragged.
+  double _sidebarLeftOriginX = 0.0; // The original position of the left sidebar during dragging.
+  double _sidebarLeftDragX = 0.0; // The current position of the mouse during dragging.
+  bool _sidebarLeftIsVisible = false; // Whether the left sidebar is visible.
+  double _sidebarRightWidth = 0.0; // The width of the right sidebar.
+  bool _sidebarRightIsVisible = false; // Whether the right sidebar is visible.
+  bool get isSidebarLeftVisible => _sidebarLeftIsVisible; // Determines whether the left sidebar is visible.
+  bool get isSidebarRightVisible => _sidebarRightIsVisible; // Determines whether the right sidebar is visible.
 
   /// Sets the visibility of the left sidebar.
   ///

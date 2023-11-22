@@ -5,10 +5,19 @@ import 'dsk_theme_colors.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
+/// Class `DSKButtonsSegmented` - A custom segmented control widget for Flutter.
+///
+/// This widget creates a row of options, similar to a segmented control, allowing the user to select one option from a group.
+///
+/// Parameters:
+/// * `options`: (List<Widget>) A list of widgets (usually Text or Icon) to be used as options.
+/// * `defaultIndex`: (int) The index of the initially selected option.
+/// * `onSelect`: (Function(int)?) Callback called when an option is selected.
+/// * `isAccent`: (bool) Determines if the accent style should be applied.
 class DSKButtonsSegmented extends StatefulWidget {
-  final List<Widget> options;
-  final int defaultIndex;
-  final Function(int)? onSelect;
+  final List<Widget> options; 
+  final int defaultIndex; 
+  final Function(int)? onSelect; 
   final bool isAccent;
 
   const DSKButtonsSegmented({
@@ -23,12 +32,15 @@ class DSKButtonsSegmented extends StatefulWidget {
   DSKButtonsSegmentedState createState() => DSKButtonsSegmentedState();
 }
 
+/// Class `DSKButtonsSegmentedState` - The state for `DSKButtonsSegmented`.
+///
+/// Manages the state and rendering of the segmented control.
 class DSKButtonsSegmentedState extends State<DSKButtonsSegmented> {
-  final int _animationMillis = 200;
-  int _selectedIndex = 0;
-  final List<GlobalKey> _keys = [];
-  final List<Rect> _rects = [];
-  double _width = 0.0;
+  final int _animationMillis = 200; // Duration of the animation in milliseconds.
+  int _selectedIndex = 0; // Currently selected option's index.
+  final List<GlobalKey> _keys = []; // Global keys for each option.
+  final List<Rect> _rects = [];// Rectangles for the position of each option.
+  double _width = 0.0;// Width of the entire widget.
 
   @override
   void initState() {
@@ -37,6 +49,7 @@ class DSKButtonsSegmentedState extends State<DSKButtonsSegmented> {
     _keys.addAll(List.generate(widget.options.length, (index) => GlobalKey()));
   }
 
+  /// Handles the selection of an option.
   _select(int index) {
     setState(() {
       _selectedIndex = index;
@@ -44,6 +57,7 @@ class DSKButtonsSegmentedState extends State<DSKButtonsSegmented> {
     widget.onSelect?.call(index);
   }
 
+  /// Calculates the positions of each option for the animation.
   void _calculatePositions() {
     _rects.clear();
     RenderBox? rowBox = context.findRenderObject() as RenderBox?;
@@ -63,6 +77,7 @@ class DSKButtonsSegmentedState extends State<DSKButtonsSegmented> {
     setState(() {});
   }
 
+  /// Calculates the left position for the animation.
   double _getPositionLeft(int index) {
     if (index == 0) {
       return 2;
@@ -73,6 +88,7 @@ class DSKButtonsSegmentedState extends State<DSKButtonsSegmented> {
     }
   }
 
+  /// Calculates the width for the animated selector.
   double _getPositionWidth(int index) {
     if (index == (_rects.length - 1)) {
       return _width - _getPositionLeft(index) - 3;
@@ -83,6 +99,7 @@ class DSKButtonsSegmentedState extends State<DSKButtonsSegmented> {
     }
   }
 
+  /// Adjusts the widget style based on the state and theme.
   Widget fixWidgetStyle(Widget widget, Color color) {
     if (widget is Text) {
       double size = 12.0;

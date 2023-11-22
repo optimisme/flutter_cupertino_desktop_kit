@@ -13,7 +13,7 @@ import 'dsk_theme_colors.dart';
 ///
 /// * `options`: A list of strings representing the options to choose from.
 /// * `size`: The size of the checkmark icon and the font size of the text.
-/// * `defaultIndex`: The index of the option that is selected by default
+/// * `defaultIndex`: The index of the option that is selected by default.
 /// * `onSelect`: A callback function that is called when an option is selected. The callback function receives the index of the selected option and the text of the selected option as parameters.
 class DSKButtonCheckList extends StatefulWidget {
   /// The list of options to choose from.

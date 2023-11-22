@@ -5,6 +5,15 @@ import 'dsk_theme_colors.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
+/// Class `DSKButtonsUpDown` - A custom widget that creates a pair of up and down buttons.
+///
+/// This widget is typically used for incrementing or decrementing values.
+///
+/// Parameters:
+/// * `enabledUp`: (bool) Determines if the up button is enabled.
+/// * `enabledDown`: (bool) Determines if the down button is enabled.
+/// * `onUpPressed`: (VoidCallback?) Callback called when the up button is pressed.
+/// * `onDownPressed`: (VoidCallback?) Callback called when the down button is pressed.
 class DSKButtonsUpDown extends StatefulWidget {
   final bool enabledUp;
   final bool enabledDown;
@@ -23,9 +32,12 @@ class DSKButtonsUpDown extends StatefulWidget {
   DSKButtonsUpDownState createState() => DSKButtonsUpDownState();
 }
 
+/// Class `DSKButtonsUpDownState` - The state for `DSKButtonsUpDown`.
+///
+/// Manages the state and rendering of the up and down buttons.
 class DSKButtonsUpDownState extends State<DSKButtonsUpDown> {
-  bool _isPressedUp = false;
-  bool _isPressedDown = false;
+  bool _isPressedUp = false; // State flag for the up button press.
+  bool _isPressedDown = false; // State flag for the down button press.
 
   @override
   Widget build(BuildContext context) {
