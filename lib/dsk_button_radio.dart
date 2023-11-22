@@ -5,7 +5,16 @@ import 'dsk_theme_colors.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
-
+/// Class `DSKButtonRadio` - A custom radio button widget for Flutter.
+///
+/// This class creates a radio button widget with custom design and behavior.
+/// It can be used where exclusive selection of options is needed.
+///
+/// Parameters:
+/// * `isSelected`: (bool) Indicates whether the radio button is currently selected.
+/// * `onSelected`: (ValueChanged<bool>?) Callback called when the selection state of the button changes.
+/// * `size`: (double) The size of the button in logical pixels.
+/// * `label`: (String) Text associated with the radio button.
 class DSKButtonRadio extends StatefulWidget {
   final bool isSelected;
   final ValueChanged<bool>? onSelected;
@@ -24,11 +33,15 @@ class DSKButtonRadio extends StatefulWidget {
   DSKButtonRadioState createState() => DSKButtonRadioState();
 }
 
+/// Class `DSKButtonRadioState` - The state for `DSKButtonRadio`.
+///
+/// Manages the state and rendering of the radio button.
 class DSKButtonRadioState extends State<DSKButtonRadio> {
   @override
   Widget build(BuildContext context) {
     double boxSize = widget.size;
 
+    // Main widget that handles interaction and arranges elements.
     return GestureDetector(
       onTap: () {
         widget.onSelected?.call(!widget.isSelected);
@@ -61,6 +74,9 @@ class DSKButtonRadioState extends State<DSKButtonRadio> {
   }
 }
 
+/// Class `VNTButtonRadioPainter` - A `CustomPainter` for drawing the radio button.
+///
+/// This class uses canvas drawing methods to create the visual appearance of the radio button.
 class VNTButtonRadioPainter extends CustomPainter {
   final Color actionColor;
   final bool isSelected;
