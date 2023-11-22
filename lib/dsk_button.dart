@@ -5,8 +5,20 @@ import 'dsk_theme_colors.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
+// Custom enum for button styles
 enum DSKButtonStyle { action, normal, destructive }
 
+/// Class `DSKButton` - A customizable button widget for Flutter.
+///
+/// This class creates a button widget with various styles and behaviors.
+/// It supports different styles, sizes, and states (enabled/disabled).
+///
+/// Parameters:
+/// * `onPressed`: (VoidCallback?) Callback called when the button is pressed.
+/// * `child`: (Widget) The content of the button, usually a text or icon.
+/// * `style`: (DSKButtonStyle) The style of the button (action, normal, destructive).
+/// * `isLarge`: (bool) Determines if the button is of a large size.
+/// * `enabled`: (bool) Determines if the button is enabled or disabled.
 class DSKButton extends StatefulWidget {
   final VoidCallback? onPressed;
   final Widget child;
@@ -27,12 +39,19 @@ class DSKButton extends StatefulWidget {
   DSKButtonState createState() => DSKButtonState();
 }
 
+/// Class `DSKButtonState` - The state for `DSKButton`.
+///
+/// Manages the state and rendering of the customizable button.
 class DSKButtonState extends State<DSKButton> {
+  // Default font size.
   static const double _fontSize = 12.0;
+
+  // Flag to track if the button is currently pressed.
   bool _isPressed = false;
 
   @override
   Widget build(BuildContext context) {
+    // Define styles and themes based on the button's state and style.
     BoxDecoration decoration;
     Color color;
     TextStyle textStyle;
@@ -44,6 +63,7 @@ class DSKButtonState extends State<DSKButton> {
       offset: const Offset(0, 1),
     );
 
+    // Styling logic depending on the button's style and state.
     if (!widget.enabled) {
       switch (widget.style) {
         case DSKButtonStyle.action:
