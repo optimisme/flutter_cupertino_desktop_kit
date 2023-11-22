@@ -5,21 +5,24 @@ import 'dsk_theme_colors.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
-/// A custom checkbox button with a rounded square design.
+/// A customizable checkbox widget that allows the user to toggle a boolean value.
 ///
-/// It can be used to indicate a selection state and provide a tappable area
-/// for user interaction.
+/// It uses [GestureDetector] to handle tap events and [AnimatedContainer] to animate the checkbox's appearance.
+///
+/// The widget can be customized using the following properties:
+///
+/// * `value`: The initial value of the checkbox.
+/// * `size`: The size of the checkbox in logical pixels.
+/// * `onChanged`: A callback function that is called when the checkbox is tapped. The callback function receives the new value of the checkbox as a parameter.
 class DSKButtonCheckBox extends StatefulWidget {
   /// The current selection state of the checkbox.
   final bool value;
 
   /// The size of the checkbox in logical pixels.
-  ///
   /// Defaults to 16.0.
   final double size;
 
   /// The callback function that is called when the checkbox is tapped.
-  ///
   /// The function receives the new value of the checkbox as a parameter.
   final ValueChanged<bool>? onChanged;
 

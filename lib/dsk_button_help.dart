@@ -5,10 +5,22 @@ import 'dsk_theme_manager.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
+/// A customizable button that displays a question mark icon and triggers a callback function when tapped.
+///
+/// It uses [GestureDetector] to handle tap events and a [DecoratedBox] to create the button's appearance.
+///
+/// The widget can be customized using the following properties:
+///
+/// * `size`: The size of the button and the question mark icon.
+/// * `onPressed`: A callback function that is called when the button is tapped.
 class DSKButtonHelp extends StatefulWidget {
+  /// The size of the button and the question mark icon.
   final double size;
+
+  /// A callback function that is called when the button is tapped.
   final VoidCallback? onPressed;
 
+  /// Creates a DSKButtonHelp widget.
   const DSKButtonHelp({
     Key? key,
     this.onPressed,
@@ -19,23 +31,29 @@ class DSKButtonHelp extends StatefulWidget {
   DSKButtonHelpState createState() => DSKButtonHelpState();
 }
 
+/// The state of the `DSKButtonHelp` widget.
 class DSKButtonHelpState extends State<DSKButtonHelp> {
+  /// Whether the button is currently pressed.
   bool _isPressed = false;
 
+  /// Handles the `onTapDown` event, updating the `_isPressed` state variable.
   void _onTapDown(TapDownDetails details) {
     setState(() => _isPressed = true);
   }
 
+  /// Handles the `onTapUp` event, updating the `_isPressed` state variable and calling the `onPressed` callback function.
   void _onTapUp(TapUpDetails details) {
     setState(() => _isPressed = false);
   }
 
+  /// Handles the `onTapCancel` event, updating the `_isPressed` state variable.
   void _onTapCancel() {
     setState(() => _isPressed = false);
   }
 
   @override
   Widget build(BuildContext context) {
+    /// Creates a GestureDetector widget to handle tap events.
     return GestureDetector(
       onTapDown: _onTapDown,
       onTapUp: _onTapUp,

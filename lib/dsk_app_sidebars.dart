@@ -4,10 +4,21 @@ import 'dsk_theme_colors.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
-/// Creates a layout with two sidebars and a central content area.
+/// A widget that provides a central content area and two optional sidebars.
 ///
-/// The sidebars can be resized and hidden, and the central content area can be
-/// animated to slide in and out when the sidebars are toggled.
+/// The sidebars can be visible or hidden, and their width can be resized.
+///
+/// The widget can be customized using the following properties:
+///
+/// * `central`: The central content widget.
+/// * `sidebarLeftIsResizable`: Whether the left sidebar is resizable.
+/// * `sidebarLeftDefaultsVisible`: Whether the left sidebar is visible by default.
+/// * `sidebarLeftMinWidth`: The minimum width of the left sidebar.
+/// * `sidebarLeftMaxWidth`: The maximum width of the left sidebar.
+/// * `sidebarLeft`: The widget to display in the left sidebar.
+/// * `sidebarRightDefaultsVisible`: Whether the right sidebar is visible by default.
+/// * `sidebarRightWidth`: The width of the right sidebar.
+/// * `sidebarRight`: The widget to display in the right sidebar.
 class DSKAppSidebars extends StatefulWidget {
   /// The central content widget.
   final Widget central;

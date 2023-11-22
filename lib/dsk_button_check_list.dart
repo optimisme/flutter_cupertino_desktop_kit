@@ -5,12 +5,30 @@ import 'dsk_theme_colors.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
+/// A customizable button checklist widget that allows the user to select a single option from a list of options.
+///
+/// It uses [MouseRegion] and [GestureDetector] to handle mouse hover and tap events.
+///
+/// The widget can be customized using the following properties:
+///
+/// * `options`: A list of strings representing the options to choose from.
+/// * `size`: The size of the checkmark icon and the font size of the text.
+/// * `defaultIndex`: The index of the option that is selected by default.
+/// * `onSelect`: A callback function that is called when an option is selected. The callback function receives the index of the selected option and the text of the selected option as parameters.
 class DSKButtonCheckList extends StatefulWidget {
+  /// The list of options to choose from.
   final List<String> options;
+
+  /// The size of the checkmark icon and the font size of the text.
   final int defaultIndex;
+
+  /// The index of the option that is selected by default.
   final double size;
+
+  /// A callback function that is called when an option is selected.
   final Function(int, String)? onSelect;
 
+  /// Creates a DSKButtonCheckList widget.
   const DSKButtonCheckList({
     Key? key,
     required this.options,
@@ -23,10 +41,20 @@ class DSKButtonCheckList extends StatefulWidget {
   DSKButtonCheckListState createState() => DSKButtonCheckListState();
 }
 
+/// The state of the `DSKButtonCheckList` widget.
+///
+/// This class manages the widget's internal state, including the current
+/// selection state and the app focus status.
 class DSKButtonCheckListState extends State<DSKButtonCheckList> {
+  /// The index of the option that is currently hovered over.
   int? _hoverIndex;
+
+  /// The index of the option that is currently selected.
   int _selectedIndex = 0;
 
+  /// Handles the selection of an option.
+  ///
+  /// Sets the `_selectedIndex` state variable to the index of the selected option and calls the `onSelect` callback function, if it is not null.
   _select(int index) {
     setState(() {
       _selectedIndex = index;
