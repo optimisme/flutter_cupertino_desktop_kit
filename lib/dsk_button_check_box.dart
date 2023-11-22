@@ -9,19 +9,6 @@ import 'dsk_theme_colors.dart';
 ///
 /// It can be used to indicate a selection state and provide a tappable area
 /// for user interaction.
-///
-/// Example:
-///
-/// ```dart
-/// DSKButtonCheckBox(
-///   value: true,
-///   onChanged: (value) => {
-///     setState(() {
-///       value = !value;
-///     })
-///   },
-/// )
-/// ```
 class DSKButtonCheckBox extends StatefulWidget {
   /// The current selection state of the checkbox.
   final bool value;
@@ -74,6 +61,7 @@ class DSKButtonCheckBoxState extends State<DSKButtonCheckBox> {
           painter: VNTButtonCheckBoxPainter(
             /// Set the action color based on the theme
             actionColor: DSKColors.accent,
+            backgroundColor: DSKColors.backgroundSecondary0,
 
             /// Set the isSelected flag based on the widget's value property
             isSelected: widget.value,
@@ -95,6 +83,9 @@ class VNTButtonCheckBoxPainter extends CustomPainter {
   /// The color used for the checkbox's action area
   final Color actionColor;
 
+  /// The color used for the checkbox's background
+  final Color backgroundColor;
+
   /// Whether the checkbox is currently selected
   final bool isSelected;
 
@@ -106,6 +97,7 @@ class VNTButtonCheckBoxPainter extends CustomPainter {
 
   VNTButtonCheckBoxPainter({
     required this.actionColor,
+    required this.backgroundColor,
     required this.isSelected,
     required this.hasAppFocus,
     required this.size,
@@ -174,7 +166,7 @@ class VNTButtonCheckBoxPainter extends CustomPainter {
       // Draw background square & shadow
       paint = Paint()
         ..style = PaintingStyle.fill
-        ..color = DSKColors.backgroundSecondary0;
+        ..color = backgroundColor;
       canvas.drawRRect(roundedSquare, paint);
 
       drawShadow(canvas, size, squareRect);
@@ -217,6 +209,7 @@ class VNTButtonCheckBoxPainter extends CustomPainter {
   @override
   bool shouldRepaint(covariant VNTButtonCheckBoxPainter oldDelegate) {
     return oldDelegate.actionColor != actionColor ||
+        oldDelegate.backgroundColor != backgroundColor ||
         oldDelegate.isSelected != isSelected ||
         oldDelegate.hasAppFocus != hasAppFocus ||
         oldDelegate.size != size;
