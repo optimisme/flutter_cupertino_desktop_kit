@@ -41,7 +41,7 @@ class DSKButtonCheckList extends StatefulWidget {
   DSKButtonCheckListState createState() => DSKButtonCheckListState();
 }
 
-/// The state of the `DSKButtonCheckList` widget.
+/// The state of the `DSKButtonCheckBox` widget.
 ///
 /// This class manages the widget's internal state, including the current
 /// selection state and the app focus status.
