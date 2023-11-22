@@ -5,14 +5,14 @@ import 'dsk_theme_colors.dart';
 class DSKButtonsSegmented extends StatefulWidget {
   final List<Widget> options;
   final int defaultIndex;
-  final Function(int) onSelect;
+  final Function(int)? onSelect;
   final bool isAccent;
 
   const DSKButtonsSegmented({
     Key? key,
     required this.options,
     this.defaultIndex = 0,
-    required this.onSelect,
+    this.onSelect,
     this.isAccent = false,
   }) : super(key: key);
 
@@ -38,7 +38,7 @@ class DSKButtonsSegmentedState extends State<DSKButtonsSegmented> {
     setState(() {
       _selectedIndex = index;
     });
-    widget.onSelect(index);
+    widget.onSelect?.call(index);
   }
 
   void _calculatePositions() {

@@ -83,7 +83,8 @@ class DSKDialogOuterShadowPainter extends CustomPainter {
     return path;
   }
 
-  static Path createContourPathArrowed(Rect rect, double arrowDiffX, bool arrowAtTop) {
+  static Path createContourPathArrowed(
+      Rect rect, double arrowDiffX, bool arrowAtTop) {
     const Radius radius = Radius.circular(8);
     final path = Path();
 
@@ -109,13 +110,14 @@ class DSKDialogOuterShadowPainter extends CustomPainter {
 
     // Flexta inferior
     if (!arrowAtTop) {
-      Offset arrowMidPoint = Offset(rect.center.dx + arrowDiffX, rect.bottom + 8);
+      Offset arrowMidPoint =
+          Offset(rect.center.dx + arrowDiffX, rect.bottom + 8);
       Offset arrowLeft = Offset(arrowMidPoint.dx - 8, rect.bottom);
       Offset arrowRight = Offset(arrowMidPoint.dx + 8, rect.bottom);
-            path.lineTo(arrowRight.dx, arrowRight.dy);
+      path.lineTo(arrowRight.dx, arrowRight.dy);
 
       path.lineTo(arrowMidPoint.dx, arrowMidPoint.dy);
-            path.lineTo(arrowLeft.dx, arrowLeft.dy);
+      path.lineTo(arrowLeft.dx, arrowLeft.dy);
     }
 
     path.lineTo(rect.left + radius.x, rect.bottom);

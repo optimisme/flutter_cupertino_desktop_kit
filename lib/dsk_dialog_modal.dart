@@ -107,9 +107,7 @@ class DSKDialogModalState extends State<DSKDialogModal>
   }
 
   void hide() {
-    if (widget.onHide != null) {
-      widget.onHide!();
-    }
+    widget.onHide?.call();
   }
 
   @override

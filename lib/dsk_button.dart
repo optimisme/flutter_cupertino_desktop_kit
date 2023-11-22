@@ -5,7 +5,7 @@ import 'dsk_theme_colors.dart';
 enum DSKButtonStyle { action, normal, destructive }
 
 class DSKButton extends StatefulWidget {
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final Widget child;
   final DSKButtonStyle style;
   final bool isLarge;
@@ -13,7 +13,7 @@ class DSKButton extends StatefulWidget {
 
   const DSKButton({
     Key? key,
-    required this.onPressed,
+    this.onPressed,
     required this.child,
     this.style = DSKButtonStyle.normal,
     this.isLarge = false,

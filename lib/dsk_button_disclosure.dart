@@ -3,20 +3,18 @@ import 'dsk_theme_colors.dart';
 
 class DSKButtonDisclosure extends StatefulWidget {
   final bool value;
-  final ValueChanged<bool> onChanged;
+  final ValueChanged<bool>? onChanged;
   final double size;
 
   const DSKButtonDisclosure({
     Key? key,
     required this.value,
-    this.onChanged = _defaultOnChanged,
-    this.size = 16.0, 
+    this.onChanged,
+    this.size = 16.0,
   }) : super(key: key);
 
   @override
   DSKButtonDisclosureState createState() => DSKButtonDisclosureState();
-
-  static void _defaultOnChanged(bool value) {}
 }
 
 class DSKButtonDisclosureState extends State<DSKButtonDisclosure>
@@ -59,7 +57,7 @@ class DSKButtonDisclosureState extends State<DSKButtonDisclosure>
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => widget.onChanged(!widget.value),
+      onTap: () => widget.onChanged?.call(!widget.value),
       child: AnimatedBuilder(
         animation: _animation,
         builder: (context, child) {

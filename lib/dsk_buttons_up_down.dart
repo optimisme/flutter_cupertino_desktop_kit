@@ -5,15 +5,15 @@ import 'dsk_theme_colors.dart';
 class DSKButtonsUpDown extends StatefulWidget {
   final bool enabledUp;
   final bool enabledDown;
-  final VoidCallback onUpPressed;
-  final VoidCallback onDownPressed;
+  final VoidCallback? onUpPressed;
+  final VoidCallback? onDownPressed;
 
   const DSKButtonsUpDown({
     Key? key,
     this.enabledUp = true,
     this.enabledDown = true,
-    required this.onUpPressed,
-    required this.onDownPressed,
+    this.onUpPressed,
+    this.onDownPressed,
   }) : super(key: key);
 
   @override
@@ -27,11 +27,11 @@ class DSKButtonsUpDownState extends State<DSKButtonsUpDown> {
   @override
   Widget build(BuildContext context) {
     // Definim l'ombra per al relleu
-    var shadow = BoxShadow(
+    var shadow = const BoxShadow(
       color: DSKColors.grey200, // Ajusta el color per obtenir un gris
       spreadRadius: 0,
       blurRadius: 0.25,
-      offset: const Offset(0, 0.5),
+      offset: Offset(0, 0.5),
     );
 
     Color backgroundUp = !_isPressedUp

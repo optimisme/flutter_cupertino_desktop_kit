@@ -3,13 +3,13 @@ import 'dsk_theme_colors.dart';
 import 'dsk_theme_manager.dart';
 
 class DSKButtonHelp extends StatefulWidget {
-  final VoidCallback onPressed;
   final double size;
+  final VoidCallback? onPressed;
 
   const DSKButtonHelp({
     Key? key,
-    required this.onPressed,
-    this.size = 24.0, // Mida més petita per al botó
+    this.onPressed,
+    this.size = 24.0,
   }) : super(key: key);
 
   @override

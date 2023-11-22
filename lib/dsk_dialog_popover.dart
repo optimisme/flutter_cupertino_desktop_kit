@@ -142,9 +142,7 @@ class DSKDialogPopoverState extends State<DSKDialogPopover>
   void hide() {
     overlayEntry?.remove();
     overlayEntry = null;
-    if (widget.onHide != null) {
-      widget.onHide!();
-    }
+    widget.onHide?.call();
   }
 
   @override

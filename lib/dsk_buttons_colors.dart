@@ -5,13 +5,13 @@ import 'dsk_theme_manager.dart';
 class DSKButtonsColors extends StatefulWidget {
   final Map<String, Color> colors;
   final String selectedColor;
-  final Function(String) onColorChanged;
+  final Function(String)? onColorChanged;
 
   const DSKButtonsColors({
     Key? key,
     required this.colors,
     this.selectedColor = "systemBlue",
-    required this.onColorChanged,
+    this.onColorChanged,
   }) : super(key: key);
 
   @override
@@ -36,7 +36,7 @@ class DSKButtonsColorsState extends State<DSKButtonsColors> {
         index = index + 1;
         return GestureDetector(
           onTap: () {
-            widget.onColorChanged(
+            widget.onColorChanged?.call(
                 colorName); // Pots passar el nom del color com a paràmetre
           },
           child: Container(

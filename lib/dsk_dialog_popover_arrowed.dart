@@ -73,7 +73,8 @@ class DSKDialogPopoverArrowedState extends State<DSKDialogPopoverArrowed>
           final childSize = childRenderBox.size;
 
           width = childSize.width;
-          height = childSize.height + 8; // 8 To give space for the shadow if at top
+          height =
+              childSize.height + 8; // 8 To give space for the shadow if at top
 
           screenSize = MediaQuery.of(context).size;
 
@@ -118,12 +119,14 @@ class DSKDialogPopoverArrowedState extends State<DSKDialogPopoverArrowed>
           }
 
           position = Offset(leftPosition, topPosition);
-          final rectContour = Rect.fromLTWH(8, 8, width!, height! - 8); // -8 To give space for the shadow if at top
-          pathContour =
-              DSKDialogOuterShadowPainter.createContourPathArrowed(rectContour, arrowDiff, arrowAtBottom);
-          final rectClip = Rect.fromLTWH(0, 0, width!, height! - 8); // -8 To give space for the shadow if at top
-          pathClip =
-              DSKDialogOuterShadowPainter.createContourPathArrowed(rectClip, arrowDiff, arrowAtBottom);
+          final rectContour = Rect.fromLTWH(8, 8, width!,
+              height! - 8); // -8 To give space for the shadow if at top
+          pathContour = DSKDialogOuterShadowPainter.createContourPathArrowed(
+              rectContour, arrowDiff, arrowAtBottom);
+          final rectClip = Rect.fromLTWH(0, 0, width!,
+              height! - 8); // -8 To give space for the shadow if at top
+          pathClip = DSKDialogOuterShadowPainter.createContourPathArrowed(
+              rectClip, arrowDiff, arrowAtBottom);
 
           isSizeDetermined = true;
         });
@@ -144,9 +147,7 @@ class DSKDialogPopoverArrowedState extends State<DSKDialogPopoverArrowed>
   void hide() {
     overlayEntry?.remove();
     overlayEntry = null;
-    if (widget.onHide != null) {
-      widget.onHide!();
-    }
+    widget.onHide?.call();
   }
 
   @override

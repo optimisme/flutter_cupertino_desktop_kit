@@ -10,8 +10,6 @@ class DSKDialogsManager {
   static final Map<GlobalKey, GlobalKey> _activeDraggableKeys = {};
   static final Map<GlobalKey, OverlayEntry> _activeDraggableEntries = {};
 
-  static void _defaultFunction() {}
-
   static void showPopover({
     required GlobalKey key,
     required BuildContext context,
@@ -19,7 +17,7 @@ class DSKDialogsManager {
     DSKDialogPopoverType type = DSKDialogPopoverType.center,
     bool isAnimated = false,
     bool isTranslucent = false,
-    Function onHide = _defaultFunction,
+    Function? onHide,
     required Widget child,
   }) {
     if (_activePopoverKeys.containsKey(anchorKey)) {
@@ -37,7 +35,7 @@ class DSKDialogsManager {
         isTranslucent: isTranslucent,
         anchorKey: anchorKey,
         onHide: () {
-          onHide();
+          onHide?.call();
           overlayEntry?.remove();
           _activePopoverKeys.remove(anchorKey);
           // Close all other popovers
@@ -60,7 +58,7 @@ class DSKDialogsManager {
     required BuildContext context,
     bool isAnimated = false,
     bool isTranslucent = false,
-    Function onHide = _defaultFunction,
+    Function? onHide,
     required Widget child,
   }) {
     if (_activeModalKey is DSKDialogModalState) {
@@ -76,7 +74,7 @@ class DSKDialogsManager {
         isAnimated: isAnimated,
         isTranslucent: isTranslucent,
         onHide: () {
-          onHide();
+          onHide?.call();
           overlayEntry?.remove();
           _activeModalKey = null;
         },
@@ -94,7 +92,7 @@ class DSKDialogsManager {
     required GlobalKey anchorKey,
     bool isAnimated = false,
     bool isTranslucent = false,
-    Function onHide = _defaultFunction,
+    Function? onHide,
     required Widget child,
   }) {
     if (_activeDraggableKeys.containsKey(anchorKey)) {
@@ -112,7 +110,7 @@ class DSKDialogsManager {
         isAnimated: isAnimated,
         isTranslucent: isTranslucent,
         onHide: () {
-          onHide();
+          onHide?.call();
           overlayEntry?.remove();
           _activeDraggableKeys.remove(anchorKey);
         },
@@ -138,7 +136,7 @@ class DSKDialogsManager {
     required GlobalKey anchorKey,
     bool isAnimated = false,
     bool isTranslucent = false,
-    Function onHide = _defaultFunction,
+    Function? onHide,
     required Widget child,
   }) {
     if (_activePopoverKeys.containsKey(anchorKey)) {
@@ -156,7 +154,7 @@ class DSKDialogsManager {
         isAnimated: isAnimated,
         isTranslucent: isTranslucent,
         onHide: () {
-          onHide();
+          onHide?.call();
           overlayEntry?.remove();
           _activePopoverKeys.remove(anchorKey);
           // Close all other popovers

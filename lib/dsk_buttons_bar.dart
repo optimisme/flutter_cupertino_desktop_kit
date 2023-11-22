@@ -4,20 +4,18 @@ import 'dsk_theme_colors.dart';
 
 class DSKButtonsBar extends StatefulWidget {
   final List<Map<String, dynamic>> options; // Canviat a llistat de diccionaris
-  final Function(List<bool>) onChanged;
+  final Function(List<bool>)? onChanged;
   final bool allowsMultipleSelection;
 
   const DSKButtonsBar({
     Key? key,
     required this.options,
-    this.onChanged = _defaultOnChanged,
+    this.onChanged,
     this.allowsMultipleSelection = false,
   }) : super(key: key);
 
   @override
   DSKButtonsBarState createState() => DSKButtonsBarState();
-
-  static void _defaultOnChanged(List<bool> values) {}
 }
 
 class DSKButtonsBarState extends State<DSKButtonsBar> {
@@ -41,7 +39,7 @@ class DSKButtonsBarState extends State<DSKButtonsBar> {
         }
       }
     });
-    widget.onChanged(
+    widget.onChanged?.call(
         _selectedStates.map((option) => option['value'] as bool).toList());
   }
 

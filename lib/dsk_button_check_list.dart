@@ -6,14 +6,14 @@ class DSKButtonCheckList extends StatefulWidget {
   final List<String> options;
   final int defaultIndex;
   final double size;
-  final Function(int, String) onSelect;
+  final Function(int, String)? onSelect;
 
   const DSKButtonCheckList({
     Key? key,
     required this.options,
     this.size = 12.0,
     this.defaultIndex = 0,
-    required this.onSelect,
+    this.onSelect,
   }) : super(key: key);
 
   @override
@@ -28,7 +28,7 @@ class DSKButtonCheckListState extends State<DSKButtonCheckList> {
     setState(() {
       _selectedIndex = index;
     });
-    widget.onSelect(index, widget.options[index]);
+    widget.onSelect?.call(index, widget.options[index]);
   }
 
   @override

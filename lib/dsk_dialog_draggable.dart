@@ -116,9 +116,7 @@ class DSKDialogDraggableState extends State<DSKDialogDraggable>
   void hide() {
     overlayEntry?.remove();
     overlayEntry = null;
-    if (widget.onHide != null) {
-      widget.onHide!();
-    }
+    widget.onHide?.call();
   }
 
   @override

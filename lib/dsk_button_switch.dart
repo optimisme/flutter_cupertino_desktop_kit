@@ -5,19 +5,17 @@ import 'dsk_theme_colors.dart';
 class DSKButtonSwitch extends StatefulWidget {
   final bool value;
   final double size;
-  final ValueChanged<bool> onChanged;
+  final ValueChanged<bool>? onChanged;
 
   const DSKButtonSwitch({
     Key? key,
     required this.value,
-    this.onChanged = _defaultOnChanged,
+    this.onChanged,
     this.size = 24.0,
   }) : super(key: key);
 
   @override
   DSKButtonSwitchState createState() => DSKButtonSwitchState();
-
-  static void _defaultOnChanged(bool value) {}
 }
 
 class DSKButtonSwitchState extends State<DSKButtonSwitch> {
@@ -34,12 +32,12 @@ class DSKButtonSwitchState extends State<DSKButtonSwitch> {
 
     return GestureDetector(
       onTap: () {
-        widget.onChanged(!widget.value);
+        widget.onChanged?.call(!widget.value);
       },
       onPanUpdate: (details) {
         // Obtenir la posició local del gest de desplaçament quan finalitza
         bool newState = details.localPosition.dx > (backWidth / 2);
-        widget.onChanged(newState);
+        widget.onChanged?.call(newState);
       },
       child: AnimatedContainer(
         duration: Duration(milliseconds: _animationMillis),

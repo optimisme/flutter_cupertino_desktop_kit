@@ -6,7 +6,7 @@ import 'dsk_theme_colors.dart';
 import 'dsk_dialog_popover.dart';
 
 class DSKButtonSelect extends StatefulWidget {
-  final Function(int, String) onSelect;
+  final Function(int, String)? onSelected;
   final int defaultIndex;
   final bool isFlat;
   final bool isTranslucent;
@@ -14,7 +14,7 @@ class DSKButtonSelect extends StatefulWidget {
 
   const DSKButtonSelect({
     Key? key,
-    required this.onSelect,
+    this.onSelected,
     required this.defaultIndex,
     required this.options,
     this.isFlat = false,
@@ -62,7 +62,7 @@ class DSKButtonSelectState extends State<DSKButtonSelect> {
             setState(() {
               _selectedIndex = index;
             });
-            widget.onSelect(index, value);
+            widget.onSelected?.call(index, value);
           },
         ),
       ),

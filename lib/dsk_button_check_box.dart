@@ -5,19 +5,17 @@ import 'dsk_theme_colors.dart';
 class DSKButtonCheckBox extends StatefulWidget {
   final bool value;
   final double size;
-  final ValueChanged<bool> onChanged;
+  final ValueChanged<bool>? onChanged;
 
   const DSKButtonCheckBox({
     Key? key,
     required this.value,
-    this.onChanged = _defaultOnChanged,
+    this.onChanged,
     this.size = 16.0,
   }) : super(key: key);
 
   @override
   DSKButtonCheckBoxState createState() => DSKButtonCheckBoxState();
-
-  static void _defaultOnChanged(bool value) {}
 }
 
 class DSKButtonCheckBoxState extends State<DSKButtonCheckBox> {
@@ -26,7 +24,7 @@ class DSKButtonCheckBoxState extends State<DSKButtonCheckBox> {
     double boxSize = widget.size;
     return GestureDetector(
         onTap: () {
-          widget.onChanged(!widget.value);
+          widget.onChanged?.call(!widget.value);
         },
         child: CustomPaint(
           size: Size(boxSize, boxSize),
@@ -155,7 +153,8 @@ class VNTButtonCheckBoxPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant VNTButtonCheckBoxPainter oldDelegate) {
-    return oldDelegate.actionColor != actionColor || oldDelegate.isSelected != isSelected ||
+    return oldDelegate.actionColor != actionColor ||
+        oldDelegate.isSelected != isSelected ||
         oldDelegate.hasAppFocus != hasAppFocus ||
         oldDelegate.size != size;
   }

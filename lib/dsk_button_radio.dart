@@ -4,14 +4,14 @@ import 'dsk_theme_colors.dart';
 
 class DSKButtonRadio extends StatefulWidget {
   final bool isSelected;
-  final ValueChanged<bool> onSelected;
+  final ValueChanged<bool>? onSelected;
   final double size;
   final String label; // Propietat per al label
 
   const DSKButtonRadio({
     Key? key,
-    required this.isSelected,
-    required this.onSelected,
+    this.isSelected = false,
+    this.onSelected,
     this.size = 16.0,
     required this.label, // Requereix el label al crear l'objecte
   }) : super(key: key);
@@ -27,7 +27,7 @@ class DSKButtonRadioState extends State<DSKButtonRadio> {
 
     return GestureDetector(
       onTap: () {
-        widget.onSelected(!widget.isSelected);
+        widget.onSelected?.call(!widget.isSelected);
       },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -157,7 +157,8 @@ class VNTButtonRadioPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant VNTButtonRadioPainter oldDelegate) {
-    return oldDelegate.actionColor != actionColor || oldDelegate.isSelected != isSelected ||
+    return oldDelegate.actionColor != actionColor ||
+        oldDelegate.isSelected != isSelected ||
         oldDelegate.hasAppFocus != hasAppFocus ||
         oldDelegate.size != size;
   }

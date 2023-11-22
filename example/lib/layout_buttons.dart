@@ -223,7 +223,7 @@ class _LayoutButtonsState extends State<LayoutButtons> {
                     child: DSKButtonSelect(
                       options: const ['One', 'Two', 'Three'],
                       defaultIndex: 0,
-                      onSelect: (int index, String value) {
+                      onSelected: (int index, String value) {
                         // ignore: avoid_print
                         print("ButtonSelect: $index $value");
                       },
@@ -235,7 +235,7 @@ class _LayoutButtonsState extends State<LayoutButtons> {
                       defaultIndex: 1,
                       isFlat: true,
                       isTranslucent: true,
-                      onSelect: (int index, String value) {
+                      onSelected: (int index, String value) {
                         // ignore: avoid_print
                         print("ButtonSelect: $index $value");
                       },

@@ -3,7 +3,7 @@ import 'dsk_theme_manager.dart';
 import 'dsk_theme_colors.dart';
 
 class DSKButtonIcon extends StatefulWidget {
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final IconData icon;
   final double size;
   final bool isCircle;
@@ -11,7 +11,7 @@ class DSKButtonIcon extends StatefulWidget {
 
   const DSKButtonIcon({
     Key? key,
-    required this.onPressed,
+    this.onPressed,
     this.icon = CupertinoIcons.bell_fill,
     this.size = 24.0,
     this.isCircle = false,
