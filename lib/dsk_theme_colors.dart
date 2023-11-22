@@ -60,18 +60,18 @@ class DSKColors {
     DSKColors.accent500 = DSKColors.adjustColor(color, 1, 0.9);
     DSKColors.accent600 = DSKColors.adjustColor(color, 1, 0.8);
 
-    /* Original set of grey colors
-    Color greyColor = VNTColors.grey;
-    VNTColors.grey50 = VNTColors.adjustColor(greyColor, 1, 1.6);
-    VNTColors.grey75 = VNTColors.adjustColor(greyColor, 1, 1.5);
-    VNTColors.grey100 = VNTColors.adjustColor(greyColor, 1, 1.3);
-    VNTColors.grey200 = VNTColors.adjustColor(greyColor, 1, 1.2);
-    VNTColors.grey300 = VNTColors.adjustColor(greyColor, 1, 1.1);
-    VNTColors.accent = color;
-    VNTColors.grey500 = VNTColors.adjustColor(greyColor, 1, 0.9);
-    VNTColors.grey600 = VNTColors.adjustColor(greyColor, 1, 0.8);
-    VNTColors.grey700 = VNTColors.adjustColor(greyColor, 1, 0.7);
-    */
+    /* How grey colors where obtained:
+    // Original set of grey colors
+    Color greyColor = DSKColors.grey;
+    DSKColors.grey50 = DSKColors.adjustColor(greyColor, 1, 1.6);
+    DSKColors.grey75 = DSKColors.adjustColor(greyColor, 1, 1.5);
+    DSKColors.grey100 = DSKColors.adjustColor(greyColor, 1, 1.3);
+    DSKColors.grey200 = DSKColors.adjustColor(greyColor, 1, 1.2);
+    DSKColors.grey300 = DSKColors.adjustColor(greyColor, 1, 1.1);
+    DSKColors.accent = color;
+    DSKColors.grey500 = DSKColors.adjustColor(greyColor, 1, 0.9);
+    DSKColors.grey600 = DSKColors.adjustColor(greyColor, 1, 0.8);
+    DSKColors.grey700 = DSKColors.adjustColor(greyColor, 1, 0.7);*/
   }
 
   static Color adjustColor(
