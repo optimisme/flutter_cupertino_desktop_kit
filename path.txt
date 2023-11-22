@@ -9,3 +9,13 @@ cp -r ./build/web/* ../gh-pages/example/
 python3 -m http.server 9000
 
 flutter run -d macos --enable-impeller
+
+
+
+flutter pub global activate dartdoc
+flutter pub global run dartdoc:dartdoc --output gh-pages/doc/
+
+
+em pots posar comentaris a aquesta classe, per tal de poder generar la documentació
+posa-hi un exemple al principi que faci servir tots els paràmetres i comenta també les funcions
+en anglès si us plau

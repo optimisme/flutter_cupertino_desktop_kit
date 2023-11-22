@@ -2,9 +2,35 @@ import 'package:flutter/cupertino.dart';
 import 'dsk_theme_manager.dart';
 import 'dsk_theme_colors.dart';
 
+/// A custom checkbox button with a rounded square design.
+///
+/// It can be used to indicate a selection state and provide a tappable area
+/// for user interaction.
+///
+/// Example:
+///
+/// ```dart
+/// DSKButtonCheckBox(
+///   value: true,
+///   onChanged: (value) => {
+///     setState(() {
+///       value = !value;
+///     })
+///   },
+/// )
+/// ```
 class DSKButtonCheckBox extends StatefulWidget {
+  /// The current selection state of the checkbox.
   final bool value;
+
+  /// The size of the checkbox in logical pixels.
+  ///
+  /// Defaults to 16.0.
   final double size;
+
+  /// The callback function that is called when the checkbox is tapped.
+  ///
+  /// The function receives the new value of the checkbox as a parameter.
   final ValueChanged<bool>? onChanged;
 
   const DSKButtonCheckBox({
@@ -18,30 +44,61 @@ class DSKButtonCheckBox extends StatefulWidget {
   DSKButtonCheckBoxState createState() => DSKButtonCheckBoxState();
 }
 
+/// The state of the `DSKButtonCheckBox` widget.
+///
+/// This class manages the widget's internal state, including the current
+/// selection state and the app focus status.
 class DSKButtonCheckBoxState extends State<DSKButtonCheckBox> {
   @override
   Widget build(BuildContext context) {
+    /// Calculate the checkbox size based on the specified size property
     double boxSize = widget.size;
+
+    /// Create a GestureDetector widget to handle tap interactions
     return GestureDetector(
+
+        /// Call the onChanged callback when the checkbox is tapped
         onTap: () {
           widget.onChanged?.call(!widget.value);
         },
+
+        /// Use a CustomPaint widget to draw the checkbox's visual representation
         child: CustomPaint(
+          /// Set the size of the CustomPaint widget to match the checkbox size
           size: Size(boxSize, boxSize),
+
+          /// Create a VNTButtonCheckBoxPainter instance to handle the painting
           painter: VNTButtonCheckBoxPainter(
+            /// Set the action color based on the theme
             actionColor: DSKColors.accent,
+
+            /// Set the isSelected flag based on the widget's value property
             isSelected: widget.value,
+
+            /// Check whether the app has focus
             hasAppFocus: DSKThemeManager.isAppFocused,
+
+            /// Set the checkbox size
             size: boxSize,
           ),
         ));
   }
 }
 
+/// The custom painter responsible for drawing the checkbox's visual elements.
+///
+/// It handles the painting of the checkbox's background, border, and checkmark.
 class VNTButtonCheckBoxPainter extends CustomPainter {
+  /// The color used for the checkbox's action area
   final Color actionColor;
+
+  /// Whether the checkbox is currently selected
   final bool isSelected;
+
+  /// Whether the app has focus
   final bool hasAppFocus;
+
+  /// The size of the checkbox in logical pixels
   final double size;
 
   VNTButtonCheckBoxPainter({
@@ -51,16 +108,19 @@ class VNTButtonCheckBoxPainter extends CustomPainter {
     required this.size,
   });
 
+  /// Draws a shadow around the checkbox to provide visual depth
   void drawShadow(Canvas canvas, Size size, Rect rect) {
-    // Defineix el path per al quadrat arrodonit
+    /// Define the path for the rounded square
     Path squarePath = Path()
       ..addRRect(RRect.fromRectAndRadius(rect, const Radius.circular(4)));
 
-    // Restringeix el dibuix de l'ombra al quadrat
+    /// Restrict the shadow painting to the checkbox area
     canvas.clipPath(squarePath);
 
-    // Pintura per a l'ombra
+    /// Create a Paint object for the shadow
     Paint shadowPaint = Paint();
+
+    /// Offset the shadow based on the theme
     Offset shadowOffset = const Offset(0, 0);
     if (DSKThemeManager.isLight) {
       shadowOffset = const Offset(0, -10);
@@ -74,13 +134,13 @@ class VNTButtonCheckBoxPainter extends CustomPainter {
         ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 6);
     }
 
-    // Dibuixar l'ombra
+    // Draw shadow
     canvas.drawRRect(
         RRect.fromRectAndRadius(
             rect.shift(shadowOffset), const Radius.circular(4)),
         shadowPaint);
 
-    // Torna a establir el clip per a dibuixar la resta
+    // Restore drawing clip
     canvas.clipRect(Rect.fromLTWH(0, 0, size.width, size.height));
   }
 
