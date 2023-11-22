@@ -2,10 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_desktop_cupertino/dsk_widgets.dart';
 
 class LayoutDialogs extends StatefulWidget {
-  final Function? toogleLeftSidebar;
-  final Function? toogleRightSidebar;
   const LayoutDialogs(
-      {super.key, this.toogleLeftSidebar, this.toogleRightSidebar});
+      {super.key});
 
   @override
   State<LayoutDialogs> createState() => _LayoutDialogsState();
@@ -186,27 +184,7 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-        navigationBar: CupertinoNavigationBar(
-          backgroundColor: DSKColors.backgroundSecondary0.withOpacity(0.5),
-          middle: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                DSKButtonIcon(
-                    icon: CupertinoIcons.sidebar_left,
-                    onPressed: () {
-                      widget.toogleLeftSidebar!();
-                    }),
-                const Text("Dialogs"),
-                DSKButtonIcon(
-                    icon: CupertinoIcons.sidebar_left,
-                    onPressed: () {
-                      widget.toogleRightSidebar!();
-                    }),
-              ]),
-        ),
-        child: Container(
+    return Container(
             color: DSKColors.background,
             child: ListView(children: [
               const SizedBox(height: 8),
@@ -425,6 +403,6 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
                     )),
               ]),
               const SizedBox(height: 50),
-            ])));
+            ]));
   }
 }

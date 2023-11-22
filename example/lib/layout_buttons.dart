@@ -2,8 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_desktop_cupertino/dsk_widgets.dart';
 
 class LayoutButtons extends StatefulWidget {
-  final Function? toogleLeftSidebar;
-  const LayoutButtons({super.key, this.toogleLeftSidebar});
+  const LayoutButtons({super.key});
 
   @override
   State<LayoutButtons> createState() => _LayoutButtonsState();
@@ -15,23 +14,7 @@ class _LayoutButtonsState extends State<LayoutButtons> {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-        navigationBar: CupertinoNavigationBar(
-          backgroundColor: DSKColors.backgroundSecondary0.withOpacity(0.5),
-          middle: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                DSKButtonIcon(
-                    icon: CupertinoIcons.sidebar_left,
-                    onPressed: () {
-                      widget.toogleLeftSidebar!();
-                    }),
-                const Text("Buttons"),
-                const SizedBox(width: 24, height: 8),
-              ]),
-        ),
-        child: Container(
+    return Container(
             color: DSKColors.background,
             child: ListView(children: [
               const SizedBox(height: 8),
@@ -355,6 +338,6 @@ class _LayoutButtonsState extends State<LayoutButtons> {
                         ))),
               ]),
               const SizedBox(height: 50),
-            ])));
+            ]));
   }
 }

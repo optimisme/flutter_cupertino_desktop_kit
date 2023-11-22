@@ -2,8 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_desktop_cupertino/dsk_widgets.dart';
 
 class LayoutPickers extends StatefulWidget {
-  final Function? toogleLeftSidebar;
-  const LayoutPickers({super.key, this.toogleLeftSidebar});
+  const LayoutPickers({super.key});
 
   @override
   State<LayoutPickers> createState() => _LayoutPickersState();
@@ -14,23 +13,7 @@ class _LayoutPickersState extends State<LayoutPickers> {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-        navigationBar: CupertinoNavigationBar(
-          backgroundColor: DSKColors.backgroundSecondary0.withOpacity(0.5),
-          middle: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                DSKButtonIcon(
-                    icon: CupertinoIcons.sidebar_left,
-                    onPressed: () {
-                      widget.toogleLeftSidebar!();
-                    }),
-                const Text("Pickers"),
-                const SizedBox(width: 24, height: 8),
-              ]),
-        ),
-        child: Container(
+    return Container(
             color: DSKColors.background,
             child: ListView(children: [
               const SizedBox(height: 8),
@@ -75,6 +58,6 @@ class _LayoutPickersState extends State<LayoutPickers> {
               ]),
               const Padding(padding: EdgeInsets.all(8), child: Text('---')),
               const SizedBox(height: 50),
-            ])));
+            ]));
   }
 }

@@ -2,8 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_desktop_cupertino/dsk_widgets.dart';
 
 class LayoutProgress extends StatefulWidget {
-  final Function? toogleLeftSidebar;
-  const LayoutProgress({super.key, this.toogleLeftSidebar});
+  const LayoutProgress({super.key});
 
   @override
   State<LayoutProgress> createState() => _LayoutProgressState();
@@ -47,23 +46,7 @@ class _LayoutProgressState extends State<LayoutProgress> {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-        navigationBar: CupertinoNavigationBar(
-          backgroundColor: DSKColors.backgroundSecondary0.withOpacity(0.5),
-          middle: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                DSKButtonIcon(
-                    icon: CupertinoIcons.sidebar_left,
-                    onPressed: () {
-                      widget.toogleLeftSidebar!();
-                    }),
-                const Text("Progress"),
-                const SizedBox(width: 24, height: 8),
-              ]),
-        ),
-        child: Container(
+    return Container(
             color: DSKColors.background,
             child: ListView(children: [
               const SizedBox(height: 8),
@@ -171,6 +154,6 @@ class _LayoutProgressState extends State<LayoutProgress> {
                         )),
                   ]),
               const SizedBox(height: 50),
-            ])));
+            ]));
   }
 }

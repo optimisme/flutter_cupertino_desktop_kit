@@ -3,8 +3,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_desktop_cupertino/dsk_widgets.dart';
 
 class LayoutIntroduction extends StatefulWidget {
-  final Function? toogleLeftSidebar;
-  const LayoutIntroduction({super.key, this.toogleLeftSidebar});
+  const LayoutIntroduction({super.key});
 
   @override
   State<LayoutIntroduction> createState() => _LayoutIntroductionState();
@@ -13,23 +12,7 @@ class LayoutIntroduction extends StatefulWidget {
 class _LayoutIntroductionState extends State<LayoutIntroduction> {
   @override
   Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-        navigationBar: CupertinoNavigationBar(
-          backgroundColor: DSKColors.backgroundSecondary0.withOpacity(0.5),
-          middle: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                DSKButtonIcon(
-                    icon: CupertinoIcons.sidebar_left,
-                    onPressed: () {
-                      widget.toogleLeftSidebar!();
-                    }),
-                const Text(""),
-                const SizedBox(width: 24, height: 8),
-              ]),
-        ),
-        child: Container(
+    return Container(
             color: DSKColors.background,
             child: ListView(children: [
               const Padding(
@@ -66,6 +49,6 @@ class _LayoutIntroductionState extends State<LayoutIntroduction> {
                                     )))
                           ]))),
               const SizedBox(height: 50),
-            ])));
+            ]));
   }
 }

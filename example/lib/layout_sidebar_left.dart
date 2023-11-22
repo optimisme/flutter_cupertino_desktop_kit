@@ -23,7 +23,6 @@ class LayoutButtonsState extends State<LayoutSidebarLeft> {
     return Container(
         color: DSKColors.backgroundSecondary1,
         child: ListView(children: [
-          const SizedBox(height: 50),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: List.generate(widget.options.length, (int index) {

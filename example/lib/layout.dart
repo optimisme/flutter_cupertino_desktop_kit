@@ -58,30 +58,47 @@ class LayoutState extends State<Layout> {
     switch (_section) {
       case "Introduction":
         centralWidget =
-            LayoutIntroduction(toogleLeftSidebar: toggleLeftSidebar);
+            LayoutIntroduction();
         break;
       case "Buttons":
-        centralWidget = LayoutButtons(toogleLeftSidebar: toggleLeftSidebar);
+        centralWidget = LayoutButtons();
         break;
       case "Dialogs":
-        centralWidget = LayoutDialogs(
-            toogleLeftSidebar: toggleLeftSidebar,
-            toogleRightSidebar: toggleRightSidebar);
+        centralWidget = LayoutDialogs();
         break;
       case "Fields":
-        centralWidget = LayoutFields(toogleLeftSidebar: toggleLeftSidebar);
+        centralWidget = LayoutFields();
         break;
       case "Pickers":
-        centralWidget = LayoutPickers(toogleLeftSidebar: toggleLeftSidebar);
+        centralWidget = LayoutPickers();
         break;
       case "Progress":
-        centralWidget = LayoutProgress(toogleLeftSidebar: toggleLeftSidebar);
+        centralWidget = LayoutProgress();
         break;
       default:
         centralWidget = Container(); // Un contenidor buit com a cas per defecte
     }
 
     return CupertinoPageScaffold(
+        navigationBar: CupertinoNavigationBar(
+          backgroundColor: DSKColors.backgroundSecondary0.withOpacity(0.5),
+          middle: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                DSKButtonIcon(
+                    icon: CupertinoIcons.sidebar_left,
+                    onPressed: () {
+                      toggleLeftSidebar();
+                    }),
+                const Text("Dialogs"),
+                DSKButtonIcon(
+                    icon: CupertinoIcons.sidebar_left,
+                    onPressed: () {
+                      toggleRightSidebar();
+                    }),
+              ]),
+        ),
         child: DSKAppSidebars(
       key: keyAppStructure,
       sidebarLeftIsResizable: true,
