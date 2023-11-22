@@ -2,6 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'dsk_theme_manager.dart';
 import 'dsk_theme_colors.dart';
 
+// Copyright © 2023 Albert Palacios. All Rights Reserved.
+// Licensed under the BSD 3-clause license, see LICENSE file for details.
+
 class DSKDialogOuterShadowPainter extends CustomPainter {
   final Path pathContour;
   final Color backgroundColor;

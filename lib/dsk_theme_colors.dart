@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
-
 // https://api.flutter.dev/flutter/cupertino/CupertinoColors-class.html
+
+// Copyright © 2023 Albert Palacios. All Rights Reserved.
+// Licensed under the BSD 3-clause license, see LICENSE file for details.
 
 class DSKColors {
   static const Color transparent = Color(0x00000000);

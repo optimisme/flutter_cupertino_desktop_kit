@@ -6,6 +6,9 @@ import 'dsk_dialogs_manager.dart';
 import 'dsk_theme_colors.dart';
 import 'dsk_theme_manager.dart';
 
+// Copyright © 2023 Albert Palacios. All Rights Reserved.
+// Licensed under the BSD 3-clause license, see LICENSE file for details.
+
 class DSKDialogDraggable extends StatefulWidget {
   final GlobalKey anchorKey;
   final bool isAnimated;

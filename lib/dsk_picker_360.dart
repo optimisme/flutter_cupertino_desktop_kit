@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_desktop_cupertino/dsk_theme_manager.dart';
 import 'dart:math' as math;
-
 import 'dsk_theme_colors.dart';
+
+// Copyright © 2023 Albert Palacios. All Rights Reserved.
+// Licensed under the BSD 3-clause license, see LICENSE file for details.
 
 class DSKPicker360 extends StatefulWidget {
   final double defaultValue;

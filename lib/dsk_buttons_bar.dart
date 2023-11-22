@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'dsk_theme_manager.dart';
 import 'dsk_theme_colors.dart';
 
+// Copyright © 2023 Albert Palacios. All Rights Reserved.
+// Licensed under the BSD 3-clause license, see LICENSE file for details.
+
 class DSKButtonsBar extends StatefulWidget {
   final List<Map<String, dynamic>> options; // Canviat a llistat de diccionaris
   final Function(List<bool>)? onChanged;

@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'dsk_theme_colors.dart';
 import 'dsk_theme_manager.dart';
 
+// Copyright © 2023 Albert Palacios. All Rights Reserved.
+// Licensed under the BSD 3-clause license, see LICENSE file for details.
+
 class DSKButtonsColors extends StatefulWidget {
   final Map<String, Color> colors;
   final String selectedColor;

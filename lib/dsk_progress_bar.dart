@@ -3,6 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'dsk_theme_colors.dart';
 import 'dsk_theme_manager.dart';
 
+// Copyright © 2023 Albert Palacios. All Rights Reserved.
+// Licensed under the BSD 3-clause license, see LICENSE file for details.
+
 class DSKProgressBar extends StatefulWidget {
   final double progress;
   final bool isIndeterminate;
@@ -128,8 +131,8 @@ class DSKProgressBarState extends State<DSKProgressBar>
       builder: (context, child) {
         return CustomPaint(
           painter: ProgressBarPainter(
-            actionColor: DSKColors.accent,
-            backgroundColor: DSKColors.backgroundSecondary1,
+              actionColor: DSKColors.accent,
+              backgroundColor: DSKColors.backgroundSecondary1,
               progress: widget.isIndeterminate
                   ? _controller.value
                   : _progressAnimation.value,
@@ -152,13 +155,13 @@ class ProgressBarPainter extends CustomPainter {
   final bool isIndeterminateAnimating;
   final bool hasAppFocus;
 
-  ProgressBarPainter({
-    required this.actionColor,
-    required this.backgroundColor,
-    required this.progress,
-    required this.isIndeterminate,
-    this.isIndeterminateAnimating = false,
-    this.hasAppFocus = true});
+  ProgressBarPainter(
+      {required this.actionColor,
+      required this.backgroundColor,
+      required this.progress,
+      required this.isIndeterminate,
+      this.isIndeterminateAnimating = false,
+      this.hasAppFocus = true});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -227,12 +230,11 @@ class ProgressBarPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant ProgressBarPainter oldDelegate) {
-    return 
-      oldDelegate.actionColor != actionColor ||
-      oldDelegate.backgroundColor != backgroundColor ||
-      oldDelegate.progress != progress ||
-      oldDelegate.hasAppFocus != hasAppFocus ||
-      oldDelegate.isIndeterminate != isIndeterminate ||
-      oldDelegate.isIndeterminateAnimating != isIndeterminateAnimating;
+    return oldDelegate.actionColor != actionColor ||
+        oldDelegate.backgroundColor != backgroundColor ||
+        oldDelegate.progress != progress ||
+        oldDelegate.hasAppFocus != hasAppFocus ||
+        oldDelegate.isIndeterminate != isIndeterminate ||
+        oldDelegate.isIndeterminateAnimating != isIndeterminateAnimating;
   }
 }

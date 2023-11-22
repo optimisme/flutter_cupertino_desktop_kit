@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
-
 import 'dsk_field_numeric.dart';
 import 'dsk_picker_360.dart';
+
+// Copyright © 2023 Albert Palacios. All Rights Reserved.
+// Licensed under the BSD 3-clause license, see LICENSE file for details.
 
 class DSKField360 extends StatefulWidget {
   final double defaultValue;

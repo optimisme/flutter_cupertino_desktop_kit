@@ -4,6 +4,9 @@ import 'dsk_dialog_modal.dart';
 import 'dsk_dialog_popover.dart';
 import 'dsk_dialog_popover_arrowed.dart';
 
+// Copyright © 2023 Albert Palacios. All Rights Reserved.
+// Licensed under the BSD 3-clause license, see LICENSE file for details.
+
 class DSKDialogsManager {
   static final Map<GlobalKey, GlobalKey> _activePopoverKeys = {};
   static GlobalKey? _activeModalKey;

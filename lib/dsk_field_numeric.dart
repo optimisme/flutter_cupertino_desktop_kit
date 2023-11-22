@@ -3,6 +3,9 @@ import 'package:flutter/services.dart';
 import 'dsk_field_text.dart';
 import 'dsk_buttons_up_down.dart';
 
+// Copyright © 2023 Albert Palacios. All Rights Reserved.
+// Licensed under the BSD 3-clause license, see LICENSE file for details.
+
 class DSKFieldNumeric extends StatefulWidget {
   final double? textSize;
   final double defaultValue;

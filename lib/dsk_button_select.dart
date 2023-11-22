@@ -5,6 +5,9 @@ import 'dsk_dialogs_manager.dart';
 import 'dsk_theme_colors.dart';
 import 'dsk_dialog_popover.dart';
 
+// Copyright © 2023 Albert Palacios. All Rights Reserved.
+// Licensed under the BSD 3-clause license, see LICENSE file for details.
+
 class DSKButtonSelect extends StatefulWidget {
   final Function(int, String)? onSelected;
   final int defaultIndex;

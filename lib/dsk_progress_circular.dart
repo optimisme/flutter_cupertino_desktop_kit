@@ -4,6 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'dsk_theme_colors.dart';
 import 'dsk_theme_manager.dart';
 
+// Copyright © 2023 Albert Palacios. All Rights Reserved.
+// Licensed under the BSD 3-clause license, see LICENSE file for details.
+
 class DSKProgressCircular extends StatefulWidget {
   final double progress;
   final bool isIndeterminate;
@@ -152,13 +155,13 @@ class ProgressCircularPainter extends CustomPainter {
   final bool isIndeterminate;
   final bool isIndeterminateAnimating;
   final bool hasAppFocus;
-  ProgressCircularPainter({
-    required this.actionColor,
-    required this.backgroundColor,
-    required this.progress,
-    required this.isIndeterminate,
-    this.isIndeterminateAnimating = false,
-    this.hasAppFocus = true});
+  ProgressCircularPainter(
+      {required this.actionColor,
+      required this.backgroundColor,
+      required this.progress,
+      required this.isIndeterminate,
+      this.isIndeterminateAnimating = false,
+      this.hasAppFocus = true});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -268,12 +271,11 @@ class ProgressCircularPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant ProgressCircularPainter oldDelegate) {
-      return 
-      oldDelegate.actionColor != actionColor ||
-      oldDelegate.backgroundColor != backgroundColor ||
-      oldDelegate.progress != progress ||
-      oldDelegate.hasAppFocus != hasAppFocus ||
-      oldDelegate.isIndeterminate != isIndeterminate ||
-      oldDelegate.isIndeterminateAnimating != isIndeterminateAnimating;
+    return oldDelegate.actionColor != actionColor ||
+        oldDelegate.backgroundColor != backgroundColor ||
+        oldDelegate.progress != progress ||
+        oldDelegate.hasAppFocus != hasAppFocus ||
+        oldDelegate.isIndeterminate != isIndeterminate ||
+        oldDelegate.isIndeterminateAnimating != isIndeterminateAnimating;
   }
 }
