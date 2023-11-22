@@ -24,11 +24,30 @@ class DSKField360State extends State<DSKField360> {
   GlobalKey<DSKPicker360State> keyPicker = GlobalKey();
   GlobalKey<DSKFieldNumericState> keyNumeric = GlobalKey();
   double _currentAngle = 0;
+  bool _isUpdating = false;
 
   @override
   void initState() {
     super.initState();
     _currentAngle = widget.defaultValue;
+  }
+
+  void _onChanged(String origin, double angle) {
+    if (_isUpdating) {
+      return;
+    }
+    setState(() {
+      _isUpdating = true;
+      _currentAngle = angle;
+      if (origin == "picker") {
+        keyNumeric.currentState?.setValue(angle);
+      }
+      if (origin == "numeric") {
+        keyPicker.currentState?.setValue(angle);
+      }
+      widget.onChanged?.call(angle);
+      _isUpdating = false;
+    });
   }
 
   @override
@@ -42,10 +61,7 @@ class DSKField360State extends State<DSKField360> {
           size: widget.textSize + 8,
           enabled: widget.enabled,
           onChanged: (angle) {
-            setState(() {
-              keyNumeric.currentState?.setValue(angle);
-              _currentAngle = angle;
-            });
+            _onChanged("picker", angle);
           },
         ),
         const SizedBox(width: 4),
@@ -59,12 +75,8 @@ class DSKField360State extends State<DSKField360> {
             increment: 1,
             decimals: 0,
             enabled: widget.enabled,
-            onChanged: (value) {
-              setState(() {
-                keyPicker.currentState?.setValue(value);
-                _currentAngle = value;
-                widget.onChanged?.call(value);
-              });
+            onChanged: (angle) {
+              _onChanged("numeric", angle);
             },
           ),
         )

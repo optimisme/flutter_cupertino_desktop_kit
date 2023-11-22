@@ -33,10 +33,12 @@ class DSKFieldNumericState extends State<DSKFieldNumeric> {
   late TextEditingController _controller;
   late RegExp _decimalRegex;
   bool _isUpdating = false;
+  double _currentValue = 0;
 
   @override
   void initState() {
     super.initState();
+    _currentValue = widget.defaultValue;
     _controller = TextEditingController(
         text: widget.defaultValue.toStringAsFixed(widget.decimals));
     if (widget.decimals != double.infinity) {
@@ -56,6 +58,18 @@ class DSKFieldNumericState extends State<DSKFieldNumeric> {
     super.dispose();
   }
 
+  _focusChanged(bool hasFocus) {
+    if (!hasFocus) {
+      if (_controller.text == "") {
+        _controller.text = "0";
+        _currentValue = 0;
+      } else {
+        _currentValue = double.parse(_controller.text);
+        _controller.text = _currentValue.toStringAsFixed(widget.decimals);
+      }
+    }
+  }
+
   void _onTextChanged() {
     if (_isUpdating) {
       return;
@@ -64,17 +78,18 @@ class DSKFieldNumericState extends State<DSKFieldNumeric> {
     String text = _controller.text;
 
     // Comprova si el text compleix amb el patró decimal.
-    if (!_decimalRegex.hasMatch(text)) {
+    if (text == "" || text == "-" || !_decimalRegex.hasMatch(text)) {
       return;
     }
 
-    double currentValue = double.parse(text);
-    if (currentValue < widget.min || currentValue > widget.max) {
+    _currentValue = double.parse(text);
+
+    if (_currentValue < widget.min || _currentValue > widget.max) {
       _isUpdating = true;
 
       // Actualitza el valor dins dels límits.
-      currentValue = currentValue.clamp(widget.min, widget.max);
-      _controller.text = currentValue.toStringAsFixed(widget.decimals);
+      _currentValue = _currentValue.clamp(widget.min, widget.max);
+      _controller.text = _currentValue.toStringAsFixed(widget.decimals);
 
       // Restableix el cursor a la posició correcta.
       _controller.selection = TextSelection.fromPosition(
@@ -83,7 +98,7 @@ class DSKFieldNumericState extends State<DSKFieldNumeric> {
       _isUpdating = false;
     }
 
-    widget.onChanged?.call(currentValue);
+    widget.onChanged?.call(_currentValue);
   }
 
   void _incrementValue() {
@@ -123,6 +138,7 @@ class DSKFieldNumericState extends State<DSKFieldNumeric> {
             controller: _controller,
             enabled: widget.enabled,
             textSize: widget.textSize,
+            onFocusChanged: _focusChanged,
             keyboardType: TextInputType.numberWithOptions(
                 signed: true, decimal: widget.decimals > 0),
             inputFormatters: [

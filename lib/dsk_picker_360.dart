@@ -61,10 +61,13 @@ class DSKPicker360State extends State<DSKPicker360> {
                 180 /
                 math.pi) %
             360;
+
     setState(() {
-      _currentAngle = angle;
+      if (angle != _currentAngle) {
+        _currentAngle = angle;
+        widget.onChanged?.call(angle);
+      }
     });
-    widget.onChanged?.call(angle);
   }
 }
 
