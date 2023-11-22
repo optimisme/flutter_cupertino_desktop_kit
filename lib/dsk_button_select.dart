@@ -8,6 +8,17 @@ import 'dsk_dialog_popover.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
+/// Class `DSKButtonSelect` - A custom selectable button widget for Flutter.
+///
+/// This class creates a dropdown-like button widget that can show a list of selectable options.
+///
+/// Parameters:
+/// * `onSelected`: (Function(int, String)?) Callback called when an option is selected, 
+///                 passing the index and value of the selected option.
+/// * `defaultIndex`: (int) The index of the initially selected option.
+/// * `isFlat`: (bool) Determines if the button has a flat design.
+/// * `isTranslucent`: (bool) Determines if the button has a translucent effect.
+/// * `options`: (List<String>) A list of string options that can be selected.
 class DSKButtonSelect extends StatefulWidget {
   final Function(int, String)? onSelected;
   final int defaultIndex;
@@ -28,10 +39,20 @@ class DSKButtonSelect extends StatefulWidget {
   DSKButtonSelectState createState() => DSKButtonSelectState();
 }
 
+/// Class `DSKButtonSelectState` - The state for `DSKButtonSelect`.
+///
+/// Manages the state and rendering of the selectable button.
 class DSKButtonSelectState extends State<DSKButtonSelect> {
+  // Font size for text.
   static const double _fontSize = 12.0;
+
+  // Hover state flag.
   bool _isMouseOver = false;
+
+  // Currently selected option's index.
   int _selectedIndex = 0;
+
+  // Global key for positioning.
   final GlobalKey _globalKey = GlobalKey();
 
   @override
@@ -45,9 +66,11 @@ class DSKButtonSelectState extends State<DSKButtonSelect> {
     super.dispose();
   }
 
+  /// Method to show a popover list when the button is tapped.
   _showPopover(BuildContext context) {
     final GlobalKey<DSKDialogPopoverState> key = GlobalKey();
 
+    // Show popover with selectable options.
     DSKDialogsManager.showPopover(
       key: key,
       context: context,
@@ -83,6 +106,7 @@ class DSKButtonSelectState extends State<DSKButtonSelect> {
       offset: const Offset(0, 1),
     );
 
+    // Apply different styles based on state.
     if (_isMouseOver || !widget.isFlat) {
       decoration = BoxDecoration(
           color: DSKColors.backgroundSecondary0,

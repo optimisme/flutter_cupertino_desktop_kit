@@ -5,6 +5,14 @@ import 'dsk_theme_colors.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
+/// Class `DSKButtonSwitch` - A custom switch button widget for Flutter.
+///
+/// This class creates a switch button widget that can toggle between on/off states.
+///
+/// Parameters:
+/// * `value`: (bool) The current state of the switch (on/off).
+/// * `onChanged`: (ValueChanged<bool>?) Callback called when the state of the switch changes.
+/// * `size`: (double) The size of the switch button.
 class DSKButtonSwitch extends StatefulWidget {
   final bool value;
   final double size;
@@ -21,11 +29,15 @@ class DSKButtonSwitch extends StatefulWidget {
   DSKButtonSwitchState createState() => DSKButtonSwitchState();
 }
 
+/// Class `DSKButtonSwitchState` - The state for `DSKButtonSwitch`.
+///
+/// Manages the state and rendering of the switch button.
 class DSKButtonSwitchState extends State<DSKButtonSwitch> {
   final int _animationMillis = 200;
 
   @override
   Widget build(BuildContext context) {
+    // Calculations for sizes and positions based on the provided `size`.
     double backRadius = widget.size * 12.0 / 24.0;
     double backHeight = widget.size * 24.0 / 24.0;
     double backWidth = widget.size * 40.0 / 24.0;
