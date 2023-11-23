@@ -44,7 +44,7 @@ class AppState extends State<App> with WidgetsBindingObserver {
           return CupertinoApp(
             debugShowCheckedModeBanner: false,
             theme: themeManager.getThemeData(context),
-            home: const Layout(),
+            home: Layout(),
           );
         },
       ),

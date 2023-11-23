@@ -60,25 +60,32 @@ class LayoutState extends State<Layout> {
     Widget centralWidget;
     switch (_section) {
       case "Introduction":
-        centralWidget = const LayoutIntroduction();
+        // ignore: prefer_const_constructors
+        centralWidget = LayoutIntroduction();
         break;
       case "Buttons":
-        centralWidget = const LayoutButtons();
+        // ignore: prefer_const_constructors
+        centralWidget = LayoutButtons();
         break;
       case "Progress":
-        centralWidget = const LayoutProgress();
+        // ignore: prefer_const_constructors
+        centralWidget = LayoutProgress();
         break;
       case "Fields":
-        centralWidget = const LayoutFields();
+        // ignore: prefer_const_constructors
+        centralWidget = LayoutFields();
         break;
       case "Pickers":
-        centralWidget = const LayoutPickers();
+        // ignore: prefer_const_constructors
+        centralWidget = LayoutPickers();
         break;
       case "Dialogs":
-        centralWidget = const LayoutDialogs();
+        // ignore: prefer_const_constructors
+        centralWidget = LayoutDialogs();
         break;
       case "Utils":
-        centralWidget = const LayoutUtils();
+        // ignore: prefer_const_constructors
+        centralWidget = LayoutUtils();
         break;
       default:
         centralWidget = Container(); // Un contenidor buit com a cas per defecte
