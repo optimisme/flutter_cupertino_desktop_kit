@@ -16,8 +16,7 @@ void main() async {
     print(e);
   }
 
-  // ignore: prefer_const_constructors
-  runApp(App());
+  runApp(const App());
 }
 
 // Show the window when it's ready
