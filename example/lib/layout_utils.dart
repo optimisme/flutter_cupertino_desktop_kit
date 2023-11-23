@@ -14,6 +14,18 @@ class _LayoutUtilsState extends State<LayoutUtils> {
     // ignore: unused_local_variable
     DSKThemeManager themeManager = DSKThemeManager();
 
+    Widget line = Container(
+      decoration: BoxDecoration(
+        border: Border(
+          top: BorderSide(
+            color: DSKColors.text,
+            width: 1.0,
+          ),
+        ),
+      ),
+      child: Container(),
+    );
+
     return Container(
         color: DSKColors.background,
         child: ListView(children: [
@@ -40,8 +52,8 @@ class _LayoutUtilsState extends State<LayoutUtils> {
                     setState(() {});
                   }),
             ),
+            line,
           ]),
-          const Padding(padding: EdgeInsets.all(8), child: Text('---')),
           const SizedBox(height: 50),
         ]));
   }
