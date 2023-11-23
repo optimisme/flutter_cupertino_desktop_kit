@@ -186,26 +186,34 @@ prints green, as expected.</p>
   <pre class="language-dart"><code class="language-dart">@override
 Widget build(BuildContext context) {
   Widget centralWidget;
-
   switch (_section) {
     case &quot;Introduction&quot;:
-      centralWidget =
-          LayoutIntroduction();
+      &#47;&#47; ignore: prefer_const_constructors
+      centralWidget = LayoutIntroduction();
       break;
     case &quot;Buttons&quot;:
+      &#47;&#47; ignore: prefer_const_constructors
       centralWidget = LayoutButtons();
       break;
-    case &quot;Dialogs&quot;:
-      centralWidget = LayoutDialogs();
+    case &quot;Progress&quot;:
+      &#47;&#47; ignore: prefer_const_constructors
+      centralWidget = LayoutProgress();
       break;
     case &quot;Fields&quot;:
+      &#47;&#47; ignore: prefer_const_constructors
       centralWidget = LayoutFields();
       break;
     case &quot;Pickers&quot;:
+      &#47;&#47; ignore: prefer_const_constructors
       centralWidget = LayoutPickers();
       break;
-    case &quot;Progress&quot;:
-      centralWidget = LayoutProgress();
+    case &quot;Dialogs&quot;:
+      &#47;&#47; ignore: prefer_const_constructors
+      centralWidget = LayoutDialogs();
+      break;
+    case &quot;Utils&quot;:
+      &#47;&#47; ignore: prefer_const_constructors
+      centralWidget = LayoutUtils();
       break;
     default:
       centralWidget = Container(); &#47;&#47; Un contenidor buit com a cas per defecte
@@ -223,7 +231,7 @@ Widget build(BuildContext context) {
                   onPressed: () {
                     toggleLeftSidebar();
                   }),
-              const Text(&quot;Dialogs&quot;),
+              Text(_section),
               DSKButtonIcon(
                   icon: CupertinoIcons.sidebar_left,
                   onPressed: () {
@@ -232,15 +240,15 @@ Widget build(BuildContext context) {
             ]),
       ),
       child: DSKAppSidebars(
-    key: keyAppStructure,
-    sidebarLeftIsResizable: true,
-    sidebarLeftDefaultsVisible: true,
-    sidebarRightDefaultsVisible: false,
-    sidebarLeft:
-        LayoutSidebarLeft(options: options, onSelect: _changeSection),
-    sidebarRight: const LayoutSidebarRight(),
-    central: centralWidget,
-  ));
+        key: keyAppStructure,
+        sidebarLeftIsResizable: true,
+        sidebarLeftDefaultsVisible: true,
+        sidebarRightDefaultsVisible: false,
+        sidebarLeft:
+            LayoutSidebarLeft(options: options, onSelect: _changeSection),
+        sidebarRight: const LayoutSidebarRight(),
+        central: centralWidget,
+      ));
 }</code></pre>
 </section>
 

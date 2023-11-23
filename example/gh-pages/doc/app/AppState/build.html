@@ -185,12 +185,12 @@ prints green, as expected.</p>
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">@override
 Widget build(BuildContext context) {
-  &#47;&#47; Use &#39;Cupertino&#39;
   return CupertinoApp(
-      debugShowCheckedModeBanner: false,
-      theme: DSKThemeManager.getThemeData(context, _appearanceBrightness),
-      &#47;&#47; ignore: prefer_const_constructors
-      home: Layout());
+    debugShowCheckedModeBanner: false,
+    theme: _themeManager.getThemeData(context),
+    &#47;&#47; ignore: prefer_const_constructors
+    home: Layout(),
+  );
 }</code></pre>
 </section>
 

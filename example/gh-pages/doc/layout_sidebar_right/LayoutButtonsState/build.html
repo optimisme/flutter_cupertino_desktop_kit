@@ -187,10 +187,11 @@ prints green, as expected.</p>
 Widget build(BuildContext context) {
   return Container(
       color: DSKColors.backgroundSecondary1,
-      child: ListView(children: [
+      child: ListView(children: const [
         Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [Text(&quot;Sidebar Right&quot;)])]));
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [Text(&quot;Sidebar Right&quot;)])
+      ]));
 }</code></pre>
 </section>
 

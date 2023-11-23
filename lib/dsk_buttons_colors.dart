@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'dsk_theme_manager.dart';
 import 'dsk_theme_colors.dart';
 
@@ -73,14 +73,18 @@ class DSKButtonsColorsState extends State<DSKButtonsColors> {
               color: color,
               border: Border.all(color: colorBorder, width: 1.25),
             ),
-            child: widget.selectedColor ==
-                    colorName // Comprova si aquest color està seleccionat
-                ? const Icon(
-                    size: 8,
-                    Icons.circle,
-                    color: Colors.white,
-                  )
-                : Container(),
+            child: Center(
+              child: widget.selectedColor == colorName
+                  ? Container(
+                      width: 6,
+                      height: 6,
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: DSKColors.white,
+                      ),
+                    )
+                  : null, // Si no està seleccionat, no mostra res
+            ),
           ),
         );
       }).toList(),

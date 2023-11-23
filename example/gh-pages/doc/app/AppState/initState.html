@@ -110,6 +110,8 @@ method, as in <code>super.initState()</code>.</p>
 void initState() {
   super.initState();
   WidgetsBinding.instance.addObserver(this);
+  _themeManager = DSKThemeManager();
+  _themeManager.forceUpdateCallback = () =&gt; setState(() {});
 }</code></pre>
 </section>
 

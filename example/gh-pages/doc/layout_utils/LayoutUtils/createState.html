@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the didChangeAppLifecycleState method from the AppState class, for the Dart programming language.">
-  <title>didChangeAppLifecycleState method - AppState class - app library - Dart API</title>
+  <meta name="description" content="API docs for the createState method from the LayoutUtils class, for the Dart programming language.">
+  <title>createState method - LayoutUtils class - layout_utils library - Dart API</title>
 
 
   
@@ -29,11 +29,11 @@
   <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">example</a></li>
-    <li><a href="../../app/app-library.html">app.dart</a></li>
-    <li><a href="../../app/AppState-class.html">AppState</a></li>
-    <li class="self-crumb">didChangeAppLifecycleState method</li>
+    <li><a href="../../layout_utils/layout_utils-library.html">layout_utils.dart</a></li>
+    <li><a href="../../layout_utils/LayoutUtils-class.html">LayoutUtils</a></li>
+    <li class="self-crumb">createState method</li>
   </ol>
-  <div class="self-name">didChangeAppLifecycleState</div>
+  <div class="self-name">createState</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -54,10 +54,10 @@
   <div
       id="dartdoc-main-content"
       class="main-content"
-      data-above-sidebar="app&#47;AppState-class-sidebar.html"
+      data-above-sidebar="layout_utils&#47;LayoutUtils-class-sidebar.html"
       data-below-sidebar="">
       <div>
-<h1><span class="kind-method">didChangeAppLifecycleState</span> method 
+<h1><span class="kind-method">createState</span> method 
 </h1></div>
 
     <section class="multi-line-signature">
@@ -68,20 +68,27 @@
     </ol>
   </div>
 
-<span class="returntype">void</span>
-<span class="name ">didChangeAppLifecycleState</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="didChangeAppLifecycleState-param-state"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-ui/AppLifecycleState.html">AppLifecycleState</a></span> <span class="parameter-name">state</span></span></li>
-</ol>)
+<span class="returntype"><a href="https://api.flutter.dev/flutter/widgets/State-class.html">State</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../layout_utils/LayoutUtils-class.html">LayoutUtils</a></span>&gt;</span></span>
+<span class="name ">createState</span>(<wbr>)
 
       <div class="features"><span class="feature">override</span></div>
 
     </section>
     
 <section class="desc markdown">
-  <p>Called when the system puts the app in the background or returns
-the app to the foreground.</p>
-<p>An example of implementing this method is provided in the class-level
-documentation for the <a href="https://api.flutter.dev/flutter/widgets/WidgetsBindingObserver-class.html">WidgetsBindingObserver</a> class.</p>
-<p>This method exposes notifications from <a href="https://api.flutter.dev/flutter/services/SystemChannels/lifecycle-constant.html">SystemChannels.lifecycle</a>.</p>
+  <p>Creates the mutable state for this widget at a given location in the tree.</p>
+<p>Subclasses should override this method to return a newly created
+instance of their associated <a href="https://api.flutter.dev/flutter/widgets/State-class.html">State</a> subclass:</p>
+<pre class="language-dart"><code class="language-dart">@override
+State&lt;SomeWidget&gt; createState() =&gt; _SomeWidgetState();
+</code></pre>
+<p>The framework can call this method multiple times over the lifetime of
+a <code>StatefulWidget</code>. For example, if the widget is inserted into the tree
+in multiple locations, the framework will create a separate <a href="https://api.flutter.dev/flutter/widgets/State-class.html">State</a> object
+for each location. Similarly, if the widget is removed from the tree and
+later inserted into the tree again, the framework will call <a href="../../layout_utils/LayoutUtils/createState.html">createState</a>
+again to create a fresh <a href="https://api.flutter.dev/flutter/widgets/State-class.html">State</a> object, simplifying the lifecycle of
+<a href="https://api.flutter.dev/flutter/widgets/State-class.html">State</a> objects.</p>
 </section>
 
 
@@ -89,11 +96,7 @@ documentation for the <a href="https://api.flutter.dev/flutter/widgets/WidgetsBi
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">@override
-void didChangeAppLifecycleState(AppLifecycleState state) {
-  super.didChangeAppLifecycleState(state);
-  bool appHasFocus = (state == AppLifecycleState.resumed);
-  _themeManager.setAppFocus(appHasFocus);
-}</code></pre>
+State&lt;LayoutUtils&gt; createState() =&gt; _LayoutUtilsState();</code></pre>
 </section>
 
 
@@ -109,13 +112,13 @@ void didChangeAppLifecycleState(AppLifecycleState state) {
 
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../../index.html">example</a></li>
-    <li><a href="../../app/app-library.html">app</a></li>
-    <li><a href="../../app/AppState-class.html">AppState</a></li>
-    <li class="self-crumb">didChangeAppLifecycleState method</li>
+    <li><a href="../../layout_utils/layout_utils-library.html">layout_utils</a></li>
+    <li><a href="../../layout_utils/LayoutUtils-class.html">LayoutUtils</a></li>
+    <li class="self-crumb">createState method</li>
 </ol>
 
 
-    <h5>AppState class</h5>
+    <h5>LayoutUtils class</h5>
     <div id="dartdoc-sidebar-left-content"></div>
   </div><!--/.sidebar-offcanvas-->
 
