@@ -4,12 +4,11 @@ import 'dsk_theme_colors.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
-class DSKThemeManager {
+class DSKThemeManager extends ChangeNotifier {
   bool isLight = true;
   bool isAppFocused = true;
   String appearanceConfig = "system"; // light, dark, system
   String themeColor = "systemBlue";
-  Function? forceUpdateCallback;
 
   // Instància única del singleton
   static final DSKThemeManager _instance = DSKThemeManager._internal();
@@ -48,12 +47,12 @@ class DSKThemeManager {
     }
 
     DSKColors.initColors(themeColor);
-    forceUpdateCallback?.call();
+    notifyListeners();
   }
 
   void setAppFocus(bool value) {
     isAppFocused = value;
-    forceUpdateCallback?.call();
+    notifyListeners();
   }
 
   String setAppearance(BuildContext context, String type,
@@ -88,7 +87,7 @@ class DSKThemeManager {
     }
 
     if (notify) {
-      forceUpdateCallback?.call();
+      notifyListeners();
     }
 
     return appearance;

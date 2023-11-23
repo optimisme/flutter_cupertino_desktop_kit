@@ -19,7 +19,9 @@ class AppState extends State<App> with WidgetsBindingObserver {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     _themeManager = DSKThemeManager();
-    _themeManager.forceUpdateCallback = () => setState(() {});
+    _themeManager.addListener(() {
+      setState(() {});
+    });
   }
 
   @override
