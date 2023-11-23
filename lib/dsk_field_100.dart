@@ -70,7 +70,7 @@ class DSKField100State extends State<DSKField100> {
         )),
         const SizedBox(width: 4),
         SizedBox(
-          width: 60,
+          width: 64,
           child: DSKFieldNumeric(
             key: keyNumeric,
             defaultValue: _currentValue,
@@ -80,7 +80,8 @@ class DSKField100State extends State<DSKField100> {
             increment: 1,
             decimals: 0,
             enabled: widget.enabled,
-            onChanged: (value) {
+            units: "%",
+            onValueChanged: (value) {
               _onChanged("numeric", value);
             },
           ),

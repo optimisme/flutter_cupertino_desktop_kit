@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'dsk_field_text.dart';
@@ -14,7 +16,9 @@ class DSKFieldNumeric extends StatefulWidget {
   final double increment;
   final int decimals;
   final bool enabled;
-  final Function(double)? onChanged;
+  final String units;
+  final Function(double)? onValueChanged;
+  final Function(double)? onTextChanged;
 
   const DSKFieldNumeric({
     Key? key,
@@ -25,7 +29,9 @@ class DSKFieldNumeric extends StatefulWidget {
     this.increment = double.infinity, // If infinity, buttons are hidden
     this.decimals = 1, // Valor per defecte, sense decimals si no s'especifica
     this.enabled = true,
-    this.onChanged,
+    this.units = "",
+    this.onValueChanged,
+    this.onTextChanged,
   }) : super(key: key);
 
   @override
@@ -34,24 +40,15 @@ class DSKFieldNumeric extends StatefulWidget {
 
 class DSKFieldNumericState extends State<DSKFieldNumeric> {
   late TextEditingController _controller;
-  late RegExp _decimalRegex;
+  //late RegExp _decimalRegex;
   bool _isUpdating = false;
   double _currentValue = 0;
 
   @override
   void initState() {
     super.initState();
-    _currentValue = widget.defaultValue;
-    _controller = TextEditingController(
-        text: widget.defaultValue.toStringAsFixed(widget.decimals));
-    if (widget.decimals != double.infinity) {
-      String str = '{0,${widget.decimals}}';
-      _decimalRegex = RegExp(r'^-?\d*\.?\d' + str);
-    } else {
-      _decimalRegex = RegExp(r'^-?\d*\.?\d*');
-      //_decimalRegex = RegExp(r'^-?\d*\.?\d*px?$');
-    }
-
+    _currentValue = _fixValue(widget.defaultValue.toString());
+    _controller = TextEditingController(text: _fixText(_currentValue));
     _controller.addListener(_onTextChanged);
   }
 
@@ -62,78 +59,82 @@ class DSKFieldNumericState extends State<DSKFieldNumeric> {
     super.dispose();
   }
 
-  _focusChanged(bool hasFocus) {
-    if (!hasFocus) {
-      if (_controller.text == "") {
-        _controller.text = "0";
-        _currentValue = 0;
-      } else {
-        _currentValue = double.parse(_controller.text);
-        _controller.text = _currentValue.toStringAsFixed(widget.decimals);
-      }
-    }
+  void setValue(double value) {
+    setState(() {
+      _currentValue = _fixValue(value.toString());
+      _setCurrentValue();
+    });
   }
 
-  void _onTextChanged() {
+  double _fixValue(String text) {
+    final match =
+        RegExp(r'-?\d+(\.\d+)?').firstMatch(text.replaceAll(',', '.'));
+    final numberStr = match != null ? match.group(0)! : '0';
+
+    final number = double.parse(numberStr);
+    final powCal = pow(10, widget.decimals);
+    return (number * powCal).round() / powCal;
+  }
+
+  String _fixText(double value) {
+    String rst = value.toStringAsFixed(widget.decimals);
+    if (widget.units != "") {
+      rst += " ${widget.units}";
+    }
+    return rst;
+  }
+
+  void _setCurrentValue() {
     if (_isUpdating) {
       return;
     }
 
-    String text = _controller.text;
+    _isUpdating = true;
+    _controller.text = _fixText(_currentValue);
 
-    // Comprova si el text compleix amb el patró decimal.
-    if (text == "" || text == "-" || !_decimalRegex.hasMatch(text)) {
-      return;
+    // Set cursor to end of text
+    _controller.selection = TextSelection.fromPosition(
+        TextPosition(offset: _controller.text.length));
+
+    widget.onValueChanged?.call(_currentValue);
+    _isUpdating = false;
+  }
+
+  _focusChanged(bool hasFocus) {
+    if (!hasFocus) {
+      _currentValue = _fixValue(_controller.text);
+      _setCurrentValue();
     }
+  }
 
-    _currentValue = double.parse(text);
-
-    if (_currentValue < widget.min || _currentValue > widget.max) {
-      _isUpdating = true;
-
-      // Actualitza el valor dins dels límits.
-      _currentValue = _currentValue.clamp(widget.min, widget.max);
-      _controller.text = _currentValue.toStringAsFixed(widget.decimals);
-
-      // Restableix el cursor a la posició correcta.
-      _controller.selection = TextSelection.fromPosition(
-          TextPosition(offset: _controller.text.length));
-
-      _isUpdating = false;
-    }
-
-    widget.onChanged?.call(_currentValue);
+  void _onTextChanged() {
+    widget.onTextChanged?.call(_fixValue(_controller.text));
   }
 
   void _incrementValue() {
-    double currentValue = double.parse(_controller.text);
-    currentValue = (currentValue + widget.increment);
-    if (currentValue < widget.min) currentValue = widget.min;
-    if (currentValue > widget.max) currentValue = widget.max;
-    _controller.text = currentValue.toStringAsFixed(widget.decimals);
+    double value = _fixValue(_controller.text);
+    value = (value + widget.increment);
+    if (value < widget.min) value = widget.min;
+    if (value > widget.max) value = widget.max;
+    _currentValue = value;
+    _setCurrentValue();
     setState(() {});
   }
 
   void _decrementValue() {
-    double currentValue = double.parse(_controller.text);
-    currentValue = (currentValue - widget.increment);
-    if (currentValue < widget.min) currentValue = widget.min;
-    if (currentValue > widget.max) currentValue = widget.max;
-    _controller.text = currentValue.toStringAsFixed(widget.decimals);
+    double value = _fixValue(_controller.text);
+    value = (value - widget.increment);
+    if (value < widget.min) value = widget.min;
+    if (value > widget.max) value = widget.max;
+    _currentValue = value;
+    _setCurrentValue();
     setState(() {});
-  }
-
-  void setValue(double value) {
-    setState(() {
-      _controller.text = value.toStringAsFixed(widget.decimals);
-    });
   }
 
   @override
   Widget build(BuildContext context) {
-    double value = double.parse(_controller.text);
-    bool enabledUp = value < widget.max;
-    bool enabledDown = value > widget.min;
+    bool enabledUp = _currentValue < widget.max;
+    bool enabledDown = _currentValue > widget.min;
 
     return Row(
       children: <Widget>[
@@ -144,12 +145,12 @@ class DSKFieldNumericState extends State<DSKFieldNumeric> {
             textSize: widget.textSize,
             textAlign: TextAlign.right,
             onFocusChanged: _focusChanged,
-            keyboardType: TextInputType.numberWithOptions(
-                signed: true, decimal: widget.decimals > 0),
-            //keyboardType: TextInputType.text,
-            inputFormatters: [
-              FilteringTextInputFormatter.allow(_decimalRegex),
-            ],
+            //keyboardType: TextInputType.numberWithOptions(
+            //    signed: true, decimal: widget.decimals > 0),
+            keyboardType: TextInputType.text,
+            //inputFormatters: [
+            //  FilteringTextInputFormatter.allow(_decimalRegex),
+            //],
           ),
         ),
         widget.increment == double.infinity

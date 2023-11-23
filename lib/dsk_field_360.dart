@@ -57,6 +57,7 @@ class DSKField360State extends State<DSKField360> {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
+        Expanded(child: Container()),
         DSKPicker360(
           key: keyPicker,
           defaultValue: _currentAngle,
@@ -67,7 +68,8 @@ class DSKField360State extends State<DSKField360> {
           },
         ),
         const SizedBox(width: 4),
-        Expanded(
+        SizedBox(
+          width: 64,
           child: DSKFieldNumeric(
             key: keyNumeric,
             defaultValue: _currentAngle,
@@ -77,7 +79,8 @@ class DSKField360State extends State<DSKField360> {
             increment: 1,
             decimals: 0,
             enabled: widget.enabled,
-            onChanged: (angle) {
+            units: "°",
+            onValueChanged: (angle) {
               _onChanged("numeric", angle);
             },
           ),

@@ -40,7 +40,7 @@ class DSKPickerSliderState extends State<DSKPickerSlider> {
     RenderBox renderBox = context.findRenderObject() as RenderBox;
     final position = renderBox.globalToLocal(globalPosition);
 
-    final double radius = renderBox.size.height / 2;
+    final double radius = renderBox.size.height / 3;
     final circleRail = renderBox.size.width - radius * 2;
 
     double newValue = ((position.dx - radius) / circleRail).clamp(0.0, 1.0);
@@ -146,7 +146,7 @@ class DSKPicker01Painter extends CustomPainter {
     canvas.drawRRect(progressRRect, progressPaint);
 
     // Dibuixar la sombra
-    final double radius = size.height / 2;
+    final double radius = size.height / 3;
     final circleRail = size.width - radius * 2;
     final circleProgress = (progressWidth * circleRail) / size.width;
     final Offset center = Offset(radius + circleProgress, size.height / 2);

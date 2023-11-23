@@ -94,7 +94,7 @@ class _LayoutFieldsState extends State<LayoutFields> {
                     width: 100,
                     child: DSKFieldNumeric(
                       defaultValue: 5.0,
-                      onChanged: (double value) {
+                      onValueChanged: (double value) {
                         // ignore: avoid_print
                         print("Numeric A: $value");
                       },
@@ -109,9 +109,10 @@ class _LayoutFieldsState extends State<LayoutFields> {
                       min: -2,
                       max: 1.5,
                       increment: 0.15,
-                      onChanged: (double value) {
+                      units: "px",
+                      onValueChanged: (double value) {
                         // ignore: avoid_print
-                        print("Numeric A: $value");
+                        print("Numeric B: $value");
                       },
                     ))),
             Padding(
@@ -121,9 +122,9 @@ class _LayoutFieldsState extends State<LayoutFields> {
                     child: DSKFieldNumeric(
                       defaultValue: 5.0,
                       enabled: false,
-                      onChanged: (double value) {
+                      onValueChanged: (double value) {
                         // ignore: avoid_print
-                        print("Numeric B: $value");
+                        print("Numeric C: $value");
                       },
                     ))),
           ]),
@@ -133,7 +134,7 @@ class _LayoutFieldsState extends State<LayoutFields> {
             Padding(
                 padding: const EdgeInsets.all(8),
                 child: SizedBox(
-                    width: 75,
+                    width: 150,
                     child: DSKField360(
                       defaultValue: 270,
                       onChanged: (double value) {
@@ -144,7 +145,7 @@ class _LayoutFieldsState extends State<LayoutFields> {
             Padding(
                 padding: const EdgeInsets.all(8),
                 child: SizedBox(
-                    width: 75,
+                    width: 150,
                     child: DSKField360(
                       enabled: false,
                       onChanged: (double value) {
