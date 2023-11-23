@@ -23,7 +23,6 @@ class DSKPickerSlider extends StatefulWidget {
 
 class DSKPickerSliderState extends State<DSKPickerSlider> {
   double _currentValue = 0.0;
-  DSKThemeManager? _lastThemeManager;
 
   @override
   void initState() {
