@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_desktop_cupertino/dsk_theme_manager.dart';
-import 'package:provider/provider.dart';
+import 'dsk_theme_manager.dart';
 import 'dsk_theme_colors.dart';
 
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
@@ -70,7 +69,7 @@ class DSKFieldTextState extends State<DSKFieldText> {
 
   @override
   Widget build(BuildContext context) {
-    final themeManager = Provider.of<DSKThemeManager>(context);
+    DSKThemeManager themeManager = DSKThemeManager();
 
     final BorderRadius borderRadius = widget.isRounded
         ? BorderRadius.circular(25.0)

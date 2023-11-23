@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'dsk_theme_manager.dart';
 import 'dsk_theme_colors.dart';
 
@@ -96,7 +95,7 @@ class DSKButtonsBarState extends State<DSKButtonsBar> {
 
   @override
   Widget build(BuildContext context) {
-    final themeManager = Provider.of<DSKThemeManager>(context);
+    DSKThemeManager themeManager = DSKThemeManager();
 
     List<Widget> buttonWidgets = List.generate(widget.options.length, (index) {
       // Determine border radius based on the position of the element

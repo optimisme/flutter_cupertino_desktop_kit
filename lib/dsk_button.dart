@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:provider/provider.dart';
 import 'dsk_theme_manager.dart';
 import 'dsk_theme_colors.dart';
 
@@ -52,7 +51,7 @@ class DSKButtonState extends State<DSKButton> {
 
   @override
   Widget build(BuildContext context) {
-    final themeManager = Provider.of<DSKThemeManager>(context);
+    DSKThemeManager themeManager = DSKThemeManager();
 
     // Define styles and themes based on the button's state and style.
     BoxDecoration decoration;

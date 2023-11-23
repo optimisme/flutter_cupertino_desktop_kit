@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_desktop_cupertino/dsk_widgets.dart';
-import 'package:provider/provider.dart';
 
 class LayoutDialogs extends StatefulWidget {
   const LayoutDialogs({super.key});
@@ -185,7 +184,7 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
   @override
   Widget build(BuildContext context) {
     // ignore: unused_local_variable
-    final themeManager = Provider.of<DSKThemeManager>(context);
+    DSKThemeManager themeManager = DSKThemeManager();
 
     return Container(
         color: DSKColors.background,

@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:provider/provider.dart';
-import 'dsk_theme_colors.dart';
 import 'dsk_theme_manager.dart';
+import 'dsk_theme_colors.dart';
 
 class DSKPickerSlider extends StatefulWidget {
   final double defaultValue;
@@ -71,7 +70,7 @@ class DSKPickerSliderState extends State<DSKPickerSlider> {
   @override
   Widget build(BuildContext context) {
     // ignore: unused_local_variable
-    final themeManager = Provider.of<DSKThemeManager>(context);
+    DSKThemeManager themeManager = DSKThemeManager();
 
     return GestureDetector(
       onTapDown: (details) {

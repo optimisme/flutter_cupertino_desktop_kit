@@ -1,4 +1,3 @@
-import 'package:provider/provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_desktop_cupertino/dsk_widgets.dart';
 import 'layout.dart';
@@ -20,6 +19,7 @@ class AppState extends State<App> with WidgetsBindingObserver {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     _themeManager = DSKThemeManager();
+    _themeManager.forceUpdateCallback = () => setState(() {});
   }
 
   @override
@@ -37,17 +37,11 @@ class AppState extends State<App> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<DSKThemeManager>(
-      create: (context) => _themeManager,
-      child: Consumer<DSKThemeManager>(
-        builder: (context, themeManager, child) {
-          return CupertinoApp(
-            debugShowCheckedModeBanner: false,
-            theme: themeManager.getThemeData(context),
-            home: Layout(),
-          );
-        },
-      ),
+    return CupertinoApp(
+      debugShowCheckedModeBanner: false,
+      theme: _themeManager.getThemeData(context),
+      // ignore: prefer_const_constructors
+      home: Layout(),
     );
   }
 }

@@ -1,8 +1,7 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
-import 'package:provider/provider.dart';
-import 'dsk_theme_colors.dart';
 import 'dsk_theme_manager.dart';
+import 'dsk_theme_colors.dart';
 
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
@@ -127,7 +126,7 @@ class DSKProgressBarState extends State<DSKProgressBar>
 
   @override
   Widget build(BuildContext context) {
-    final themeManager = Provider.of<DSKThemeManager>(context);
+    DSKThemeManager themeManager = DSKThemeManager();
     return AnimatedBuilder(
       animation: _controller,
       builder: (context, child) {

@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:provider/provider.dart';
 import 'dsk_theme_manager.dart';
 import 'dsk_theme_colors.dart';
 
@@ -72,7 +71,7 @@ class DSKButtonIconState extends State<DSKButtonIcon> {
 
   @override
   Widget build(BuildContext context) {
-    final themeManager = Provider.of<DSKThemeManager>(context);
+    DSKThemeManager themeManager = DSKThemeManager();
 
     final Color backgroundColor = themeManager.isLight
         ? _isPressed

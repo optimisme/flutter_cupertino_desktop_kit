@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_desktop_cupertino/dsk_widgets.dart';
-import 'package:provider/provider.dart';
 
 class LayoutSidebarLeft extends StatefulWidget {
   final List<String> options;
@@ -19,7 +18,7 @@ class LayoutButtonsState extends State<LayoutSidebarLeft> {
 
   @override
   Widget build(BuildContext context) {
-    final themeManager = Provider.of<DSKThemeManager>(context);
+    DSKThemeManager themeManager = DSKThemeManager();
 
     String selectedRadio = themeManager.appearanceConfig;
     return Container(

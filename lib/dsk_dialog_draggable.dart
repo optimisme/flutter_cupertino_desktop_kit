@@ -3,9 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'dsk_dialog_outer_shadow_painter.dart';
 import 'dsk_dialog_popover_clipper.dart';
 import 'dsk_dialogs_manager.dart';
-import 'package:provider/provider.dart';
-import 'dsk_theme_colors.dart';
 import 'dsk_theme_manager.dart';
+import 'dsk_theme_colors.dart';
 
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
@@ -125,7 +124,7 @@ class DSKDialogDraggableState extends State<DSKDialogDraggable>
 
   @override
   Widget build(BuildContext context) {
-    final themeManager = Provider.of<DSKThemeManager>(context);
+    DSKThemeManager themeManager = DSKThemeManager();
 
     if (isSizeDetermined) {
       var leftPosition = position.dx;

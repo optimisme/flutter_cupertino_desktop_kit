@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:provider/provider.dart';
 import 'dsk_theme_manager.dart';
 import 'dsk_theme_colors.dart';
 
@@ -45,7 +44,7 @@ class DSKButtonCheckBox extends StatefulWidget {
 class DSKButtonCheckBoxState extends State<DSKButtonCheckBox> {
   @override
   Widget build(BuildContext context) {
-    final themeManager = Provider.of<DSKThemeManager>(context);
+    DSKThemeManager themeManager = DSKThemeManager();
 
     /// Calculate the checkbox size based on the specified size property
     double boxSize = widget.size;

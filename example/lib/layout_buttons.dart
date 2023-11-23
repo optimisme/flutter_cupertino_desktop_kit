@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_desktop_cupertino/dsk_widgets.dart';
-import 'package:provider/provider.dart';
 
 class LayoutButtons extends StatefulWidget {
   const LayoutButtons({super.key});
@@ -16,7 +15,7 @@ class _LayoutButtonsState extends State<LayoutButtons> {
   @override
   Widget build(BuildContext context) {
     // ignore: unused_local_variable
-    final themeManager = Provider.of<DSKThemeManager>(context);
+    final themeManager = DSKThemeManager();
 
     return Container(
         color: DSKColors.background,

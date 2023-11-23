@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:provider/provider.dart';
 import 'dsk_theme_manager.dart';
 import 'dsk_theme_colors.dart';
 
@@ -40,7 +39,7 @@ class DSKButtonRadio extends StatefulWidget {
 class DSKButtonRadioState extends State<DSKButtonRadio> {
   @override
   Widget build(BuildContext context) {
-    final themeManager = Provider.of<DSKThemeManager>(context);
+    DSKThemeManager themeManager = DSKThemeManager();
 
     double boxSize = widget.size;
 

@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_desktop_cupertino/dsk_widgets.dart';
-import 'package:provider/provider.dart';
 
 class LayoutFields extends StatefulWidget {
   const LayoutFields({super.key});
@@ -23,7 +22,7 @@ class _LayoutFieldsState extends State<LayoutFields> {
   @override
   Widget build(BuildContext context) {
     // ignore: unused_local_variable
-    final themeManager = Provider.of<DSKThemeManager>(context);
+    DSKThemeManager themeManager = DSKThemeManager();
 
     return Container(
         color: DSKColors.background,

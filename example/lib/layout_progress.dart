@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_desktop_cupertino/dsk_widgets.dart';
-import 'package:provider/provider.dart';
 
 class LayoutProgress extends StatefulWidget {
   const LayoutProgress({super.key});
@@ -48,7 +47,7 @@ class _LayoutProgressState extends State<LayoutProgress> {
   @override
   Widget build(BuildContext context) {
     // ignore: unused_local_variable
-    final themeManager = Provider.of<DSKThemeManager>(context);
+    DSKThemeManager themeManager = DSKThemeManager();
 
     return Container(
         color: DSKColors.background,

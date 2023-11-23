@@ -9,6 +9,18 @@ class DSKThemeManager extends ChangeNotifier {
   bool isAppFocused = true;
   String appearanceConfig = "system"; // light, dark, system
   String themeColor = "systemBlue";
+  Function? forceUpdateCallback;
+
+  // Instància única del singleton
+  static final DSKThemeManager _instance = DSKThemeManager._internal();
+
+  // Constructor privat per crear la instància única
+  DSKThemeManager._internal();
+
+  // Mètode estàtic per obtenir la instància del singleton
+  factory DSKThemeManager() {
+    return _instance;
+  }
 
   CupertinoThemeData getThemeData(BuildContext context) {
     String appearance = setAppearance(context, appearanceConfig, notify: false);
@@ -37,11 +49,13 @@ class DSKThemeManager extends ChangeNotifier {
 
     DSKColors.initColors(themeColor);
     notifyListeners();
+    forceUpdateCallback?.call();
   }
 
   void setAppFocus(bool value) {
     isAppFocused = value;
     notifyListeners();
+    forceUpdateCallback?.call();
   }
 
   String setAppearance(BuildContext context, String type,
@@ -75,7 +89,11 @@ class DSKThemeManager extends ChangeNotifier {
       DSKColors.text = CupertinoColors.white;
     }
 
-    if (notify) notifyListeners();
+    if (notify) {
+      notifyListeners();
+      forceUpdateCallback?.call();
+    }
+
     return appearance;
   }
 }

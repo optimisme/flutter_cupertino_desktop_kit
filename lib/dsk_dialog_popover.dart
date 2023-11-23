@@ -2,7 +2,6 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'dsk_dialog_outer_shadow_painter.dart';
 import 'dsk_dialog_popover_clipper.dart';
-import 'package:provider/provider.dart';
 import 'dsk_theme_manager.dart';
 import 'dsk_theme_colors.dart';
 
@@ -151,7 +150,7 @@ class DSKDialogPopoverState extends State<DSKDialogPopover>
 
   @override
   Widget build(BuildContext context) {
-    final themeManager = Provider.of<DSKThemeManager>(context);
+    DSKThemeManager themeManager = DSKThemeManager();
 
     Color backgroundColor = !widget.isTranslucent
         ? DSKColors.backgroundSecondary0

@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_desktop_cupertino/dsk_widgets.dart';
-import 'package:provider/provider.dart';
 import 'layout_sidebar_left.dart';
 import 'layout_sidebar_right.dart';
 import 'layout_buttons.dart';
@@ -55,7 +54,7 @@ class LayoutState extends State<Layout> {
   @override
   Widget build(BuildContext context) {
     // ignore: unused_local_variable
-    final themeManager = Provider.of<DSKThemeManager>(context);
+    DSKThemeManager themeManager = DSKThemeManager();
 
     Widget centralWidget;
     switch (_section) {

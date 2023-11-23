@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:provider/provider.dart';
 import 'dsk_theme_manager.dart';
 import 'dsk_theme_colors.dart';
 
@@ -123,7 +122,7 @@ class DSKButtonsSegmentedState extends State<DSKButtonsSegmented> {
 
   @override
   Widget build(BuildContext context) {
-    final themeManager = Provider.of<DSKThemeManager>(context);
+    DSKThemeManager themeManager = DSKThemeManager();
 
     // Schedule a post-frame callback to calculate positions
     WidgetsBinding.instance.addPostFrameCallback((_) {
