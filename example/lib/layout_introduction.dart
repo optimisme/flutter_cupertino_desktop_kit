@@ -12,9 +12,6 @@ class LayoutIntroduction extends StatefulWidget {
 class _LayoutIntroductionState extends State<LayoutIntroduction> {
   @override
   Widget build(BuildContext context) {
-    // ignore: unused_local_variable
-    DSKThemeManager themeManager = DSKThemeManager();
-
     return Container(
         color: DSKColors.background,
         child: ListView(children: [

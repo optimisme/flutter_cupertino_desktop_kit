@@ -21,9 +21,6 @@ class _LayoutFieldsState extends State<LayoutFields> {
 
   @override
   Widget build(BuildContext context) {
-    // ignore: unused_local_variable
-    DSKThemeManager themeManager = DSKThemeManager();
-
     return Container(
         color: DSKColors.background,
         child: ListView(children: [

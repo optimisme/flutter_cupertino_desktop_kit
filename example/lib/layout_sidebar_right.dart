@@ -11,9 +11,6 @@ class LayoutSidebarRight extends StatefulWidget {
 class LayoutButtonsState extends State<LayoutSidebarRight> {
   @override
   Widget build(BuildContext context) {
-    // ignore: unused_local_variable
-    DSKThemeManager themeManager = DSKThemeManager();
-
     return Container(
         color: DSKColors.backgroundSecondary1,
         child: ListView(children: const [

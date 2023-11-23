@@ -53,9 +53,6 @@ class LayoutState extends State<Layout> {
 
   @override
   Widget build(BuildContext context) {
-    // ignore: unused_local_variable
-    DSKThemeManager themeManager = DSKThemeManager();
-
     Widget centralWidget;
     switch (_section) {
       case "Introduction":

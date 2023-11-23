@@ -11,9 +11,6 @@ class LayoutUtils extends StatefulWidget {
 class _LayoutUtilsState extends State<LayoutUtils> {
   @override
   Widget build(BuildContext context) {
-    // ignore: unused_local_variable
-    DSKThemeManager themeManager = DSKThemeManager();
-
     Widget line = Container(
       decoration: BoxDecoration(
         border: Border(

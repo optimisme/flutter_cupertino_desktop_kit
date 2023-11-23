@@ -14,9 +14,6 @@ class _LayoutButtonsState extends State<LayoutButtons> {
 
   @override
   Widget build(BuildContext context) {
-    // ignore: unused_local_variable
-    final themeManager = DSKThemeManager();
-
     return Container(
         color: DSKColors.background,
         child: ListView(children: [
