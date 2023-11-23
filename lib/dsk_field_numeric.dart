@@ -69,7 +69,8 @@ class DSKFieldNumericState extends State<DSKFieldNumeric> {
   double _fixValue(String text) {
     final match =
         RegExp(r'-?\d+(\.\d+)?').firstMatch(text.replaceAll(',', '.'));
-    final numberStr = match != null ? match.group(0)! : '0';
+    final numberStr =
+        match != null ? match.group(0)! : _currentValue.toString();
 
     final number = double.parse(numberStr);
     final powCal = pow(10, widget.decimals);
