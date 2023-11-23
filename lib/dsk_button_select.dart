@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
 import 'dsk_theme_manager.dart';
 import 'dsk_button_check_list.dart';
 import 'dsk_dialogs_manager.dart';
@@ -13,7 +14,7 @@ import 'dsk_dialog_popover.dart';
 /// This class creates a dropdown-like button widget that can show a list of selectable options.
 ///
 /// Parameters:
-/// * `onSelected`: (Function(int, String)?) Callback called when an option is selected, 
+/// * `onSelected`: (Function(int, String)?) Callback called when an option is selected,
 ///                 passing the index and value of the selected option.
 /// * `defaultIndex`: (int) The index of the initially selected option.
 /// * `isFlat`: (bool) Determines if the button has a flat design.
@@ -97,6 +98,8 @@ class DSKButtonSelectState extends State<DSKButtonSelect> {
 
   @override
   Widget build(BuildContext context) {
+    final themeManager = Provider.of<DSKThemeManager>(context);
+
     BoxDecoration decoration;
     TextStyle textStyle;
     BoxShadow shadow = BoxShadow(
@@ -153,7 +156,7 @@ class DSKButtonSelectState extends State<DSKButtonSelect> {
                       DecoratedBox(
                         decoration: BoxDecoration(
                           color: !widget.isFlat
-                              ? DSKThemeManager.isAppFocused
+                              ? themeManager.isAppFocused
                                   ? DSKColors.accent300
                                   : DSKColors.transparent
                               : _isMouseOver
@@ -168,8 +171,8 @@ class DSKButtonSelectState extends State<DSKButtonSelect> {
                               child: Icon(
                                 CupertinoIcons.chevron_up_chevron_down,
                                 color: !widget.isFlat &&
-                                        DSKThemeManager.isLight &&
-                                        DSKThemeManager.isAppFocused
+                                        themeManager.isLight &&
+                                        themeManager.isAppFocused
                                     ? DSKColors.white
                                     : DSKColors.text,
                                 size: _fontSize * 1.2,

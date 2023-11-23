@@ -8,9 +8,12 @@ import 'dsk_theme_colors.dart';
 class DSKDialogOuterShadowPainter extends CustomPainter {
   final Path pathContour;
   final Color backgroundColor;
+  final bool isLightTheme;
 
   DSKDialogOuterShadowPainter(
-      {required this.pathContour, required this.backgroundColor});
+      {required this.pathContour,
+      required this.backgroundColor,
+      required this.isLightTheme});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -27,7 +30,7 @@ class DSKDialogOuterShadowPainter extends CustomPainter {
     // Pinta el contorn
     final paintLine = Paint()
       ..strokeWidth = 0.5
-      ..color = DSKThemeManager.isLight ? DSKColors.grey200 : DSKColors.grey500
+      ..color = isLightTheme ? DSKColors.grey200 : DSKColors.grey500
       ..style = PaintingStyle.stroke;
 
     canvas.drawPath(pathContour, paintLine);
@@ -44,9 +47,8 @@ class DSKDialogOuterShadowPainter extends CustomPainter {
     canvas.clipPath(clipPath);
 
     // Defineix i dibuixa l'ombra
-    Color shadowColor = DSKThemeManager.isLight
-        ? DSKColors.black.withOpacity(0.5)
-        : DSKColors.black;
+    Color shadowColor =
+        isLightTheme ? DSKColors.black.withOpacity(0.5) : DSKColors.black;
     final shadowPaint = Paint()
       ..color = shadowColor
       ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 4);
@@ -58,7 +60,8 @@ class DSKDialogOuterShadowPainter extends CustomPainter {
   @override
   bool shouldRepaint(covariant DSKDialogOuterShadowPainter oldDelegate) {
     return pathContour != oldDelegate.pathContour ||
-        backgroundColor != oldDelegate.backgroundColor;
+        backgroundColor != oldDelegate.backgroundColor ||
+        isLightTheme != oldDelegate.isLightTheme;
   }
 
   static Path createContourPath(Rect rect) {

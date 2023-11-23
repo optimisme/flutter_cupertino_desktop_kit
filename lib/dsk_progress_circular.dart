@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math' as math;
 import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
 import 'dsk_theme_colors.dart';
 import 'dsk_theme_manager.dart';
 
@@ -127,6 +128,7 @@ class DSKProgressCircularState extends State<DSKProgressCircular>
 
   @override
   Widget build(BuildContext context) {
+    final themeManager = Provider.of<DSKThemeManager>(context);
     return AnimatedBuilder(
       animation: _controller,
       builder: (context, child) {
@@ -139,7 +141,8 @@ class DSKProgressCircularState extends State<DSKProgressCircular>
                   : _progressAnimation.value,
               isIndeterminate: widget.isIndeterminate,
               isIndeterminateAnimating: _controller.isAnimating,
-              hasAppFocus: DSKThemeManager.isAppFocused),
+              hasAppFocus: themeManager.isAppFocused,
+              isLightTheme: themeManager.isLight),
           child: child,
         );
       },
@@ -155,13 +158,15 @@ class ProgressCircularPainter extends CustomPainter {
   final bool isIndeterminate;
   final bool isIndeterminateAnimating;
   final bool hasAppFocus;
+  final bool isLightTheme;
   ProgressCircularPainter(
       {required this.actionColor,
       required this.backgroundColor,
       required this.progress,
       required this.isIndeterminate,
       this.isIndeterminateAnimating = false,
-      this.hasAppFocus = true});
+      this.hasAppFocus = true,
+      required this.isLightTheme});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -194,7 +199,7 @@ class ProgressCircularPainter extends CustomPainter {
           double diff = (normalizedProgress - i).abs();
           if (diff > 4) diff = 8 - diff;
           final int alpha = (255 * (1 - (diff / 4))).toInt().clamp(0, 255);
-          if (DSKThemeManager.isLight) {
+          if (isLightTheme) {
             lineColor = DSKColors.grey700.withAlpha(alpha);
           } else {
             lineColor = DSKColors.grey.withAlpha(alpha);
@@ -276,6 +281,7 @@ class ProgressCircularPainter extends CustomPainter {
         oldDelegate.progress != progress ||
         oldDelegate.hasAppFocus != hasAppFocus ||
         oldDelegate.isIndeterminate != isIndeterminate ||
+        oldDelegate.isLightTheme != isLightTheme ||
         oldDelegate.isIndeterminateAnimating != isIndeterminateAnimating;
   }
 }

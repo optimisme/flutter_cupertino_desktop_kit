@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_desktop_cupertino/dsk_widgets.dart';
+import 'package:provider/provider.dart';
 
 class LayoutDialogs extends StatefulWidget {
-  const LayoutDialogs(
-      {super.key});
+  const LayoutDialogs({super.key});
 
   @override
   State<LayoutDialogs> createState() => _LayoutDialogsState();
@@ -184,225 +184,218 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
+    final themeManager = Provider.of<DSKThemeManager>(context);
+
     return Container(
-            color: DSKColors.background,
-            child: ListView(children: [
-              const SizedBox(height: 8),
-              Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: RichText(
-                    text: TextSpan(
-                      style: TextStyle(fontSize: 14, color: DSKColors.text),
-                      children: const <TextSpan>[
-                        TextSpan(
-                            text: '*Important! ',
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                        TextSpan(
-                            text:
-                                'The shadow of translucent dialogs is not drawn properly on the web.'),
-                      ],
-                    ),
-                  )),
-              const SizedBox(height: 8),
-              const Padding(
-                  padding: EdgeInsets.all(8), child: Text('DSKDialogPopover:')),
-              Wrap(children: [
-                Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: DSKButton(
-                      key: _anchorPopover0,
-                      style: DSKButtonStyle.normal,
-                      isLarge: false,
-                      onPressed: () {
-                        _showPopover(
-                            context, _anchorPopover0, false, false, false);
-                      },
-                      child: const Text('Popover'),
-                    )),
-                Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: DSKButton(
-                      key: _anchorPopover1,
-                      style: DSKButtonStyle.normal,
-                      isLarge: false,
-                      onPressed: () {
-                        _showPopover(
-                            context, _anchorPopover1, true, false, true);
-                      },
-                      child: const Text('Centered translucent'),
-                    )),
-                Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: DSKButton(
-                      key: _anchorPopover2,
-                      style: DSKButtonStyle.normal,
-                      isLarge: false,
-                      onPressed: () {
-                        _showPopover(
-                            context, _anchorPopover2, true, true, false);
-                      },
-                      child: const Text('With animation'),
-                    )),
-                Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: DSKButton(
-                      key: _anchorPopover3,
-                      style: DSKButtonStyle.normal,
-                      isLarge: false,
-                      onPressed: () {
-                        _showPopover(
-                            context, _anchorPopover3, true, true, true);
-                      },
-                      child: const Text('Translucent with animation'),
-                    )),
-              ]),
-              const Padding(
-                  padding: EdgeInsets.all(8), child: Text('DSKDialogModal:')),
-              Wrap(children: [
-                Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: DSKButton(
-                      style: DSKButtonStyle.normal,
-                      isLarge: false,
-                      onPressed: () {
-                        _showModal(context, false, false);
-                      },
-                      child: const Text('Modal'),
-                    )),
-                Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: DSKButton(
-                      style: DSKButtonStyle.normal,
-                      isLarge: false,
-                      onPressed: () {
-                        _showModal(context, true, false);
-                      },
-                      child: const Text('With animation'),
-                    )),
-                Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: DSKButton(
-                      style: DSKButtonStyle.normal,
-                      isLarge: false,
-                      onPressed: () {
-                        _showModal(context, false, true);
-                      },
-                      child: const Text('Translucent'),
-                    )),
-                Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: DSKButton(
-                      style: DSKButtonStyle.normal,
-                      isLarge: false,
-                      onPressed: () {
-                        _showModal(context, true, true);
-                      },
-                      child: const Text('Translucent with animation'),
-                    )),
-              ]),
-              const Padding(
-                  padding: EdgeInsets.all(8),
-                  child: Text('DSKDialogDraggable:')),
-              Wrap(children: [
-                Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: DSKButton(
-                      key: _anchorDraggable0,
-                      style: DSKButtonStyle.normal,
-                      isLarge: false,
-                      onPressed: () {
-                        _showDraggable(
-                            context, _anchorDraggable0, false, false);
-                      },
-                      child: const Text('Draggable'),
-                    )),
-                Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: DSKButton(
-                      key: _anchorDraggable1,
-                      style: DSKButtonStyle.normal,
-                      isLarge: false,
-                      onPressed: () {
-                        _showDraggable(context, _anchorDraggable1, true, false);
-                      },
-                      child: const Text('With animation'),
-                    )),
-                Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: DSKButton(
-                      key: _anchorDraggable2,
-                      style: DSKButtonStyle.normal,
-                      isLarge: false,
-                      onPressed: () {
-                        _showDraggable(context, _anchorDraggable2, false, true);
-                      },
-                      child: const Text('Translucent'),
-                    )),
-                Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: DSKButton(
-                      key: _anchorDraggable3,
-                      style: DSKButtonStyle.normal,
-                      isLarge: false,
-                      onPressed: () {
-                        _showDraggable(context, _anchorDraggable3, true, true);
-                      },
-                      child: const Text('Translucent with animation'),
-                    )),
-              ]),
-              const Padding(
-                  padding: EdgeInsets.all(8), child: Text('DSKDialogArrow:')),
-              Wrap(children: [
-                Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: DSKButton(
-                      key: _anchorArrowed0,
-                      style: DSKButtonStyle.normal,
-                      isLarge: false,
-                      onPressed: () {
-                        _showPopoverArrowed(
-                            context, _anchorArrowed0, false, false);
-                      },
-                      child: const Text('Arrowed'),
-                    )),
-                Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: DSKButton(
-                      key: _anchorArrowed1,
-                      style: DSKButtonStyle.normal,
-                      isLarge: false,
-                      onPressed: () {
-                        _showPopoverArrowed(
-                            context, _anchorArrowed1, true, false);
-                      },
-                      child: const Text('With animation'),
-                    )),
-                Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: DSKButton(
-                      key: _anchorArrowed2,
-                      style: DSKButtonStyle.normal,
-                      isLarge: false,
-                      onPressed: () {
-                        _showPopoverArrowed(
-                            context, _anchorArrowed2, false, true);
-                      },
-                      child: const Text('Translucent'),
-                    )),
-                Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: DSKButton(
-                      key: _anchorArrowed3,
-                      style: DSKButtonStyle.normal,
-                      isLarge: false,
-                      onPressed: () {
-                        _showPopoverArrowed(
-                            context, _anchorArrowed3, true, true);
-                      },
-                      child: const Text('Translucent with animation'),
-                    )),
-              ]),
-              const SizedBox(height: 50),
-            ]));
+        color: DSKColors.background,
+        child: ListView(children: [
+          const SizedBox(height: 8),
+          Padding(
+              padding: const EdgeInsets.all(8),
+              child: RichText(
+                text: TextSpan(
+                  style: TextStyle(fontSize: 14, color: DSKColors.text),
+                  children: const <TextSpan>[
+                    TextSpan(
+                        text: '*Important! ',
+                        style: TextStyle(fontWeight: FontWeight.bold)),
+                    TextSpan(
+                        text:
+                            'The shadow of translucent dialogs is not drawn properly on the web.'),
+                  ],
+                ),
+              )),
+          const SizedBox(height: 8),
+          const Padding(
+              padding: EdgeInsets.all(8), child: Text('DSKDialogPopover:')),
+          Wrap(children: [
+            Padding(
+                padding: const EdgeInsets.all(8),
+                child: DSKButton(
+                  key: _anchorPopover0,
+                  style: DSKButtonStyle.normal,
+                  isLarge: false,
+                  onPressed: () {
+                    _showPopover(context, _anchorPopover0, false, false, false);
+                  },
+                  child: const Text('Popover'),
+                )),
+            Padding(
+                padding: const EdgeInsets.all(8),
+                child: DSKButton(
+                  key: _anchorPopover1,
+                  style: DSKButtonStyle.normal,
+                  isLarge: false,
+                  onPressed: () {
+                    _showPopover(context, _anchorPopover1, true, false, true);
+                  },
+                  child: const Text('Centered translucent'),
+                )),
+            Padding(
+                padding: const EdgeInsets.all(8),
+                child: DSKButton(
+                  key: _anchorPopover2,
+                  style: DSKButtonStyle.normal,
+                  isLarge: false,
+                  onPressed: () {
+                    _showPopover(context, _anchorPopover2, true, true, false);
+                  },
+                  child: const Text('With animation'),
+                )),
+            Padding(
+                padding: const EdgeInsets.all(8),
+                child: DSKButton(
+                  key: _anchorPopover3,
+                  style: DSKButtonStyle.normal,
+                  isLarge: false,
+                  onPressed: () {
+                    _showPopover(context, _anchorPopover3, true, true, true);
+                  },
+                  child: const Text('Translucent with animation'),
+                )),
+          ]),
+          const Padding(
+              padding: EdgeInsets.all(8), child: Text('DSKDialogModal:')),
+          Wrap(children: [
+            Padding(
+                padding: const EdgeInsets.all(8),
+                child: DSKButton(
+                  style: DSKButtonStyle.normal,
+                  isLarge: false,
+                  onPressed: () {
+                    _showModal(context, false, false);
+                  },
+                  child: const Text('Modal'),
+                )),
+            Padding(
+                padding: const EdgeInsets.all(8),
+                child: DSKButton(
+                  style: DSKButtonStyle.normal,
+                  isLarge: false,
+                  onPressed: () {
+                    _showModal(context, true, false);
+                  },
+                  child: const Text('With animation'),
+                )),
+            Padding(
+                padding: const EdgeInsets.all(8),
+                child: DSKButton(
+                  style: DSKButtonStyle.normal,
+                  isLarge: false,
+                  onPressed: () {
+                    _showModal(context, false, true);
+                  },
+                  child: const Text('Translucent'),
+                )),
+            Padding(
+                padding: const EdgeInsets.all(8),
+                child: DSKButton(
+                  style: DSKButtonStyle.normal,
+                  isLarge: false,
+                  onPressed: () {
+                    _showModal(context, true, true);
+                  },
+                  child: const Text('Translucent with animation'),
+                )),
+          ]),
+          const Padding(
+              padding: EdgeInsets.all(8), child: Text('DSKDialogDraggable:')),
+          Wrap(children: [
+            Padding(
+                padding: const EdgeInsets.all(8),
+                child: DSKButton(
+                  key: _anchorDraggable0,
+                  style: DSKButtonStyle.normal,
+                  isLarge: false,
+                  onPressed: () {
+                    _showDraggable(context, _anchorDraggable0, false, false);
+                  },
+                  child: const Text('Draggable'),
+                )),
+            Padding(
+                padding: const EdgeInsets.all(8),
+                child: DSKButton(
+                  key: _anchorDraggable1,
+                  style: DSKButtonStyle.normal,
+                  isLarge: false,
+                  onPressed: () {
+                    _showDraggable(context, _anchorDraggable1, true, false);
+                  },
+                  child: const Text('With animation'),
+                )),
+            Padding(
+                padding: const EdgeInsets.all(8),
+                child: DSKButton(
+                  key: _anchorDraggable2,
+                  style: DSKButtonStyle.normal,
+                  isLarge: false,
+                  onPressed: () {
+                    _showDraggable(context, _anchorDraggable2, false, true);
+                  },
+                  child: const Text('Translucent'),
+                )),
+            Padding(
+                padding: const EdgeInsets.all(8),
+                child: DSKButton(
+                  key: _anchorDraggable3,
+                  style: DSKButtonStyle.normal,
+                  isLarge: false,
+                  onPressed: () {
+                    _showDraggable(context, _anchorDraggable3, true, true);
+                  },
+                  child: const Text('Translucent with animation'),
+                )),
+          ]),
+          const Padding(
+              padding: EdgeInsets.all(8), child: Text('DSKDialogArrow:')),
+          Wrap(children: [
+            Padding(
+                padding: const EdgeInsets.all(8),
+                child: DSKButton(
+                  key: _anchorArrowed0,
+                  style: DSKButtonStyle.normal,
+                  isLarge: false,
+                  onPressed: () {
+                    _showPopoverArrowed(context, _anchorArrowed0, false, false);
+                  },
+                  child: const Text('Arrowed'),
+                )),
+            Padding(
+                padding: const EdgeInsets.all(8),
+                child: DSKButton(
+                  key: _anchorArrowed1,
+                  style: DSKButtonStyle.normal,
+                  isLarge: false,
+                  onPressed: () {
+                    _showPopoverArrowed(context, _anchorArrowed1, true, false);
+                  },
+                  child: const Text('With animation'),
+                )),
+            Padding(
+                padding: const EdgeInsets.all(8),
+                child: DSKButton(
+                  key: _anchorArrowed2,
+                  style: DSKButtonStyle.normal,
+                  isLarge: false,
+                  onPressed: () {
+                    _showPopoverArrowed(context, _anchorArrowed2, false, true);
+                  },
+                  child: const Text('Translucent'),
+                )),
+            Padding(
+                padding: const EdgeInsets.all(8),
+                child: DSKButton(
+                  key: _anchorArrowed3,
+                  style: DSKButtonStyle.normal,
+                  isLarge: false,
+                  onPressed: () {
+                    _showPopoverArrowed(context, _anchorArrowed3, true, true);
+                  },
+                  child: const Text('Translucent with animation'),
+                )),
+          ]),
+          const SizedBox(height: 50),
+        ]));
   }
 }

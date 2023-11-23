@@ -1,6 +1,7 @@
+import 'dart:math' as math;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_desktop_cupertino/dsk_theme_manager.dart';
-import 'dart:math' as math;
+import 'package:provider/provider.dart';
 import 'dsk_theme_colors.dart';
 
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
@@ -39,21 +40,6 @@ class DSKPicker360State extends State<DSKPicker360> {
     });
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onPanUpdate: !widget.enabled ? null : _onPanUpdate,
-      child: CustomPaint(
-        painter: DSKPicker360Painter(
-            _currentAngle,
-            DSKColors.backgroundSecondary0,
-            widget.enabled ? DSKColors.text : DSKColors.grey,
-            DSKThemeManager.isLight ? DSKColors.grey100 : DSKColors.grey),
-        size: Size(widget.size, widget.size),
-      ),
-    );
-  }
-
   void _onPanUpdate(DragUpdateDetails details) {
     RenderBox renderBox = context.findRenderObject() as RenderBox;
     final halfSize = widget.size / 2;
@@ -70,6 +56,22 @@ class DSKPicker360State extends State<DSKPicker360> {
         widget.onChanged?.call(angle);
       }
     });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final themeManager = Provider.of<DSKThemeManager>(context);
+    return GestureDetector(
+      onPanUpdate: !widget.enabled ? null : _onPanUpdate,
+      child: CustomPaint(
+        painter: DSKPicker360Painter(
+            _currentAngle,
+            DSKColors.backgroundSecondary0,
+            widget.enabled ? DSKColors.text : DSKColors.grey,
+            themeManager.isLight ? DSKColors.grey100 : DSKColors.grey),
+        size: Size(widget.size, widget.size),
+      ),
+    );
   }
 }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
 import 'dsk_theme_manager.dart';
 import 'dsk_theme_colors.dart';
 
@@ -44,6 +45,8 @@ class DSKButtonCheckBox extends StatefulWidget {
 class DSKButtonCheckBoxState extends State<DSKButtonCheckBox> {
   @override
   Widget build(BuildContext context) {
+    final themeManager = Provider.of<DSKThemeManager>(context);
+
     /// Calculate the checkbox size based on the specified size property
     double boxSize = widget.size;
 
@@ -62,19 +65,20 @@ class DSKButtonCheckBoxState extends State<DSKButtonCheckBox> {
 
           /// Create a VNTButtonCheckBoxPainter instance to handle the painting
           painter: VNTButtonCheckBoxPainter(
-            /// Set the action color based on the theme
-            actionColor: DSKColors.accent,
-            backgroundColor: DSKColors.backgroundSecondary0,
 
-            /// Set the isSelected flag based on the widget's value property
-            isSelected: widget.value,
+              /// Set the action color based on the theme
+              actionColor: DSKColors.accent,
+              backgroundColor: DSKColors.backgroundSecondary0,
 
-            /// Check whether the app has focus
-            hasAppFocus: DSKThemeManager.isAppFocused,
+              /// Set the isSelected flag based on the widget's value property
+              isSelected: widget.value,
 
-            /// Set the checkbox size
-            size: boxSize,
-          ),
+              /// Check whether the app has focus
+              hasAppFocus: themeManager.isAppFocused,
+
+              /// Set the checkbox size
+              size: boxSize,
+              isLightTheme: themeManager.isLight),
         ));
   }
 }
@@ -98,12 +102,16 @@ class VNTButtonCheckBoxPainter extends CustomPainter {
   /// The size of the checkbox in logical pixels
   final double size;
 
+  /// Whether the app is using the light theme
+  final bool isLightTheme;
+
   VNTButtonCheckBoxPainter({
     required this.actionColor,
     required this.backgroundColor,
     required this.isSelected,
     required this.hasAppFocus,
     required this.size,
+    required this.isLightTheme,
   });
 
   /// Draws a shadow around the checkbox to provide visual depth
@@ -120,7 +128,7 @@ class VNTButtonCheckBoxPainter extends CustomPainter {
 
     /// Offset the shadow based on the theme
     Offset shadowOffset = const Offset(0, 0);
-    if (DSKThemeManager.isLight) {
+    if (isLightTheme) {
       shadowOffset = const Offset(0, -10);
       shadowPaint = Paint()
         ..color = DSKColors.black.withOpacity(0.25)
@@ -177,7 +185,7 @@ class VNTButtonCheckBoxPainter extends CustomPainter {
 
     // Draw outer square
     Color outerColor = DSKColors.grey;
-    if (!DSKThemeManager.isLight) {
+    if (!isLightTheme) {
       outerColor = DSKColors.grey600;
     }
     paint = Paint()
@@ -189,7 +197,7 @@ class VNTButtonCheckBoxPainter extends CustomPainter {
 
     if (isSelected) {
       Color selectColor = DSKColors.white;
-      if (DSKThemeManager.isLight && !hasAppFocus) {
+      if (isLightTheme && !hasAppFocus) {
         selectColor = DSKColors.black;
       }
       Paint linePaint = Paint()

@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
 import 'dsk_theme_manager.dart';
 import 'dsk_theme_colors.dart';
 
@@ -41,6 +42,8 @@ class DSKButtonsUpDownState extends State<DSKButtonsUpDown> {
 
   @override
   Widget build(BuildContext context) {
+    final themeManager = Provider.of<DSKThemeManager>(context);
+
     // Definim l'ombra per al relleu
     var shadow = const BoxShadow(
       color: DSKColors.grey200, // Ajusta el color per obtenir un gris
@@ -51,13 +54,13 @@ class DSKButtonsUpDownState extends State<DSKButtonsUpDown> {
 
     Color backgroundUp = !_isPressedUp
         ? DSKColors.backgroundSecondary0
-        : DSKThemeManager.isLight
+        : themeManager.isLight
             ? DSKColors.backgroundSecondary1
             : DSKColors.grey;
 
     Color backgroundDown = !_isPressedDown
         ? DSKColors.backgroundSecondary0
-        : DSKThemeManager.isLight
+        : themeManager.isLight
             ? DSKColors.backgroundSecondary1
             : DSKColors.grey;
 

@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
 import 'dsk_theme_manager.dart';
 import 'dsk_theme_colors.dart';
 
@@ -39,6 +40,8 @@ class DSKButtonRadio extends StatefulWidget {
 class DSKButtonRadioState extends State<DSKButtonRadio> {
   @override
   Widget build(BuildContext context) {
+    final themeManager = Provider.of<DSKThemeManager>(context);
+
     double boxSize = widget.size;
 
     // Main widget that handles interaction and arranges elements.
@@ -55,8 +58,9 @@ class DSKButtonRadioState extends State<DSKButtonRadio> {
             painter: VNTButtonRadioPainter(
               actionColor: DSKColors.accent,
               isSelected: widget.isSelected,
-              hasAppFocus: DSKThemeManager.isAppFocused,
+              hasAppFocus: themeManager.isAppFocused,
               size: boxSize,
+              isLightTheme: themeManager.isLight,
             ),
           ),
           const SizedBox(width: 4),
@@ -82,12 +86,14 @@ class VNTButtonRadioPainter extends CustomPainter {
   final bool isSelected;
   final bool hasAppFocus;
   final double size;
+  final bool isLightTheme;
 
   VNTButtonRadioPainter({
     required this.actionColor,
     required this.isSelected,
     required this.hasAppFocus,
     required this.size,
+    required this.isLightTheme,
   });
 
   void drawShadow(Canvas canvas, Size size, Offset center, double radius) {
@@ -101,7 +107,7 @@ class VNTButtonRadioPainter extends CustomPainter {
     // Pintura per a l'ombra
     Paint shadowPaint = Paint();
     Offset shadowOffset = const Offset(0, 0);
-    if (DSKThemeManager.isLight) {
+    if (isLightTheme) {
       shadowOffset = const Offset(0, -10);
       shadowPaint = Paint()
         ..color = DSKColors.black.withOpacity(0.25)
@@ -151,7 +157,7 @@ class VNTButtonRadioPainter extends CustomPainter {
     }
     // Draw outer circle
     Color outerColor = DSKColors.grey;
-    if (!DSKThemeManager.isLight) {
+    if (!isLightTheme) {
       outerColor = DSKColors.grey600;
     }
     paint = Paint()
@@ -163,7 +169,7 @@ class VNTButtonRadioPainter extends CustomPainter {
 
     if (isSelected) {
       Color selectColor = DSKColors.white;
-      if (DSKThemeManager.isLight && !hasAppFocus) {
+      if (isLightTheme && !hasAppFocus) {
         selectColor = DSKColors.black;
       }
       paint = Paint()
@@ -180,6 +186,7 @@ class VNTButtonRadioPainter extends CustomPainter {
     return oldDelegate.actionColor != actionColor ||
         oldDelegate.isSelected != isSelected ||
         oldDelegate.hasAppFocus != hasAppFocus ||
+        oldDelegate.isLightTheme != isLightTheme ||
         oldDelegate.size != size;
   }
 }

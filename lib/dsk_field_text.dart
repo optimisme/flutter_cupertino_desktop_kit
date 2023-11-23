@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_desktop_cupertino/dsk_theme_manager.dart';
+import 'package:provider/provider.dart';
 import 'dsk_theme_colors.dart';
 
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
@@ -69,6 +70,8 @@ class DSKFieldTextState extends State<DSKFieldText> {
 
   @override
   Widget build(BuildContext context) {
+    final themeManager = Provider.of<DSKThemeManager>(context);
+
     final BorderRadius borderRadius = widget.isRounded
         ? BorderRadius.circular(25.0)
         : BorderRadius.circular(4.0);
@@ -88,7 +91,7 @@ class DSKFieldTextState extends State<DSKFieldText> {
           border: Border.all(
             color: widget.enabled
                 ? DSKColors.grey200
-                : DSKThemeManager.isLight
+                : themeManager.isLight
                     ? DSKColors.grey75
                     : DSKColors.grey700,
             width: 1,
@@ -96,7 +99,7 @@ class DSKFieldTextState extends State<DSKFieldText> {
           boxShadow: _internalFocusNode.hasFocus
               ? [
                   BoxShadow(
-                    color: DSKThemeManager.isAppFocused
+                    color: themeManager.isAppFocused
                         ? DSKColors.accent200
                         : DSKColors.transparent,
                     spreadRadius: 1.5,
@@ -110,7 +113,7 @@ class DSKFieldTextState extends State<DSKFieldText> {
           fontSize: widget.textSize,
           color: widget.enabled
               ? DSKColors.text
-              : DSKThemeManager.isLight
+              : themeManager.isLight
                   ? DSKColors.grey100
                   : DSKColors.grey700),
       prefix: widget.prefixIcon == null

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
 import 'dsk_theme_colors.dart';
 import 'dsk_theme_manager.dart';
 
@@ -126,6 +127,7 @@ class DSKProgressBarState extends State<DSKProgressBar>
 
   @override
   Widget build(BuildContext context) {
+    final themeManager = Provider.of<DSKThemeManager>(context);
     return AnimatedBuilder(
       animation: _controller,
       builder: (context, child) {
@@ -138,7 +140,7 @@ class DSKProgressBarState extends State<DSKProgressBar>
                   : _progressAnimation.value,
               isIndeterminate: widget.isIndeterminate,
               isIndeterminateAnimating: _controller.isAnimating,
-              hasAppFocus: DSKThemeManager.isAppFocused),
+              hasAppFocus: themeManager.isAppFocused),
           child: child,
         );
       },

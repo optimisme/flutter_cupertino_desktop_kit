@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'dsk_theme_colors.dart';
 import 'dsk_theme_manager.dart';
 
@@ -15,7 +16,6 @@ import 'dsk_theme_manager.dart';
 /// * `onColorChanged`: (Function(String)?) Callback called when a color is selected.
 
 class DSKButtonsColors extends StatefulWidget {
-
   /// Map of color names to color values.
   final Map<String, Color> colors;
 
@@ -42,6 +42,8 @@ class DSKButtonsColors extends StatefulWidget {
 class DSKButtonsColorsState extends State<DSKButtonsColors> {
   @override
   Widget build(BuildContext context) {
+    final themeManager = Provider.of<DSKThemeManager>(context);
+
     // Index to keep track of each color's position.
     int index = -1;
 
@@ -52,7 +54,7 @@ class DSKButtonsColorsState extends State<DSKButtonsColors> {
         Color colorBorder = color;
 
         // Adjust the border color based on the theme and color brightness.
-        if (DSKThemeManager.isLight) {
+        if (themeManager.isLight) {
           colorBorder = DSKColors.adjustColor(color, 1, 0.75);
         } else {
           colorBorder = DSKColors.adjustColor(color, 1, 1.25);

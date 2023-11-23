@@ -1,6 +1,6 @@
-import 'package:example/app.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_desktop_cupertino/dsk_widgets.dart';
+import 'package:provider/provider.dart';
 
 class LayoutSidebarLeft extends StatefulWidget {
   final List<String> options;
@@ -19,7 +19,9 @@ class LayoutButtonsState extends State<LayoutSidebarLeft> {
 
   @override
   Widget build(BuildContext context) {
-    String selectedRadio = DSKThemeManager.appearanceConfig;
+    final themeManager = Provider.of<DSKThemeManager>(context);
+
+    String selectedRadio = themeManager.appearanceConfig;
     return Container(
         color: DSKColors.backgroundSecondary1,
         child: ListView(children: [
@@ -50,7 +52,7 @@ class LayoutButtonsState extends State<LayoutSidebarLeft> {
                           fontSize: 14,
                           color: _selectedIndex == index
                               ? DSKColors.white
-                              : DSKThemeManager.isLight
+                              : themeManager.isLight
                                   ? DSKColors.black
                                   : DSKColors.white),
                     ),
@@ -61,57 +63,57 @@ class LayoutButtonsState extends State<LayoutSidebarLeft> {
           ),
           const SizedBox(height: 25),
           Padding(
-                  padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-          const Text("Theme: ",
-                            style: TextStyle(fontSize: 14)),
-          const SizedBox(height: 8),
-          DSKButtonRadio(
-              label: "Sytem",
-              isSelected: selectedRadio == "system",
-              onSelected: (bool? isSelected) {
-                setState(() {
-                  selectedRadio = "system";
-                  App.of(context)?.setAppearance("system");
-                });
-              },
-            ),
-          const SizedBox(height: 8),
-          DSKButtonRadio(
-              label: "Light",
-              isSelected: selectedRadio == "light",
-              onSelected: (bool? isSelected) {
-                setState(() {
-                  selectedRadio = "light";
-                  App.of(context)?.setAppearance("light");
-                });
-              },
-            ),
-          const SizedBox(height: 8),
-          DSKButtonRadio(
-              label: "Dark",
-              isSelected: selectedRadio == "dark",
-              onSelected: (bool? isSelected) {
-                setState(() {
-                  selectedRadio = "dark";
-                  App.of(context)?.setAppearance("dark");
-                });
-              },
-            ),
-          const SizedBox(height: 16),
-          const Text("Primary color: ",
-                            style: TextStyle(fontSize: 14)),
-          const SizedBox(height: 8),
-          DSKButtonsColors(
-                colors: DSKColors.systemColors,
-                selectedColor: DSKThemeManager.themeColor,
-                onColorChanged: (String colorName) {
-                  App.of(context)?.setActiveColor(colorName);
-                },
-              ),
-        ]))]));
+              padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text("Theme: ", style: TextStyle(fontSize: 14)),
+                    const SizedBox(height: 8),
+                    DSKButtonRadio(
+                      label: "Sytem",
+                      isSelected: selectedRadio == "system",
+                      onSelected: (bool? isSelected) {
+                        setState(() {
+                          selectedRadio = "system";
+                          themeManager.setAppearance(context, "system");
+                        });
+                      },
+                    ),
+                    const SizedBox(height: 8),
+                    DSKButtonRadio(
+                      label: "Light",
+                      isSelected: selectedRadio == "light",
+                      onSelected: (bool? isSelected) {
+                        setState(() {
+                          selectedRadio = "light";
+                          themeManager.setAppearance(context, "light");
+                        });
+                      },
+                    ),
+                    const SizedBox(height: 8),
+                    DSKButtonRadio(
+                      label: "Dark",
+                      isSelected: selectedRadio == "dark",
+                      onSelected: (bool? isSelected) {
+                        setState(() {
+                          selectedRadio = "dark";
+                          themeManager.setAppearance(context, "dark");
+                        });
+                      },
+                    ),
+                    const SizedBox(height: 16),
+                    const Text("Primary color: ",
+                        style: TextStyle(fontSize: 14)),
+                    const SizedBox(height: 8),
+                    DSKButtonsColors(
+                      colors: DSKColors.systemColors,
+                      selectedColor: themeManager.themeColor,
+                      onColorChanged: (String colorName) {
+                        themeManager.setAccentColour(colorName);
+                      },
+                    ),
+                  ]))
+        ]));
   }
 }

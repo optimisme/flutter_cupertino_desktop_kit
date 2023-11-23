@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
 import 'dsk_theme_manager.dart';
 import 'dsk_theme_colors.dart';
 
@@ -37,6 +38,8 @@ class DSKButtonSwitchState extends State<DSKButtonSwitch> {
 
   @override
   Widget build(BuildContext context) {
+    final themeManager = Provider.of<DSKThemeManager>(context);
+
     // Calculations for sizes and positions based on the provided `size`.
     double backRadius = widget.size * 12.0 / 24.0;
     double backHeight = widget.size * 24.0 / 24.0;
@@ -63,8 +66,8 @@ class DSKButtonSwitchState extends State<DSKButtonSwitch> {
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: DSKThemeManager.isAppFocused && widget.value
-                  ? DSKThemeManager.isLight
+              colors: themeManager.isAppFocused && widget.value
+                  ? themeManager.isLight
                       ? [DSKColors.accent, DSKColors.accent200]
                       : [DSKColors.accent500, DSKColors.accent]
                   : [

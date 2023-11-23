@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'dsk_dialog_outer_shadow_painter.dart';
 import 'dsk_dialog_popover_clipper.dart';
+import 'package:provider/provider.dart';
 import 'dsk_theme_manager.dart';
 import 'dsk_theme_colors.dart';
 
@@ -115,9 +116,11 @@ class DSKDialogModalState extends State<DSKDialogModal>
 
   @override
   Widget build(BuildContext context) {
+    final themeManager = Provider.of<DSKThemeManager>(context);
+
     Color backgroundColor = !widget.isTranslucent
         ? DSKColors.backgroundSecondary0
-        : DSKThemeManager.isLight
+        : themeManager.isLight
             ? DSKColors.backgroundSecondary0.withOpacity(0.25)
             : DSKColors.backgroundSecondary0.withOpacity(0.5);
 
@@ -135,7 +138,9 @@ class DSKDialogModalState extends State<DSKDialogModal>
             children: [
               CustomPaint(
                 painter: DSKDialogOuterShadowPainter(
-                    pathContour: pathContour, backgroundColor: backgroundColor),
+                    pathContour: pathContour,
+                    backgroundColor: backgroundColor,
+                    isLightTheme: themeManager.isLight),
                 child: Container(),
               ),
               Positioned(

@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
 import 'dsk_theme_manager.dart';
 import 'dsk_theme_colors.dart';
 
@@ -70,6 +71,8 @@ class DSKButtonCheckListState extends State<DSKButtonCheckList> {
 
   @override
   Widget build(BuildContext context) {
+    final themeManager = Provider.of<DSKThemeManager>(context);
+
     return IntrinsicWidth(
         child: ConstrainedBox(
       constraints: const BoxConstraints(
@@ -109,7 +112,7 @@ class DSKButtonCheckListState extends State<DSKButtonCheckList> {
                           widget.options[index],
                           style: TextStyle(
                               fontSize: widget.size,
-                              color: DSKThemeManager.isLight && isHovered
+                              color: themeManager.isLight && isHovered
                                   ? DSKColors.background
                                   : DSKColors.text),
                         ),

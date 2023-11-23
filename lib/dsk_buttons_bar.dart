@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'dsk_theme_manager.dart';
 import 'dsk_theme_colors.dart';
 
@@ -16,7 +17,7 @@ import 'dsk_theme_colors.dart';
 
 class DSKButtonsBar extends StatefulWidget {
   /// List of button options.
-  final List<Map<String, dynamic>> options; 
+  final List<Map<String, dynamic>> options;
 
   /// Callback for selection changes.
   final Function(List<bool>)? onChanged;
@@ -39,7 +40,6 @@ class DSKButtonsBar extends StatefulWidget {
 ///
 /// Manages the state and rendering of the buttons bar.
 class DSKButtonsBarState extends State<DSKButtonsBar> {
-
   // Border radius for button edges.
   final double _borderRadius = 4.0;
 
@@ -67,12 +67,13 @@ class DSKButtonsBarState extends State<DSKButtonsBar> {
         _selectedStates.map((option) => option['value'] as bool).toList());
   }
 
-  Widget fixWidgetStyle(Widget widget, int index) {
-    Color color = DSKThemeManager.isLight
-        ? _selectedStates[index]['value'] && DSKThemeManager.isAppFocused
+  Widget fixWidgetStyle(
+      Widget widget, int index, DSKThemeManager themeManager) {
+    Color color = themeManager.isLight
+        ? _selectedStates[index]['value'] && themeManager.isAppFocused
             ? DSKColors.white
             : DSKColors.black
-        : _selectedStates[index]['value'] && !DSKThemeManager.isAppFocused
+        : _selectedStates[index]['value'] && !themeManager.isAppFocused
             ? DSKColors.black
             : DSKColors.white;
     if (widget is Text) {
@@ -95,6 +96,8 @@ class DSKButtonsBarState extends State<DSKButtonsBar> {
 
   @override
   Widget build(BuildContext context) {
+    final themeManager = Provider.of<DSKThemeManager>(context);
+
     List<Widget> buttonWidgets = List.generate(widget.options.length, (index) {
       // Determine border radius based on the position of the element
       BorderRadius borderRadius = BorderRadius.zero;
@@ -122,7 +125,7 @@ class DSKButtonsBarState extends State<DSKButtonsBar> {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: _selectedStates[index]['value']
-                    ? DSKThemeManager.isAppFocused
+                    ? themeManager.isAppFocused
                         ? [DSKColors.accent200, DSKColors.accent500]
                         : [DSKColors.grey200, DSKColors.grey300]
                     : [
@@ -132,7 +135,8 @@ class DSKButtonsBarState extends State<DSKButtonsBar> {
               ),
               borderRadius: borderRadius,
             ),
-            child: fixWidgetStyle(widget.options[index]['widget'], index),
+            child: fixWidgetStyle(
+                widget.options[index]['widget'], index, themeManager),
           ),
         ),
       );

@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
 import 'dsk_theme_manager.dart';
 import 'dsk_theme_colors.dart';
 
@@ -71,7 +72,9 @@ class DSKButtonIconState extends State<DSKButtonIcon> {
 
   @override
   Widget build(BuildContext context) {
-    final Color backgroundColor = DSKThemeManager.isLight
+    final themeManager = Provider.of<DSKThemeManager>(context);
+
+    final Color backgroundColor = themeManager.isLight
         ? _isPressed
             ? DSKColors.grey75
             : _isHovering
@@ -106,7 +109,7 @@ class DSKButtonIconState extends State<DSKButtonIcon> {
                     alignment: Alignment.center,
                     child: Icon(
                       widget.icon,
-                      color: widget.isSelected && DSKThemeManager.isAppFocused
+                      color: widget.isSelected && themeManager.isAppFocused
                           ? DSKColors.accent
                           : DSKColors.text,
                       size: widget.size * 0.5, // Icona més petita que el botó

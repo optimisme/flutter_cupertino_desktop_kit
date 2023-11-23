@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_desktop_cupertino/dsk_widgets.dart';
+import 'package:provider/provider.dart';
 import 'layout_sidebar_left.dart';
 import 'layout_sidebar_right.dart';
 import 'layout_buttons.dart';
@@ -8,6 +9,7 @@ import 'layout_fields.dart';
 import 'layout_pickers.dart';
 import 'layout_progress.dart';
 import 'layout_introduction.dart';
+import 'layout_utils.dart';
 
 class Layout extends StatefulWidget {
   const Layout({super.key});
@@ -17,8 +19,6 @@ class Layout extends StatefulWidget {
 }
 
 class LayoutState extends State<Layout> {
-  bool isSwitched = false;
-  int selectedRadio = 1;
   bool isSidebarLeftVisible = true;
   GlobalKey<DSKAppSidebarsState> keyAppStructure = GlobalKey();
   String _section = "Introduction";
@@ -28,7 +28,8 @@ class LayoutState extends State<Layout> {
     "Progress",
     "Fields",
     "Pickers",
-    "Dialogs"
+    "Dialogs",
+    "Utils",
   ];
 
   void toggleLeftSidebar() {
@@ -53,27 +54,31 @@ class LayoutState extends State<Layout> {
 
   @override
   Widget build(BuildContext context) {
-    Widget centralWidget;
+    // ignore: unused_local_variable
+    final themeManager = Provider.of<DSKThemeManager>(context);
 
+    Widget centralWidget;
     switch (_section) {
       case "Introduction":
-        centralWidget =
-            LayoutIntroduction();
+        centralWidget = const LayoutIntroduction();
         break;
       case "Buttons":
-        centralWidget = LayoutButtons();
-        break;
-      case "Dialogs":
-        centralWidget = LayoutDialogs();
-        break;
-      case "Fields":
-        centralWidget = LayoutFields();
-        break;
-      case "Pickers":
-        centralWidget = LayoutPickers();
+        centralWidget = const LayoutButtons();
         break;
       case "Progress":
-        centralWidget = LayoutProgress();
+        centralWidget = const LayoutProgress();
+        break;
+      case "Fields":
+        centralWidget = const LayoutFields();
+        break;
+      case "Pickers":
+        centralWidget = const LayoutPickers();
+        break;
+      case "Dialogs":
+        centralWidget = const LayoutDialogs();
+        break;
+      case "Utils":
+        centralWidget = const LayoutUtils();
         break;
       default:
         centralWidget = Container(); // Un contenidor buit com a cas per defecte
@@ -91,7 +96,7 @@ class LayoutState extends State<Layout> {
                     onPressed: () {
                       toggleLeftSidebar();
                     }),
-                const Text("Dialogs"),
+                Text(_section),
                 DSKButtonIcon(
                     icon: CupertinoIcons.sidebar_left,
                     onPressed: () {
@@ -100,14 +105,14 @@ class LayoutState extends State<Layout> {
               ]),
         ),
         child: DSKAppSidebars(
-      key: keyAppStructure,
-      sidebarLeftIsResizable: true,
-      sidebarLeftDefaultsVisible: true,
-      sidebarRightDefaultsVisible: false,
-      sidebarLeft:
-          LayoutSidebarLeft(options: options, onSelect: _changeSection),
-      sidebarRight: const LayoutSidebarRight(),
-      central: centralWidget,
-    ));
+          key: keyAppStructure,
+          sidebarLeftIsResizable: true,
+          sidebarLeftDefaultsVisible: true,
+          sidebarRightDefaultsVisible: false,
+          sidebarLeft:
+              LayoutSidebarLeft(options: options, onSelect: _changeSection),
+          sidebarRight: const LayoutSidebarRight(),
+          central: centralWidget,
+        ));
   }
 }

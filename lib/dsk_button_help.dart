@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
 import 'dsk_theme_colors.dart';
 import 'dsk_theme_manager.dart';
 
@@ -53,6 +54,8 @@ class DSKButtonHelpState extends State<DSKButtonHelp> {
 
   @override
   Widget build(BuildContext context) {
+    final themeManager = Provider.of<DSKThemeManager>(context);
+
     /// Creates a GestureDetector widget to handle tap events.
     return GestureDetector(
       onTapDown: _onTapDown,
@@ -62,7 +65,7 @@ class DSKButtonHelpState extends State<DSKButtonHelp> {
       child: DecoratedBox(
         decoration: BoxDecoration(
           color: _isPressed
-              ? DSKThemeManager.isLight
+              ? themeManager.isLight
                   ? DSKColors.grey50
                   : DSKColors.grey500
               : DSKColors.backgroundSecondary0,
@@ -75,7 +78,7 @@ class DSKButtonHelpState extends State<DSKButtonHelp> {
               offset: const Offset(0, 1),
             ),
           ],
-          border: DSKThemeManager.isLight
+          border: themeManager.isLight
               ? Border.all(color: DSKColors.grey75)
               : Border.all(color: DSKColors.grey600),
         ),

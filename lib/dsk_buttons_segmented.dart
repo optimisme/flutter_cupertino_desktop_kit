@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
 import 'dsk_theme_manager.dart';
 import 'dsk_theme_colors.dart';
 
@@ -15,9 +16,9 @@ import 'dsk_theme_colors.dart';
 /// * `onSelect`: (Function(int)?) Callback called when an option is selected.
 /// * `isAccent`: (bool) Determines if the accent style should be applied.
 class DSKButtonsSegmented extends StatefulWidget {
-  final List<Widget> options; 
-  final int defaultIndex; 
-  final Function(int)? onSelect; 
+  final List<Widget> options;
+  final int defaultIndex;
+  final Function(int)? onSelect;
   final bool isAccent;
 
   const DSKButtonsSegmented({
@@ -36,11 +37,12 @@ class DSKButtonsSegmented extends StatefulWidget {
 ///
 /// Manages the state and rendering of the segmented control.
 class DSKButtonsSegmentedState extends State<DSKButtonsSegmented> {
-  final int _animationMillis = 200; // Duration of the animation in milliseconds.
+  final int _animationMillis =
+      200; // Duration of the animation in milliseconds.
   int _selectedIndex = 0; // Currently selected option's index.
   final List<GlobalKey> _keys = []; // Global keys for each option.
-  final List<Rect> _rects = [];// Rectangles for the position of each option.
-  double _width = 0.0;// Width of the entire widget.
+  final List<Rect> _rects = []; // Rectangles for the position of each option.
+  double _width = 0.0; // Width of the entire widget.
 
   @override
   void initState() {
@@ -121,6 +123,8 @@ class DSKButtonsSegmentedState extends State<DSKButtonsSegmented> {
 
   @override
   Widget build(BuildContext context) {
+    final themeManager = Provider.of<DSKThemeManager>(context);
+
     // Schedule a post-frame callback to calculate positions
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted) {
@@ -153,10 +157,10 @@ class DSKButtonsSegmentedState extends State<DSKButtonsSegmented> {
               child: Container(
                 decoration: BoxDecoration(
                   color: widget.isAccent
-                      ? DSKThemeManager.isAppFocused
+                      ? themeManager.isAppFocused
                           ? DSKColors.accent
                           : DSKColors.grey300
-                      : DSKThemeManager.isAppFocused
+                      : themeManager.isAppFocused
                           ? DSKColors.backgroundSecondary0
                           : DSKColors.grey300,
                   borderRadius: BorderRadius.circular(4.0),
@@ -188,7 +192,7 @@ class DSKButtonsSegmentedState extends State<DSKButtonsSegmented> {
                           begin: DSKColors.text,
                           end: widget.isAccent &&
                                   index == _selectedIndex &&
-                                  DSKThemeManager.isAppFocused
+                                  themeManager.isAppFocused
                               ? DSKColors.white
                               : DSKColors.text,
                         ),

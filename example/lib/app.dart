@@ -1,5 +1,6 @@
+import 'package:provider/provider.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_desktop_cupertino/dsk_theme_manager.dart';
+import 'package:flutter_desktop_cupertino/dsk_widgets.dart';
 import 'layout.dart';
 
 // Main application widget
@@ -8,20 +9,17 @@ class App extends StatefulWidget {
 
   @override
   AppState createState() => AppState();
-
-  static AppState? of(BuildContext context) {
-    return context.findAncestorStateOfType<AppState>();
-  }
 }
 
 // Main application state
 class AppState extends State<App> with WidgetsBindingObserver {
-  String _appearanceBrightness = 'system';
+  late final DSKThemeManager _themeManager;
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
+    _themeManager = DSKThemeManager();
   }
 
   @override
@@ -33,30 +31,23 @@ class AppState extends State<App> with WidgetsBindingObserver {
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     super.didChangeAppLifecycleState(state);
-    bool appHasFocus = state == AppLifecycleState.resumed;
-    DSKThemeManager.setAppFocus(appHasFocus);
-    setState(() {});
+    bool appHasFocus = (state == AppLifecycleState.resumed);
+    _themeManager.setAppFocus(appHasFocus);
   }
 
-  setActiveColor(String colorName) {
-    DSKThemeManager.setAccentColour(colorName);
-    setState(() {});
-  }
-
-  setAppearance(String type) {
-    // light, dark, system
-    _appearanceBrightness = type;
-    setState(() {});
-  }
-
-  // Definir el contingut del widget 'App'
   @override
   Widget build(BuildContext context) {
-    // Use 'Cupertino'
-    return CupertinoApp(
-        debugShowCheckedModeBanner: false,
-        theme: DSKThemeManager.getThemeData(context, _appearanceBrightness),
-        // ignore: prefer_const_constructors
-        home: Layout());
+    return ChangeNotifierProvider<DSKThemeManager>(
+      create: (context) => _themeManager,
+      child: Consumer<DSKThemeManager>(
+        builder: (context, themeManager, child) {
+          return CupertinoApp(
+            debugShowCheckedModeBanner: false,
+            theme: themeManager.getThemeData(context),
+            home: const Layout(),
+          );
+        },
+      ),
+    );
   }
 }
