@@ -1,10 +1,9 @@
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
-import 'dsk_app_inherited.dart';
+import 'dsk_theme_notifier.dart';
 import 'dsk_dialog_outer_shadow_painter.dart';
 import 'dsk_dialog_popover_clipper.dart';
-import 'dsk_theme_manager.dart';
-import 'dsk_theme_colors.dart';
+import 'dsk_theme.dart';
 
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
@@ -156,13 +155,14 @@ class DSKDialogPopoverArrowedState extends State<DSKDialogPopoverArrowed>
 
   @override
   Widget build(BuildContext context) {
-    DSKThemeManager themeManager = DSKAppInheritedWidget.of(context)!.changeNotifier; // React to theme changes
+    DSKTheme theme =
+        DSKThemeNotifier.of(context)!.changeNotifier; // React to theme changes
 
     Color backgroundColor = !widget.isTranslucent
-        ? DSKColors.backgroundSecondary0
-        : themeManager.isLight
-            ? DSKColors.backgroundSecondary0.withOpacity(0.25)
-            : DSKColors.backgroundSecondary0.withOpacity(0.5);
+        ? theme.backgroundSecondary0
+        : theme.isLight
+            ? theme.backgroundSecondary0.withOpacity(0.25)
+            : theme.backgroundSecondary0.withOpacity(0.5);
 
     Widget dialogContents = Container(
       key: childKey,
@@ -179,8 +179,8 @@ class DSKDialogPopoverArrowedState extends State<DSKDialogPopoverArrowed>
               CustomPaint(
                 painter: DSKDialogOuterShadowPainter(
                     pathContour: pathContour,
-                    backgroundColor: backgroundColor,
-                    isLightTheme: themeManager.isLight),
+                    colorBackground: backgroundColor,
+                    isLightTheme: theme.isLight),
                 child: Container(),
               ),
               Positioned(
@@ -211,7 +211,7 @@ class DSKDialogPopoverArrowedState extends State<DSKDialogPopoverArrowed>
                 },
                 behavior: HitTestBehavior.translucent,
                 child: Container(
-                  color: DSKColors.transparent,
+                  color: DSKTheme.transparent,
                   width: screenSize!.width,
                   height: screenSize!.height,
                 ),

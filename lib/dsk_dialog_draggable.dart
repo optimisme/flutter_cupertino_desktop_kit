@@ -1,11 +1,10 @@
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
-import 'dsk_app_inherited.dart';
+import 'dsk_theme_notifier.dart';
 import 'dsk_dialog_outer_shadow_painter.dart';
 import 'dsk_dialog_popover_clipper.dart';
 import 'dsk_dialogs_manager.dart';
-import 'dsk_theme_manager.dart';
-import 'dsk_theme_colors.dart';
+import 'dsk_theme.dart';
 
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
@@ -124,7 +123,8 @@ class DSKDialogDraggableState extends State<DSKDialogDraggable>
 
   @override
   Widget build(BuildContext context) {
-    DSKThemeManager themeManager = DSKAppInheritedWidget.of(context)!.changeNotifier; // React to theme changes
+    DSKTheme theme =
+        DSKThemeNotifier.of(context)!.changeNotifier; // React to theme changes
 
     if (isSizeDetermined) {
       var leftPosition = position.dx;
@@ -149,10 +149,10 @@ class DSKDialogDraggableState extends State<DSKDialogDraggable>
     }
 
     Color backgroundColor = !widget.isTranslucent
-        ? DSKColors.backgroundSecondary0
-        : themeManager.isLight
-            ? DSKColors.backgroundSecondary0.withOpacity(0.25)
-            : DSKColors.backgroundSecondary0.withOpacity(0.5);
+        ? theme.backgroundSecondary0
+        : theme.isLight
+            ? theme.backgroundSecondary0.withOpacity(0.25)
+            : theme.backgroundSecondary0.withOpacity(0.5);
 
     Widget dialogContents = Container(
       key: childKey,
@@ -169,8 +169,8 @@ class DSKDialogDraggableState extends State<DSKDialogDraggable>
               CustomPaint(
                 painter: DSKDialogOuterShadowPainter(
                     pathContour: pathContour,
-                    backgroundColor: backgroundColor,
-                    isLightTheme: themeManager.isLight),
+                    colorBackground: backgroundColor,
+                    isLightTheme: theme.isLight),
                 child: Container(),
               ),
               Positioned(

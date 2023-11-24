@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'dsk_app_inherited.dart';
-import 'dsk_theme_manager.dart';
-import 'dsk_theme_colors.dart';
+import 'dsk_theme_notifier.dart';
+import 'dsk_theme.dart';
 
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
@@ -38,7 +37,8 @@ class DSKButtonSwitchState extends State<DSKButtonSwitch> {
 
   @override
   Widget build(BuildContext context) {
-    DSKThemeManager themeManager = DSKAppInheritedWidget.of(context)!.changeNotifier; // React to theme changes
+    DSKTheme theme =
+        DSKThemeNotifier.of(context)!.changeNotifier; // React to theme changes
 
     // Calculations for sizes and positions based on the provided `size`.
     double backRadius = widget.size * 12.0 / 24.0;
@@ -66,14 +66,11 @@ class DSKButtonSwitchState extends State<DSKButtonSwitch> {
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: themeManager.isAppFocused && widget.value
-                  ? themeManager.isLight
-                      ? [DSKColors.accent, DSKColors.accent200]
-                      : [DSKColors.accent500, DSKColors.accent]
-                  : [
-                      DSKColors.backgroundSecondary1,
-                      DSKColors.backgroundSecondary1
-                    ],
+              colors: theme.isAppFocused && widget.value
+                  ? theme.isLight
+                      ? [theme.accent, theme.accent200]
+                      : [theme.accent500, theme.accent]
+                  : [theme.backgroundSecondary1, theme.backgroundSecondary1],
             )),
         child: Stack(
           children: [
@@ -88,7 +85,7 @@ class DSKButtonSwitchState extends State<DSKButtonSwitch> {
                 width: circleSize,
                 decoration: const BoxDecoration(
                   shape: BoxShape.circle,
-                  color: DSKColors.white,
+                  color: DSKTheme.white,
                 ),
               ),
             ),

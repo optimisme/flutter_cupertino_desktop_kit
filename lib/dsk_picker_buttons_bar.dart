@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'dsk_app_inherited.dart';
-import 'dsk_theme_manager.dart';
-import 'dsk_theme_colors.dart';
+import 'dsk_theme_notifier.dart';
+import 'dsk_theme.dart';
 
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
@@ -72,15 +71,14 @@ class DSKPickerButtonsBarState extends State<DSKPickerButtonsBar> {
         _selectedStates.map((option) => option['value'] as bool).toList());
   }
 
-  Widget fixWidgetStyle(
-      Widget widget, int index, DSKThemeManager themeManager) {
-    Color color = themeManager.isLight
-        ? _selectedStates[index]['value'] && themeManager.isAppFocused
-            ? DSKColors.white
-            : DSKColors.black
-        : _selectedStates[index]['value'] && !themeManager.isAppFocused
-            ? DSKColors.black
-            : DSKColors.white;
+  Widget fixWidgetStyle(Widget widget, int index, DSKTheme theme) {
+    Color color = theme.isLight
+        ? _selectedStates[index]['value'] && theme.isAppFocused
+            ? DSKTheme.white
+            : DSKTheme.black
+        : _selectedStates[index]['value'] && !theme.isAppFocused
+            ? DSKTheme.black
+            : DSKTheme.white;
     if (widget is Text) {
       double size = 12.0;
       return Text(
@@ -101,7 +99,8 @@ class DSKPickerButtonsBarState extends State<DSKPickerButtonsBar> {
 
   @override
   Widget build(BuildContext context) {
-    DSKThemeManager themeManager = DSKAppInheritedWidget.of(context)!.changeNotifier; // React to theme changes
+    DSKTheme theme =
+        DSKThemeNotifier.of(context)!.changeNotifier; // React to theme changes
 
     List<Widget> buttonWidgets = List.generate(widget.options.length, (index) {
       // Determine border radius based on the position of the element
@@ -130,18 +129,15 @@ class DSKPickerButtonsBarState extends State<DSKPickerButtonsBar> {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: _selectedStates[index]['value']
-                    ? themeManager.isAppFocused
-                        ? [DSKColors.accent200, DSKColors.accent500]
-                        : [DSKColors.grey200, DSKColors.grey300]
-                    : [
-                        DSKColors.backgroundSecondary0,
-                        DSKColors.backgroundSecondary1
-                      ],
+                    ? theme.isAppFocused
+                        ? [theme.accent200, theme.accent500]
+                        : [DSKTheme.grey200, DSKTheme.grey300]
+                    : [theme.backgroundSecondary0, theme.backgroundSecondary1],
               ),
               borderRadius: borderRadius,
             ),
-            child: fixWidgetStyle(
-                widget.options[index]['widget'], index, themeManager),
+            child:
+                fixWidgetStyle(widget.options[index]['widget'], index, theme),
           ),
         ),
       );
@@ -150,11 +146,11 @@ class DSKPickerButtonsBarState extends State<DSKPickerButtonsBar> {
     return Container(
         padding: const EdgeInsets.all(0.5),
         decoration: BoxDecoration(
-            color: DSKColors.grey200,
+            color: DSKTheme.grey200,
             borderRadius: BorderRadius.circular(4),
             boxShadow: [
               BoxShadow(
-                color: DSKColors.black.withOpacity(0.1),
+                color: DSKTheme.black.withOpacity(0.1),
                 spreadRadius: 0,
                 blurRadius: 1,
                 offset: const Offset(0, 1),

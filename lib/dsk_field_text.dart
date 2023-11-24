@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
-import 'dsk_app_inherited.dart';
-import 'dsk_theme_manager.dart';
-import 'dsk_theme_colors.dart';
+import 'dsk_theme_notifier.dart';
+import 'dsk_theme.dart';
 
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
@@ -70,7 +69,8 @@ class DSKFieldTextState extends State<DSKFieldText> {
 
   @override
   Widget build(BuildContext context) {
-    DSKThemeManager themeManager = DSKAppInheritedWidget.of(context)!.changeNotifier; // React to theme changes
+    DSKTheme theme =
+        DSKThemeNotifier.of(context)!.changeNotifier; // React to theme changes
 
     final BorderRadius borderRadius = widget.isRounded
         ? BorderRadius.circular(25.0)
@@ -86,22 +86,22 @@ class DSKFieldTextState extends State<DSKFieldText> {
       onSubmitted: widget.onSubmitted,
       padding: const EdgeInsets.fromLTRB(4, 2, 4, 4),
       decoration: BoxDecoration(
-          color: DSKColors.background,
+          color: theme.background,
           borderRadius: borderRadius,
           border: Border.all(
             color: widget.enabled
-                ? DSKColors.grey200
-                : themeManager.isLight
-                    ? DSKColors.grey75
-                    : DSKColors.grey700,
+                ? DSKTheme.grey200
+                : theme.isLight
+                    ? DSKTheme.grey75
+                    : DSKTheme.grey700,
             width: 1,
           ),
           boxShadow: _internalFocusNode.hasFocus
               ? [
                   BoxShadow(
-                    color: themeManager.isAppFocused
-                        ? DSKColors.accent200
-                        : DSKColors.transparent,
+                    color: theme.isAppFocused
+                        ? theme.accent200
+                        : DSKTheme.transparent,
                     spreadRadius: 1.5,
                     blurRadius: 0.7,
                     offset: const Offset(0, 0),
@@ -112,13 +112,13 @@ class DSKFieldTextState extends State<DSKFieldText> {
       style: TextStyle(
           fontSize: widget.textSize,
           color: widget.enabled
-              ? DSKColors.text
-              : themeManager.isLight
-                  ? DSKColors.grey100
-                  : DSKColors.grey700),
+              ? theme.text
+              : theme.isLight
+                  ? DSKTheme.grey100
+                  : DSKTheme.grey700),
       prefix: widget.prefixIcon == null
           ? null
-          : Icon(widget.prefixIcon, color: DSKColors.grey),
+          : Icon(widget.prefixIcon, color: DSKTheme.grey),
       keyboardType: widget.keyboardType,
       inputFormatters: widget.inputFormatters,
     );

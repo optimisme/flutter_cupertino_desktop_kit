@@ -1,8 +1,7 @@
 import 'dart:math' as math;
 import 'package:flutter/cupertino.dart';
-import 'dsk_app_inherited.dart';
-import 'dsk_theme_manager.dart';
-import 'dsk_theme_colors.dart';
+import 'dsk_theme_notifier.dart';
+import 'dsk_theme.dart';
 
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
@@ -65,16 +64,17 @@ class DSKPicker360State extends State<DSKPicker360> {
 
   @override
   Widget build(BuildContext context) {
-    DSKThemeManager themeManager = DSKAppInheritedWidget.of(context)!.changeNotifier; // React to theme changes
+    DSKTheme theme =
+        DSKThemeNotifier.of(context)!.changeNotifier; // React to theme changes
 
     return GestureDetector(
       onPanUpdate: !widget.enabled ? null : _onPanUpdate,
       child: CustomPaint(
         painter: DSKPicker360Painter(
+            theme.backgroundSecondary0,
             _currentAngle,
-            DSKColors.backgroundSecondary0,
-            widget.enabled ? DSKColors.text : DSKColors.grey,
-            themeManager.isLight ? DSKColors.grey100 : DSKColors.grey),
+            widget.enabled ? theme.text : DSKTheme.grey,
+            theme.isLight ? DSKTheme.grey100 : DSKTheme.grey),
         size: Size(widget.size, widget.size),
       ),
     );
@@ -82,13 +82,13 @@ class DSKPicker360State extends State<DSKPicker360> {
 }
 
 class DSKPicker360Painter extends CustomPainter {
+  final Color colorBackgroundSecondary0;
   final double angle;
-  final Color backgroundColor;
   final Color borderColor;
   final Color pickerColor;
 
-  DSKPicker360Painter(
-      this.angle, this.backgroundColor, this.pickerColor, this.borderColor);
+  DSKPicker360Painter(this.colorBackgroundSecondary0, this.angle,
+      this.pickerColor, this.borderColor);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -98,7 +98,7 @@ class DSKPicker360Painter extends CustomPainter {
 
     // Dibuixar la sombra
     final shadowPaint = Paint()
-      ..color = DSKColors.grey50
+      ..color = DSKTheme.grey50
       ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 1.0);
     final circlePath = Path()
       ..addOval(Rect.fromCircle(center: center, radius: radius));
@@ -107,7 +107,7 @@ class DSKPicker360Painter extends CustomPainter {
     // Dibuixar el cercle principal
     final paint = Paint()
       ..style = PaintingStyle.fill
-      ..color = backgroundColor;
+      ..color = colorBackgroundSecondary0;
     canvas.drawCircle(center, radius, paint);
 
     final paintBorder = Paint()
@@ -131,7 +131,7 @@ class DSKPicker360Painter extends CustomPainter {
   @override
   bool shouldRepaint(covariant DSKPicker360Painter oldDelegate) {
     return oldDelegate.angle != angle ||
-        oldDelegate.backgroundColor != backgroundColor ||
+        oldDelegate.colorBackgroundSecondary0 != colorBackgroundSecondary0 ||
         oldDelegate.pickerColor != pickerColor ||
         oldDelegate.borderColor != borderColor;
   }

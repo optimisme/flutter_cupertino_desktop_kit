@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'dsk_app_inherited.dart';
-import 'dsk_theme_manager.dart';
-import 'dsk_theme_colors.dart';
+import 'dsk_theme_notifier.dart';
+import 'dsk_theme.dart';
 
 class DSKPickerSlider extends StatefulWidget {
   final double defaultValue;
@@ -70,7 +69,8 @@ class DSKPickerSliderState extends State<DSKPickerSlider> {
 
   @override
   Widget build(BuildContext context) {
-    DSKThemeManager themeManager = DSKAppInheritedWidget.of(context)!.changeNotifier; // React to theme changes
+    DSKTheme theme =
+        DSKThemeNotifier.of(context)!.changeNotifier; // React to theme changes
 
     return GestureDetector(
       onTapDown: (details) {
@@ -79,11 +79,11 @@ class DSKPickerSliderState extends State<DSKPickerSlider> {
       onPanUpdate: !widget.enabled ? null : _onPanUpdate,
       child: CustomPaint(
         painter: DSKPicker01Painter(
-          actionColor: DSKColors.accent,
-          backgroundColorBar: DSKColors.backgroundSecondary1,
-          backgroundColorCircle: DSKColors.backgroundSecondary0,
+          colorAccent: theme.accent,
+          colorBar: theme.backgroundSecondary1,
+          colorCircle: theme.backgroundSecondary0,
           value: _currentValue,
-          hasAppFocus: themeManager.isAppFocused, // Border color
+          hasAppFocus: theme.isAppFocused, // Border color
         ),
         size: Size(widget.size, widget.size),
       ),
@@ -92,27 +92,27 @@ class DSKPickerSliderState extends State<DSKPickerSlider> {
 }
 
 class DSKPicker01Painter extends CustomPainter {
-  final Color actionColor;
-  final Color backgroundColorBar;
-  final Color backgroundColorCircle;
+  final Color colorAccent;
+  final Color colorBar;
+  final Color colorCircle;
   final double value;
   final bool hasAppFocus;
 
   DSKPicker01Painter(
-      {required this.actionColor,
-      required this.backgroundColorBar,
-      required this.backgroundColorCircle,
+      {required this.colorAccent,
+      required this.colorBar,
+      required this.colorCircle,
       required this.value,
       this.hasAppFocus = true});
 
   @override
   void paint(Canvas canvas, Size size) {
     Paint backgroundPaint = Paint()
-      ..color = backgroundColorBar
+      ..color = colorBar
       ..style = PaintingStyle.fill;
 
     Paint progressPaint = Paint()
-      ..color = hasAppFocus ? actionColor : DSKColors.grey
+      ..color = hasAppFocus ? colorAccent : DSKTheme.grey
       ..style = PaintingStyle.fill;
 
     // Calcula l'alçada i la posició vertical centrada de la barra
@@ -150,7 +150,7 @@ class DSKPicker01Painter extends CustomPainter {
     final circleProgress = (progressWidth * circleRail) / size.width;
     final Offset center = Offset(radius + circleProgress, size.height / 2);
     final shadowPaint = Paint()
-      ..color = DSKColors.grey50
+      ..color = DSKTheme.grey50
       ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 1.0);
     final circlePath = Path()
       ..addOval(Rect.fromCircle(center: center, radius: radius));
@@ -159,21 +159,21 @@ class DSKPicker01Painter extends CustomPainter {
     // Dibuixar el cercle principal
     final paint = Paint()
       ..style = PaintingStyle.fill
-      ..color = backgroundColorCircle;
+      ..color = colorCircle;
     canvas.drawCircle(center, radius, paint);
 
     final paintBorder = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = 0.75
-      ..color = DSKColors.grey100;
+      ..color = DSKTheme.grey100;
     canvas.drawCircle(center, radius, paintBorder);
   }
 
   @override
   bool shouldRepaint(covariant DSKPicker01Painter oldDelegate) {
-    return oldDelegate.actionColor != actionColor ||
-        oldDelegate.backgroundColorBar != backgroundColorBar ||
-        oldDelegate.backgroundColorCircle != backgroundColorCircle ||
+    return oldDelegate.colorAccent != colorAccent ||
+        oldDelegate.colorBar != colorBar ||
+        oldDelegate.colorCircle != colorCircle ||
         oldDelegate.value != value ||
         oldDelegate.hasAppFocus != hasAppFocus;
   }

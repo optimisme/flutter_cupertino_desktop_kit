@@ -18,12 +18,12 @@ class LayoutButtonsState extends State<LayoutSidebarLeft> {
 
   @override
   Widget build(BuildContext context) {
+    DSKTheme theme =
+        DSKThemeNotifier.of(context)!.changeNotifier; // React to theme changes
 
-    DSKThemeManager themeManager = DSKAppInheritedWidget.of(context)!.changeNotifier; // React to theme changes
-
-    String selectedRadio = themeManager.appearanceConfig;
+    String selectedRadio = theme.appearanceConfig;
     return Container(
-        color: DSKColors.backgroundSecondary1,
+        color: theme.backgroundSecondary1,
         child: ListView(children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,7 +42,7 @@ class LayoutButtonsState extends State<LayoutSidebarLeft> {
                     padding: const EdgeInsets.fromLTRB(8, 4, 8, 6),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(4.0),
-                      color: _selectedIndex == index ? DSKColors.accent : null,
+                      color: _selectedIndex == index ? theme.accent : null,
                     ),
                     child: Text(
                       widget.options[index],
@@ -51,10 +51,10 @@ class LayoutButtonsState extends State<LayoutSidebarLeft> {
                       style: TextStyle(
                           fontSize: 14,
                           color: _selectedIndex == index
-                              ? DSKColors.white
-                              : themeManager.isLight
-                                  ? DSKColors.black
-                                  : DSKColors.white),
+                              ? DSKTheme.white
+                              : theme.isLight
+                                  ? DSKTheme.black
+                                  : DSKTheme.white),
                     ),
                   ),
                 ),
@@ -76,7 +76,7 @@ class LayoutButtonsState extends State<LayoutSidebarLeft> {
                       onSelected: (bool? isSelected) {
                         setState(() {
                           selectedRadio = "system";
-                          themeManager.setAppearanceConfig(context);
+                          theme.setAppearanceConfig(context);
                         });
                       },
                     ),
@@ -87,7 +87,7 @@ class LayoutButtonsState extends State<LayoutSidebarLeft> {
                       onSelected: (bool? isSelected) {
                         setState(() {
                           selectedRadio = "light";
-                          themeManager.setAppearanceConfig(context, type: "light");
+                          theme.setAppearanceConfig(context, type: "light");
                         });
                       },
                     ),
@@ -98,7 +98,7 @@ class LayoutButtonsState extends State<LayoutSidebarLeft> {
                       onSelected: (bool? isSelected) {
                         setState(() {
                           selectedRadio = "dark";
-                          themeManager.setAppearanceConfig(context, type: "dark");
+                          theme.setAppearanceConfig(context, type: "dark");
                         });
                       },
                     ),
@@ -107,10 +107,10 @@ class LayoutButtonsState extends State<LayoutSidebarLeft> {
                         style: TextStyle(fontSize: 14)),
                     const SizedBox(height: 8),
                     DSKPickerThemeColors(
-                      colors: DSKColors.systemColors,
-                      selectedColor: themeManager.themeColor,
+                      colors: DSKTheme.systemColors,
+                      selectedColor: theme.themeColor,
                       onColorChanged: (String colorName) {
-                        themeManager.setAccentColour(colorName);
+                        theme.setAccentColour(colorName);
                       },
                     ),
                   ]))

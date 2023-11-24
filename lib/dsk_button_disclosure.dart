@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'dsk_app_inherited.dart';
-import 'dsk_theme_colors.dart';
+import 'dsk_theme.dart';
+import 'dsk_theme_notifier.dart';
 
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
@@ -85,7 +85,8 @@ class DSKButtonDisclosureState extends State<DSKButtonDisclosure>
 
   @override
   Widget build(BuildContext context) {
-    DSKAppInheritedWidget.of(context)!.changeNotifier; // React to theme changes
+    DSKTheme theme =
+        DSKThemeNotifier.of(context)!.changeNotifier; // React to theme changes
 
     return GestureDetector(
       onTap: () => widget.onChanged?.call(!widget.value),
@@ -95,7 +96,7 @@ class DSKButtonDisclosureState extends State<DSKButtonDisclosure>
           return Transform.rotate(
             angle: _animation.value * 3.14159, // Rotació en radians
             child: Icon(
-              color: DSKColors.text,
+              color: theme.text,
               CupertinoIcons.chevron_forward,
               size: widget.size,
             ),

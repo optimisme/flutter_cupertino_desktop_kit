@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'dsk_app_inherited.dart';
-import 'dsk_theme_manager.dart';
-import 'dsk_theme_colors.dart';
+import 'dsk_theme_notifier.dart';
+import 'dsk_theme.dart';
 
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
@@ -52,7 +51,8 @@ class DSKButtonState extends State<DSKButton> {
 
   @override
   Widget build(BuildContext context) {
-    DSKThemeManager themeManager = DSKAppInheritedWidget.of(context)!.changeNotifier; // React to theme changes
+    DSKTheme theme =
+        DSKThemeNotifier.of(context)!.changeNotifier; // React to theme changes
 
     // Define styles and themes based on the button's state and style.
     BoxDecoration decoration;
@@ -60,7 +60,7 @@ class DSKButtonState extends State<DSKButton> {
     TextStyle textStyle;
     IconThemeData iconTheme;
     BoxShadow shadow = BoxShadow(
-      color: DSKColors.black.withOpacity(0.1),
+      color: DSKTheme.black.withOpacity(0.1),
       spreadRadius: 0,
       blurRadius: 1,
       offset: const Offset(0, 1),
@@ -71,13 +71,10 @@ class DSKButtonState extends State<DSKButton> {
       switch (widget.style) {
         case DSKButtonStyle.action:
           decoration = BoxDecoration(
-              color: themeManager.isAppFocused
-                  ? DSKColors.accent200
-                  : DSKColors.grey200,
+              color: theme.isAppFocused ? theme.accent200 : DSKTheme.grey200,
               borderRadius: BorderRadius.circular(6.0),
               boxShadow: [shadow]);
-          color =
-              themeManager.isAppFocused ? DSKColors.accent600 : DSKColors.grey;
+          color = theme.isAppFocused ? theme.accent600 : DSKTheme.grey;
           textStyle = TextStyle(
             fontSize: _fontSize,
             color: color,
@@ -88,10 +85,10 @@ class DSKButtonState extends State<DSKButton> {
         case DSKButtonStyle.normal:
         case DSKButtonStyle.destructive:
           decoration = BoxDecoration(
-              color: DSKColors.backgroundSecondary0,
+              color: theme.backgroundSecondary0,
               borderRadius: BorderRadius.circular(6.0),
               boxShadow: [shadow]);
-          color = DSKColors.grey;
+          color = DSKTheme.grey;
           textStyle = TextStyle(
             fontSize: _fontSize,
             color: color,
@@ -102,18 +99,18 @@ class DSKButtonState extends State<DSKButton> {
     } else {
       switch (widget.style) {
         case DSKButtonStyle.action:
-          if (themeManager.isAppFocused) {
+          if (theme.isAppFocused) {
             decoration = BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: _isPressed
-                      ? [DSKColors.accent100, DSKColors.accent]
-                      : [DSKColors.accent300, DSKColors.accent500],
+                      ? [theme.accent100, theme.accent]
+                      : [theme.accent300, theme.accent500],
                 ),
                 borderRadius: BorderRadius.circular(6.0),
                 boxShadow: [shadow]);
-            color = _isPressed ? DSKColors.accent50 : DSKColors.white;
+            color = _isPressed ? theme.accent50 : DSKTheme.white;
             textStyle = TextStyle(
               fontSize: _fontSize,
               color: color,
@@ -121,13 +118,12 @@ class DSKButtonState extends State<DSKButton> {
             iconTheme = IconThemeData(color: color, size: _fontSize + 2);
           } else {
             decoration = BoxDecoration(
-                color: _isPressed
-                    ? DSKColors.grey200
-                    : DSKColors.backgroundSecondary0,
-                border: Border.all(color: DSKColors.backgroundSecondary1),
+                color:
+                    _isPressed ? DSKTheme.grey200 : theme.backgroundSecondary0,
+                border: Border.all(color: theme.backgroundSecondary1),
                 borderRadius: BorderRadius.circular(6.0),
                 boxShadow: [shadow]);
-            color = DSKColors.black;
+            color = DSKTheme.black;
             textStyle = TextStyle(
               fontSize: _fontSize,
               color: color,
@@ -138,19 +134,19 @@ class DSKButtonState extends State<DSKButton> {
 
         case DSKButtonStyle.destructive:
           decoration = BoxDecoration(
-              color: themeManager.isLight
+              color: theme.isLight
                   ? _isPressed
-                      ? DSKColors.grey50
-                      : DSKColors.white
+                      ? DSKTheme.grey50
+                      : DSKTheme.white
                   : _isPressed
-                      ? DSKColors.grey500
-                      : DSKColors.backgroundSecondary0,
-              border: themeManager.isLight
-                  ? Border.all(color: DSKColors.grey75)
-                  : Border.all(color: DSKColors.grey600),
+                      ? DSKTheme.grey500
+                      : theme.backgroundSecondary0,
+              border: theme.isLight
+                  ? Border.all(color: DSKTheme.grey75)
+                  : Border.all(color: DSKTheme.grey600),
               borderRadius: BorderRadius.circular(6.0),
               boxShadow: [shadow]);
-          color = DSKColors.red;
+          color = DSKTheme.red;
           textStyle = TextStyle(
             fontSize: _fontSize,
             color: color,
@@ -160,19 +156,19 @@ class DSKButtonState extends State<DSKButton> {
 
         default:
           decoration = BoxDecoration(
-              color: themeManager.isLight
+              color: theme.isLight
                   ? _isPressed
-                      ? DSKColors.grey50
-                      : DSKColors.white
+                      ? DSKTheme.grey50
+                      : DSKTheme.white
                   : _isPressed
-                      ? DSKColors.grey500
-                      : DSKColors.backgroundSecondary0,
-              border: themeManager.isLight
-                  ? Border.all(color: DSKColors.grey75)
-                  : Border.all(color: DSKColors.grey600),
+                      ? DSKTheme.grey500
+                      : theme.backgroundSecondary0,
+              border: theme.isLight
+                  ? Border.all(color: DSKTheme.grey75)
+                  : Border.all(color: DSKTheme.grey600),
               borderRadius: BorderRadius.circular(6.0),
               boxShadow: [shadow]);
-          color = DSKColors.text;
+          color = theme.text;
           textStyle = TextStyle(
             fontSize: _fontSize,
             color: color,

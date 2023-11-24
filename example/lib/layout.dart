@@ -53,6 +53,9 @@ class LayoutState extends State<Layout> {
 
   @override
   Widget build(BuildContext context) {
+    DSKTheme theme =
+        DSKThemeNotifier.of(context)!.changeNotifier; // React to theme changes
+
     Widget centralWidget;
     switch (_section) {
       case "Introduction":
@@ -89,7 +92,7 @@ class LayoutState extends State<Layout> {
 
     return CupertinoPageScaffold(
         navigationBar: CupertinoNavigationBar(
-          backgroundColor: DSKColors.backgroundSecondary0.withOpacity(0.5),
+          backgroundColor: theme.backgroundSecondary0.withOpacity(0.5),
           middle: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,

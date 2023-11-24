@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'dsk_app_inherited.dart';
-import 'dsk_theme_manager.dart';
-import 'dsk_theme_colors.dart';
+import 'dsk_theme_notifier.dart';
+import 'dsk_theme.dart';
 
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
@@ -30,7 +29,8 @@ class DSKPickerButtonsSegmented extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  DSKPickerButtonsSegmentedState createState() => DSKPickerButtonsSegmentedState();
+  DSKPickerButtonsSegmentedState createState() =>
+      DSKPickerButtonsSegmentedState();
 }
 
 /// Class `DSKButtonsSegmentedState` - The state for `DSKButtonsSegmented`.
@@ -123,7 +123,8 @@ class DSKPickerButtonsSegmentedState extends State<DSKPickerButtonsSegmented> {
 
   @override
   Widget build(BuildContext context) {
-    DSKThemeManager themeManager = DSKAppInheritedWidget.of(context)!.changeNotifier; // React to theme changes
+    DSKTheme theme =
+        DSKThemeNotifier.of(context)!.changeNotifier; // React to theme changes
 
     // Schedule a post-frame callback to calculate positions
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -137,10 +138,10 @@ class DSKPickerButtonsSegmentedState extends State<DSKPickerButtonsSegmented> {
       decoration: widget.isAccent
           ? const BoxDecoration()
           : BoxDecoration(
-              color: DSKColors.backgroundSecondary1,
+              color: theme.backgroundSecondary1,
               borderRadius: BorderRadius.circular(4.0),
               border: Border.all(
-                color: DSKColors.grey300,
+                color: DSKTheme.grey300,
                 width: 0.5,
               ),
             ),
@@ -157,18 +158,18 @@ class DSKPickerButtonsSegmentedState extends State<DSKPickerButtonsSegmented> {
               child: Container(
                 decoration: BoxDecoration(
                   color: widget.isAccent
-                      ? themeManager.isAppFocused
-                          ? DSKColors.accent
-                          : DSKColors.grey300
-                      : themeManager.isAppFocused
-                          ? DSKColors.backgroundSecondary0
-                          : DSKColors.grey300,
+                      ? theme.isAppFocused
+                          ? theme.accent
+                          : DSKTheme.grey300
+                      : theme.isAppFocused
+                          ? theme.backgroundSecondary0
+                          : DSKTheme.grey300,
                   borderRadius: BorderRadius.circular(4.0),
                   boxShadow: widget.isAccent
                       ? []
                       : [
                           BoxShadow(
-                            color: DSKColors.black.withOpacity(0.15),
+                            color: DSKTheme.black.withOpacity(0.15),
                             spreadRadius: 0,
                             blurRadius: 1,
                             offset: const Offset(0, 1),
@@ -189,12 +190,12 @@ class DSKPickerButtonsSegmentedState extends State<DSKPickerButtonsSegmented> {
                     child: TweenAnimationBuilder(
                         duration: const Duration(milliseconds: 200),
                         tween: ColorTween(
-                          begin: DSKColors.text,
+                          begin: theme.text,
                           end: widget.isAccent &&
                                   index == _selectedIndex &&
-                                  themeManager.isAppFocused
-                              ? DSKColors.white
-                              : DSKColors.text,
+                                  theme.isAppFocused
+                              ? DSKTheme.white
+                              : theme.text,
                         ),
                         builder: (BuildContext context, Color? color,
                             Widget? child) {

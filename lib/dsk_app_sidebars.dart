@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'dsk_theme_colors.dart';
+import 'package:flutter_desktop_cupertino/dsk_theme.dart';
 
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
@@ -47,22 +47,28 @@ class DSKAppSidebars extends StatefulWidget {
   DSKAppSidebarsState createState() => DSKAppSidebarsState();
 }
 
-  /// The state of the `DSKAppSidebars` widget.
-  ///
-  /// This class manages the state of the sidebars, including their visibility
-  /// and width.
+/// The state of the `DSKAppSidebars` widget.
+///
+/// This class manages the state of the sidebars, including their visibility
+/// and width.
 class DSKAppSidebarsState extends State<DSKAppSidebars> {
-  MouseCursor _cursor = SystemMouseCursors.basic; // The current cursor for the mouse.
+  MouseCursor _cursor =
+      SystemMouseCursors.basic; // The current cursor for the mouse.
   int _animationMillis = 200; // The duration of the sidebar animation.
   double _sidebarLeftWidth = 0.0; // The width of the left sidebar.
-  bool _sidebarLeftDragging = false; // Whether the left sidebar is currently being dragged.
-  double _sidebarLeftOriginX = 0.0; // The original position of the left sidebar during dragging.
-  double _sidebarLeftDragX = 0.0; // The current position of the mouse during dragging.
+  bool _sidebarLeftDragging =
+      false; // Whether the left sidebar is currently being dragged.
+  double _sidebarLeftOriginX =
+      0.0; // The original position of the left sidebar during dragging.
+  double _sidebarLeftDragX =
+      0.0; // The current position of the mouse during dragging.
   bool _sidebarLeftIsVisible = false; // Whether the left sidebar is visible.
   double _sidebarRightWidth = 0.0; // The width of the right sidebar.
   bool _sidebarRightIsVisible = false; // Whether the right sidebar is visible.
-  bool get isSidebarLeftVisible => _sidebarLeftIsVisible; // Determines whether the left sidebar is visible.
-  bool get isSidebarRightVisible => _sidebarRightIsVisible; // Determines whether the right sidebar is visible.
+  bool get isSidebarLeftVisible =>
+      _sidebarLeftIsVisible; // Determines whether the left sidebar is visible.
+  bool get isSidebarRightVisible =>
+      _sidebarRightIsVisible; // Determines whether the right sidebar is visible.
 
   /// Sets the visibility of the left sidebar.
   ///
@@ -156,7 +162,7 @@ class DSKAppSidebarsState extends State<DSKAppSidebars> {
           child: Container(
               width: 2.5,
               decoration: const BoxDecoration(
-                color: DSKColors.transparent,
+                color: DSKTheme.transparent,
               )),
         ));
   }
@@ -231,7 +237,7 @@ class DSKAppSidebarsState extends State<DSKAppSidebars> {
                   decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
-                        color: DSKColors.grey500.withOpacity(0.3),
+                        color: DSKTheme.grey500.withOpacity(0.3),
                         spreadRadius: 0,
                         blurRadius: 2,
                         offset: const Offset(0, 2),

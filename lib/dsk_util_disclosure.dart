@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'dsk_app_inherited.dart';
+import 'dsk_theme_notifier.dart';
 import 'dsk_button_disclosure.dart';
 
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
@@ -59,7 +59,7 @@ class DSKUtilDisclosureState extends State<DSKUtilDisclosure>
 
   @override
   Widget build(BuildContext context) {
-    DSKAppInheritedWidget.of(context)!.changeNotifier; // React to theme changes
+    DSKThemeNotifier.of(context)!.changeNotifier; // React to theme changes
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,

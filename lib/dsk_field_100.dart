@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'dsk_app_inherited.dart';
+import 'dsk_theme_notifier.dart';
 import 'dsk_field_numeric.dart';
 import 'dsk_picker_slider.dart';
 
@@ -56,7 +56,7 @@ class DSKField100State extends State<DSKField100> {
 
   @override
   Widget build(BuildContext context) {
-    DSKAppInheritedWidget.of(context)!.changeNotifier; // React to theme changes
+    DSKThemeNotifier.of(context)!.changeNotifier; // React to theme changes
 
     return Row(
       mainAxisSize: MainAxisSize.min,

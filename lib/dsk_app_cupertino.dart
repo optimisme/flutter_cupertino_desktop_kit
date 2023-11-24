@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'dsk_theme_manager.dart';
-import 'dsk_app_inherited.dart';
+import 'dsk_theme.dart';
+import 'dsk_theme_notifier.dart';
 
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
@@ -19,7 +19,7 @@ class DSKCupertinoApp extends StatefulWidget {
 // Main application state
 class DSKCupertinoAppState extends State<DSKCupertinoApp>
     with WidgetsBindingObserver {
-  late final DSKThemeManager _themeManager = DSKThemeManager();
+  late final DSKTheme _themeManager = DSKTheme();
 
   @override
   void initState() {
@@ -30,7 +30,8 @@ class DSKCupertinoAppState extends State<DSKCupertinoApp>
     });
     if (widget.defaultAppearance != null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        _themeManager.setAppearanceConfig(context, type: widget.defaultAppearance!);
+        _themeManager.setAppearanceConfig(context,
+            type: widget.defaultAppearance!);
         setState(() {});
       });
     }
@@ -59,12 +60,12 @@ class DSKCupertinoAppState extends State<DSKCupertinoApp>
 
   @override
   Widget build(BuildContext context) {
-    return DSKAppInheritedWidget(
-      changeNotifier: _themeManager,
-      child:CupertinoApp(
-        debugShowCheckedModeBanner: false,
-        theme: _themeManager.getThemeData(context),
-        home: widget.child,
-    ));
+    return DSKThemeNotifier(
+        changeNotifier: _themeManager,
+        child: CupertinoApp(
+          debugShowCheckedModeBanner: false,
+          theme: _themeManager.getThemeData(context),
+          home: widget.child,
+        ));
   }
 }

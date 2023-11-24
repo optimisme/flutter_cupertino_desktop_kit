@@ -10,14 +10,13 @@ class LayoutIntroduction extends StatefulWidget {
 }
 
 class _LayoutIntroductionState extends State<LayoutIntroduction> {
-  
   @override
   Widget build(BuildContext context) {
-
-    DSKAppInheritedWidget.of(context)!.changeNotifier; // React to theme changes
+    DSKTheme theme =
+        DSKThemeNotifier.of(context)!.changeNotifier; // React to theme changes
 
     return Container(
-        color: DSKColors.background,
+        color: theme.background,
         child: ListView(children: [
           const Padding(
               padding: EdgeInsets.symmetric(vertical: 16, horizontal: 32),
@@ -47,7 +46,7 @@ class _LayoutIntroductionState extends State<LayoutIntroduction> {
                             cursor: SystemMouseCursors.click,
                             child: Text('https://github.com/optimisme',
                                 style: TextStyle(
-                                  color: DSKColors.accent,
+                                  color: theme.accent,
                                 )))
                       ]))),
           const SizedBox(height: 50),

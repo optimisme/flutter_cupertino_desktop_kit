@@ -1,9 +1,8 @@
 import 'dart:async';
 import 'dart:math' as math;
 import 'package:flutter/cupertino.dart';
-import 'dsk_app_inherited.dart';
-import 'dsk_theme_manager.dart';
-import 'dsk_theme_colors.dart';
+import 'dsk_theme_notifier.dart';
+import 'dsk_theme.dart';
 
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
@@ -128,22 +127,23 @@ class DSKProgressCircularState extends State<DSKProgressCircular>
 
   @override
   Widget build(BuildContext context) {
-    DSKThemeManager themeManager = DSKAppInheritedWidget.of(context)!.changeNotifier; // React to theme changes
+    DSKTheme theme =
+        DSKThemeNotifier.of(context)!.changeNotifier; // React to theme changes
 
     return AnimatedBuilder(
       animation: _controller,
       builder: (context, child) {
         return CustomPaint(
           painter: ProgressCircularPainter(
-              actionColor: DSKColors.accent,
-              backgroundColor: DSKColors.backgroundSecondary1,
+              colorAccent: theme.accent,
+              colorBackgroundSecondary1: theme.backgroundSecondary1,
               progress: widget.isIndeterminate
                   ? _controller.value
                   : _progressAnimation.value,
               isIndeterminate: widget.isIndeterminate,
               isIndeterminateAnimating: _controller.isAnimating,
-              hasAppFocus: themeManager.isAppFocused,
-              isLightTheme: themeManager.isLight),
+              hasAppFocus: theme.isAppFocused,
+              isLightTheme: theme.isLight),
           child: child,
         );
       },
@@ -153,16 +153,16 @@ class DSKProgressCircularState extends State<DSKProgressCircular>
 }
 
 class ProgressCircularPainter extends CustomPainter {
-  final Color actionColor;
-  final Color backgroundColor;
+  final Color colorAccent;
+  final Color colorBackgroundSecondary1;
   final double progress;
   final bool isIndeterminate;
   final bool isIndeterminateAnimating;
   final bool hasAppFocus;
   final bool isLightTheme;
   ProgressCircularPainter(
-      {required this.actionColor,
-      required this.backgroundColor,
+      {required this.colorAccent,
+      required this.colorBackgroundSecondary1,
       required this.progress,
       required this.isIndeterminate,
       this.isIndeterminateAnimating = false,
@@ -194,16 +194,16 @@ class ProgressCircularPainter extends CustomPainter {
         final double lineAngle = i * angleIncrement;
 
         // Calcula el color de la línia basat en l'animació
-        Color lineColor = backgroundColor;
+        Color lineColor = colorBackgroundSecondary1;
         if (isIndeterminateAnimating) {
           final double normalizedProgress = (progress * 8) % 8;
           double diff = (normalizedProgress - i).abs();
           if (diff > 4) diff = 8 - diff;
           final int alpha = (255 * (1 - (diff / 4))).toInt().clamp(0, 255);
           if (isLightTheme) {
-            lineColor = DSKColors.grey700.withAlpha(alpha);
+            lineColor = DSKTheme.grey700.withAlpha(alpha);
           } else {
-            lineColor = DSKColors.grey.withAlpha(alpha);
+            lineColor = DSKTheme.grey.withAlpha(alpha);
           }
         }
 
@@ -226,11 +226,11 @@ class ProgressCircularPainter extends CustomPainter {
       }
     } else {
       Paint backgroundPaint = Paint()
-        ..color = DSKColors.backgroundSecondary1
+        ..color = colorBackgroundSecondary1
         ..style = PaintingStyle.fill;
 
       Paint progressPaint = Paint()
-        ..color = hasAppFocus ? actionColor : DSKColors.grey
+        ..color = hasAppFocus ? colorAccent : DSKTheme.grey
         ..style = PaintingStyle.fill;
 
       // Center the circle within the canvas
@@ -277,8 +277,8 @@ class ProgressCircularPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant ProgressCircularPainter oldDelegate) {
-    return oldDelegate.actionColor != actionColor ||
-        oldDelegate.backgroundColor != backgroundColor ||
+    return oldDelegate.colorAccent != colorAccent ||
+        oldDelegate.colorBackgroundSecondary1 != colorBackgroundSecondary1 ||
         oldDelegate.progress != progress ||
         oldDelegate.hasAppFocus != hasAppFocus ||
         oldDelegate.isIndeterminate != isIndeterminate ||

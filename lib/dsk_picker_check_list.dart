@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'dsk_app_inherited.dart';
-import 'dsk_theme_manager.dart';
-import 'dsk_theme_colors.dart';
+import 'dsk_theme_notifier.dart';
+import 'dsk_theme.dart';
 
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
@@ -73,7 +72,8 @@ class DSKPickerCheckListState extends State<DSKPickerCheckList> {
 
   @override
   Widget build(BuildContext context) {
-    DSKThemeManager themeManager = DSKAppInheritedWidget.of(context)!.changeNotifier; // React to theme changes
+    DSKTheme theme =
+        DSKThemeNotifier.of(context)!.changeNotifier; // React to theme changes
 
     return IntrinsicWidth(
         child: ConstrainedBox(
@@ -95,8 +95,7 @@ class DSKPickerCheckListState extends State<DSKPickerCheckList> {
                     padding: const EdgeInsets.fromLTRB(4, 2, 4, 6),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(4.0),
-                      color:
-                          isHovered ? DSKColors.accent : DSKColors.transparent,
+                      color: isHovered ? theme.accent : DSKTheme.transparent,
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -108,15 +107,15 @@ class DSKPickerCheckListState extends State<DSKPickerCheckList> {
                                 : Icon(CupertinoIcons.check_mark,
                                     size: widget.size,
                                     color: isHovered
-                                        ? DSKColors.background
-                                        : DSKColors.text)),
+                                        ? theme.background
+                                        : theme.text)),
                         Text(
                           widget.options[index],
                           style: TextStyle(
                               fontSize: widget.size,
-                              color: themeManager.isLight && isHovered
-                                  ? DSKColors.background
-                                  : DSKColors.text),
+                              color: theme.isLight && isHovered
+                                  ? theme.background
+                                  : theme.text),
                         ),
                       ],
                     ),

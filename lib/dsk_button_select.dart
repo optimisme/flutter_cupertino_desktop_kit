@@ -1,9 +1,8 @@
 import 'package:flutter/cupertino.dart';
-import 'dsk_app_inherited.dart';
-import 'dsk_theme_manager.dart';
+import 'dsk_theme_notifier.dart';
+import 'dsk_theme.dart';
 import 'dsk_picker_check_list.dart';
 import 'dsk_dialogs_manager.dart';
-import 'dsk_theme_colors.dart';
 import 'dsk_dialog_popover.dart';
 
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
@@ -98,12 +97,13 @@ class DSKButtonSelectState extends State<DSKButtonSelect> {
 
   @override
   Widget build(BuildContext context) {
-    DSKThemeManager themeManager = DSKAppInheritedWidget.of(context)!.changeNotifier; // React to theme changes
+    DSKTheme theme =
+        DSKThemeNotifier.of(context)!.changeNotifier; // React to theme changes
 
     BoxDecoration decoration;
     TextStyle textStyle;
     BoxShadow shadow = BoxShadow(
-      color: DSKColors.black.withOpacity(0.1),
+      color: DSKTheme.black.withOpacity(0.1),
       spreadRadius: 0,
       blurRadius: 1,
       offset: const Offset(0, 1),
@@ -112,8 +112,8 @@ class DSKButtonSelectState extends State<DSKButtonSelect> {
     // Apply different styles based on state.
     if (_isMouseOver || !widget.isFlat) {
       decoration = BoxDecoration(
-          color: DSKColors.backgroundSecondary0,
-          border: Border.all(color: DSKColors.backgroundSecondary1),
+          color: theme.backgroundSecondary0,
+          border: Border.all(color: theme.backgroundSecondary1),
           borderRadius: BorderRadius.circular(6.0),
           boxShadow: [shadow]);
     } else {
@@ -122,7 +122,7 @@ class DSKButtonSelectState extends State<DSKButtonSelect> {
 
     textStyle = TextStyle(
       fontSize: _fontSize,
-      color: DSKColors.text,
+      color: theme.text,
     );
 
     return MouseRegion(
@@ -156,12 +156,12 @@ class DSKButtonSelectState extends State<DSKButtonSelect> {
                       DecoratedBox(
                         decoration: BoxDecoration(
                           color: !widget.isFlat
-                              ? themeManager.isAppFocused
-                                  ? DSKColors.accent300
-                                  : DSKColors.transparent
+                              ? theme.isAppFocused
+                                  ? theme.accent300
+                                  : DSKTheme.transparent
                               : _isMouseOver
                                   ? null
-                                  : DSKColors.backgroundSecondary1,
+                                  : theme.backgroundSecondary1,
                           borderRadius: BorderRadius.circular(4),
                         ),
                         child: Container(
@@ -171,10 +171,10 @@ class DSKButtonSelectState extends State<DSKButtonSelect> {
                               child: Icon(
                                 CupertinoIcons.chevron_up_chevron_down,
                                 color: !widget.isFlat &&
-                                        themeManager.isLight &&
-                                        themeManager.isAppFocused
-                                    ? DSKColors.white
-                                    : DSKColors.text,
+                                        theme.isLight &&
+                                        theme.isAppFocused
+                                    ? DSKTheme.white
+                                    : theme.text,
                                 size: _fontSize * 1.2,
                               ),
                             )),

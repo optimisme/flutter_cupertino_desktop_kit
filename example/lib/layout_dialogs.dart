@@ -23,8 +23,8 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
   final GlobalKey<DSKDialogPopoverState> _anchorArrowed2 = GlobalKey();
   final GlobalKey<DSKDialogPopoverState> _anchorArrowed3 = GlobalKey();
 
-  _showPopover(BuildContext context, GlobalKey anchorKey, bool centered,
-      bool animated, bool translucent) {
+  _showPopover(BuildContext context, GlobalKey anchorKey, DSKTheme theme,
+      bool centered, bool animated, bool translucent) {
     final GlobalKey<DSKDialogPopoverState> key = GlobalKey();
     DSKDialogsManager.showPopover(
       key: key,
@@ -49,7 +49,7 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
                 key.currentState?.hide();
               },
               child: Text('Close popover',
-                  style: TextStyle(fontSize: 12, color: DSKColors.accent)),
+                  style: TextStyle(fontSize: 12, color: theme.accent)),
             ),
           ],
         ),
@@ -57,7 +57,8 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
     );
   }
 
-  _showModal(BuildContext context, bool animated, bool translucent) {
+  _showModal(
+      BuildContext context, DSKTheme theme, bool animated, bool translucent) {
     final GlobalKey<DSKDialogModalState> key = GlobalKey();
     DSKDialogsManager.showModal(
       key: key,
@@ -81,7 +82,7 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
                 key.currentState?.hide();
               },
               child: Text('Close modal',
-                  style: TextStyle(fontSize: 12, color: DSKColors.accent)),
+                  style: TextStyle(fontSize: 12, color: theme.accent)),
             ),
           ],
         ),
@@ -89,8 +90,8 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
     );
   }
 
-  void _showDraggable(BuildContext context, GlobalKey anchorKey, bool animated,
-      bool translucent) {
+  void _showDraggable(BuildContext context, GlobalKey anchorKey, DSKTheme theme,
+      bool animated, bool translucent) {
     final GlobalKey<DSKDialogDraggableState> key = GlobalKey();
     DSKDialogsManager.showDraggable(
       key: key,
@@ -140,7 +141,7 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
                 key.currentState?.hide();
               },
               child: Text('Close draggable',
-                  style: TextStyle(fontSize: 12, color: DSKColors.accent)),
+                  style: TextStyle(fontSize: 12, color: theme.accent)),
             ),
           ],
         ),
@@ -148,8 +149,8 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
     );
   }
 
-  _showPopoverArrowed(BuildContext context, GlobalKey anchorKey, bool animated,
-      bool translucent) {
+  _showPopoverArrowed(BuildContext context, GlobalKey anchorKey, DSKTheme theme,
+      bool animated, bool translucent) {
     final GlobalKey<DSKDialogPopoverArrowedState> key = GlobalKey();
     DSKDialogsManager.showPopoverArrowed(
       key: key,
@@ -173,7 +174,7 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
                 key.currentState?.hide();
               },
               child: Text('Close arrowed',
-                  style: TextStyle(fontSize: 12, color: DSKColors.accent)),
+                  style: TextStyle(fontSize: 12, color: theme.accent)),
             ),
           ],
         ),
@@ -183,18 +184,18 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
 
   @override
   Widget build(BuildContext context) {
-
-    DSKAppInheritedWidget.of(context)!.changeNotifier; // React to theme changes
+    DSKTheme theme =
+        DSKThemeNotifier.of(context)!.changeNotifier; // React to theme changes
 
     return Container(
-        color: DSKColors.background,
+        color: theme.background,
         child: ListView(children: [
           const SizedBox(height: 8),
           Padding(
               padding: const EdgeInsets.all(8),
               child: RichText(
                 text: TextSpan(
-                  style: TextStyle(fontSize: 14, color: DSKColors.text),
+                  style: TextStyle(fontSize: 14, color: theme.text),
                   children: const <TextSpan>[
                     TextSpan(
                         text: '*Important! ',
@@ -216,7 +217,8 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
                   style: DSKButtonStyle.normal,
                   isLarge: false,
                   onPressed: () {
-                    _showPopover(context, _anchorPopover0, false, false, false);
+                    _showPopover(
+                        context, _anchorPopover0, theme, false, false, false);
                   },
                   child: const Text('Popover'),
                 )),
@@ -227,7 +229,8 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
                   style: DSKButtonStyle.normal,
                   isLarge: false,
                   onPressed: () {
-                    _showPopover(context, _anchorPopover1, true, false, true);
+                    _showPopover(
+                        context, _anchorPopover1, theme, true, false, true);
                   },
                   child: const Text('Centered translucent'),
                 )),
@@ -238,7 +241,8 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
                   style: DSKButtonStyle.normal,
                   isLarge: false,
                   onPressed: () {
-                    _showPopover(context, _anchorPopover2, true, true, false);
+                    _showPopover(
+                        context, _anchorPopover2, theme, true, true, false);
                   },
                   child: const Text('With animation'),
                 )),
@@ -249,7 +253,8 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
                   style: DSKButtonStyle.normal,
                   isLarge: false,
                   onPressed: () {
-                    _showPopover(context, _anchorPopover3, true, true, true);
+                    _showPopover(
+                        context, _anchorPopover3, theme, true, true, true);
                   },
                   child: const Text('Translucent with animation'),
                 )),
@@ -263,7 +268,7 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
                   style: DSKButtonStyle.normal,
                   isLarge: false,
                   onPressed: () {
-                    _showModal(context, false, false);
+                    _showModal(context, theme, false, false);
                   },
                   child: const Text('Modal'),
                 )),
@@ -273,7 +278,7 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
                   style: DSKButtonStyle.normal,
                   isLarge: false,
                   onPressed: () {
-                    _showModal(context, true, false);
+                    _showModal(context, theme, true, false);
                   },
                   child: const Text('With animation'),
                 )),
@@ -283,7 +288,7 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
                   style: DSKButtonStyle.normal,
                   isLarge: false,
                   onPressed: () {
-                    _showModal(context, false, true);
+                    _showModal(context, theme, false, true);
                   },
                   child: const Text('Translucent'),
                 )),
@@ -293,7 +298,7 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
                   style: DSKButtonStyle.normal,
                   isLarge: false,
                   onPressed: () {
-                    _showModal(context, true, true);
+                    _showModal(context, theme, true, true);
                   },
                   child: const Text('Translucent with animation'),
                 )),
@@ -308,7 +313,8 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
                   style: DSKButtonStyle.normal,
                   isLarge: false,
                   onPressed: () {
-                    _showDraggable(context, _anchorDraggable0, false, false);
+                    _showDraggable(
+                        context, _anchorDraggable0, theme, false, false);
                   },
                   child: const Text('Draggable'),
                 )),
@@ -319,7 +325,8 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
                   style: DSKButtonStyle.normal,
                   isLarge: false,
                   onPressed: () {
-                    _showDraggable(context, _anchorDraggable1, true, false);
+                    _showDraggable(
+                        context, _anchorDraggable1, theme, true, false);
                   },
                   child: const Text('With animation'),
                 )),
@@ -330,7 +337,8 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
                   style: DSKButtonStyle.normal,
                   isLarge: false,
                   onPressed: () {
-                    _showDraggable(context, _anchorDraggable2, false, true);
+                    _showDraggable(
+                        context, _anchorDraggable2, theme, false, true);
                   },
                   child: const Text('Translucent'),
                 )),
@@ -341,7 +349,8 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
                   style: DSKButtonStyle.normal,
                   isLarge: false,
                   onPressed: () {
-                    _showDraggable(context, _anchorDraggable3, true, true);
+                    _showDraggable(
+                        context, _anchorDraggable3, theme, true, true);
                   },
                   child: const Text('Translucent with animation'),
                 )),
@@ -356,7 +365,8 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
                   style: DSKButtonStyle.normal,
                   isLarge: false,
                   onPressed: () {
-                    _showPopoverArrowed(context, _anchorArrowed0, false, false);
+                    _showPopoverArrowed(
+                        context, _anchorArrowed0, theme, false, false);
                   },
                   child: const Text('Arrowed'),
                 )),
@@ -367,7 +377,8 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
                   style: DSKButtonStyle.normal,
                   isLarge: false,
                   onPressed: () {
-                    _showPopoverArrowed(context, _anchorArrowed1, true, false);
+                    _showPopoverArrowed(
+                        context, _anchorArrowed1, theme, true, false);
                   },
                   child: const Text('With animation'),
                 )),
@@ -378,7 +389,8 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
                   style: DSKButtonStyle.normal,
                   isLarge: false,
                   onPressed: () {
-                    _showPopoverArrowed(context, _anchorArrowed2, false, true);
+                    _showPopoverArrowed(
+                        context, _anchorArrowed2, theme, false, true);
                   },
                   child: const Text('Translucent'),
                 )),
@@ -389,7 +401,8 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
                   style: DSKButtonStyle.normal,
                   isLarge: false,
                   onPressed: () {
-                    _showPopoverArrowed(context, _anchorArrowed3, true, true);
+                    _showPopoverArrowed(
+                        context, _anchorArrowed3, theme, true, true);
                   },
                   child: const Text('Translucent with animation'),
                 )),

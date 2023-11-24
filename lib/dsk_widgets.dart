@@ -1,5 +1,4 @@
 export 'dsk_app_cupertino.dart';
-export 'dsk_app_inherited.dart';
 export 'dsk_app_sidebars.dart';
 export 'dsk_button.dart';
 export 'dsk_button_check_box.dart';
@@ -27,6 +26,6 @@ export 'dsk_picker_slider.dart';
 export 'dsk_picker_theme_colors.dart';
 export 'dsk_progress_bar.dart';
 export 'dsk_progress_circular.dart';
-export 'dsk_theme_colors.dart';
-export 'dsk_theme_manager.dart';
+export 'dsk_theme_notifier.dart';
+export 'dsk_theme.dart';
 export 'dsk_util_disclosure.dart';

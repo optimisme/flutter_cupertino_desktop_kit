@@ -11,14 +11,14 @@ class LayoutUtils extends StatefulWidget {
 class _LayoutUtilsState extends State<LayoutUtils> {
   @override
   Widget build(BuildContext context) {
-
-    DSKAppInheritedWidget.of(context)!.changeNotifier; // React to theme changes
+    DSKTheme theme =
+        DSKThemeNotifier.of(context)!.changeNotifier; // React to theme changes
 
     Widget line = Container(
       decoration: BoxDecoration(
         border: Border(
           top: BorderSide(
-            color: DSKColors.text,
+            color: theme.text,
             width: 1.0,
           ),
         ),
@@ -27,7 +27,7 @@ class _LayoutUtilsState extends State<LayoutUtils> {
     );
 
     return Container(
-        color: DSKColors.background,
+        color: theme.background,
         child: ListView(children: [
           const SizedBox(height: 8),
           const Padding(
@@ -44,7 +44,7 @@ class _LayoutUtilsState extends State<LayoutUtils> {
                       child: Container(
                           padding: const EdgeInsets.all(4.0),
                           decoration: BoxDecoration(
-                            color: DSKColors.backgroundSecondary1,
+                            color: theme.backgroundSecondary1,
                             borderRadius: BorderRadius.circular(4.0),
                           ),
                           child: const Text('Expandible disclosure'))),

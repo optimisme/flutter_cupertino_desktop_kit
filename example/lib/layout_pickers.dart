@@ -14,11 +14,11 @@ class _LayoutPickersState extends State<LayoutPickers> {
 
   @override
   Widget build(BuildContext context) {
-
-    DSKAppInheritedWidget.of(context)!.changeNotifier; // React to theme changes
+    DSKTheme theme =
+        DSKThemeNotifier.of(context)!.changeNotifier; // React to theme changes
 
     return Container(
-        color: DSKColors.background,
+        color: theme.background,
         child: ListView(children: [
           const SizedBox(height: 8),
           const Padding(
@@ -52,8 +52,9 @@ class _LayoutPickersState extends State<LayoutPickers> {
             Text(_angle.toStringAsFixed(2),
                 style: const TextStyle(fontSize: 12)),
           ]),
-const Padding(
-              padding: EdgeInsets.all(8), child: Text('DSKPickerButtonsSegmented:')),
+          const Padding(
+              padding: EdgeInsets.all(8),
+              child: Text('DSKPickerButtonsSegmented:')),
           Wrap(children: [
             Padding(
                 padding: const EdgeInsets.all(8),

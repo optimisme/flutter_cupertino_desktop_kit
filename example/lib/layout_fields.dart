@@ -21,11 +21,11 @@ class _LayoutFieldsState extends State<LayoutFields> {
 
   @override
   Widget build(BuildContext context) {
-
-    DSKAppInheritedWidget.of(context)!.changeNotifier; // React to theme changes
+    DSKTheme theme =
+        DSKThemeNotifier.of(context)!.changeNotifier; // React to theme changes
 
     return Container(
-        color: DSKColors.background,
+        color: theme.background,
         child: ListView(children: [
           const SizedBox(height: 8),
           const Padding(

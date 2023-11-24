@@ -1,8 +1,7 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
-import 'dsk_app_inherited.dart';
-import 'dsk_theme_manager.dart';
-import 'dsk_theme_colors.dart';
+import 'dsk_theme_notifier.dart';
+import 'dsk_theme.dart';
 
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
@@ -128,21 +127,22 @@ class DSKProgressBarState extends State<DSKProgressBar>
 
   @override
   Widget build(BuildContext context) {
-    DSKThemeManager themeManager = DSKAppInheritedWidget.of(context)!.changeNotifier; // React to theme changes
+    DSKTheme theme =
+        DSKThemeNotifier.of(context)!.changeNotifier; // React to theme changes
 
     return AnimatedBuilder(
       animation: _controller,
       builder: (context, child) {
         return CustomPaint(
           painter: ProgressBarPainter(
-              actionColor: DSKColors.accent,
-              backgroundColor: DSKColors.backgroundSecondary1,
+              colorAccent: theme.accent,
+              backgroundColor: theme.backgroundSecondary1,
               progress: widget.isIndeterminate
                   ? _controller.value
                   : _progressAnimation.value,
               isIndeterminate: widget.isIndeterminate,
               isIndeterminateAnimating: _controller.isAnimating,
-              hasAppFocus: themeManager.isAppFocused),
+              hasAppFocus: theme.isAppFocused),
           child: child,
         );
       },
@@ -152,7 +152,7 @@ class DSKProgressBarState extends State<DSKProgressBar>
 }
 
 class ProgressBarPainter extends CustomPainter {
-  final Color actionColor;
+  final Color colorAccent;
   final Color backgroundColor;
   final double progress;
   final bool isIndeterminate;
@@ -160,7 +160,7 @@ class ProgressBarPainter extends CustomPainter {
   final bool hasAppFocus;
 
   ProgressBarPainter(
-      {required this.actionColor,
+      {required this.colorAccent,
       required this.backgroundColor,
       required this.progress,
       required this.isIndeterminate,
@@ -174,7 +174,7 @@ class ProgressBarPainter extends CustomPainter {
       ..style = PaintingStyle.fill;
 
     Paint progressPaint = Paint()
-      ..color = hasAppFocus ? actionColor : DSKColors.grey
+      ..color = hasAppFocus ? colorAccent : DSKTheme.grey
       ..style = PaintingStyle.fill;
 
     // Calcula l'alçada i la posició vertical centrada de la barra
@@ -234,7 +234,7 @@ class ProgressBarPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant ProgressBarPainter oldDelegate) {
-    return oldDelegate.actionColor != actionColor ||
+    return oldDelegate.colorAccent != colorAccent ||
         oldDelegate.backgroundColor != backgroundColor ||
         oldDelegate.progress != progress ||
         oldDelegate.hasAppFocus != hasAppFocus ||

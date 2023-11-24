@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'dsk_app_inherited.dart';
-import 'dsk_theme_manager.dart';
-import 'dsk_theme_colors.dart';
+import 'dsk_theme_notifier.dart';
+import 'dsk_theme.dart';
 
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
@@ -42,27 +41,28 @@ class DSKButtonsUpDownState extends State<DSKButtonsUpDown> {
 
   @override
   Widget build(BuildContext context) {
-    DSKThemeManager themeManager = DSKAppInheritedWidget.of(context)!.changeNotifier; // React to theme changes
+    DSKTheme theme =
+        DSKThemeNotifier.of(context)!.changeNotifier; // React to theme changes
 
     // Definim l'ombra per al relleu
     var shadow = const BoxShadow(
-      color: DSKColors.grey200, // Ajusta el color per obtenir un gris
+      color: DSKTheme.grey200, // Ajusta el color per obtenir un gris
       spreadRadius: 0,
       blurRadius: 0.25,
       offset: Offset(0, 0.5),
     );
 
     Color backgroundUp = !_isPressedUp
-        ? DSKColors.backgroundSecondary0
-        : themeManager.isLight
-            ? DSKColors.backgroundSecondary1
-            : DSKColors.grey;
+        ? theme.backgroundSecondary0
+        : theme.isLight
+            ? theme.backgroundSecondary1
+            : DSKTheme.grey;
 
     Color backgroundDown = !_isPressedDown
-        ? DSKColors.backgroundSecondary0
-        : themeManager.isLight
-            ? DSKColors.backgroundSecondary1
-            : DSKColors.grey;
+        ? theme.backgroundSecondary0
+        : theme.isLight
+            ? theme.backgroundSecondary1
+            : DSKTheme.grey;
 
     // Estil per al botó amunt
     var decorationUp = BoxDecoration(
@@ -72,7 +72,7 @@ class DSKButtonsUpDownState extends State<DSKButtonsUpDown> {
         topRight: Radius.circular(5.0),
       ),
       border: Border.all(
-        color: DSKColors.grey,
+        color: DSKTheme.grey,
         width: 0.5,
       ),
       boxShadow: [shadow],
@@ -86,7 +86,7 @@ class DSKButtonsUpDownState extends State<DSKButtonsUpDown> {
         bottomRight: Radius.circular(5.0),
       ),
       border: Border.all(
-        color: DSKColors.grey,
+        color: DSKTheme.grey,
         width: 0.5,
       ),
       boxShadow: [shadow],
@@ -113,7 +113,7 @@ class DSKButtonsUpDownState extends State<DSKButtonsUpDown> {
               padding: const EdgeInsets.fromLTRB(2, 1, 2, 0),
               child: Icon(CupertinoIcons.chevron_up,
                   size: 9,
-                  color: widget.enabledUp ? DSKColors.black : DSKColors.grey75),
+                  color: widget.enabledUp ? DSKTheme.black : DSKTheme.grey75),
             ),
           )),
         ),
@@ -135,8 +135,7 @@ class DSKButtonsUpDownState extends State<DSKButtonsUpDown> {
               padding: const EdgeInsets.fromLTRB(2, 1, 2, 0),
               child: Icon(CupertinoIcons.chevron_down,
                   size: 9,
-                  color:
-                      widget.enabledDown ? DSKColors.black : DSKColors.grey75),
+                  color: widget.enabledDown ? DSKTheme.black : DSKTheme.grey75),
             ),
           )),
         ),

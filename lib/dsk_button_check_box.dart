@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'dsk_app_inherited.dart';
-import 'dsk_theme_manager.dart';
-import 'dsk_theme_colors.dart';
+import 'dsk_theme_notifier.dart';
+import 'dsk_theme.dart';
 
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
@@ -43,11 +42,10 @@ class DSKButtonCheckBox extends StatefulWidget {
 /// This class manages the widget's internal state, including the current
 /// selection state and the app focus status.
 class DSKButtonCheckBoxState extends State<DSKButtonCheckBox> {
-
   @override
   Widget build(BuildContext context) {
-    DSKThemeManager themeManager = DSKAppInheritedWidget.of(context)!.changeNotifier; // React to theme changes
-
+    DSKTheme themeManager =
+        DSKThemeNotifier.of(context)!.changeNotifier; // React to theme changes
 
     /// Calculate the checkbox size based on the specified size property
     double boxSize = widget.size;
@@ -69,8 +67,9 @@ class DSKButtonCheckBoxState extends State<DSKButtonCheckBox> {
           painter: VNTButtonCheckBoxPainter(
 
               /// Set the action color based on the theme
-              actionColor: DSKColors.accent,
-              backgroundColor: DSKColors.backgroundSecondary0,
+              colorAccent: themeManager.accent,
+              colorAccent200: themeManager.accent200,
+              colorBackgroundSecondary0: themeManager.backgroundSecondary0,
 
               /// Set the isSelected flag based on the widget's value property
               isSelected: widget.value,
@@ -90,10 +89,11 @@ class DSKButtonCheckBoxState extends State<DSKButtonCheckBox> {
 /// It handles the painting of the checkbox's background, border, and checkmark.
 class VNTButtonCheckBoxPainter extends CustomPainter {
   /// The color used for the checkbox's action area
-  final Color actionColor;
+  final Color colorAccent;
+  final Color colorAccent200;
 
   /// The color used for the checkbox's background
-  final Color backgroundColor;
+  final Color colorBackgroundSecondary0;
 
   /// Whether the checkbox is currently selected
   final bool isSelected;
@@ -108,8 +108,9 @@ class VNTButtonCheckBoxPainter extends CustomPainter {
   final bool isLightTheme;
 
   VNTButtonCheckBoxPainter({
-    required this.actionColor,
-    required this.backgroundColor,
+    required this.colorAccent,
+    required this.colorAccent200,
+    required this.colorBackgroundSecondary0,
     required this.isSelected,
     required this.hasAppFocus,
     required this.size,
@@ -133,12 +134,12 @@ class VNTButtonCheckBoxPainter extends CustomPainter {
     if (isLightTheme) {
       shadowOffset = const Offset(0, -10);
       shadowPaint = Paint()
-        ..color = DSKColors.black.withOpacity(0.25)
+        ..color = DSKTheme.black.withOpacity(0.25)
         ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 10);
     } else {
       shadowOffset = const Offset(0, -8);
       shadowPaint = Paint()
-        ..color = DSKColors.black.withOpacity(0.5)
+        ..color = DSKTheme.black.withOpacity(0.5)
         ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 6);
     }
 
@@ -167,7 +168,7 @@ class VNTButtonCheckBoxPainter extends CustomPainter {
       LinearGradient gradient = LinearGradient(
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
-        colors: [DSKColors.accent200, DSKColors.accent],
+        colors: [colorAccent200, colorAccent],
       );
 
       paint = Paint()
@@ -179,16 +180,16 @@ class VNTButtonCheckBoxPainter extends CustomPainter {
       // Draw background square & shadow
       paint = Paint()
         ..style = PaintingStyle.fill
-        ..color = backgroundColor;
+        ..color = colorBackgroundSecondary0;
       canvas.drawRRect(roundedSquare, paint);
 
       drawShadow(canvas, size, squareRect);
     }
 
     // Draw outer square
-    Color outerColor = DSKColors.grey;
+    Color outerColor = DSKTheme.grey;
     if (!isLightTheme) {
-      outerColor = DSKColors.grey600;
+      outerColor = DSKTheme.grey600;
     }
     paint = Paint()
       ..style = PaintingStyle.stroke
@@ -198,9 +199,9 @@ class VNTButtonCheckBoxPainter extends CustomPainter {
     canvas.drawRRect(roundedSquare, paint);
 
     if (isSelected) {
-      Color selectColor = DSKColors.white;
+      Color selectColor = DSKTheme.white;
       if (isLightTheme && !hasAppFocus) {
-        selectColor = DSKColors.black;
+        selectColor = DSKTheme.black;
       }
       Paint linePaint = Paint()
         ..color = selectColor
@@ -221,8 +222,9 @@ class VNTButtonCheckBoxPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant VNTButtonCheckBoxPainter oldDelegate) {
-    return oldDelegate.actionColor != actionColor ||
-        oldDelegate.backgroundColor != backgroundColor ||
+    return oldDelegate.colorAccent != colorAccent ||
+        oldDelegate.colorAccent200 != colorAccent200 ||
+        oldDelegate.colorBackgroundSecondary0 != colorBackgroundSecondary0 ||
         oldDelegate.isSelected != isSelected ||
         oldDelegate.hasAppFocus != hasAppFocus ||
         oldDelegate.size != size;

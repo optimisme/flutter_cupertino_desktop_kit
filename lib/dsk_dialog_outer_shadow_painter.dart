@@ -1,17 +1,17 @@
 import 'package:flutter/cupertino.dart';
-import 'dsk_theme_colors.dart';
+import 'package:flutter_desktop_cupertino/dsk_theme.dart';
 
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
 class DSKDialogOuterShadowPainter extends CustomPainter {
+  final Color colorBackground;
   final Path pathContour;
-  final Color backgroundColor;
   final bool isLightTheme;
 
   DSKDialogOuterShadowPainter(
-      {required this.pathContour,
-      required this.backgroundColor,
+      {required this.colorBackground,
+      required this.pathContour,
       required this.isLightTheme});
 
   @override
@@ -21,7 +21,7 @@ class DSKDialogOuterShadowPainter extends CustomPainter {
 
     // Pinta el fons
     final Paint paintBack = Paint()
-      ..color = backgroundColor
+      ..color = colorBackground
       ..style = PaintingStyle.fill;
 
     canvas.drawPath(pathContour, paintBack);
@@ -29,7 +29,7 @@ class DSKDialogOuterShadowPainter extends CustomPainter {
     // Pinta el contorn
     final paintLine = Paint()
       ..strokeWidth = 0.5
-      ..color = isLightTheme ? DSKColors.grey200 : DSKColors.grey500
+      ..color = isLightTheme ? DSKTheme.grey200 : DSKTheme.grey500
       ..style = PaintingStyle.stroke;
 
     canvas.drawPath(pathContour, paintLine);
@@ -47,7 +47,7 @@ class DSKDialogOuterShadowPainter extends CustomPainter {
 
     // Defineix i dibuixa l'ombra
     Color shadowColor =
-        isLightTheme ? DSKColors.black.withOpacity(0.5) : DSKColors.black;
+        isLightTheme ? DSKTheme.black.withOpacity(0.5) : DSKTheme.black;
     final shadowPaint = Paint()
       ..color = shadowColor
       ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 4);
@@ -58,8 +58,8 @@ class DSKDialogOuterShadowPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant DSKDialogOuterShadowPainter oldDelegate) {
-    return pathContour != oldDelegate.pathContour ||
-        backgroundColor != oldDelegate.backgroundColor ||
+    return colorBackground != oldDelegate.colorBackground ||
+        pathContour != oldDelegate.pathContour ||
         isLightTheme != oldDelegate.isLightTheme;
   }
 

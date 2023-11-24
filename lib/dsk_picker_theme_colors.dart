@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'dsk_app_inherited.dart';
-import 'dsk_theme_manager.dart';
-import 'dsk_theme_colors.dart';
+import 'dsk_theme_notifier.dart';
+import 'dsk_theme.dart';
 
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
@@ -50,7 +49,8 @@ class DSKPickerThemeColorsState extends State<DSKPickerThemeColors> {
 
   @override
   Widget build(BuildContext context) {
-    DSKThemeManager themeManager = DSKAppInheritedWidget.of(context)!.changeNotifier; // React to theme changes
+    DSKTheme theme =
+        DSKThemeNotifier.of(context)!.changeNotifier; // React to theme changes
 
     // Index to keep track of each color's position.
     int index = -1;
@@ -61,10 +61,10 @@ class DSKPickerThemeColorsState extends State<DSKPickerThemeColors> {
         Color colorBorder = color;
 
         // Adjust the border color based on the theme and color brightness.
-        if (themeManager.isLight) {
-          colorBorder = DSKColors.adjustColor(color, 1, 0.75);
+        if (theme.isLight) {
+          colorBorder = DSKTheme.adjustColor(color, 1, 0.75);
         } else {
-          colorBorder = DSKColors.adjustColor(color, 1, 1.25);
+          colorBorder = DSKTheme.adjustColor(color, 1, 1.25);
         }
         index = index + 1;
         return GestureDetector(
@@ -90,7 +90,7 @@ class DSKPickerThemeColorsState extends State<DSKPickerThemeColors> {
                       height: 6,
                       decoration: const BoxDecoration(
                         shape: BoxShape.circle,
-                        color: DSKColors.white,
+                        color: DSKTheme.white,
                       ),
                     )
                   : null, // Si no està seleccionat, no mostra res

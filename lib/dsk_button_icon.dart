@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'dsk_app_inherited.dart';
-import 'dsk_theme_manager.dart';
-import 'dsk_theme_colors.dart';
+import 'dsk_theme_notifier.dart';
+import 'dsk_theme.dart';
 
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
@@ -72,23 +71,24 @@ class DSKButtonIconState extends State<DSKButtonIcon> {
 
   @override
   Widget build(BuildContext context) {
-    DSKThemeManager themeManager = DSKAppInheritedWidget.of(context)!.changeNotifier; // React to theme changes
+    DSKTheme theme =
+        DSKThemeNotifier.of(context)!.changeNotifier; // React to theme changes
 
-    final Color backgroundColor = themeManager.isLight
+    final Color backgroundColor = theme.isLight
         ? _isPressed
-            ? DSKColors.grey75
+            ? DSKTheme.grey75
             : _isHovering
-                ? DSKColors.grey50
+                ? DSKTheme.grey50
                 : widget.isSelected
-                    ? DSKColors.backgroundSecondary1
-                    : DSKColors.transparent
+                    ? theme.backgroundSecondary1
+                    : DSKTheme.transparent
         : _isPressed
-            ? DSKColors.grey
+            ? DSKTheme.grey
             : _isHovering
-                ? DSKColors.grey600
+                ? DSKTheme.grey600
                 : widget.isSelected
-                    ? DSKColors.backgroundSecondary1
-                    : DSKColors.transparent;
+                    ? theme.backgroundSecondary1
+                    : DSKTheme.transparent;
 
     return MouseRegion(
       onEnter: _onMouseEnter,
@@ -109,9 +109,9 @@ class DSKButtonIconState extends State<DSKButtonIcon> {
                     alignment: Alignment.center,
                     child: Icon(
                       widget.icon,
-                      color: widget.isSelected && themeManager.isAppFocused
-                          ? DSKColors.accent
-                          : DSKColors.text,
+                      color: widget.isSelected && theme.isAppFocused
+                          ? theme.accent
+                          : theme.text,
                       size: widget.size * 0.5, // Icona més petita que el botó
                     )),
               )
@@ -125,7 +125,7 @@ class DSKButtonIconState extends State<DSKButtonIcon> {
                     alignment: Alignment.center,
                     child: Icon(
                       widget.icon,
-                      color: DSKColors.text,
+                      color: theme.text,
                       size: widget.size * 0.75,
                     )),
               ),

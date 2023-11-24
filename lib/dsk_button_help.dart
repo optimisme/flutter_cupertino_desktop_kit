@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'dsk_app_inherited.dart';
-import 'dsk_theme_manager.dart';
-import 'dsk_theme_colors.dart';
+import 'dsk_theme_notifier.dart';
+import 'dsk_theme.dart';
 
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
@@ -54,7 +53,8 @@ class DSKButtonHelpState extends State<DSKButtonHelp> {
 
   @override
   Widget build(BuildContext context) {
-    DSKThemeManager themeManager = DSKAppInheritedWidget.of(context)!.changeNotifier; // React to theme changes
+    DSKTheme theme =
+        DSKThemeNotifier.of(context)!.changeNotifier; // React to theme changes
 
     /// Creates a GestureDetector widget to handle tap events.
     return GestureDetector(
@@ -65,22 +65,22 @@ class DSKButtonHelpState extends State<DSKButtonHelp> {
       child: DecoratedBox(
         decoration: BoxDecoration(
           color: _isPressed
-              ? themeManager.isLight
-                  ? DSKColors.grey50
-                  : DSKColors.grey500
-              : DSKColors.backgroundSecondary0,
+              ? theme.isLight
+                  ? DSKTheme.grey50
+                  : DSKTheme.grey500
+              : theme.backgroundSecondary0,
           shape: BoxShape.circle,
           boxShadow: [
             BoxShadow(
-              color: DSKColors.text.withOpacity(0.1),
+              color: theme.text.withOpacity(0.1),
               spreadRadius: 0,
               blurRadius: 1,
               offset: const Offset(0, 1),
             ),
           ],
-          border: themeManager.isLight
-              ? Border.all(color: DSKColors.grey75)
-              : Border.all(color: DSKColors.grey600),
+          border: theme.isLight
+              ? Border.all(color: DSKTheme.grey75)
+              : Border.all(color: DSKTheme.grey600),
         ),
         child: Container(
           width: widget.size,
@@ -90,7 +90,7 @@ class DSKButtonHelpState extends State<DSKButtonHelp> {
             '?',
             style: TextStyle(
               fontSize: widget.size / 1.5,
-              color: DSKColors.text,
+              color: theme.text,
               fontWeight: FontWeight.w300,
             ),
           ),
