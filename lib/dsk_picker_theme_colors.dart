@@ -54,7 +54,7 @@ class DSKPickerThemeColorsState extends State<DSKPickerThemeColors> {
 
     // Index to keep track of each color's position.
     int index = -1;
-    return Row(
+    return Wrap(
       children: widget.colors.entries.map((entry) {
         final String colorName = entry.key;
         final Color color = entry.value;
