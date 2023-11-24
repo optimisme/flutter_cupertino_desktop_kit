@@ -36,6 +36,24 @@ class DSKButtonHelpState extends State<DSKButtonHelp> {
   /// Whether the button is currently pressed.
   bool _isPressed = false;
 
+  @override
+  void initState() {
+    super.initState();
+    DSKThemeManager().addListener(_update);
+  }
+
+  @override
+  void dispose() {
+    DSKThemeManager().removeListener(_update);
+    super.dispose();
+  }
+
+  void _update() {
+    if (mounted) {
+      setState(() {});
+    }
+  }
+
   /// Handles the `onTapDown` event, updating the `_isPressed` state variable.
   void _onTapDown(TapDownDetails details) {
     setState(() => _isPressed = true);

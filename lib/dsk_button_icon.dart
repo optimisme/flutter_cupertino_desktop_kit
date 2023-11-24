@@ -44,6 +44,24 @@ class DSKButtonIconState extends State<DSKButtonIcon> {
   /// Whether the mouse is currently hovering over the button.
   bool _isHovering = false;
 
+  @override
+  void initState() {
+    super.initState();
+    DSKThemeManager().addListener(_update);
+  }
+
+  @override
+  void dispose() {
+    DSKThemeManager().removeListener(_update);
+    super.dispose();
+  }
+
+  void _update() {
+    if (mounted) {
+      setState(() {});
+    }
+  }
+
   /// Handles the `onTapDown` event, updating the `_isPressed` state variable.
   void _onTapDown(TapDownDetails details) {
     setState(() => _isPressed = true);

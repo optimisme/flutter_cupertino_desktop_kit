@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'dsk_field_numeric.dart';
 import 'dsk_picker_360.dart';
+import 'dsk_theme_manager.dart';
 
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
@@ -31,7 +32,20 @@ class DSKField360State extends State<DSKField360> {
   @override
   void initState() {
     super.initState();
+    DSKThemeManager().addListener(_update);
     _currentAngle = widget.defaultValue;
+  }
+
+  @override
+  void dispose() {
+    DSKThemeManager().removeListener(_update);
+    super.dispose();
+  }
+
+  void _update() {
+    if (mounted) {
+      setState(() {});
+    }
   }
 
   void _onChanged(String origin, double angle) {

@@ -30,7 +30,20 @@ class DSKPicker360State extends State<DSKPicker360> {
   @override
   void initState() {
     super.initState();
+    DSKThemeManager().addListener(_update);
     _currentAngle = widget.defaultValue;
+  }
+
+  @override
+  void dispose() {
+    DSKThemeManager().removeListener(_update);
+    super.dispose();
+  }
+
+  void _update() {
+    if (mounted) {
+      setState(() {});
+    }
   }
 
   void setValue(double value) {

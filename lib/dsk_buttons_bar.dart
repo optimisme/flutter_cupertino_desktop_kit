@@ -48,7 +48,20 @@ class DSKButtonsBarState extends State<DSKButtonsBar> {
   @override
   void initState() {
     super.initState();
+    DSKThemeManager().addListener(_update);
     _selectedStates = widget.options.map((option) => Map.of(option)).toList();
+  }
+
+  @override
+  void dispose() {
+    DSKThemeManager().removeListener(_update);
+    super.dispose();
+  }
+
+  void _update() {
+    if (mounted) {
+      setState(() {});
+    }
   }
 
   /// Handles tap events on buttons, updating the selection state.

@@ -38,6 +38,24 @@ class DSKButtonRadio extends StatefulWidget {
 /// Manages the state and rendering of the radio button.
 class DSKButtonRadioState extends State<DSKButtonRadio> {
   @override
+  void initState() {
+    super.initState();
+    DSKThemeManager().addListener(_update);
+  }
+
+  @override
+  void dispose() {
+    DSKThemeManager().removeListener(_update);
+    super.dispose();
+  }
+
+  void _update() {
+    if (mounted) {
+      setState(() {});
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     DSKThemeManager themeManager = DSKThemeManager();
 

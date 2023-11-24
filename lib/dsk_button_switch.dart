@@ -36,6 +36,24 @@ class DSKButtonSwitchState extends State<DSKButtonSwitch> {
   final int _animationMillis = 200;
 
   @override
+  void initState() {
+    super.initState();
+    DSKThemeManager().addListener(_update);
+  }
+
+  @override
+  void dispose() {
+    DSKThemeManager().removeListener(_update);
+    super.dispose();
+  }
+
+  void _update() {
+    if (mounted) {
+      setState(() {});
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     DSKThemeManager themeManager = DSKThemeManager();
 

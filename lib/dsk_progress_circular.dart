@@ -34,6 +34,8 @@ class DSKProgressCircularState extends State<DSKProgressCircular>
   @override
   void initState() {
     super.initState();
+    DSKThemeManager().addListener(_update);
+
     _controller = AnimationController(
       vsync: this,
       duration: Duration(milliseconds: _animationMillis),
@@ -56,6 +58,20 @@ class DSKProgressCircularState extends State<DSKProgressCircular>
 
     if (widget.isIndeterminate && widget.isRunning) {
       startIndeterminateAnimation();
+    }
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    _controller.dispose();
+    DSKThemeManager().removeListener(_update);
+    super.dispose();
+  }
+
+  void _update() {
+    if (mounted) {
+      setState(() {});
     }
   }
 
@@ -116,13 +132,6 @@ class DSKProgressCircularState extends State<DSKProgressCircular>
     } else if (status == AnimationStatus.dismissed) {
       _controller.forward();
     }
-  }
-
-  @override
-  void dispose() {
-    _timer?.cancel();
-    _controller.dispose();
-    super.dispose();
   }
 
   @override

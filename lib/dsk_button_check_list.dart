@@ -52,20 +52,30 @@ class DSKButtonCheckListState extends State<DSKButtonCheckList> {
   /// The index of the option that is currently selected.
   int _selectedIndex = 0;
 
-  /// Handles the selection of an option.
-  ///
-  /// Sets the `_selectedIndex` state variable to the index of the selected option and calls the `onSelect` callback function, if it is not null.
+  @override
+  void initState() {
+    super.initState();
+    DSKThemeManager().addListener(_update);
+    _selectedIndex = widget.defaultIndex;
+  }
+
+  @override
+  void dispose() {
+    DSKThemeManager().removeListener(_update);
+    super.dispose();
+  }
+
+  void _update() {
+    if (mounted) {
+      setState(() {});
+    }
+  }
+
   _select(int index) {
     setState(() {
       _selectedIndex = index;
     });
     widget.onSelect?.call(index, widget.options[index]);
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _selectedIndex = widget.defaultIndex;
   }
 
   @override

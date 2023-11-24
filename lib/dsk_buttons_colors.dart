@@ -39,13 +39,32 @@ class DSKButtonsColors extends StatefulWidget {
 ///
 /// Manages the rendering of the color selection buttons.
 class DSKButtonsColorsState extends State<DSKButtonsColors> {
+  String _selectedColor = "";
+
+  @override
+  void initState() {
+    super.initState();
+    DSKThemeManager().addListener(_update);
+    _selectedColor = widget.selectedColor;
+  }
+
+  @override
+  void dispose() {
+    DSKThemeManager().removeListener(_update);
+    super.dispose();
+  }
+
+  void _update() {
+    if (mounted) {
+      setState(() {});
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     DSKThemeManager themeManager = DSKThemeManager();
-
     // Index to keep track of each color's position.
     int index = -1;
-
     return Row(
       children: widget.colors.entries.map((entry) {
         final String colorName = entry.key;
@@ -61,8 +80,10 @@ class DSKButtonsColorsState extends State<DSKButtonsColors> {
         index = index + 1;
         return GestureDetector(
           onTap: () {
-            widget.onColorChanged?.call(
-                colorName); // Pots passar el nom del color com a paràmetre
+            widget.onColorChanged?.call(colorName);
+            setState(() {
+              _selectedColor = colorName;
+            });
           },
           child: Container(
             width: 16,
@@ -74,7 +95,7 @@ class DSKButtonsColorsState extends State<DSKButtonsColors> {
               border: Border.all(color: colorBorder, width: 1.25),
             ),
             child: Center(
-              child: widget.selectedColor == colorName
+              child: _selectedColor == colorName
                   ? Container(
                       width: 6,
                       height: 6,

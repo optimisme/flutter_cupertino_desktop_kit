@@ -43,8 +43,27 @@ class DSKButtonCheckBox extends StatefulWidget {
 /// selection state and the app focus status.
 class DSKButtonCheckBoxState extends State<DSKButtonCheckBox> {
   @override
+  void initState() {
+    super.initState();
+    DSKThemeManager().addListener(_update);
+  }
+
+  @override
+  void dispose() {
+    DSKThemeManager().removeListener(_update);
+    super.dispose();
+  }
+
+  void _update() {
+    if (mounted) {
+      setState(() {});
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     DSKThemeManager themeManager = DSKThemeManager();
+    print(themeManager.isLight);
 
     /// Calculate the checkbox size based on the specified size property
     double boxSize = widget.size;

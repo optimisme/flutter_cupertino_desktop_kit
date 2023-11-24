@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'dsk_theme_colors.dart';
+import 'dsk_theme_manager.dart';
 
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
@@ -50,6 +51,7 @@ class DSKButtonDisclosureState extends State<DSKButtonDisclosure>
   @override
   void initState() {
     super.initState();
+    DSKThemeManager().addListener(_update);
 
     /// Creates an animation controller with a duration of [_animationMillis] milliseconds.
     _controller = AnimationController(
@@ -69,17 +71,24 @@ class DSKButtonDisclosureState extends State<DSKButtonDisclosure>
   }
 
   @override
+  void dispose() {
+    _controller.dispose();
+    DSKThemeManager().removeListener(_update);
+    super.dispose();
+  }
+
+  void _update() {
+    if (mounted) {
+      setState(() {});
+    }
+  }
+
+  @override
   void didUpdateWidget(DSKButtonDisclosure oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.value != oldWidget.value) {
       widget.value ? _controller.forward() : _controller.reverse();
     }
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
   }
 
   @override

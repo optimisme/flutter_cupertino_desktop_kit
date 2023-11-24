@@ -50,6 +50,7 @@ class DSKFieldTextState extends State<DSKFieldText> {
   @override
   void initState() {
     super.initState();
+    DSKThemeManager().addListener(_update);
     _internalFocusNode = widget.focusNode ?? FocusNode();
     _internalFocusNode.addListener(_handleFocusChanged);
   }
@@ -58,7 +59,14 @@ class DSKFieldTextState extends State<DSKFieldText> {
   void dispose() {
     _internalFocusNode.removeListener(_handleFocusChanged);
     _internalFocusNode.dispose();
+    DSKThemeManager().removeListener(_update);
     super.dispose();
+  }
+
+  void _update() {
+    if (mounted) {
+      setState(() {});
+    }
   }
 
   void _handleFocusChanged() {

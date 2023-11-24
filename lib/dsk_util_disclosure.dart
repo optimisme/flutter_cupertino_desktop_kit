@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'dsk_button_disclosure.dart';
+import 'dsk_theme_manager.dart';
 
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
@@ -30,6 +31,8 @@ class DSKUtilDisclosureState extends State<DSKUtilDisclosure>
   @override
   void initState() {
     super.initState();
+    DSKThemeManager().addListener(_update);
+
     _controller = AnimationController(
       duration: Duration(milliseconds: _animationMillis),
       vsync: this,
@@ -41,7 +44,14 @@ class DSKUtilDisclosureState extends State<DSKUtilDisclosure>
   @override
   void dispose() {
     _controller.dispose();
+    DSKThemeManager().removeListener(_update);
     super.dispose();
+  }
+
+  void _update() {
+    if (mounted) {
+      setState(() {});
+    }
   }
 
   void _toggleDisclosure() {

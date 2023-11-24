@@ -46,8 +46,21 @@ class DSKButtonsSegmentedState extends State<DSKButtonsSegmented> {
   @override
   void initState() {
     super.initState();
+    DSKThemeManager().addListener(_update);
     _selectedIndex = widget.defaultIndex;
     _keys.addAll(List.generate(widget.options.length, (index) => GlobalKey()));
+  }
+
+  @override
+  void dispose() {
+    DSKThemeManager().removeListener(_update);
+    super.dispose();
+  }
+
+  void _update() {
+    if (mounted) {
+      setState(() {});
+    }
   }
 
   /// Handles the selection of an option.

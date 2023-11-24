@@ -49,7 +49,7 @@ class DSKDialogDraggableState extends State<DSKDialogDraggable>
   @override
   void initState() {
     super.initState();
-
+    DSKThemeManager().addListener(_update);
     if (widget.isAnimated) {
       animationController = AnimationController(
         duration: Duration(milliseconds: _animationMillis),
@@ -112,8 +112,15 @@ class DSKDialogDraggableState extends State<DSKDialogDraggable>
 
   @override
   void dispose() {
+    DSKThemeManager().removeListener(_update);
     animationController?.dispose();
     super.dispose();
+  }
+
+  void _update() {
+    if (mounted) {
+      setState(() {});
+    }
   }
 
   void hide() {

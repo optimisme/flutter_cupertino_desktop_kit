@@ -58,12 +58,20 @@ class DSKButtonSelectState extends State<DSKButtonSelect> {
   @override
   void initState() {
     super.initState();
+    DSKThemeManager().addListener(_update);
     _selectedIndex = widget.defaultIndex;
   }
 
   @override
   void dispose() {
+    DSKThemeManager().removeListener(_update);
     super.dispose();
+  }
+
+  void _update() {
+    if (mounted) {
+      setState(() {});
+    }
   }
 
   /// Method to show a popover list when the button is tapped.

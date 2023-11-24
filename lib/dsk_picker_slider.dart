@@ -26,7 +26,20 @@ class DSKPickerSliderState extends State<DSKPickerSlider> {
   @override
   void initState() {
     super.initState();
+    DSKThemeManager().addListener(_update);
     _currentValue = widget.defaultValue;
+  }
+
+  @override
+  void dispose() {
+    DSKThemeManager().removeListener(_update);
+    super.dispose();
+  }
+
+  void _update() {
+    if (mounted) {
+      setState(() {});
+    }
   }
 
   void setValue(double value) {

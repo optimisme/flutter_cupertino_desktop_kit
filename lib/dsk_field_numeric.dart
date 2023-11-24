@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'dsk_field_text.dart';
 import 'dsk_buttons_up_down.dart';
+import 'dsk_theme_manager.dart';
 
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
@@ -47,6 +48,7 @@ class DSKFieldNumericState extends State<DSKFieldNumeric> {
   @override
   void initState() {
     super.initState();
+    DSKThemeManager().addListener(_update);
     _currentValue = _fixValue(widget.defaultValue.toString());
     _controller = TextEditingController(text: _fixText(_currentValue));
     _controller.addListener(_onTextChanged);
@@ -56,7 +58,14 @@ class DSKFieldNumericState extends State<DSKFieldNumeric> {
   void dispose() {
     _controller.removeListener(_onTextChanged);
     _controller.dispose();
+    DSKThemeManager().removeListener(_update);
     super.dispose();
+  }
+
+  void _update() {
+    if (mounted) {
+      setState(() {});
+    }
   }
 
   void setValue(double value) {

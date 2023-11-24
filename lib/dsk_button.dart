@@ -50,6 +50,24 @@ class DSKButtonState extends State<DSKButton> {
   bool _isPressed = false;
 
   @override
+  void initState() {
+    super.initState();
+    DSKThemeManager().addListener(_update);
+  }
+
+  @override
+  void dispose() {
+    DSKThemeManager().removeListener(_update);
+    super.dispose();
+  }
+
+  void _update() {
+    if (mounted) {
+      setState(() {});
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     DSKThemeManager themeManager = DSKThemeManager();
 
