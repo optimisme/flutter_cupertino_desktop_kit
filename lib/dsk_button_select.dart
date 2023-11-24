@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'dsk_app_inherited.dart';
 import 'dsk_theme_manager.dart';
 import 'dsk_button_check_list.dart';
 import 'dsk_dialogs_manager.dart';
@@ -58,20 +59,12 @@ class DSKButtonSelectState extends State<DSKButtonSelect> {
   @override
   void initState() {
     super.initState();
-    DSKThemeManager().addListener(_update);
     _selectedIndex = widget.defaultIndex;
   }
 
   @override
   void dispose() {
-    DSKThemeManager().removeListener(_update);
     super.dispose();
-  }
-
-  void _update() {
-    if (mounted) {
-      setState(() {});
-    }
   }
 
   /// Method to show a popover list when the button is tapped.
@@ -105,7 +98,7 @@ class DSKButtonSelectState extends State<DSKButtonSelect> {
 
   @override
   Widget build(BuildContext context) {
-    DSKThemeManager themeManager = DSKThemeManager();
+    DSKThemeManager themeManager = DSKAppInheritedWidget.of(context)!.changeNotifier; // React to theme changes
 
     BoxDecoration decoration;
     TextStyle textStyle;

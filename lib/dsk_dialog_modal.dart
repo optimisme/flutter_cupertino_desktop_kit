@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
+import 'dsk_app_inherited.dart';
 import 'dsk_dialog_outer_shadow_painter.dart';
 import 'dsk_dialog_popover_clipper.dart';
 import 'dsk_theme_manager.dart';
@@ -44,7 +45,6 @@ class DSKDialogModalState extends State<DSKDialogModal>
   @override
   void initState() {
     super.initState();
-    DSKThemeManager().addListener(_update);
 
     if (widget.isAnimated) {
       animationController = AnimationController(
@@ -107,14 +107,7 @@ class DSKDialogModalState extends State<DSKDialogModal>
   @override
   void dispose() {
     animationController?.dispose();
-    DSKThemeManager().removeListener(_update);
     super.dispose();
-  }
-
-  void _update() {
-    if (mounted) {
-      setState(() {});
-    }
   }
 
   void hide() {
@@ -123,7 +116,7 @@ class DSKDialogModalState extends State<DSKDialogModal>
 
   @override
   Widget build(BuildContext context) {
-    DSKThemeManager themeManager = DSKThemeManager();
+    DSKThemeManager themeManager = DSKAppInheritedWidget.of(context)!.changeNotifier; // React to theme changes
 
     Color backgroundColor = !widget.isTranslucent
         ? DSKColors.backgroundSecondary0

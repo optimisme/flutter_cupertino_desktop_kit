@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'dsk_theme_manager.dart';
+import 'dsk_app_inherited.dart';
 
 // Main application widget
 class DSKCupertinoApp extends StatefulWidget {
@@ -50,16 +51,17 @@ class DSKCupertinoAppState extends State<DSKCupertinoApp>
     super.didChangePlatformBrightness();
     if (_themeManager.appearanceConfig == "system") {
       _themeManager.setAppearanceConfig(context);
-      setState(() {});
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoApp(
-      debugShowCheckedModeBanner: false,
-      theme: _themeManager.getThemeData(context),
-      home: widget.child,
-    );
+    return DSKAppInheritedWidget(
+      changeNotifier: _themeManager,
+      child:CupertinoApp(
+        debugShowCheckedModeBanner: false,
+        theme: _themeManager.getThemeData(context),
+        home: widget.child,
+    ));
   }
 }

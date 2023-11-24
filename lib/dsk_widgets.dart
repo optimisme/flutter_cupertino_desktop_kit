@@ -1,4 +1,5 @@
 export 'dsk_app_cupertino.dart';
+export 'dsk_app_inherited.dart';
 export 'dsk_app_sidebars.dart';
 export 'dsk_button.dart';
 export 'dsk_button_check_box.dart';

@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
+import 'dsk_app_inherited.dart';
 import 'dsk_dialog_outer_shadow_painter.dart';
 import 'dsk_dialog_popover_clipper.dart';
 import 'dsk_dialogs_manager.dart';
@@ -49,7 +50,6 @@ class DSKDialogDraggableState extends State<DSKDialogDraggable>
   @override
   void initState() {
     super.initState();
-    DSKThemeManager().addListener(_update);
     if (widget.isAnimated) {
       animationController = AnimationController(
         duration: Duration(milliseconds: _animationMillis),
@@ -112,15 +112,8 @@ class DSKDialogDraggableState extends State<DSKDialogDraggable>
 
   @override
   void dispose() {
-    DSKThemeManager().removeListener(_update);
     animationController?.dispose();
     super.dispose();
-  }
-
-  void _update() {
-    if (mounted) {
-      setState(() {});
-    }
   }
 
   void hide() {
@@ -131,7 +124,7 @@ class DSKDialogDraggableState extends State<DSKDialogDraggable>
 
   @override
   Widget build(BuildContext context) {
-    DSKThemeManager themeManager = DSKThemeManager();
+    DSKThemeManager themeManager = DSKAppInheritedWidget.of(context)!.changeNotifier; // React to theme changes
 
     if (isSizeDetermined) {
       var leftPosition = position.dx;

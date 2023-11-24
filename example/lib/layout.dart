@@ -53,6 +53,7 @@ class LayoutState extends State<Layout> {
 
   @override
   Widget build(BuildContext context) {
+    print("build layout.dart");
     Widget centralWidget;
     switch (_section) {
       case "Introduction":
@@ -61,6 +62,7 @@ class LayoutState extends State<Layout> {
         break;
       case "Buttons":
         // ignore: prefer_const_constructors
+        print("build layout.dart buttons");
         centralWidget = LayoutButtons();
         break;
       case "Progress":

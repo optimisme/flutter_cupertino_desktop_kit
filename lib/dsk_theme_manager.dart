@@ -10,17 +10,6 @@ class DSKThemeManager extends ChangeNotifier {
   String appearanceConfig = "system"; // light, dark, system
   String themeColor = "systemBlue";
 
-  // Instància única del singleton
-  static final DSKThemeManager _instance = DSKThemeManager._internal();
-
-  // Constructor privat per crear la instància única
-  DSKThemeManager._internal();
-
-  // Mètode estàtic per obtenir la instància del singleton
-  factory DSKThemeManager() {
-    return _instance;
-  }
-
   CupertinoThemeData getThemeData(BuildContext context) {
     String appearance = "";
 
@@ -29,7 +18,6 @@ class DSKThemeManager extends ChangeNotifier {
     CupertinoThemeData baseTheme =
         CupertinoThemeData(primaryColor: DSKColors.systemColors[themeColor]);
 
-    print("A");
     appearance = setAppearanceConfig(context, type: appearanceConfig, notify: false);
 
         // Set light/dark appearance colors and return theme
@@ -70,7 +58,7 @@ class DSKThemeManager extends ChangeNotifier {
       appearance = appearanceConfig;
     }
 
-    print("B"+appearanceConfig);
+    print("setAppearanceConfig: $appearance dsk_theme_manager.dart");
     _setAppearance(appearance, notify: notify);
 
     return appearance;
@@ -84,6 +72,7 @@ class DSKThemeManager extends ChangeNotifier {
     DSKColors.initColors(themeColor);
 
     // Set light/dark appearance colors and return theme
+    print("setAppearance: $appearance dsk_theme_manager.dart");
     if (appearance == "light") {
       isLight = true;
       DSKColors.background = CupertinoColors.white;

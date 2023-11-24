@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'dsk_app_inherited.dart';
 import 'dsk_theme_manager.dart';
 import 'dsk_theme_colors.dart';
 
@@ -44,24 +45,6 @@ class DSKButtonIconState extends State<DSKButtonIcon> {
   /// Whether the mouse is currently hovering over the button.
   bool _isHovering = false;
 
-  @override
-  void initState() {
-    super.initState();
-    DSKThemeManager().addListener(_update);
-  }
-
-  @override
-  void dispose() {
-    DSKThemeManager().removeListener(_update);
-    super.dispose();
-  }
-
-  void _update() {
-    if (mounted) {
-      setState(() {});
-    }
-  }
-
   /// Handles the `onTapDown` event, updating the `_isPressed` state variable.
   void _onTapDown(TapDownDetails details) {
     setState(() => _isPressed = true);
@@ -89,7 +72,7 @@ class DSKButtonIconState extends State<DSKButtonIcon> {
 
   @override
   Widget build(BuildContext context) {
-    DSKThemeManager themeManager = DSKThemeManager();
+    DSKThemeManager themeManager = DSKAppInheritedWidget.of(context)!.changeNotifier; // React to theme changes
 
     final Color backgroundColor = themeManager.isLight
         ? _isPressed

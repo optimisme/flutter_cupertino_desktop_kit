@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'dsk_app_inherited.dart';
 import 'dsk_theme_manager.dart';
 import 'dsk_theme_colors.dart';
 
@@ -36,24 +37,6 @@ class DSKButtonHelpState extends State<DSKButtonHelp> {
   /// Whether the button is currently pressed.
   bool _isPressed = false;
 
-  @override
-  void initState() {
-    super.initState();
-    DSKThemeManager().addListener(_update);
-  }
-
-  @override
-  void dispose() {
-    DSKThemeManager().removeListener(_update);
-    super.dispose();
-  }
-
-  void _update() {
-    if (mounted) {
-      setState(() {});
-    }
-  }
-
   /// Handles the `onTapDown` event, updating the `_isPressed` state variable.
   void _onTapDown(TapDownDetails details) {
     setState(() => _isPressed = true);
@@ -71,7 +54,7 @@ class DSKButtonHelpState extends State<DSKButtonHelp> {
 
   @override
   Widget build(BuildContext context) {
-    DSKThemeManager themeManager = DSKThemeManager();
+    DSKThemeManager themeManager = DSKAppInheritedWidget.of(context)!.changeNotifier; // React to theme changes
 
     /// Creates a GestureDetector widget to handle tap events.
     return GestureDetector(

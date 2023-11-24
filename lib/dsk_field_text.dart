@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
+import 'dsk_app_inherited.dart';
 import 'dsk_theme_manager.dart';
 import 'dsk_theme_colors.dart';
 
@@ -50,7 +51,6 @@ class DSKFieldTextState extends State<DSKFieldText> {
   @override
   void initState() {
     super.initState();
-    DSKThemeManager().addListener(_update);
     _internalFocusNode = widget.focusNode ?? FocusNode();
     _internalFocusNode.addListener(_handleFocusChanged);
   }
@@ -59,14 +59,7 @@ class DSKFieldTextState extends State<DSKFieldText> {
   void dispose() {
     _internalFocusNode.removeListener(_handleFocusChanged);
     _internalFocusNode.dispose();
-    DSKThemeManager().removeListener(_update);
     super.dispose();
-  }
-
-  void _update() {
-    if (mounted) {
-      setState(() {});
-    }
   }
 
   void _handleFocusChanged() {
@@ -77,7 +70,7 @@ class DSKFieldTextState extends State<DSKFieldText> {
 
   @override
   Widget build(BuildContext context) {
-    DSKThemeManager themeManager = DSKThemeManager();
+    DSKThemeManager themeManager = DSKAppInheritedWidget.of(context)!.changeNotifier; // React to theme changes
 
     final BorderRadius borderRadius = widget.isRounded
         ? BorderRadius.circular(25.0)

@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'dsk_app_inherited.dart';
 import 'dsk_theme_colors.dart';
 import 'dsk_theme_manager.dart';
 
@@ -51,7 +52,6 @@ class DSKButtonDisclosureState extends State<DSKButtonDisclosure>
   @override
   void initState() {
     super.initState();
-    DSKThemeManager().addListener(_update);
 
     /// Creates an animation controller with a duration of [_animationMillis] milliseconds.
     _controller = AnimationController(
@@ -73,14 +73,7 @@ class DSKButtonDisclosureState extends State<DSKButtonDisclosure>
   @override
   void dispose() {
     _controller.dispose();
-    DSKThemeManager().removeListener(_update);
     super.dispose();
-  }
-
-  void _update() {
-    if (mounted) {
-      setState(() {});
-    }
   }
 
   @override
@@ -93,6 +86,8 @@ class DSKButtonDisclosureState extends State<DSKButtonDisclosure>
 
   @override
   Widget build(BuildContext context) {
+    DSKAppInheritedWidget.of(context)!.changeNotifier; // React to theme changes
+
     return GestureDetector(
       onTap: () => widget.onChanged?.call(!widget.value),
       child: AnimatedBuilder(

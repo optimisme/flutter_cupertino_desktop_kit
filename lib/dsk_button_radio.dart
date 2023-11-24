@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'dsk_app_inherited.dart';
 import 'dsk_theme_manager.dart';
 import 'dsk_theme_colors.dart';
 
@@ -37,27 +38,10 @@ class DSKButtonRadio extends StatefulWidget {
 ///
 /// Manages the state and rendering of the radio button.
 class DSKButtonRadioState extends State<DSKButtonRadio> {
-  @override
-  void initState() {
-    super.initState();
-    DSKThemeManager().addListener(_update);
-  }
-
-  @override
-  void dispose() {
-    DSKThemeManager().removeListener(_update);
-    super.dispose();
-  }
-
-  void _update() {
-    if (mounted) {
-      setState(() {});
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
-    DSKThemeManager themeManager = DSKThemeManager();
+    DSKThemeManager themeManager = DSKAppInheritedWidget.of(context)!.changeNotifier; // React to theme changes
 
     double boxSize = widget.size;
 

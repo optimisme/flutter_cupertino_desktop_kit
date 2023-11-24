@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'dsk_app_inherited.dart';
 import 'dsk_theme_manager.dart';
 import 'dsk_theme_colors.dart';
 
@@ -26,20 +27,7 @@ class DSKPickerSliderState extends State<DSKPickerSlider> {
   @override
   void initState() {
     super.initState();
-    DSKThemeManager().addListener(_update);
     _currentValue = widget.defaultValue;
-  }
-
-  @override
-  void dispose() {
-    DSKThemeManager().removeListener(_update);
-    super.dispose();
-  }
-
-  void _update() {
-    if (mounted) {
-      setState(() {});
-    }
   }
 
   void setValue(double value) {
@@ -82,8 +70,7 @@ class DSKPickerSliderState extends State<DSKPickerSlider> {
 
   @override
   Widget build(BuildContext context) {
-    // ignore: unused_local_variable
-    DSKThemeManager themeManager = DSKThemeManager();
+    DSKThemeManager themeManager = DSKAppInheritedWidget.of(context)!.changeNotifier; // React to theme changes
 
     return GestureDetector(
       onTapDown: (details) {

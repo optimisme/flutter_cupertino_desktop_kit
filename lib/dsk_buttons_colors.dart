@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'dsk_app_inherited.dart';
 import 'dsk_theme_manager.dart';
 import 'dsk_theme_colors.dart';
 
@@ -44,25 +45,13 @@ class DSKButtonsColorsState extends State<DSKButtonsColors> {
   @override
   void initState() {
     super.initState();
-    DSKThemeManager().addListener(_update);
     _selectedColor = widget.selectedColor;
   }
 
   @override
-  void dispose() {
-    DSKThemeManager().removeListener(_update);
-    super.dispose();
-  }
-
-  void _update() {
-    if (mounted) {
-      setState(() {});
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
-    DSKThemeManager themeManager = DSKThemeManager();
+    DSKThemeManager themeManager = DSKAppInheritedWidget.of(context)!.changeNotifier; // React to theme changes
+
     // Index to keep track of each color's position.
     int index = -1;
     return Row(

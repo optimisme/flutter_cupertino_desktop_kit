@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'dsk_app_inherited.dart';
 import 'dsk_field_numeric.dart';
 import 'dsk_picker_360.dart';
 import 'dsk_theme_manager.dart';
@@ -32,20 +33,7 @@ class DSKField360State extends State<DSKField360> {
   @override
   void initState() {
     super.initState();
-    DSKThemeManager().addListener(_update);
     _currentAngle = widget.defaultValue;
-  }
-
-  @override
-  void dispose() {
-    DSKThemeManager().removeListener(_update);
-    super.dispose();
-  }
-
-  void _update() {
-    if (mounted) {
-      setState(() {});
-    }
   }
 
   void _onChanged(String origin, double angle) {
@@ -68,6 +56,8 @@ class DSKField360State extends State<DSKField360> {
 
   @override
   Widget build(BuildContext context) {
+    DSKAppInheritedWidget.of(context)!.changeNotifier; // React to theme changes
+
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [

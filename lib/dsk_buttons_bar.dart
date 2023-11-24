@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'dsk_app_inherited.dart';
 import 'dsk_theme_manager.dart';
 import 'dsk_theme_colors.dart';
 
@@ -48,20 +49,12 @@ class DSKButtonsBarState extends State<DSKButtonsBar> {
   @override
   void initState() {
     super.initState();
-    DSKThemeManager().addListener(_update);
     _selectedStates = widget.options.map((option) => Map.of(option)).toList();
   }
 
   @override
   void dispose() {
-    DSKThemeManager().removeListener(_update);
     super.dispose();
-  }
-
-  void _update() {
-    if (mounted) {
-      setState(() {});
-    }
   }
 
   /// Handles tap events on buttons, updating the selection state.
@@ -108,7 +101,7 @@ class DSKButtonsBarState extends State<DSKButtonsBar> {
 
   @override
   Widget build(BuildContext context) {
-    DSKThemeManager themeManager = DSKThemeManager();
+    DSKThemeManager themeManager = DSKAppInheritedWidget.of(context)!.changeNotifier; // React to theme changes
 
     List<Widget> buttonWidgets = List.generate(widget.options.length, (index) {
       // Determine border radius based on the position of the element

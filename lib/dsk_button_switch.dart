@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'dsk_app_inherited.dart';
 import 'dsk_theme_manager.dart';
 import 'dsk_theme_colors.dart';
 
@@ -36,26 +37,8 @@ class DSKButtonSwitchState extends State<DSKButtonSwitch> {
   final int _animationMillis = 200;
 
   @override
-  void initState() {
-    super.initState();
-    DSKThemeManager().addListener(_update);
-  }
-
-  @override
-  void dispose() {
-    DSKThemeManager().removeListener(_update);
-    super.dispose();
-  }
-
-  void _update() {
-    if (mounted) {
-      setState(() {});
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
-    DSKThemeManager themeManager = DSKThemeManager();
+    DSKThemeManager themeManager = DSKAppInheritedWidget.of(context)!.changeNotifier; // React to theme changes
 
     // Calculations for sizes and positions based on the provided `size`.
     double backRadius = widget.size * 12.0 / 24.0;

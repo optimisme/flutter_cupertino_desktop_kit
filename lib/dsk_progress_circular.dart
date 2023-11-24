@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math' as math;
 import 'package:flutter/cupertino.dart';
+import 'dsk_app_inherited.dart';
 import 'dsk_theme_manager.dart';
 import 'dsk_theme_colors.dart';
 
@@ -34,8 +35,6 @@ class DSKProgressCircularState extends State<DSKProgressCircular>
   @override
   void initState() {
     super.initState();
-    DSKThemeManager().addListener(_update);
-
     _controller = AnimationController(
       vsync: this,
       duration: Duration(milliseconds: _animationMillis),
@@ -65,14 +64,7 @@ class DSKProgressCircularState extends State<DSKProgressCircular>
   void dispose() {
     _timer?.cancel();
     _controller.dispose();
-    DSKThemeManager().removeListener(_update);
     super.dispose();
-  }
-
-  void _update() {
-    if (mounted) {
-      setState(() {});
-    }
   }
 
   @override
@@ -136,7 +128,8 @@ class DSKProgressCircularState extends State<DSKProgressCircular>
 
   @override
   Widget build(BuildContext context) {
-    DSKThemeManager themeManager = DSKThemeManager();
+    DSKThemeManager themeManager = DSKAppInheritedWidget.of(context)!.changeNotifier; // React to theme changes
+
     return AnimatedBuilder(
       animation: _controller,
       builder: (context, child) {

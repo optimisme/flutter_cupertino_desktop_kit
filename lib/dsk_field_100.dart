@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'dsk_app_inherited.dart';
 import 'dsk_field_numeric.dart';
 import 'dsk_picker_slider.dart';
 import 'dsk_theme_manager.dart';
@@ -32,20 +33,7 @@ class DSKField100State extends State<DSKField100> {
   @override
   void initState() {
     super.initState();
-    DSKThemeManager().addListener(_update);
     _currentValue = widget.defaultValue;
-  }
-
-  @override
-  void dispose() {
-    DSKThemeManager().removeListener(_update);
-    super.dispose();
-  }
-
-  void _update() {
-    if (mounted) {
-      setState(() {});
-    }
   }
 
   void _onChanged(String origin, double value) {
@@ -69,6 +57,8 @@ class DSKField100State extends State<DSKField100> {
 
   @override
   Widget build(BuildContext context) {
+    DSKAppInheritedWidget.of(context)!.changeNotifier; // React to theme changes
+
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [

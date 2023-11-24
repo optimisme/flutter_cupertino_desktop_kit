@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'dsk_app_inherited.dart';
 import 'dsk_theme_manager.dart';
 import 'dsk_theme_colors.dart';
 
@@ -42,28 +43,11 @@ class DSKButtonCheckBox extends StatefulWidget {
 /// This class manages the widget's internal state, including the current
 /// selection state and the app focus status.
 class DSKButtonCheckBoxState extends State<DSKButtonCheckBox> {
-  @override
-  void initState() {
-    super.initState();
-    DSKThemeManager().addListener(_update);
-  }
-
-  @override
-  void dispose() {
-    DSKThemeManager().removeListener(_update);
-    super.dispose();
-  }
-
-  void _update() {
-    if (mounted) {
-      setState(() {});
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
-    DSKThemeManager themeManager = DSKThemeManager();
-    print(themeManager.isLight);
+    DSKThemeManager themeManager = DSKAppInheritedWidget.of(context)!.changeNotifier; // React to theme changes
+
 
     /// Calculate the checkbox size based on the specified size property
     double boxSize = widget.size;

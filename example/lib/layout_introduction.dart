@@ -10,8 +10,12 @@ class LayoutIntroduction extends StatefulWidget {
 }
 
 class _LayoutIntroductionState extends State<LayoutIntroduction> {
+  
   @override
   Widget build(BuildContext context) {
+
+    DSKAppInheritedWidget.of(context)!.changeNotifier; // React to theme changes
+
     return Container(
         color: DSKColors.background,
         child: ListView(children: [

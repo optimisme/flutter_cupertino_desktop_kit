@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 import 'package:flutter/cupertino.dart';
+import 'dsk_app_inherited.dart';
 import 'dsk_theme_manager.dart';
 import 'dsk_theme_colors.dart';
 
@@ -30,20 +31,12 @@ class DSKPicker360State extends State<DSKPicker360> {
   @override
   void initState() {
     super.initState();
-    DSKThemeManager().addListener(_update);
     _currentAngle = widget.defaultValue;
   }
 
   @override
   void dispose() {
-    DSKThemeManager().removeListener(_update);
     super.dispose();
-  }
-
-  void _update() {
-    if (mounted) {
-      setState(() {});
-    }
   }
 
   void setValue(double value) {
@@ -72,7 +65,7 @@ class DSKPicker360State extends State<DSKPicker360> {
 
   @override
   Widget build(BuildContext context) {
-    DSKThemeManager themeManager = DSKThemeManager();
+    DSKThemeManager themeManager = DSKAppInheritedWidget.of(context)!.changeNotifier; // React to theme changes
 
     return GestureDetector(
       onPanUpdate: !widget.enabled ? null : _onPanUpdate,

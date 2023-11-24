@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'dsk_app_inherited.dart';
 import 'dsk_button_disclosure.dart';
 import 'dsk_theme_manager.dart';
 
@@ -31,7 +32,6 @@ class DSKUtilDisclosureState extends State<DSKUtilDisclosure>
   @override
   void initState() {
     super.initState();
-    DSKThemeManager().addListener(_update);
 
     _controller = AnimationController(
       duration: Duration(milliseconds: _animationMillis),
@@ -44,14 +44,7 @@ class DSKUtilDisclosureState extends State<DSKUtilDisclosure>
   @override
   void dispose() {
     _controller.dispose();
-    DSKThemeManager().removeListener(_update);
     super.dispose();
-  }
-
-  void _update() {
-    if (mounted) {
-      setState(() {});
-    }
   }
 
   void _toggleDisclosure() {
@@ -67,6 +60,8 @@ class DSKUtilDisclosureState extends State<DSKUtilDisclosure>
 
   @override
   Widget build(BuildContext context) {
+    DSKAppInheritedWidget.of(context)!.changeNotifier; // React to theme changes
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [

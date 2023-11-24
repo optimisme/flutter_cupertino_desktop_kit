@@ -11,6 +11,9 @@ class LayoutUtils extends StatefulWidget {
 class _LayoutUtilsState extends State<LayoutUtils> {
   @override
   Widget build(BuildContext context) {
+
+    DSKAppInheritedWidget.of(context)!.changeNotifier; // React to theme changes
+
     Widget line = Container(
       decoration: BoxDecoration(
         border: Border(
