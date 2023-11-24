@@ -1,10 +1,8 @@
 import 'dart:math';
-
 import 'package:flutter/cupertino.dart';
 import 'dsk_app_inherited.dart';
 import 'dsk_field_text.dart';
 import 'dsk_buttons_up_down.dart';
-import 'dsk_theme_manager.dart';
 
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
@@ -135,7 +133,7 @@ class DSKFieldNumericState extends State<DSKFieldNumeric> {
 
   @override
   Widget build(BuildContext context) {
-    DSKThemeManager themeManager = DSKAppInheritedWidget.of(context)!.changeNotifier; // React to theme changes
+    DSKAppInheritedWidget.of(context)!.changeNotifier; // React to theme changes
 
     bool enabledUp = _currentValue < widget.max;
     bool enabledDown = _currentValue > widget.min;
