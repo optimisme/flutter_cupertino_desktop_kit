@@ -47,10 +47,9 @@ class DSKCupertinoAppState extends State<DSKCupertinoApp>
   @override
   void didChangePlatformBrightness() {
     super.didChangePlatformBrightness();
-    var brightness = MediaQuery.of(context).platformBrightness;
     if (_themeManager.appearanceConfig == "system") {
       _themeManager.setAppearanceConfig(
-          context, brightness == Brightness.light ? "light" : "dark");
+          context, _themeManager.appearanceConfig);
     }
   }
 

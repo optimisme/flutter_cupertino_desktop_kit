@@ -58,7 +58,7 @@ class DSKThemeManager extends ChangeNotifier {
 
   String setAppearanceConfig(BuildContext context, String type,
       {bool notify = true}) {
-    String appearance = "";
+    String appearance = ""; // only light or dark (no system)
 
     appearanceConfig = type;
 
@@ -68,13 +68,13 @@ class DSKThemeManager extends ChangeNotifier {
     } else {
       appearance = appearanceConfig;
     }
-    _setAppearance(appearanceConfig, notify: notify);
+    _setAppearance(appearance, notify: notify);
 
     return appearance;
   }
 
   void _setAppearance(String type, {bool notify = true}) {
-    //light, dark (no system)
+    // only light or dark (no system)
     String appearance = type;
 
     // Set accent color
