@@ -26,7 +26,8 @@ class DSKCupertinoAppState extends State<DSKCupertinoApp>
     });
     if (widget.defaultAppearance != null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        _themeManager.setAppearanceConfig(context, widget.defaultAppearance!);
+        _themeManager.setAppearanceConfig(context, type: widget.defaultAppearance!);
+        setState(() {});
       });
     }
   }
@@ -48,8 +49,8 @@ class DSKCupertinoAppState extends State<DSKCupertinoApp>
   void didChangePlatformBrightness() {
     super.didChangePlatformBrightness();
     if (_themeManager.appearanceConfig == "system") {
-      _themeManager.setAppearanceConfig(
-          context, _themeManager.appearanceConfig);
+      _themeManager.setAppearanceConfig(context);
+      setState(() {});
     }
   }
 

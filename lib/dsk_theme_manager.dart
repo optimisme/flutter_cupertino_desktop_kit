@@ -22,15 +22,17 @@ class DSKThemeManager extends ChangeNotifier {
   }
 
   CupertinoThemeData getThemeData(BuildContext context) {
+    String appearance = "";
+
     // Set accent color
     DSKColors.initColors(themeColor);
     CupertinoThemeData baseTheme =
         CupertinoThemeData(primaryColor: DSKColors.systemColors[themeColor]);
 
-    String appearance =
-        setAppearanceConfig(context, appearanceConfig, notify: false);
+    print("A");
+    appearance = setAppearanceConfig(context, type: appearanceConfig, notify: false);
 
-    // Set light/dark appearance colors and return theme
+        // Set light/dark appearance colors and return theme
     if (appearance == "light") {
       return baseTheme.copyWith(brightness: Brightness.light);
     } else {
@@ -56,18 +58,19 @@ class DSKThemeManager extends ChangeNotifier {
     notifyListeners();
   }
 
-  String setAppearanceConfig(BuildContext context, String type,
-      {bool notify = true}) {
+  String setAppearanceConfig(BuildContext context, { String type = "system",
+      bool notify = true }) {
     String appearance = ""; // only light or dark (no system)
 
     appearanceConfig = type;
-
     if (appearanceConfig == "system") {
       var brightness = MediaQuery.of(context).platformBrightness;
       appearance = (brightness == Brightness.light) ? "light" : "dark";
     } else {
       appearance = appearanceConfig;
     }
+
+    print("B"+appearanceConfig);
     _setAppearance(appearance, notify: notify);
 
     return appearance;

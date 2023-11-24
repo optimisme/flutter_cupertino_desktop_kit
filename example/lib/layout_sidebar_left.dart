@@ -75,7 +75,7 @@ class LayoutButtonsState extends State<LayoutSidebarLeft> {
                       onSelected: (bool? isSelected) {
                         setState(() {
                           selectedRadio = "system";
-                          themeManager.setAppearanceConfig(context, "system");
+                          themeManager.setAppearanceConfig(context);
                         });
                       },
                     ),
@@ -86,7 +86,7 @@ class LayoutButtonsState extends State<LayoutSidebarLeft> {
                       onSelected: (bool? isSelected) {
                         setState(() {
                           selectedRadio = "light";
-                          themeManager.setAppearanceConfig(context, "light");
+                          themeManager.setAppearanceConfig(context, type: "light");
                         });
                       },
                     ),
@@ -97,7 +97,7 @@ class LayoutButtonsState extends State<LayoutSidebarLeft> {
                       onSelected: (bool? isSelected) {
                         setState(() {
                           selectedRadio = "dark";
-                          themeManager.setAppearanceConfig(context, "dark");
+                          themeManager.setAppearanceConfig(context, type: "dark");
                         });
                       },
                     ),
