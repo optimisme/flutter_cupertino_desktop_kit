@@ -108,7 +108,6 @@ class LayoutButtonsState extends State<LayoutSidebarLeft> {
                     const SizedBox(height: 8),
                     DSKPickerThemeColors(
                       colors: DSKTheme.systemColors,
-                      selectedColor: theme.themeColor,
                       onColorChanged: (String colorName) {
                         theme.setAccentColour(colorName);
                       },

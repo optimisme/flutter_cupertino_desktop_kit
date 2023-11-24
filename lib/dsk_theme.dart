@@ -7,8 +7,8 @@ class DSKTheme extends ChangeNotifier {
   // Appearance
   bool isLight = true;
   bool isAppFocused = true;
-  String appearanceConfig = "system"; // light, dark, system
-  String themeColor = "systemBlue";
+  String appearanceConfig = ""; // light, dark, system
+  String colorConfig = "";
 
   // Abaliable theme colors
   static const Map<String, Color> systemColors = {
@@ -41,7 +41,7 @@ class DSKTheme extends ChangeNotifier {
   static const Color grey600 = Color(0xff717176);
   static const Color grey700 = Color(0xff636367);
 
-  // Default colors for background and text (modified by dark/light mode)
+  // Default colors for bacground and text (modified by dark/light mode)
   Color background = CupertinoColors.white;
   Color backgroundSecondary0 = CupertinoColors.white;
   Color backgroundSecondary1 = CupertinoColors.systemGrey5;
@@ -56,13 +56,22 @@ class DSKTheme extends ChangeNotifier {
   Color accent500 = const Color(0xff056ee0);
   Color accent600 = const Color(0xff0562c7);
 
-  CupertinoThemeData getThemeData(BuildContext context) {
+  CupertinoThemeData getThemeData(
+      BuildContext context, String initialAppearance, String initialColor) {
     String appearance = "";
 
+    if (appearanceConfig == "") {
+      appearanceConfig = initialAppearance;
+    }
+
+    if (colorConfig == "") {
+      colorConfig = initialColor;
+    }
+
     // Set accent color
-    initColors(themeColor);
+    initColors(colorConfig);
     CupertinoThemeData baseTheme =
-        CupertinoThemeData(primaryColor: systemColors[themeColor]);
+        CupertinoThemeData(primaryColor: systemColors[colorConfig]);
 
     appearance =
         setAppearanceConfig(context, type: appearanceConfig, notify: false);
@@ -75,22 +84,15 @@ class DSKTheme extends ChangeNotifier {
     }
   }
 
-  void setAccentColour(String name) {
-    Color? color = systemColors[name];
-    themeColor = name;
-
-    if (color == null) {
-      color = systemColors["systemBlue"];
-      themeColor = "systemBlue";
-    }
-
-    initColors(themeColor);
-    notifyListeners();
-  }
-
   void setAppFocus(bool value) {
     isAppFocused = value;
     notifyListeners();
+  }
+
+  void addPostFrameCallback(
+      BuildContext context, String defaultAppearance, String colorName) {
+    setAppearanceConfig(context, type: defaultAppearance, notify: false);
+    setAccentColour(colorName);
   }
 
   String setAppearanceConfig(BuildContext context,
@@ -115,7 +117,7 @@ class DSKTheme extends ChangeNotifier {
     String appearance = type;
 
     // Set accent color
-    initColors(themeColor);
+    initColors(colorConfig);
 
     // Set light/dark appearance colors and return theme
     if (appearance == "light") {
@@ -135,6 +137,19 @@ class DSKTheme extends ChangeNotifier {
     if (notify) {
       notifyListeners();
     }
+  }
+
+  void setAccentColour(String name) {
+    Color? color = systemColors[name];
+    colorConfig = name;
+
+    if (color == null) {
+      color = systemColors["systemBlue"];
+      colorConfig = "systemBlue";
+    }
+
+    initColors(colorConfig);
+    notifyListeners();
   }
 
   void initColors(themeColor) {

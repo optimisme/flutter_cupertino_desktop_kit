@@ -15,7 +15,9 @@ class AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return const DSKCupertinoApp(
-      defaultAppearance: "system", // light, dark, system
+      defaultAppearance: "system", // system, light, dark
+      defaultColor:
+          "systemBlue", // systemBlue, systemPurple, systemPink, systemRed, systemOrange, systemYellow, systemGreen, systemGray
       child: Layout(),
     );
   }

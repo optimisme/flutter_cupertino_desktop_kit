@@ -19,7 +19,6 @@ class DSKPickerThemeColors extends StatefulWidget {
   final Map<String, Color> colors;
 
   /// Name of the currently selected color.
-  final String selectedColor;
 
   /// Callback for color selection.
   final Function(String)? onColorChanged;
@@ -27,7 +26,6 @@ class DSKPickerThemeColors extends StatefulWidget {
   const DSKPickerThemeColors({
     Key? key,
     required this.colors,
-    this.selectedColor = "systemBlue",
     this.onColorChanged,
   }) : super(key: key);
 
@@ -39,14 +37,6 @@ class DSKPickerThemeColors extends StatefulWidget {
 ///
 /// Manages the rendering of the color selection buttons.
 class DSKPickerThemeColorsState extends State<DSKPickerThemeColors> {
-  String _selectedColor = "";
-
-  @override
-  void initState() {
-    super.initState();
-    _selectedColor = widget.selectedColor;
-  }
-
   @override
   Widget build(BuildContext context) {
     DSKTheme theme =
@@ -70,9 +60,6 @@ class DSKPickerThemeColorsState extends State<DSKPickerThemeColors> {
         return GestureDetector(
           onTap: () {
             widget.onColorChanged?.call(colorName);
-            setState(() {
-              _selectedColor = colorName;
-            });
           },
           child: Container(
             width: 16,
@@ -84,7 +71,7 @@ class DSKPickerThemeColorsState extends State<DSKPickerThemeColors> {
               border: Border.all(color: colorBorder, width: 1.25),
             ),
             child: Center(
-              child: _selectedColor == colorName
+              child: theme.colorConfig == colorName
                   ? Container(
                       width: 6,
                       height: 6,

@@ -7,9 +7,14 @@ import 'dsk_theme_notifier.dart';
 
 // Main application widget
 class DSKCupertinoApp extends StatefulWidget {
-  final String? defaultAppearance;
+  final String defaultAppearance;
+  final String defaultColor;
   final Widget child;
-  const DSKCupertinoApp({Key? key, this.defaultAppearance, required this.child})
+  const DSKCupertinoApp(
+      {Key? key,
+      this.defaultAppearance = "system",
+      this.defaultColor = "systemBlue",
+      required this.child})
       : super(key: key);
 
   @override
@@ -28,13 +33,6 @@ class DSKCupertinoAppState extends State<DSKCupertinoApp>
     _themeManager.addListener(() {
       setState(() {});
     });
-    if (widget.defaultAppearance != null) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        _themeManager.setAppearanceConfig(context,
-            type: widget.defaultAppearance!);
-        setState(() {});
-      });
-    }
   }
 
   @override
@@ -64,7 +62,8 @@ class DSKCupertinoAppState extends State<DSKCupertinoApp>
         changeNotifier: _themeManager,
         child: CupertinoApp(
           debugShowCheckedModeBanner: false,
-          theme: _themeManager.getThemeData(context),
+          theme: _themeManager.getThemeData(
+              context, widget.defaultAppearance, widget.defaultColor),
           home: widget.child,
         ));
   }
