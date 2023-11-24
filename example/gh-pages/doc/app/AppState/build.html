@@ -81,7 +81,7 @@
 <p>The framework calls this method in a number of different situations. For
 example:</p>
 <ul>
-<li>After calling <a href="../../app/AppState/initState.html">initState</a>.</li>
+<li>After calling <a href="https://api.flutter.dev/flutter/widgets/State/initState.html">initState</a>.</li>
 <li>After calling <a href="https://api.flutter.dev/flutter/widgets/State/didUpdateWidget.html">didUpdateWidget</a>.</li>
 <li>After receiving a call to <a href="https://api.flutter.dev/flutter/widgets/State/setState.html">setState</a>.</li>
 <li>After a dependency of this <a href="https://api.flutter.dev/flutter/widgets/State-class.html">State</a> object changes (e.g., an
@@ -185,11 +185,9 @@ prints green, as expected.</p>
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">@override
 Widget build(BuildContext context) {
-  return CupertinoApp(
-    debugShowCheckedModeBanner: false,
-    theme: _themeManager.getThemeData(context),
-    &#47;&#47; ignore: prefer_const_constructors
-    home: Layout(),
+  return const DSKCupertinoApp(
+    defaultAppearance: &quot;system&quot;, &#47;&#47; light, dark, system
+    child: Layout(),
   );
 }</code></pre>
 </section>

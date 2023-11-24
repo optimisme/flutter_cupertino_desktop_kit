@@ -185,7 +185,8 @@ prints green, as expected.</p>
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">@override
 Widget build(BuildContext context) {
-  DSKThemeManager themeManager = DSKThemeManager();
+
+  DSKThemeManager themeManager = DSKAppInheritedWidget.of(context)!.changeNotifier; &#47;&#47; React to theme changes
 
   String selectedRadio = themeManager.appearanceConfig;
   return Container(
@@ -242,7 +243,7 @@ Widget build(BuildContext context) {
                     onSelected: (bool? isSelected) {
                       setState(() {
                         selectedRadio = &quot;system&quot;;
-                        themeManager.setAppearance(context, &quot;system&quot;);
+                        themeManager.setAppearanceConfig(context);
                       });
                     },
                   ),
@@ -253,7 +254,7 @@ Widget build(BuildContext context) {
                     onSelected: (bool? isSelected) {
                       setState(() {
                         selectedRadio = &quot;light&quot;;
-                        themeManager.setAppearance(context, &quot;light&quot;);
+                        themeManager.setAppearanceConfig(context, type: &quot;light&quot;);
                       });
                     },
                   ),
@@ -264,7 +265,7 @@ Widget build(BuildContext context) {
                     onSelected: (bool? isSelected) {
                       setState(() {
                         selectedRadio = &quot;dark&quot;;
-                        themeManager.setAppearance(context, &quot;dark&quot;);
+                        themeManager.setAppearanceConfig(context, type: &quot;dark&quot;);
                       });
                     },
                   ),
@@ -272,7 +273,7 @@ Widget build(BuildContext context) {
                   const Text(&quot;Primary color: &quot;,
                       style: TextStyle(fontSize: 14)),
                   const SizedBox(height: 8),
-                  DSKButtonsColors(
+                  DSKPickerThemeColors(
                     colors: DSKColors.systemColors,
                     selectedColor: themeManager.themeColor,
                     onColorChanged: (String colorName) {

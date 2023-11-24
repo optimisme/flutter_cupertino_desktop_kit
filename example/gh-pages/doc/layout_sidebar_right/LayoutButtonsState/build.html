@@ -185,6 +185,9 @@ prints green, as expected.</p>
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">@override
 Widget build(BuildContext context) {
+
+  DSKAppInheritedWidget.of(context)!.changeNotifier; &#47;&#47; React to theme changes
+
   return Container(
       color: DSKColors.backgroundSecondary1,
       child: ListView(children: const [

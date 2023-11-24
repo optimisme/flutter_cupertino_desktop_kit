@@ -77,12 +77,6 @@
 
         
         
-  <dt>Mixed in types</dt>
-  <dd>
-    <ul class="comma-separated clazz-relationships">
-        <li><a href="https://api.flutter.dev/flutter/widgets/WidgetsBindingObserver-class.html">WidgetsBindingObserver</a></li>
-    </ul>
-  </dd>
 
 
 
@@ -227,34 +221,6 @@ removed via <a href="https://api.flutter.dev/flutter/widgets/State/deactivate.ht
 
 </dd>
 
-        <dt id="didChangeAccessibilityFeatures" class="callable inherited">
-  <span class="name"><a href="https://api.flutter.dev/flutter/widgets/WidgetsBindingObserver/didChangeAccessibilityFeatures.html">didChangeAccessibilityFeatures</a></span><span class="signature">(<wbr>)
-    <span class="returntype parameter">&#8594; void</span>
-  </span>
-  
-
-</dt>
-<dd class="inherited">
-  Called when the system changes the set of currently active accessibility
-features.
-  <div class="features"><span class="feature">inherited</span></div>
-
-</dd>
-
-        <dt id="didChangeAppLifecycleState" class="callable">
-  <span class="name"><a href="../app/AppState/didChangeAppLifecycleState.html">didChangeAppLifecycleState</a></span><span class="signature">(<wbr><span class="parameter" id="didChangeAppLifecycleState-param-state"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-ui/AppLifecycleState.html">AppLifecycleState</a></span> <span class="parameter-name">state</span></span>)
-    <span class="returntype parameter">&#8594; void</span>
-  </span>
-  
-
-</dt>
-<dd>
-  Called when the system puts the app in the background or returns
-the app to the foreground.
-  <div class="features"><span class="feature">override</span></div>
-
-</dd>
-
         <dt id="didChangeDependencies" class="callable inherited">
   <span class="name"><a href="https://api.flutter.dev/flutter/widgets/State/didChangeDependencies.html">didChangeDependencies</a></span><span class="signature">(<wbr>)
     <span class="returntype parameter">&#8594; void</span>
@@ -264,130 +230,6 @@ the app to the foreground.
 </dt>
 <dd class="inherited">
   Called when a dependency of this <a href="https://api.flutter.dev/flutter/widgets/State-class.html">State</a> object changes.
-  <div class="features"><span class="feature">inherited</span></div>
-
-</dd>
-
-        <dt id="didChangeLocales" class="callable inherited">
-  <span class="name"><a href="https://api.flutter.dev/flutter/widgets/WidgetsBindingObserver/didChangeLocales.html">didChangeLocales</a></span><span class="signature">(<wbr><span class="parameter" id="didChangeLocales-param-locales"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-ui/Locale-class.html">Locale</a></span>&gt;</span>?</span> <span class="parameter-name">locales</span></span>)
-    <span class="returntype parameter">&#8594; void</span>
-  </span>
-  
-
-</dt>
-<dd class="inherited">
-  Called when the system tells the app that the user's locale has
-changed. For example, if the user changes the system language
-settings.
-  <div class="features"><span class="feature">inherited</span></div>
-
-</dd>
-
-        <dt id="didChangeMetrics" class="callable inherited">
-  <span class="name"><a href="https://api.flutter.dev/flutter/widgets/WidgetsBindingObserver/didChangeMetrics.html">didChangeMetrics</a></span><span class="signature">(<wbr>)
-    <span class="returntype parameter">&#8594; void</span>
-  </span>
-  
-
-</dt>
-<dd class="inherited">
-  Called when the application's dimensions change. For example,
-when a phone is rotated.
-  <div class="features"><span class="feature">inherited</span></div>
-
-</dd>
-
-        <dt id="didChangePlatformBrightness" class="callable inherited">
-  <span class="name"><a href="https://api.flutter.dev/flutter/widgets/WidgetsBindingObserver/didChangePlatformBrightness.html">didChangePlatformBrightness</a></span><span class="signature">(<wbr>)
-    <span class="returntype parameter">&#8594; void</span>
-  </span>
-  
-
-</dt>
-<dd class="inherited">
-  Called when the platform brightness changes.
-  <div class="features"><span class="feature">inherited</span></div>
-
-</dd>
-
-        <dt id="didChangeTextScaleFactor" class="callable inherited">
-  <span class="name"><a href="https://api.flutter.dev/flutter/widgets/WidgetsBindingObserver/didChangeTextScaleFactor.html">didChangeTextScaleFactor</a></span><span class="signature">(<wbr>)
-    <span class="returntype parameter">&#8594; void</span>
-  </span>
-  
-
-</dt>
-<dd class="inherited">
-  Called when the platform's text scale factor changes.
-  <div class="features"><span class="feature">inherited</span></div>
-
-</dd>
-
-        <dt id="didHaveMemoryPressure" class="callable inherited">
-  <span class="name"><a href="https://api.flutter.dev/flutter/widgets/WidgetsBindingObserver/didHaveMemoryPressure.html">didHaveMemoryPressure</a></span><span class="signature">(<wbr>)
-    <span class="returntype parameter">&#8594; void</span>
-  </span>
-  
-
-</dt>
-<dd class="inherited">
-  Called when the system is running low on memory.
-  <div class="features"><span class="feature">inherited</span></div>
-
-</dd>
-
-        <dt id="didPopRoute" class="callable inherited">
-  <span class="name"><a href="https://api.flutter.dev/flutter/widgets/WidgetsBindingObserver/didPopRoute.html">didPopRoute</a></span><span class="signature">(<wbr>)
-    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span>&gt;</span></span>
-  </span>
-  
-
-</dt>
-<dd class="inherited">
-  Called when the system tells the app to pop the current route.
-For example, on Android, this is called when the user presses
-the back button.
-  <div class="features"><span class="feature">inherited</span></div>
-
-</dd>
-
-        <dt id="didPushRoute" class="callable inherited">
-  <span class="name deprecated"><a class="deprecated" href="https://api.flutter.dev/flutter/widgets/WidgetsBindingObserver/didPushRoute.html">didPushRoute</a></span><span class="signature">(<wbr><span class="parameter" id="didPushRoute-param-route"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">route</span></span>)
-    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span>&gt;</span></span>
-  </span>
-  
-
-</dt>
-<dd class="inherited">
-  Called when the host tells the application to push a new route onto the
-navigator.
-  <div class="features"><span class="feature">inherited</span></div>
-
-</dd>
-
-        <dt id="didPushRouteInformation" class="callable inherited">
-  <span class="name"><a href="https://api.flutter.dev/flutter/widgets/WidgetsBindingObserver/didPushRouteInformation.html">didPushRouteInformation</a></span><span class="signature">(<wbr><span class="parameter" id="didPushRouteInformation-param-routeInformation"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/widgets/RouteInformation-class.html">RouteInformation</a></span> <span class="parameter-name">routeInformation</span></span>)
-    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span>&gt;</span></span>
-  </span>
-  
-
-</dt>
-<dd class="inherited">
-  Called when the host tells the application to push a new
-<a href="https://api.flutter.dev/flutter/widgets/RouteInformation-class.html">RouteInformation</a> and a restoration state onto the router.
-  <div class="features"><span class="feature">inherited</span></div>
-
-</dd>
-
-        <dt id="didRequestAppExit" class="callable inherited">
-  <span class="name"><a href="https://api.flutter.dev/flutter/widgets/WidgetsBindingObserver/didRequestAppExit.html">didRequestAppExit</a></span><span class="signature">(<wbr>)
-    <span class="returntype parameter">&#8594; <a href="https://api.flutter.dev/flutter/dart-async/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-ui/AppExitResponse.html">AppExitResponse</a></span>&gt;</span></span>
-  </span>
-  
-
-</dt>
-<dd class="inherited">
-  Called when a request is received from the system to exit the application.
   <div class="features"><span class="feature">inherited</span></div>
 
 </dd>
@@ -405,29 +247,29 @@ navigator.
 
 </dd>
 
-        <dt id="dispose" class="callable">
-  <span class="name"><a href="../app/AppState/dispose.html">dispose</a></span><span class="signature">(<wbr>)
+        <dt id="dispose" class="callable inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/widgets/State/dispose.html">dispose</a></span><span class="signature">(<wbr>)
     <span class="returntype parameter">&#8594; void</span>
   </span>
   
 
 </dt>
-<dd>
+<dd class="inherited">
   Called when this object is removed from the tree permanently.
-  <div class="features"><span class="feature">override</span></div>
+  <div class="features"><span class="feature">inherited</span></div>
 
 </dd>
 
-        <dt id="initState" class="callable">
-  <span class="name"><a href="../app/AppState/initState.html">initState</a></span><span class="signature">(<wbr>)
+        <dt id="initState" class="callable inherited">
+  <span class="name"><a href="https://api.flutter.dev/flutter/widgets/State/initState.html">initState</a></span><span class="signature">(<wbr>)
     <span class="returntype parameter">&#8594; void</span>
   </span>
   
 
 </dt>
-<dd>
+<dd class="inherited">
   Called when this object is inserted into the tree.
-  <div class="features"><span class="feature">override</span></div>
+  <div class="features"><span class="feature">inherited</span></div>
 
 </dd>
 
