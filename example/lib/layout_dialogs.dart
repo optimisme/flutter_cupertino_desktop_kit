@@ -115,7 +115,7 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
                 child: GestureDetector(
                     onTapDown: (details) {}, // prevent dragging
                     onPanUpdate: (details) {}, // prevent dragging
-                    child: DSKButtonsBar(
+                    child: DSKPickerButtonsBar(
                       options: const [
                         {"widget": Icon(CupertinoIcons.bold), "value": true},
                         {"widget": Icon(CupertinoIcons.italic), "value": false},

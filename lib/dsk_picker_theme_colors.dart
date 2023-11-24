@@ -15,7 +15,7 @@ import 'dsk_theme_colors.dart';
 /// * `selectedColor`: (String) The name of the currently selected color.
 /// * `onColorChanged`: (Function(String)?) Callback called when a color is selected.
 
-class DSKButtonsColors extends StatefulWidget {
+class DSKPickerThemeColors extends StatefulWidget {
   /// Map of color names to color values.
   final Map<String, Color> colors;
 
@@ -25,7 +25,7 @@ class DSKButtonsColors extends StatefulWidget {
   /// Callback for color selection.
   final Function(String)? onColorChanged;
 
-  const DSKButtonsColors({
+  const DSKPickerThemeColors({
     Key? key,
     required this.colors,
     this.selectedColor = "systemBlue",
@@ -33,13 +33,13 @@ class DSKButtonsColors extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  DSKButtonsColorsState createState() => DSKButtonsColorsState();
+  DSKPickerThemeColorsState createState() => DSKPickerThemeColorsState();
 }
 
 /// Class `DSKButtonsColorsState` - The state for `DSKButtonsColors`.
 ///
 /// Manages the rendering of the color selection buttons.
-class DSKButtonsColorsState extends State<DSKButtonsColors> {
+class DSKPickerThemeColorsState extends State<DSKPickerThemeColors> {
   String _selectedColor = "";
 
   @override

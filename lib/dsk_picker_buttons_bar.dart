@@ -15,7 +15,7 @@ import 'dsk_theme_colors.dart';
 /// * `onChanged`: (Function(List<bool>)?) Callback called when the selection of buttons changes.
 /// * `allowsMultipleSelection`: (bool) Determines if multiple buttons can be selected simultaneously.
 
-class DSKButtonsBar extends StatefulWidget {
+class DSKPickerButtonsBar extends StatefulWidget {
   /// List of button options.
   final List<Map<String, dynamic>> options;
 
@@ -25,7 +25,7 @@ class DSKButtonsBar extends StatefulWidget {
   /// Flag for multiple selection.
   final bool allowsMultipleSelection;
 
-  const DSKButtonsBar({
+  const DSKPickerButtonsBar({
     Key? key,
     required this.options,
     this.onChanged,
@@ -33,13 +33,13 @@ class DSKButtonsBar extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  DSKButtonsBarState createState() => DSKButtonsBarState();
+  DSKPickerButtonsBarState createState() => DSKPickerButtonsBarState();
 }
 
 /// Class `DSKButtonsBarState` - The state for `DSKButtonsBar`.
 ///
 /// Manages the state and rendering of the buttons bar.
-class DSKButtonsBarState extends State<DSKButtonsBar> {
+class DSKPickerButtonsBarState extends State<DSKPickerButtonsBar> {
   // Border radius for button edges.
   final double _borderRadius = 4.0;
 

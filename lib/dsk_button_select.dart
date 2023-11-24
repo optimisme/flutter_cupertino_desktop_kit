@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'dsk_app_inherited.dart';
 import 'dsk_theme_manager.dart';
-import 'dsk_button_check_list.dart';
+import 'dsk_picker_check_list.dart';
 import 'dsk_dialogs_manager.dart';
 import 'dsk_theme_colors.dart';
 import 'dsk_dialog_popover.dart';
@@ -81,7 +81,7 @@ class DSKButtonSelectState extends State<DSKButtonSelect> {
       isTranslucent: widget.isTranslucent,
       child: Padding(
         padding: const EdgeInsets.all(5.0),
-        child: DSKButtonCheckList(
+        child: DSKPickerCheckList(
           options: widget.options,
           defaultIndex: _selectedIndex,
           onSelect: (int index, String value) {

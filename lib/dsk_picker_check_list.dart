@@ -16,7 +16,7 @@ import 'dsk_theme_colors.dart';
 /// * `size`: The size of the checkmark icon and the font size of the text.
 /// * `defaultIndex`: The index of the option that is selected by default.
 /// * `onSelect`: A callback function that is called when an option is selected. The callback function receives the index of the selected option and the text of the selected option as parameters.
-class DSKButtonCheckList extends StatefulWidget {
+class DSKPickerCheckList extends StatefulWidget {
   /// The list of options to choose from.
   final List<String> options;
 
@@ -30,7 +30,7 @@ class DSKButtonCheckList extends StatefulWidget {
   final Function(int, String)? onSelect;
 
   /// Creates a DSKButtonCheckList widget.
-  const DSKButtonCheckList({
+  const DSKPickerCheckList({
     Key? key,
     required this.options,
     this.size = 12.0,
@@ -39,14 +39,14 @@ class DSKButtonCheckList extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  DSKButtonCheckListState createState() => DSKButtonCheckListState();
+  DSKPickerCheckListState createState() => DSKPickerCheckListState();
 }
 
 /// The state of the `DSKButtonCheckBox` widget.
 ///
 /// This class manages the widget's internal state, including the current
 /// selection state and the app focus status.
-class DSKButtonCheckListState extends State<DSKButtonCheckList> {
+class DSKPickerCheckListState extends State<DSKPickerCheckList> {
   /// The index of the option that is currently hovered over.
   int? _hoverIndex;
 

@@ -15,13 +15,13 @@ import 'dsk_theme_colors.dart';
 /// * `defaultIndex`: (int) The index of the initially selected option.
 /// * `onSelect`: (Function(int)?) Callback called when an option is selected.
 /// * `isAccent`: (bool) Determines if the accent style should be applied.
-class DSKButtonsSegmented extends StatefulWidget {
+class DSKPickerButtonsSegmented extends StatefulWidget {
   final List<Widget> options;
   final int defaultIndex;
   final Function(int)? onSelect;
   final bool isAccent;
 
-  const DSKButtonsSegmented({
+  const DSKPickerButtonsSegmented({
     Key? key,
     required this.options,
     this.defaultIndex = 0,
@@ -30,13 +30,13 @@ class DSKButtonsSegmented extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  DSKButtonsSegmentedState createState() => DSKButtonsSegmentedState();
+  DSKPickerButtonsSegmentedState createState() => DSKPickerButtonsSegmentedState();
 }
 
 /// Class `DSKButtonsSegmentedState` - The state for `DSKButtonsSegmented`.
 ///
 /// Manages the state and rendering of the segmented control.
-class DSKButtonsSegmentedState extends State<DSKButtonsSegmented> {
+class DSKPickerButtonsSegmentedState extends State<DSKPickerButtonsSegmented> {
   final int _animationMillis =
       200; // Duration of the animation in milliseconds.
   int _selectedIndex = 0; // Currently selected option's index.

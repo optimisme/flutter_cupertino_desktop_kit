@@ -106,7 +106,7 @@ class LayoutButtonsState extends State<LayoutSidebarLeft> {
                     const Text("Primary color: ",
                         style: TextStyle(fontSize: 14)),
                     const SizedBox(height: 8),
-                    DSKButtonsColors(
+                    DSKPickerThemeColors(
                       colors: DSKColors.systemColors,
                       selectedColor: themeManager.themeColor,
                       onColorChanged: (String colorName) {

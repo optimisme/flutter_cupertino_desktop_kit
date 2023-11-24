@@ -58,7 +58,6 @@ class DSKThemeManager extends ChangeNotifier {
       appearance = appearanceConfig;
     }
 
-    print("setAppearanceConfig: $appearance dsk_theme_manager.dart");
     _setAppearance(appearance, notify: notify);
 
     return appearance;
@@ -72,7 +71,6 @@ class DSKThemeManager extends ChangeNotifier {
     DSKColors.initColors(themeColor);
 
     // Set light/dark appearance colors and return theme
-    print("setAppearance: $appearance dsk_theme_manager.dart");
     if (appearance == "light") {
       isLight = true;
       DSKColors.background = CupertinoColors.white;
