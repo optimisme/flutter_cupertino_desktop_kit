@@ -109,7 +109,8 @@ class LayoutButtonsState extends State<LayoutSidebarLeft> {
                     DSKPickerThemeColors(
                       colors: DSKTheme.systemColors,
                       onColorChanged: (String colorName) {
-                        theme.setAccentColour(colorName);
+                        // ignore: avoid_print
+                        print("Color changed: $colorName");
                       },
                     ),
                   ]))

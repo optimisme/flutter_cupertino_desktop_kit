@@ -59,6 +59,7 @@ class DSKPickerThemeColorsState extends State<DSKPickerThemeColors> {
         index = index + 1;
         return GestureDetector(
           onTap: () {
+            theme.setAccentColour(colorName);
             widget.onColorChanged?.call(colorName);
           },
           child: Container(
