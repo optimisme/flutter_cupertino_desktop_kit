@@ -41,7 +41,7 @@ class DSKTheme extends ChangeNotifier {
   static const Color grey600 = Color(0xff717176);
   static const Color grey700 = Color(0xff636367);
 
-  // Default colors for bacground and text (modified by dark/light mode)
+  // Default colors for background and text (modified by dark/light mode)
   Color background = CupertinoColors.white;
   Color backgroundSecondary0 = CupertinoColors.white;
   Color backgroundSecondary1 = CupertinoColors.systemGrey5;

@@ -185,12 +185,12 @@ prints green, as expected.</p>
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">@override
 Widget build(BuildContext context) {
+  DSKTheme theme =
+      DSKThemeNotifier.of(context)!.changeNotifier; &#47;&#47; React to theme changes
 
-  DSKThemeManager themeManager = DSKAppInheritedWidget.of(context)!.changeNotifier; &#47;&#47; React to theme changes
-
-  String selectedRadio = themeManager.appearanceConfig;
+  String selectedRadio = theme.appearanceConfig;
   return Container(
-      color: DSKColors.backgroundSecondary1,
+      color: theme.backgroundSecondary1,
       child: ListView(children: [
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -209,7 +209,7 @@ Widget build(BuildContext context) {
                   padding: const EdgeInsets.fromLTRB(8, 4, 8, 6),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(4.0),
-                    color: _selectedIndex == index ? DSKColors.accent : null,
+                    color: _selectedIndex == index ? theme.accent : null,
                   ),
                   child: Text(
                     widget.options[index],
@@ -218,10 +218,10 @@ Widget build(BuildContext context) {
                     style: TextStyle(
                         fontSize: 14,
                         color: _selectedIndex == index
-                            ? DSKColors.white
-                            : themeManager.isLight
-                                ? DSKColors.black
-                                : DSKColors.white),
+                            ? DSKTheme.white
+                            : theme.isLight
+                                ? DSKTheme.black
+                                : DSKTheme.white),
                   ),
                 ),
               ),
@@ -243,7 +243,7 @@ Widget build(BuildContext context) {
                     onSelected: (bool? isSelected) {
                       setState(() {
                         selectedRadio = &quot;system&quot;;
-                        themeManager.setAppearanceConfig(context);
+                        theme.setAppearanceConfig(context);
                       });
                     },
                   ),
@@ -254,7 +254,7 @@ Widget build(BuildContext context) {
                     onSelected: (bool? isSelected) {
                       setState(() {
                         selectedRadio = &quot;light&quot;;
-                        themeManager.setAppearanceConfig(context, type: &quot;light&quot;);
+                        theme.setAppearanceConfig(context, type: &quot;light&quot;);
                       });
                     },
                   ),
@@ -265,7 +265,7 @@ Widget build(BuildContext context) {
                     onSelected: (bool? isSelected) {
                       setState(() {
                         selectedRadio = &quot;dark&quot;;
-                        themeManager.setAppearanceConfig(context, type: &quot;dark&quot;);
+                        theme.setAppearanceConfig(context, type: &quot;dark&quot;);
                       });
                     },
                   ),
@@ -274,10 +274,10 @@ Widget build(BuildContext context) {
                       style: TextStyle(fontSize: 14)),
                   const SizedBox(height: 8),
                   DSKPickerThemeColors(
-                    colors: DSKColors.systemColors,
-                    selectedColor: themeManager.themeColor,
+                    colors: DSKTheme.systemColors,
+                    selectedColor: theme.themeColor,
                     onColorChanged: (String colorName) {
-                      themeManager.setAccentColour(colorName);
+                      theme.setAccentColour(colorName);
                     },
                   ),
                 ]))
