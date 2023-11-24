@@ -6,12 +6,12 @@ import 'dsk_picker_slider.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
-class DSKField100 extends StatefulWidget {
+class DSKFieldNumericSlider extends StatefulWidget {
   final double defaultValue;
   final double textSize;
   final bool enabled;
   final Function(double)? onChanged;
-  const DSKField100({
+  const DSKFieldNumericSlider({
     Key? key,
     this.defaultValue = 0.0,
     this.textSize = 12,
@@ -20,10 +20,10 @@ class DSKField100 extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  DSKField100State createState() => DSKField100State();
+  DSKFieldNumericSliderState createState() => DSKFieldNumericSliderState();
 }
 
-class DSKField100State extends State<DSKField100> {
+class DSKFieldNumericSliderState extends State<DSKFieldNumericSlider> {
   GlobalKey<DSKPickerSliderState> keyPicker = GlobalKey();
   GlobalKey<DSKFieldNumericState> keyNumeric = GlobalKey();
   double _currentValue = 0;

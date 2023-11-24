@@ -154,13 +154,14 @@ class _LayoutFieldsState extends State<LayoutFields> {
                     ))),
           ]),
           const Padding(
-              padding: EdgeInsets.all(8), child: Text('DSKField100:')),
+              padding: EdgeInsets.all(8),
+              child: Text('DSKFieldNumericSlider:')),
           Wrap(children: [
             Padding(
                 padding: const EdgeInsets.all(8),
                 child: SizedBox(
                     width: 150,
-                    child: DSKField100(
+                    child: DSKFieldNumericSlider(
                       defaultValue: 50,
                       onChanged: (double value) {
                         // ignore: avoid_print
@@ -171,7 +172,7 @@ class _LayoutFieldsState extends State<LayoutFields> {
                 padding: const EdgeInsets.all(8),
                 child: SizedBox(
                     width: 150,
-                    child: DSKField100(
+                    child: DSKFieldNumericSlider(
                       enabled: false,
                       onChanged: (double value) {
                         // ignore: avoid_print
