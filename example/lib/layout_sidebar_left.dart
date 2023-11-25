@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_desktop_cupertino/cx_widgets.dart';
+import 'package:flutter_cupertino_desktop/cx_widgets.dart';
 
 class LayoutSidebarLeft extends StatefulWidget {
   final List<String> options;

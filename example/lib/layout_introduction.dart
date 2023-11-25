@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter_desktop_cupertino/cx_widgets.dart';
+import 'package:flutter_cupertino_desktop/cx_widgets.dart';
 
 class LayoutIntroduction extends StatefulWidget {
   const LayoutIntroduction({super.key});
@@ -49,7 +49,7 @@ class _LayoutIntroductionState extends State<LayoutIntroduction> {
       const Padding(
           padding: EdgeInsets.symmetric(vertical: 16, horizontal: 32),
           child: Text(
-              'The CX prefix aims to be unique within the Flutter ecosystem, while also being concise and evocative of ideas of graphics, experience, and expansion. In doing so, it embodies the spirit of the project.')),
+              'The CX prefix aims to be unique within the Flutter ecosystem, while also being concise and evocative of ideas of graphics, experience, expansion and OSX. In doing so, it embodies the spirit of the project.')),
       const SizedBox(height: 50),
     ]);
   }
