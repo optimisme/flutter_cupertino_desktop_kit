@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter_cupertino_desktop/cx_widgets.dart';
+import 'package:flutter_cupertino_desktop/ck_widgets.dart';
 
 class LayoutIntroduction extends StatefulWidget {
   const LayoutIntroduction({super.key});
@@ -12,7 +12,7 @@ class LayoutIntroduction extends StatefulWidget {
 class _LayoutIntroductionState extends State<LayoutIntroduction> {
   @override
   Widget build(BuildContext context) {
-    CXTheme theme = CXThemeNotifier.of(context)!.changeNotifier;
+    CKTheme theme = CKThemeNotifier.of(context)!.changeNotifier;
 
     return ListView(children: [
       const Padding(
@@ -22,7 +22,7 @@ class _LayoutIntroductionState extends State<LayoutIntroduction> {
       const Padding(
           padding: EdgeInsets.symmetric(vertical: 16, horizontal: 32),
           child: Text(
-              'This project, Flutter Cupertino Desktop (CX), defines Flutter widgets for Desktop, providing a macOS-style aesthetic, built upon the foundation of Cupertino widgets.')),
+              'This project, Flutter Cupertino Desktop (CK), defines Flutter widgets for Desktop, providing a macOS-style aesthetic, built upon the foundation of Cupertino widgets.')),
       const Padding(
           padding: EdgeInsets.symmetric(vertical: 16, horizontal: 32),
           child: Text(
@@ -49,7 +49,7 @@ class _LayoutIntroductionState extends State<LayoutIntroduction> {
       const Padding(
           padding: EdgeInsets.symmetric(vertical: 16, horizontal: 32),
           child: Text(
-              'The CX prefix aims to be unique within the Flutter ecosystem, while also being concise and evocative of ideas of graphics, experience, expansion and OSX. In doing so, it embodies the spirit of the project.')),
+              'The CK prefix strives to be distinctive within the Flutter ecosystem, while remaining concise and suggestive of Flutter Desktop and macOS AppKit. In doing so, it captures the essence of the project.')),
       const SizedBox(height: 50),
     ]);
   }

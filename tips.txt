@@ -16,6 +16,3 @@ flutter pub global activate dartdoc
 flutter pub global run dartdoc:dartdoc --output gh-pages/doc/
 
 
-em pots posar comentaris a aquesta classe, per tal de poder generar la documentació
-posa-hi l'explicació de cada paràmetre al principi i comenta també les funcions
-en anglès si us plau

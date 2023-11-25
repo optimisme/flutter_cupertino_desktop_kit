@@ -1,10 +1,10 @@
 # Flutter macOS GUI
 
-This project, Flutter Cupertino Desktop (CX), defines Flutter widgets for Desktop, providing a macOS-style aesthetic, built upon the foundation of Cupertino widgets.
+This project, Flutter Cupertino Desktop (CK), defines Flutter widgets for Desktop, providing a macOS-style aesthetic, built upon the foundation of Cupertino widgets.
 
 The goal is to be able to develop applications for all desktop systems, including the web, filling in the gaps in the Cupertino theme.
 
-The CX prefix aims to be unique within the Flutter ecosystem, while also being concise and evocative of ideas of graphics, experience, expansion and OSX. In doing so, it embodies the spirit of the project.
+The CK prefix strives to be distinctive within the Flutter ecosystem, while remaining concise and suggestive of Flutter Desktop and macOS AppKit. In doing so, it captures the essence of the project.
 
 ## Getting Started
 

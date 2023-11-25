@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_cupertino_desktop/cx_widgets.dart';
+import 'package:flutter_cupertino_desktop/ck_widgets.dart';
 import 'layout.dart';
 
 // Main application widget
@@ -14,7 +14,7 @@ class App extends StatefulWidget {
 class AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
-    return const CXApp(
+    return const CKApp(
       defaultAppearance: "system", // system, light, dark
       defaultColor:
           "systemBlue", // systemBlue, systemPurple, systemPink, systemRed, systemOrange, systemYellow, systemGreen, systemGray

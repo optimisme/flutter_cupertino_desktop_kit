@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_cupertino_desktop/cx_widgets.dart';
+import 'package:flutter_cupertino_desktop/ck_widgets.dart';
 
 class LayoutProgress extends StatefulWidget {
   const LayoutProgress({super.key});
@@ -57,7 +57,7 @@ class _LayoutProgressState extends State<LayoutProgress> {
                 padding: const EdgeInsets.all(8),
                 child: SizedBox(
                     width: 250,
-                    child: CXProgressBar(
+                    child: CKProgressBar(
                       progress: _progressL,
                     ))),
             Padding(
@@ -67,8 +67,8 @@ class _LayoutProgressState extends State<LayoutProgress> {
             ),
             Padding(
                 padding: const EdgeInsets.all(8),
-                child: CXButton(
-                  style: CXButtonStyle.normal,
+                child: CKButton(
+                  style: CKButtonStyle.normal,
                   onPressed: () {
                     _increaseProgressL();
                   },
@@ -83,15 +83,15 @@ class _LayoutProgressState extends State<LayoutProgress> {
                 padding: const EdgeInsets.all(8),
                 child: SizedBox(
                     width: 250,
-                    child: CXProgressBar(
+                    child: CKProgressBar(
                       progress: _progressL,
                       isIndeterminate: true,
                       isRunning: _isRunningL,
                     ))),
             Padding(
                 padding: const EdgeInsets.all(8),
-                child: CXButton(
-                  style: CXButtonStyle.normal,
+                child: CKButton(
+                  style: CKButtonStyle.normal,
                   onPressed: () {
                     _toggleIndeterminateL();
                   },
@@ -108,7 +108,7 @@ class _LayoutProgressState extends State<LayoutProgress> {
                 padding: const EdgeInsets.all(8),
                 child: SizedBox(
                     width: 250,
-                    child: CXProgressCircular(
+                    child: CKProgressCircular(
                       progress: _progressC,
                     ))),
             Padding(
@@ -118,8 +118,8 @@ class _LayoutProgressState extends State<LayoutProgress> {
             ),
             Padding(
                 padding: const EdgeInsets.all(8),
-                child: CXButton(
-                  style: CXButtonStyle.normal,
+                child: CKButton(
+                  style: CKButtonStyle.normal,
                   onPressed: () {
                     _increaseProgressC();
                   },
@@ -134,15 +134,15 @@ class _LayoutProgressState extends State<LayoutProgress> {
                 padding: const EdgeInsets.all(8),
                 child: SizedBox(
                     width: 250,
-                    child: CXProgressCircular(
+                    child: CKProgressCircular(
                       progress: _progressC,
                       isIndeterminate: true,
                       isRunning: _isRunningC,
                     ))),
             Padding(
                 padding: const EdgeInsets.all(8),
-                child: CXButton(
-                  style: CXButtonStyle.normal,
+                child: CKButton(
+                  style: CKButtonStyle.normal,
                   onPressed: () {
                     _toggleIndeterminateC();
                   },

@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_cupertino_desktop/cx_widgets.dart';
+import 'package:flutter_cupertino_desktop/ck_widgets.dart';
 
 class LayoutUtils extends StatefulWidget {
   const LayoutUtils({super.key});
@@ -11,7 +11,7 @@ class LayoutUtils extends StatefulWidget {
 class _LayoutUtilsState extends State<LayoutUtils> {
   @override
   Widget build(BuildContext context) {
-    CXTheme theme = CXThemeNotifier.of(context)!.changeNotifier;
+    CKTheme theme = CKThemeNotifier.of(context)!.changeNotifier;
 
     Widget line = Container(
       decoration: BoxDecoration(
@@ -32,7 +32,7 @@ class _LayoutUtilsState extends State<LayoutUtils> {
       Wrap(crossAxisAlignment: WrapCrossAlignment.center, children: [
         Padding(
           padding: const EdgeInsets.all(8),
-          child: CXUtilDisclosure(
+          child: CKUtilDisclosure(
               title: const Text('Show/Hide', style: TextStyle(fontSize: 14)),
               child: SizedBox(
                   width: 300,

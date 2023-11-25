@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_cupertino_desktop/cx_widgets.dart';
+import 'package:flutter_cupertino_desktop/ck_widgets.dart';
 
 class LayoutPickers extends StatefulWidget {
   const LayoutPickers({super.key});
@@ -20,7 +20,7 @@ class _LayoutPickersState extends State<LayoutPickers> {
       Wrap(crossAxisAlignment: WrapCrossAlignment.center, children: [
         Padding(
             padding: const EdgeInsets.all(8),
-            child: CXPicker360(
+            child: CKPicker360(
               onChanged: (angle) {
                 _angle = angle;
                 setState(() {});
@@ -35,7 +35,7 @@ class _LayoutPickersState extends State<LayoutPickers> {
             padding: const EdgeInsets.all(8),
             child: SizedBox(
                 width: 100,
-                child: CSPickerSlider(
+                child: CKPickerSlider(
                   onChanged: (value) {
                     _value = value;
                     setState(() {});
@@ -50,7 +50,7 @@ class _LayoutPickersState extends State<LayoutPickers> {
             padding: const EdgeInsets.all(8),
             child: SizedBox(
                 width: 300,
-                child: CXPickerButtonsSegmented(
+                child: CKPickerButtonsSegmented(
                   options: const [
                     Text('Car'),
                     Text('Motorbike'),
@@ -66,7 +66,7 @@ class _LayoutPickersState extends State<LayoutPickers> {
             padding: const EdgeInsets.all(8),
             child: SizedBox(
                 width: 250,
-                child: CXPickerButtonsSegmented(
+                child: CKPickerButtonsSegmented(
                   options: const [
                     Icon(CupertinoIcons.ant),
                     Text('Flower'),
@@ -88,7 +88,7 @@ class _LayoutPickersState extends State<LayoutPickers> {
             padding: const EdgeInsets.all(8),
             child: SizedBox(
                 width: 300,
-                child: CXPickerButtonsBar(
+                child: CKPickerButtonsBar(
                   options: const [
                     {
                       "widget": Icon(CupertinoIcons.text_alignleft),
@@ -113,7 +113,7 @@ class _LayoutPickersState extends State<LayoutPickers> {
             padding: const EdgeInsets.all(8),
             child: SizedBox(
                 width: 250,
-                child: CXPickerButtonsBar(
+                child: CKPickerButtonsBar(
                   options: const [
                     {"widget": Icon(CupertinoIcons.bold), "value": false},
                     {"widget": Icon(CupertinoIcons.italic), "value": false},
@@ -135,7 +135,7 @@ class _LayoutPickersState extends State<LayoutPickers> {
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
-            child: CXPickerCheckList(
+            child: CKPickerCheckList(
               options: const ['Car', 'Motorbike', 'Plane'],
               defaultIndex: 2,
               onSelect: (int index, String value) {

@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_cupertino_desktop/cx_widgets.dart';
+import 'package:flutter_cupertino_desktop/ck_widgets.dart';
 
 class LayoutFields extends StatefulWidget {
   const LayoutFields({super.key});
@@ -29,7 +29,7 @@ class _LayoutFieldsState extends State<LayoutFields> {
             padding: const EdgeInsets.all(8),
             child: SizedBox(
                 width: 100,
-                child: CXFieldText(
+                child: CKFieldText(
                   controller: _textController,
                   isRounded: false,
                   onChanged: (value) {
@@ -46,7 +46,7 @@ class _LayoutFieldsState extends State<LayoutFields> {
             padding: const EdgeInsets.all(8),
             child: SizedBox(
                 width: 100,
-                child: CXFieldText(
+                child: CKFieldText(
                   placeholder: 'Placeholder',
                   isRounded: false,
                   onChanged: (value) {
@@ -63,7 +63,7 @@ class _LayoutFieldsState extends State<LayoutFields> {
             padding: const EdgeInsets.all(8),
             child: SizedBox(
                 width: 100,
-                child: CXFieldText(
+                child: CKFieldText(
                   controller: _passController,
                   obscureText: true,
                   isRounded: false,
@@ -84,7 +84,7 @@ class _LayoutFieldsState extends State<LayoutFields> {
             padding: const EdgeInsets.all(8),
             child: SizedBox(
                 width: 100,
-                child: CXFieldNumeric(
+                child: CKFieldNumeric(
                   defaultValue: 5.0,
                   onValueChanged: (double value) {
                     // ignore: avoid_print
@@ -95,7 +95,7 @@ class _LayoutFieldsState extends State<LayoutFields> {
             padding: const EdgeInsets.all(8),
             child: SizedBox(
                 width: 100,
-                child: CXFieldNumeric(
+                child: CKFieldNumeric(
                   defaultValue: -1.0,
                   decimals: 2,
                   min: -2,
@@ -111,7 +111,7 @@ class _LayoutFieldsState extends State<LayoutFields> {
             padding: const EdgeInsets.all(8),
             child: SizedBox(
                 width: 100,
-                child: CXFieldNumeric(
+                child: CKFieldNumeric(
                   defaultValue: 5.0,
                   enabled: false,
                   onValueChanged: (double value) {
@@ -126,7 +126,7 @@ class _LayoutFieldsState extends State<LayoutFields> {
             padding: const EdgeInsets.all(8),
             child: SizedBox(
                 width: 150,
-                child: CXField360(
+                child: CKField360(
                   defaultValue: 270,
                   onChanged: (double value) {
                     // ignore: avoid_print
@@ -137,7 +137,7 @@ class _LayoutFieldsState extends State<LayoutFields> {
             padding: const EdgeInsets.all(8),
             child: SizedBox(
                 width: 150,
-                child: CXField360(
+                child: CKField360(
                   enabled: false,
                   onChanged: (double value) {
                     // ignore: avoid_print
@@ -152,7 +152,7 @@ class _LayoutFieldsState extends State<LayoutFields> {
             padding: const EdgeInsets.all(8),
             child: SizedBox(
                 width: 150,
-                child: CXFieldNumericSlider(
+                child: CKFieldNumericSlider(
                   defaultValue: 0.5,
                   onValueChanged: (double value) {
                     // ignore: avoid_print
@@ -163,7 +163,7 @@ class _LayoutFieldsState extends State<LayoutFields> {
             padding: const EdgeInsets.all(8),
             child: SizedBox(
                 width: 150,
-                child: CXFieldNumericSlider(
+                child: CKFieldNumericSlider(
                   defaultValue: 50,
                   min: 0,
                   max: 100,
@@ -179,7 +179,7 @@ class _LayoutFieldsState extends State<LayoutFields> {
             padding: const EdgeInsets.all(8),
             child: SizedBox(
                 width: 150,
-                child: CXFieldNumericSlider(
+                child: CKFieldNumericSlider(
                   defaultValue: 128,
                   min: 0,
                   max: 255,

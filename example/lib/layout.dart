@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_cupertino_desktop/cx_widgets.dart';
+import 'package:flutter_cupertino_desktop/ck_widgets.dart';
 import 'layout_sidebar_left.dart';
 import 'layout_sidebar_right.dart';
 import 'layout_buttons.dart';
@@ -19,7 +19,7 @@ class Layout extends StatefulWidget {
 
 class LayoutState extends State<Layout> {
   bool isSidebarLeftVisible = true;
-  GlobalKey<CXAppSidebarsState> keyAppStructure = GlobalKey();
+  GlobalKey<CKAppSidebarsState> keyAppStructure = GlobalKey();
   String _section = "Introduction";
   List<String> options = [
     "Introduction",
@@ -32,14 +32,14 @@ class LayoutState extends State<Layout> {
   ];
 
   void toggleLeftSidebar() {
-    final CXAppSidebarsState? state = keyAppStructure.currentState;
+    final CKAppSidebarsState? state = keyAppStructure.currentState;
     if (state != null) {
       state.setSidebarLeftVisibility(!state.isSidebarLeftVisible);
     }
   }
 
   void toggleRightSidebar() {
-    final CXAppSidebarsState? state = keyAppStructure.currentState;
+    final CKAppSidebarsState? state = keyAppStructure.currentState;
     if (state != null) {
       state.setSidebarRightVisibility(!state.isSidebarRightVisible);
     }
@@ -53,7 +53,7 @@ class LayoutState extends State<Layout> {
 
   @override
   Widget build(BuildContext context) {
-    CXTheme theme = CXThemeNotifier.of(context)!.changeNotifier;
+    CKTheme theme = CKThemeNotifier.of(context)!.changeNotifier;
 
     Widget centralWidget;
     switch (_section) {
@@ -89,20 +89,20 @@ class LayoutState extends State<Layout> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                CXButtonIcon(
+                CKButtonIcon(
                     icon: CupertinoIcons.sidebar_left,
                     onPressed: () {
                       toggleLeftSidebar();
                     }),
                 Text(_section),
-                CXButtonIcon(
+                CKButtonIcon(
                     icon: CupertinoIcons.sidebar_left,
                     onPressed: () {
                       toggleRightSidebar();
                     }),
               ]),
         ),
-        child: CXAppSidebars(
+        child: CKAppSidebars(
           key: keyAppStructure,
           sidebarLeftIsResizable: true,
           sidebarLeftDefaultsVisible: true,
