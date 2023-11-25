@@ -25,35 +25,32 @@ class _LayoutUtilsState extends State<LayoutUtils> {
       child: Container(),
     );
 
-    return Container(
-        color: theme.background,
-        child: ListView(children: [
-          const SizedBox(height: 8),
-          const Padding(
-              padding: EdgeInsets.all(8), child: Text('DSKUtilsDisclosure:')),
-          Wrap(crossAxisAlignment: WrapCrossAlignment.center, children: [
-            Padding(
-              padding: const EdgeInsets.all(8),
-              child: DSKUtilDisclosure(
-                  title:
-                      const Text('Show/Hide', style: TextStyle(fontSize: 14)),
-                  child: SizedBox(
-                      width: 300,
-                      height: 150,
-                      child: Container(
-                          padding: const EdgeInsets.all(4.0),
-                          decoration: BoxDecoration(
-                            color: theme.backgroundSecondary1,
-                            borderRadius: BorderRadius.circular(4.0),
-                          ),
-                          child: const Text('Expandible disclosure'))),
-                  onChanged: (bool value) {
-                    setState(() {});
-                  }),
-            ),
-            line,
-          ]),
-          const SizedBox(height: 50),
-        ]));
+    return ListView(children: [
+      const SizedBox(height: 8),
+      const Padding(
+          padding: EdgeInsets.all(8), child: Text('DSKUtilsDisclosure:')),
+      Wrap(crossAxisAlignment: WrapCrossAlignment.center, children: [
+        Padding(
+          padding: const EdgeInsets.all(8),
+          child: DSKUtilDisclosure(
+              title: const Text('Show/Hide', style: TextStyle(fontSize: 14)),
+              child: SizedBox(
+                  width: 300,
+                  height: 150,
+                  child: Container(
+                      padding: const EdgeInsets.all(4.0),
+                      decoration: BoxDecoration(
+                        color: theme.backgroundSecondary1,
+                        borderRadius: BorderRadius.circular(4.0),
+                      ),
+                      child: const Text('Expandible disclosure'))),
+              onChanged: (bool value) {
+                setState(() {});
+              }),
+        ),
+        line,
+      ]),
+      const SizedBox(height: 50),
+    ]);
   }
 }

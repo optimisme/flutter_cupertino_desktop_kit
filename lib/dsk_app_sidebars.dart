@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_desktop_cupertino/dsk_theme.dart';
 
+import 'dsk_theme_notifier.dart';
+
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
@@ -178,6 +180,8 @@ class DSKAppSidebarsState extends State<DSKAppSidebars> {
 
   @override
   Widget build(BuildContext context) {
+    DSKTheme theme = DSKThemeNotifier.of(context)!.changeNotifier;
+
     if (widget.sidebarLeft == null) {
       _sidebarLeftIsVisible = false;
     }
@@ -198,24 +202,28 @@ class DSKAppSidebarsState extends State<DSKAppSidebars> {
           children: [
             // Left Sidebar
             Positioned(
-              left: 0,
-              top: 0,
-              bottom: 0,
-              width: _sidebarLeftWidth,
-              child: widget.sidebarLeft != null
-                  ? widget.sidebarLeft!
-                  : Container(),
-            ),
+                left: 0,
+                top: 0,
+                bottom: 0,
+                width: _sidebarLeftWidth,
+                child: Container(
+                  color: theme.backgroundSecondary1,
+                  child: widget.sidebarLeft != null
+                      ? widget.sidebarLeft!
+                      : Container(),
+                )),
             // Right Sidebar
             Positioned(
-              right: 0,
-              top: 0,
-              bottom: 0,
-              width: widget.sidebarRightWidth,
-              child: widget.sidebarRight != null
-                  ? widget.sidebarRight!
-                  : Container(),
-            ),
+                right: 0,
+                top: 0,
+                bottom: 0,
+                width: widget.sidebarRightWidth,
+                child: Container(
+                  color: theme.backgroundSecondary1,
+                  child: widget.sidebarRight != null
+                      ? widget.sidebarRight!
+                      : Container(),
+                )),
             // Left resize handle (right is not resizable)
             (widget.sidebarLeft != null && widget.sidebarLeftIsResizable)
                 ? AnimatedPositioned(
@@ -235,6 +243,7 @@ class DSKAppSidebarsState extends State<DSKAppSidebars> {
               bottom: 0,
               child: Container(
                   decoration: BoxDecoration(
+                    color: theme.background,
                     boxShadow: [
                       BoxShadow(
                         color: DSKTheme.grey500.withOpacity(0.3),

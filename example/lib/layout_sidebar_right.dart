@@ -11,14 +11,10 @@ class LayoutSidebarRight extends StatefulWidget {
 class LayoutButtonsState extends State<LayoutSidebarRight> {
   @override
   Widget build(BuildContext context) {
-    DSKTheme theme = DSKThemeNotifier.of(context)!.changeNotifier;
-
-    return Container(
-        color: theme.backgroundSecondary1,
-        child: ListView(children: const [
-          Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [Text("Sidebar Right")])
-        ]));
+    return ListView(children: const [
+      Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [Text("Sidebar Right")])
+    ]);
   }
 }

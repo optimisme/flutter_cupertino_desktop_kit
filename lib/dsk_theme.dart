@@ -78,9 +78,11 @@ class DSKTheme extends ChangeNotifier {
 
     // Set light/dark appearance colors and return theme
     if (appearance == "light") {
-      return baseTheme.copyWith(brightness: Brightness.light);
+      return baseTheme.copyWith(
+          brightness: Brightness.light, scaffoldBackgroundColor: background);
     } else {
-      return baseTheme.copyWith(brightness: Brightness.dark);
+      return baseTheme.copyWith(
+          brightness: Brightness.dark, scaffoldBackgroundColor: background);
     }
   }
 
@@ -122,7 +124,7 @@ class DSKTheme extends ChangeNotifier {
       text = CupertinoColors.black;
     } else {
       isLight = false;
-      background = const Color.fromARGB(255, 24, 20, 20);
+      background = const Color.fromARGB(255, 32, 32, 32);
       backgroundSecondary0 = const Color.fromRGBO(95, 95, 95, 1);
       backgroundSecondary1 = const Color.fromRGBO(55, 55, 55, 1);
       text = CupertinoColors.white;

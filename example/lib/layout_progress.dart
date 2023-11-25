@@ -46,115 +46,110 @@ class _LayoutProgressState extends State<LayoutProgress> {
 
   @override
   Widget build(BuildContext context) {
-    DSKTheme theme = DSKThemeNotifier.of(context)!.changeNotifier;
-
-    return Container(
-        color: theme.background,
-        child: ListView(children: [
-          const SizedBox(height: 8),
-          const Padding(
-              padding: EdgeInsets.all(8), child: Text('DSKProgressBar:')),
-          Wrap(
-              alignment: WrapAlignment.start,
-              crossAxisAlignment: WrapCrossAlignment.center,
-              children: [
-                Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: SizedBox(
-                        width: 250,
-                        child: DSKProgressBar(
-                          progress: _progressL,
-                        ))),
-                Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: Text(_progressL.toStringAsFixed(1),
-                      style: const TextStyle(fontSize: 12)),
-                ),
-                Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: DSKButton(
-                      style: DSKButtonStyle.normal,
-                      onPressed: () {
-                        _increaseProgressL();
-                      },
-                      child: const Text('Increase'),
-                    )),
-              ]),
-          Wrap(
-              alignment: WrapAlignment.start,
-              crossAxisAlignment: WrapCrossAlignment.center,
-              children: [
-                Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: SizedBox(
-                        width: 250,
-                        child: DSKProgressBar(
-                          progress: _progressL,
-                          isIndeterminate: true,
-                          isRunning: _isRunningL,
-                        ))),
-                Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: DSKButton(
-                      style: DSKButtonStyle.normal,
-                      onPressed: () {
-                        _toggleIndeterminateL();
-                      },
-                      child: const Text('Toggle running'),
-                    )),
-              ]),
-          const Padding(
-              padding: EdgeInsets.all(8), child: Text('DSKProgressCircular:')),
-          Wrap(
-              alignment: WrapAlignment.start,
-              crossAxisAlignment: WrapCrossAlignment.center,
-              children: [
-                Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: SizedBox(
-                        width: 250,
-                        child: DSKProgressCircular(
-                          progress: _progressC,
-                        ))),
-                Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: Text(_progressC.toStringAsFixed(1),
-                      style: const TextStyle(fontSize: 12)),
-                ),
-                Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: DSKButton(
-                      style: DSKButtonStyle.normal,
-                      onPressed: () {
-                        _increaseProgressC();
-                      },
-                      child: const Text('Increase'),
-                    )),
-              ]),
-          Wrap(
-              alignment: WrapAlignment.start,
-              crossAxisAlignment: WrapCrossAlignment.center,
-              children: [
-                Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: SizedBox(
-                        width: 250,
-                        child: DSKProgressCircular(
-                          progress: _progressC,
-                          isIndeterminate: true,
-                          isRunning: _isRunningC,
-                        ))),
-                Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: DSKButton(
-                      style: DSKButtonStyle.normal,
-                      onPressed: () {
-                        _toggleIndeterminateC();
-                      },
-                      child: const Text('Toggle running'),
-                    )),
-              ]),
-          const SizedBox(height: 50),
-        ]));
+    return ListView(children: [
+      const SizedBox(height: 8),
+      const Padding(padding: EdgeInsets.all(8), child: Text('DSKProgressBar:')),
+      Wrap(
+          alignment: WrapAlignment.start,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          children: [
+            Padding(
+                padding: const EdgeInsets.all(8),
+                child: SizedBox(
+                    width: 250,
+                    child: DSKProgressBar(
+                      progress: _progressL,
+                    ))),
+            Padding(
+              padding: const EdgeInsets.all(8),
+              child: Text(_progressL.toStringAsFixed(1),
+                  style: const TextStyle(fontSize: 12)),
+            ),
+            Padding(
+                padding: const EdgeInsets.all(8),
+                child: DSKButton(
+                  style: DSKButtonStyle.normal,
+                  onPressed: () {
+                    _increaseProgressL();
+                  },
+                  child: const Text('Increase'),
+                )),
+          ]),
+      Wrap(
+          alignment: WrapAlignment.start,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          children: [
+            Padding(
+                padding: const EdgeInsets.all(8),
+                child: SizedBox(
+                    width: 250,
+                    child: DSKProgressBar(
+                      progress: _progressL,
+                      isIndeterminate: true,
+                      isRunning: _isRunningL,
+                    ))),
+            Padding(
+                padding: const EdgeInsets.all(8),
+                child: DSKButton(
+                  style: DSKButtonStyle.normal,
+                  onPressed: () {
+                    _toggleIndeterminateL();
+                  },
+                  child: const Text('Toggle running'),
+                )),
+          ]),
+      const Padding(
+          padding: EdgeInsets.all(8), child: Text('DSKProgressCircular:')),
+      Wrap(
+          alignment: WrapAlignment.start,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          children: [
+            Padding(
+                padding: const EdgeInsets.all(8),
+                child: SizedBox(
+                    width: 250,
+                    child: DSKProgressCircular(
+                      progress: _progressC,
+                    ))),
+            Padding(
+              padding: const EdgeInsets.all(8),
+              child: Text(_progressC.toStringAsFixed(1),
+                  style: const TextStyle(fontSize: 12)),
+            ),
+            Padding(
+                padding: const EdgeInsets.all(8),
+                child: DSKButton(
+                  style: DSKButtonStyle.normal,
+                  onPressed: () {
+                    _increaseProgressC();
+                  },
+                  child: const Text('Increase'),
+                )),
+          ]),
+      Wrap(
+          alignment: WrapAlignment.start,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          children: [
+            Padding(
+                padding: const EdgeInsets.all(8),
+                child: SizedBox(
+                    width: 250,
+                    child: DSKProgressCircular(
+                      progress: _progressC,
+                      isIndeterminate: true,
+                      isRunning: _isRunningC,
+                    ))),
+            Padding(
+                padding: const EdgeInsets.all(8),
+                child: DSKButton(
+                  style: DSKButtonStyle.normal,
+                  onPressed: () {
+                    _toggleIndeterminateC();
+                  },
+                  child: const Text('Toggle running'),
+                )),
+          ]),
+      const SizedBox(height: 50),
+    ]);
   }
 }
