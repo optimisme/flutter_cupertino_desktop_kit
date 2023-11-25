@@ -161,10 +161,10 @@ class _LayoutFieldsState extends State<LayoutFields> {
                 child: SizedBox(
                     width: 150,
                     child: DSKFieldNumericSlider(
-                      defaultValue: 50,
-                      onChanged: (double value) {
+                      defaultValue: 0.5,
+                      onValueChanged: (double value) {
                         // ignore: avoid_print
-                        print("Field100: $value");
+                        print("Numeric slider default: $value");
                       },
                     ))),
             Padding(
@@ -172,10 +172,30 @@ class _LayoutFieldsState extends State<LayoutFields> {
                 child: SizedBox(
                     width: 150,
                     child: DSKFieldNumericSlider(
-                      enabled: false,
-                      onChanged: (double value) {
+                      defaultValue: 50,
+                      min: 0,
+                      max: 100,
+                      increment: 1,
+                      decimals: 0,
+                      units: "%",
+                      onValueChanged: (double value) {
                         // ignore: avoid_print
-                        print("Field360: $value");
+                        print("Numeric slider %: $value");
+                      },
+                    ))),
+            Padding(
+                padding: const EdgeInsets.all(8),
+                child: SizedBox(
+                    width: 150,
+                    child: DSKFieldNumericSlider(
+                      defaultValue: 128,
+                      min: 0,
+                      max: 255,
+                      increment: 1,
+                      decimals: 0,
+                      onValueChanged: (double value) {
+                        // ignore: avoid_print
+                        print("Numeric slider %: $value");
                       },
                     ))),
           ]),

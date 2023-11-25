@@ -8,14 +8,26 @@ import 'dsk_picker_slider.dart';
 class DSKFieldNumericSlider extends StatefulWidget {
   final double defaultValue;
   final double textSize;
+  final double min;
+  final double max;
+  final double increment;
+  final int decimals;
   final bool enabled;
-  final Function(double)? onChanged;
+  final String units;
+  final Function(double)? onValueChanged;
+  final Function(double)? onTextChanged;
   const DSKFieldNumericSlider({
     Key? key,
     this.defaultValue = 0.0,
     this.textSize = 12,
+    this.min = 0,
+    this.max = 1,
+    this.increment = double.infinity, // If infinity, buttons are hidden
+    this.decimals = 1, // Valor per defecte, sense decimals si no s'especifica
+    this.units = "",
     this.enabled = true,
-    this.onChanged,
+    this.onValueChanged,
+    this.onTextChanged,
   }) : super(key: key);
 
   @override
@@ -26,29 +38,45 @@ class DSKFieldNumericSliderState extends State<DSKFieldNumericSlider> {
   GlobalKey<DSKPickerSliderState> keyPicker = GlobalKey();
   GlobalKey<DSKFieldNumericState> keyNumeric = GlobalKey();
   double _currentValue = 0;
+  double _distance = 0;
   bool _isUpdating = false;
 
   @override
   void initState() {
     super.initState();
+    _checkInit();
+  }
+
+  @override
+  void didUpdateWidget(DSKFieldNumericSlider oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    _checkInit();
+  }
+
+  void _checkInit() {
+    if (widget.max == double.infinity || widget.min == double.infinity) {
+      throw Exception(
+          "DSKFieldNumericSlider: max and min must be specified and not infinity");
+    }
+    _distance = (widget.max - widget.min).abs();
     _currentValue = widget.defaultValue;
   }
 
-  void _onChanged(String origin, double value) {
+  void _onValueChanged(String origin, double value) {
     if (_isUpdating) {
       return;
     }
     setState(() {
       _isUpdating = true;
       if (origin == "picker") {
-        _currentValue = value * 100;
+        _currentValue = value * _distance + widget.min;
         keyNumeric.currentState?.setValue(_currentValue);
       }
       if (origin == "numeric") {
         _currentValue = value;
-        keyPicker.currentState?.setValue(value / 100);
+        keyPicker.currentState?.setValue((value - widget.min) / _distance);
       }
-      widget.onChanged?.call(_currentValue);
+      widget.onValueChanged?.call(_currentValue);
       _isUpdating = false;
     });
   }
@@ -61,11 +89,11 @@ class DSKFieldNumericSliderState extends State<DSKFieldNumericSlider> {
         Expanded(
             child: DSKPickerSlider(
           key: keyPicker,
-          defaultValue: _currentValue / 100,
+          defaultValue: (_currentValue - widget.min) / _distance,
           size: widget.textSize + 8,
           enabled: widget.enabled,
           onChanged: (value) {
-            _onChanged("picker", value);
+            _onValueChanged("picker", value);
           },
         )),
         const SizedBox(width: 4),
@@ -75,14 +103,17 @@ class DSKFieldNumericSliderState extends State<DSKFieldNumericSlider> {
             key: keyNumeric,
             defaultValue: _currentValue,
             textSize: widget.textSize,
-            min: 0,
-            max: 100,
-            increment: 1,
-            decimals: 0,
+            min: widget.min,
+            max: widget.max,
+            increment: widget.increment,
+            decimals: widget.decimals,
             enabled: widget.enabled,
-            units: "%",
+            units: widget.units,
             onValueChanged: (value) {
-              _onChanged("numeric", value);
+              _onValueChanged("numeric", value);
+            },
+            onTextChanged: (value) {
+              widget.onTextChanged?.call(value);
             },
           ),
         )
