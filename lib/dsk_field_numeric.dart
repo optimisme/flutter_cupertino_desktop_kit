@@ -38,7 +38,6 @@ class DSKFieldNumeric extends StatefulWidget {
 
 class DSKFieldNumericState extends State<DSKFieldNumeric> {
   late TextEditingController _controller;
-  //late RegExp _decimalRegex;
   bool _isUpdating = false;
   double _currentValue = 0;
 
