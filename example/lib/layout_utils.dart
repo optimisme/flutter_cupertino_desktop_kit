@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_desktop_cupertino/dsk_widgets.dart';
+import 'package:flutter_desktop_cupertino/cx_widgets.dart';
 
 class LayoutUtils extends StatefulWidget {
   const LayoutUtils({super.key});
@@ -11,7 +11,7 @@ class LayoutUtils extends StatefulWidget {
 class _LayoutUtilsState extends State<LayoutUtils> {
   @override
   Widget build(BuildContext context) {
-    DSKTheme theme = DSKThemeNotifier.of(context)!.changeNotifier;
+    CXTheme theme = CXThemeNotifier.of(context)!.changeNotifier;
 
     Widget line = Container(
       decoration: BoxDecoration(
@@ -28,11 +28,11 @@ class _LayoutUtilsState extends State<LayoutUtils> {
     return ListView(children: [
       const SizedBox(height: 8),
       const Padding(
-          padding: EdgeInsets.all(8), child: Text('DSKUtilsDisclosure:')),
+          padding: EdgeInsets.all(8), child: Text('CXUtilsDisclosure:')),
       Wrap(crossAxisAlignment: WrapCrossAlignment.center, children: [
         Padding(
           padding: const EdgeInsets.all(8),
-          child: DSKUtilDisclosure(
+          child: CXUtilDisclosure(
               title: const Text('Show/Hide', style: TextStyle(fontSize: 14)),
               child: SizedBox(
                   width: 300,

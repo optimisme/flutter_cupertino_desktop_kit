@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_desktop_cupertino/dsk_widgets.dart';
+import 'package:flutter_desktop_cupertino/cx_widgets.dart';
 
 class LayoutDialogs extends StatefulWidget {
   const LayoutDialogs({super.key});
@@ -10,27 +10,27 @@ class LayoutDialogs extends StatefulWidget {
 
 class _LayoutDialogsState extends State<LayoutDialogs> {
   // Used to tell the popover where to show up
-  final GlobalKey<DSKDialogPopoverState> _anchorPopover0 = GlobalKey();
-  final GlobalKey<DSKDialogPopoverState> _anchorPopover1 = GlobalKey();
-  final GlobalKey<DSKDialogPopoverState> _anchorPopover2 = GlobalKey();
-  final GlobalKey<DSKDialogPopoverState> _anchorPopover3 = GlobalKey();
-  final GlobalKey<DSKDialogPopoverState> _anchorDraggable0 = GlobalKey();
-  final GlobalKey<DSKDialogPopoverState> _anchorDraggable1 = GlobalKey();
-  final GlobalKey<DSKDialogPopoverState> _anchorDraggable2 = GlobalKey();
-  final GlobalKey<DSKDialogPopoverState> _anchorDraggable3 = GlobalKey();
-  final GlobalKey<DSKDialogPopoverState> _anchorArrowed0 = GlobalKey();
-  final GlobalKey<DSKDialogPopoverState> _anchorArrowed1 = GlobalKey();
-  final GlobalKey<DSKDialogPopoverState> _anchorArrowed2 = GlobalKey();
-  final GlobalKey<DSKDialogPopoverState> _anchorArrowed3 = GlobalKey();
+  final GlobalKey<CXDialogPopoverState> _anchorPopover0 = GlobalKey();
+  final GlobalKey<CXDialogPopoverState> _anchorPopover1 = GlobalKey();
+  final GlobalKey<CXDialogPopoverState> _anchorPopover2 = GlobalKey();
+  final GlobalKey<CXDialogPopoverState> _anchorPopover3 = GlobalKey();
+  final GlobalKey<CXDialogPopoverState> _anchorDraggable0 = GlobalKey();
+  final GlobalKey<CXDialogPopoverState> _anchorDraggable1 = GlobalKey();
+  final GlobalKey<CXDialogPopoverState> _anchorDraggable2 = GlobalKey();
+  final GlobalKey<CXDialogPopoverState> _anchorDraggable3 = GlobalKey();
+  final GlobalKey<CXDialogPopoverState> _anchorArrowed0 = GlobalKey();
+  final GlobalKey<CXDialogPopoverState> _anchorArrowed1 = GlobalKey();
+  final GlobalKey<CXDialogPopoverState> _anchorArrowed2 = GlobalKey();
+  final GlobalKey<CXDialogPopoverState> _anchorArrowed3 = GlobalKey();
 
-  _showPopover(BuildContext context, GlobalKey anchorKey, DSKTheme theme,
+  _showPopover(BuildContext context, GlobalKey anchorKey, CXTheme theme,
       bool centered, bool animated, bool translucent) {
-    final GlobalKey<DSKDialogPopoverState> key = GlobalKey();
-    DSKDialogsManager.showPopover(
+    final GlobalKey<CXDialogPopoverState> key = GlobalKey();
+    CXDialogsManager.showPopover(
       key: key,
       context: context,
       anchorKey: anchorKey,
-      type: centered ? DSKDialogPopoverType.center : DSKDialogPopoverType.down,
+      type: centered ? CXDialogPopoverType.center : CXDialogPopoverType.down,
       isAnimated: animated,
       isTranslucent: translucent,
       onHide: () {
@@ -58,9 +58,9 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
   }
 
   _showModal(
-      BuildContext context, DSKTheme theme, bool animated, bool translucent) {
-    final GlobalKey<DSKDialogModalState> key = GlobalKey();
-    DSKDialogsManager.showModal(
+      BuildContext context, CXTheme theme, bool animated, bool translucent) {
+    final GlobalKey<CXDialogModalState> key = GlobalKey();
+    CXDialogsManager.showModal(
       key: key,
       context: context,
       isAnimated: animated,
@@ -90,10 +90,10 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
     );
   }
 
-  void _showDraggable(BuildContext context, GlobalKey anchorKey, DSKTheme theme,
+  void _showDraggable(BuildContext context, GlobalKey anchorKey, CXTheme theme,
       bool animated, bool translucent) {
-    final GlobalKey<DSKDialogDraggableState> key = GlobalKey();
-    DSKDialogsManager.showDraggable(
+    final GlobalKey<CXDialogDraggableState> key = GlobalKey();
+    CXDialogsManager.showDraggable(
       key: key,
       context: context,
       anchorKey: anchorKey,
@@ -116,7 +116,7 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
                 child: GestureDetector(
                     onTapDown: (details) {}, // prevent dragging
                     onPanUpdate: (details) {}, // prevent dragging
-                    child: DSKPickerButtonsBar(
+                    child: CXPickerButtonsBar(
                       options: const [
                         {"widget": Icon(CupertinoIcons.bold), "value": true},
                         {"widget": Icon(CupertinoIcons.italic), "value": false},
@@ -149,10 +149,10 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
     );
   }
 
-  _showPopoverArrowed(BuildContext context, GlobalKey anchorKey, DSKTheme theme,
+  _showPopoverArrowed(BuildContext context, GlobalKey anchorKey, CXTheme theme,
       bool animated, bool translucent) {
-    final GlobalKey<DSKDialogPopoverArrowedState> key = GlobalKey();
-    DSKDialogsManager.showPopoverArrowed(
+    final GlobalKey<CXDialogPopoverArrowedState> key = GlobalKey();
+    CXDialogsManager.showPopoverArrowed(
       key: key,
       context: context,
       anchorKey: anchorKey,
@@ -184,7 +184,7 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
 
   @override
   Widget build(BuildContext context) {
-    DSKTheme theme = DSKThemeNotifier.of(context)!.changeNotifier;
+    CXTheme theme = CXThemeNotifier.of(context)!.changeNotifier;
 
     return ListView(children: [
       const SizedBox(height: 8),
@@ -205,13 +205,13 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
           )),
       const SizedBox(height: 8),
       const Padding(
-          padding: EdgeInsets.all(8), child: Text('DSKDialogPopover:')),
+          padding: EdgeInsets.all(8), child: Text('CXDialogPopover:')),
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
-            child: DSKButton(
+            child: CXButton(
               key: _anchorPopover0,
-              style: DSKButtonStyle.normal,
+              style: CXButtonStyle.normal,
               isLarge: false,
               onPressed: () {
                 _showPopover(
@@ -221,9 +221,9 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
             )),
         Padding(
             padding: const EdgeInsets.all(8),
-            child: DSKButton(
+            child: CXButton(
               key: _anchorPopover1,
-              style: DSKButtonStyle.normal,
+              style: CXButtonStyle.normal,
               isLarge: false,
               onPressed: () {
                 _showPopover(
@@ -233,9 +233,9 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
             )),
         Padding(
             padding: const EdgeInsets.all(8),
-            child: DSKButton(
+            child: CXButton(
               key: _anchorPopover2,
-              style: DSKButtonStyle.normal,
+              style: CXButtonStyle.normal,
               isLarge: false,
               onPressed: () {
                 _showPopover(
@@ -245,9 +245,9 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
             )),
         Padding(
             padding: const EdgeInsets.all(8),
-            child: DSKButton(
+            child: CXButton(
               key: _anchorPopover3,
-              style: DSKButtonStyle.normal,
+              style: CXButtonStyle.normal,
               isLarge: false,
               onPressed: () {
                 _showPopover(context, _anchorPopover3, theme, true, true, true);
@@ -255,12 +255,12 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
               child: const Text('Translucent with animation'),
             )),
       ]),
-      const Padding(padding: EdgeInsets.all(8), child: Text('DSKDialogModal:')),
+      const Padding(padding: EdgeInsets.all(8), child: Text('CXDialogModal:')),
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
-            child: DSKButton(
-              style: DSKButtonStyle.normal,
+            child: CXButton(
+              style: CXButtonStyle.normal,
               isLarge: false,
               onPressed: () {
                 _showModal(context, theme, false, false);
@@ -269,8 +269,8 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
             )),
         Padding(
             padding: const EdgeInsets.all(8),
-            child: DSKButton(
-              style: DSKButtonStyle.normal,
+            child: CXButton(
+              style: CXButtonStyle.normal,
               isLarge: false,
               onPressed: () {
                 _showModal(context, theme, true, false);
@@ -279,8 +279,8 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
             )),
         Padding(
             padding: const EdgeInsets.all(8),
-            child: DSKButton(
-              style: DSKButtonStyle.normal,
+            child: CXButton(
+              style: CXButtonStyle.normal,
               isLarge: false,
               onPressed: () {
                 _showModal(context, theme, false, true);
@@ -289,8 +289,8 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
             )),
         Padding(
             padding: const EdgeInsets.all(8),
-            child: DSKButton(
-              style: DSKButtonStyle.normal,
+            child: CXButton(
+              style: CXButtonStyle.normal,
               isLarge: false,
               onPressed: () {
                 _showModal(context, theme, true, true);
@@ -299,13 +299,13 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
             )),
       ]),
       const Padding(
-          padding: EdgeInsets.all(8), child: Text('DSKDialogDraggable:')),
+          padding: EdgeInsets.all(8), child: Text('CXDialogDraggable:')),
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
-            child: DSKButton(
+            child: CXButton(
               key: _anchorDraggable0,
-              style: DSKButtonStyle.normal,
+              style: CXButtonStyle.normal,
               isLarge: false,
               onPressed: () {
                 _showDraggable(context, _anchorDraggable0, theme, false, false);
@@ -314,9 +314,9 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
             )),
         Padding(
             padding: const EdgeInsets.all(8),
-            child: DSKButton(
+            child: CXButton(
               key: _anchorDraggable1,
-              style: DSKButtonStyle.normal,
+              style: CXButtonStyle.normal,
               isLarge: false,
               onPressed: () {
                 _showDraggable(context, _anchorDraggable1, theme, true, false);
@@ -325,9 +325,9 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
             )),
         Padding(
             padding: const EdgeInsets.all(8),
-            child: DSKButton(
+            child: CXButton(
               key: _anchorDraggable2,
-              style: DSKButtonStyle.normal,
+              style: CXButtonStyle.normal,
               isLarge: false,
               onPressed: () {
                 _showDraggable(context, _anchorDraggable2, theme, false, true);
@@ -336,9 +336,9 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
             )),
         Padding(
             padding: const EdgeInsets.all(8),
-            child: DSKButton(
+            child: CXButton(
               key: _anchorDraggable3,
-              style: DSKButtonStyle.normal,
+              style: CXButtonStyle.normal,
               isLarge: false,
               onPressed: () {
                 _showDraggable(context, _anchorDraggable3, theme, true, true);
@@ -346,13 +346,13 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
               child: const Text('Translucent with animation'),
             )),
       ]),
-      const Padding(padding: EdgeInsets.all(8), child: Text('DSKDialogArrow:')),
+      const Padding(padding: EdgeInsets.all(8), child: Text('CXDialogArrow:')),
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
-            child: DSKButton(
+            child: CXButton(
               key: _anchorArrowed0,
-              style: DSKButtonStyle.normal,
+              style: CXButtonStyle.normal,
               isLarge: false,
               onPressed: () {
                 _showPopoverArrowed(
@@ -362,9 +362,9 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
             )),
         Padding(
             padding: const EdgeInsets.all(8),
-            child: DSKButton(
+            child: CXButton(
               key: _anchorArrowed1,
-              style: DSKButtonStyle.normal,
+              style: CXButtonStyle.normal,
               isLarge: false,
               onPressed: () {
                 _showPopoverArrowed(
@@ -374,9 +374,9 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
             )),
         Padding(
             padding: const EdgeInsets.all(8),
-            child: DSKButton(
+            child: CXButton(
               key: _anchorArrowed2,
-              style: DSKButtonStyle.normal,
+              style: CXButtonStyle.normal,
               isLarge: false,
               onPressed: () {
                 _showPopoverArrowed(
@@ -386,9 +386,9 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
             )),
         Padding(
             padding: const EdgeInsets.all(8),
-            child: DSKButton(
+            child: CXButton(
               key: _anchorArrowed3,
-              style: DSKButtonStyle.normal,
+              style: CXButtonStyle.normal,
               isLarge: false,
               onPressed: () {
                 _showPopoverArrowed(

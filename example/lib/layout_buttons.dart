@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_desktop_cupertino/dsk_widgets.dart';
+import 'package:flutter_desktop_cupertino/cx_widgets.dart';
 
 class LayoutButtons extends StatefulWidget {
   const LayoutButtons({super.key});
@@ -16,107 +16,106 @@ class _LayoutButtonsState extends State<LayoutButtons> {
   Widget build(BuildContext context) {
     return ListView(children: [
       const SizedBox(height: 8),
-      const Padding(padding: EdgeInsets.all(8), child: Text('DSKButton:')),
+      const Padding(padding: EdgeInsets.all(8), child: Text('CXButton:')),
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
-            child: DSKButton(
-              style: DSKButtonStyle.action,
+            child: CXButton(
+              style: CXButtonStyle.action,
               isLarge: true,
               onPressed: () {},
               child: const Text('Action large'),
             )),
         Padding(
             padding: const EdgeInsets.all(8),
-            child: DSKButton(
-              style: DSKButtonStyle.action,
+            child: CXButton(
+              style: CXButtonStyle.action,
               onPressed: () {},
               child: const Text('Action'),
             )),
         Padding(
             padding: const EdgeInsets.all(8),
-            child: DSKButton(
-              style: DSKButtonStyle.destructive,
+            child: CXButton(
+              style: CXButtonStyle.destructive,
               onPressed: () {},
               child: const Text('Destructive'),
             )),
         Padding(
             padding: const EdgeInsets.all(8),
-            child: DSKButton(
-              style: DSKButtonStyle.normal,
+            child: CXButton(
+              style: CXButtonStyle.normal,
               onPressed: () {},
               child: const Text('Normal'),
             )),
         Padding(
             padding: const EdgeInsets.all(8),
-            child: DSKButton(
-              style: DSKButtonStyle.normal,
+            child: CXButton(
+              style: CXButtonStyle.normal,
               onPressed: () {},
               child: const Icon(CupertinoIcons.bookmark),
             )),
         Padding(
             padding: const EdgeInsets.all(8),
-            child: DSKButton(
-              style: DSKButtonStyle.action,
+            child: CXButton(
+              style: CXButtonStyle.action,
               enabled: false,
               onPressed: () {},
               child: const Text('Action disabled'),
             )),
         Padding(
             padding: const EdgeInsets.all(8),
-            child: DSKButton(
-              style: DSKButtonStyle.destructive,
+            child: CXButton(
+              style: CXButtonStyle.destructive,
               enabled: false,
               onPressed: () {},
               child: const Text('Destructive disabled'),
             )),
         Padding(
             padding: const EdgeInsets.all(8),
-            child: DSKButton(
-              style: DSKButtonStyle.normal,
+            child: CXButton(
+              style: CXButtonStyle.normal,
               enabled: false,
               onPressed: () {},
               child: const Text('Normal disabled'),
             )),
         Padding(
             padding: const EdgeInsets.all(8),
-            child: DSKButton(
-              style: DSKButtonStyle.normal,
+            child: CXButton(
+              style: CXButtonStyle.normal,
               enabled: false,
               onPressed: () {},
               child: const Icon(CupertinoIcons.bookmark),
             )),
       ]),
-      const Padding(padding: EdgeInsets.all(8), child: Text('DSKButtonHelp:')),
+      const Padding(padding: EdgeInsets.all(8), child: Text('CXButtonHelp:')),
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
-            child: DSKButtonHelp(size: 24, onPressed: () {})),
+            child: CXButtonHelp(size: 24, onPressed: () {})),
       ]),
-      const Padding(padding: EdgeInsets.all(8), child: Text('DSKButtonIcon:')),
+      const Padding(padding: EdgeInsets.all(8), child: Text('CXButtonIcon:')),
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
-            child: DSKButtonIcon(
+            child: CXButtonIcon(
                 size: 28, icon: CupertinoIcons.back, onPressed: () {})),
         Padding(
             padding: const EdgeInsets.all(8),
-            child: DSKButtonIcon(size: 28, isCircle: true, onPressed: () {})),
+            child: CXButtonIcon(size: 28, isCircle: true, onPressed: () {})),
         Padding(
             padding: const EdgeInsets.all(8),
-            child: DSKButtonIcon(
+            child: CXButtonIcon(
                 size: 28,
                 icon: CupertinoIcons.cloud_fill,
                 isCircle: true,
                 isSelected: true,
                 onPressed: () {})),
       ]),
-      const Padding(
-          padding: EdgeInsets.all(8), child: Text('DSKButtonSwitch:')),
+      const Padding(padding: EdgeInsets.all(8), child: Text('CXButtonSwitch:')),
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
-            child: DSKButtonSwitch(
+            child: CXButtonSwitch(
               value: isSwitched,
               onChanged: (bool newValue) {
                 setState(() {
@@ -126,7 +125,7 @@ class _LayoutButtonsState extends State<LayoutButtons> {
             )),
         Padding(
             padding: const EdgeInsets.all(8),
-            child: DSKButtonSwitch(
+            child: CXButtonSwitch(
               value: isSwitched,
               size: 12,
               onChanged: (bool newValue) {
@@ -137,11 +136,11 @@ class _LayoutButtonsState extends State<LayoutButtons> {
             )),
       ]),
       const Padding(
-          padding: EdgeInsets.all(8), child: Text('DSKButtonCheckbox:')),
+          padding: EdgeInsets.all(8), child: Text('CXButtonCheckbox:')),
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
-            child: DSKButtonCheckBox(
+            child: CXButtonCheckBox(
               value: isSwitched,
               onChanged: (bool? value) {
                 setState(() {
@@ -151,11 +150,11 @@ class _LayoutButtonsState extends State<LayoutButtons> {
             )),
       ]),
       const Padding(
-          padding: EdgeInsets.all(8), child: Text('DSKButtonDisclosure:')),
+          padding: EdgeInsets.all(8), child: Text('CXButtonDisclosure:')),
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
-            child: DSKButtonDisclosure(
+            child: CXButtonDisclosure(
               value: isSwitched,
               onChanged: (bool newValue) {
                 setState(() {
@@ -164,11 +163,11 @@ class _LayoutButtonsState extends State<LayoutButtons> {
               },
             )),
       ]),
-      const Padding(padding: EdgeInsets.all(8), child: Text('DSKButtonRadio:')),
+      const Padding(padding: EdgeInsets.all(8), child: Text('CXButtonRadio:')),
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
-            child: DSKButtonRadio(
+            child: CXButtonRadio(
               isSelected: selectedRadio == 1,
               onSelected: (bool? isSelected) {
                 setState(() {
@@ -179,7 +178,7 @@ class _LayoutButtonsState extends State<LayoutButtons> {
             )),
         Padding(
             padding: const EdgeInsets.all(8),
-            child: DSKButtonRadio(
+            child: CXButtonRadio(
               isSelected: selectedRadio == 2,
               onSelected: (bool? isSelected) {
                 setState(() {
@@ -189,12 +188,11 @@ class _LayoutButtonsState extends State<LayoutButtons> {
               child: const Text("You"),
             )),
       ]),
-      const Padding(
-          padding: EdgeInsets.all(8), child: Text('DSKButtonSelect:')),
+      const Padding(padding: EdgeInsets.all(8), child: Text('CXButtonSelect:')),
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
-            child: DSKButtonSelect(
+            child: CXButtonSelect(
               options: const ['One', 'Two', 'Three'],
               defaultIndex: 0,
               onSelected: (int index, String value) {
@@ -204,7 +202,7 @@ class _LayoutButtonsState extends State<LayoutButtons> {
             )),
         Padding(
             padding: const EdgeInsets.all(8),
-            child: DSKButtonSelect(
+            child: CXButtonSelect(
               options: const ['No', 'Yes', 'Maybe', 'Who knows?'],
               defaultIndex: 1,
               isFlat: true,

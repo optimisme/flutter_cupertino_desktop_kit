@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_desktop_cupertino/dsk_widgets.dart';
+import 'package:flutter_desktop_cupertino/cx_widgets.dart';
 
 class LayoutSidebarLeft extends StatefulWidget {
   final List<String> options;
@@ -18,7 +18,7 @@ class LayoutButtonsState extends State<LayoutSidebarLeft> {
 
   @override
   Widget build(BuildContext context) {
-    DSKTheme theme = DSKThemeNotifier.of(context)!.changeNotifier;
+    CXTheme theme = CXThemeNotifier.of(context)!.changeNotifier;
 
     bool isAccent = true;
 
@@ -38,7 +38,7 @@ class LayoutButtonsState extends State<LayoutSidebarLeft> {
                 _selectedIndex = index;
               });
             },
-            child: DSKButtonSidebar(
+            child: CXButtonSidebar(
               isSelected: _selectedIndex == index,
               isAccent: true,
               onSelected: () {
@@ -61,7 +61,7 @@ class LayoutButtonsState extends State<LayoutSidebarLeft> {
               children: [
                 Text("Theme: ", style: textStyle),
                 const SizedBox(height: 8),
-                DSKButtonRadio(
+                CXButtonRadio(
                   isSelected: selectedRadio == "system",
                   onSelected: (bool? isSelected) {
                     setState(() {
@@ -72,7 +72,7 @@ class LayoutButtonsState extends State<LayoutSidebarLeft> {
                   child: Text("System", style: textStyle),
                 ),
                 const SizedBox(height: 8),
-                DSKButtonRadio(
+                CXButtonRadio(
                   isSelected: selectedRadio == "light",
                   onSelected: (bool? isSelected) {
                     setState(() {
@@ -83,7 +83,7 @@ class LayoutButtonsState extends State<LayoutSidebarLeft> {
                   child: Text("Light", style: textStyle),
                 ),
                 const SizedBox(height: 8),
-                DSKButtonRadio(
+                CXButtonRadio(
                   isSelected: selectedRadio == "dark",
                   onSelected: (bool? isSelected) {
                     setState(() {
@@ -96,8 +96,8 @@ class LayoutButtonsState extends State<LayoutSidebarLeft> {
                 const SizedBox(height: 16),
                 Text("Primary color: ", style: textStyle),
                 const SizedBox(height: 8),
-                DSKPickerThemeColors(
-                  colors: DSKTheme.systemColors,
+                CXPickerThemeColors(
+                  colors: CXTheme.systemColors,
                   onColorChanged: (String colorName) {
                     // ignore: avoid_print
                     print("Color changed: $colorName");

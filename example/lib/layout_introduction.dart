@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter_desktop_cupertino/dsk_widgets.dart';
+import 'package:flutter_desktop_cupertino/cx_widgets.dart';
 
 class LayoutIntroduction extends StatefulWidget {
   const LayoutIntroduction({super.key});
@@ -12,7 +12,7 @@ class LayoutIntroduction extends StatefulWidget {
 class _LayoutIntroductionState extends State<LayoutIntroduction> {
   @override
   Widget build(BuildContext context) {
-    DSKTheme theme = DSKThemeNotifier.of(context)!.changeNotifier;
+    CXTheme theme = CXThemeNotifier.of(context)!.changeNotifier;
 
     return ListView(children: [
       const Padding(
@@ -22,7 +22,7 @@ class _LayoutIntroductionState extends State<LayoutIntroduction> {
       const Padding(
           padding: EdgeInsets.symmetric(vertical: 16, horizontal: 32),
           child: Text(
-              'This project defines Flutter Widgets for Desktop, with a macOS-style aesthetic, using Cupertino as a foundation.')),
+              'This project, Flutter Cupertino Desktop (CX), defines Flutter widgets for Desktop, providing a macOS-style aesthetic, built upon the foundation of Cupertino widgets.')),
       const Padding(
           padding: EdgeInsets.symmetric(vertical: 16, horizontal: 32),
           child: Text(
@@ -46,6 +46,10 @@ class _LayoutIntroductionState extends State<LayoutIntroduction> {
                               color: theme.accent,
                             )))
                   ]))),
+      const Padding(
+          padding: EdgeInsets.symmetric(vertical: 16, horizontal: 32),
+          child: Text(
+              'The CX prefix aims to be unique within the Flutter ecosystem, while also being concise and evocative of ideas of graphics, experience, and expansion. In doing so, it embodies the spirit of the project.')),
       const SizedBox(height: 50),
     ]);
   }

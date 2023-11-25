@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_desktop_cupertino/dsk_widgets.dart';
+import 'package:flutter_desktop_cupertino/cx_widgets.dart';
 
 class LayoutProgress extends StatefulWidget {
   const LayoutProgress({super.key});
@@ -48,7 +48,7 @@ class _LayoutProgressState extends State<LayoutProgress> {
   Widget build(BuildContext context) {
     return ListView(children: [
       const SizedBox(height: 8),
-      const Padding(padding: EdgeInsets.all(8), child: Text('DSKProgressBar:')),
+      const Padding(padding: EdgeInsets.all(8), child: Text('CXProgressBar:')),
       Wrap(
           alignment: WrapAlignment.start,
           crossAxisAlignment: WrapCrossAlignment.center,
@@ -57,7 +57,7 @@ class _LayoutProgressState extends State<LayoutProgress> {
                 padding: const EdgeInsets.all(8),
                 child: SizedBox(
                     width: 250,
-                    child: DSKProgressBar(
+                    child: CXProgressBar(
                       progress: _progressL,
                     ))),
             Padding(
@@ -67,8 +67,8 @@ class _LayoutProgressState extends State<LayoutProgress> {
             ),
             Padding(
                 padding: const EdgeInsets.all(8),
-                child: DSKButton(
-                  style: DSKButtonStyle.normal,
+                child: CXButton(
+                  style: CXButtonStyle.normal,
                   onPressed: () {
                     _increaseProgressL();
                   },
@@ -83,15 +83,15 @@ class _LayoutProgressState extends State<LayoutProgress> {
                 padding: const EdgeInsets.all(8),
                 child: SizedBox(
                     width: 250,
-                    child: DSKProgressBar(
+                    child: CXProgressBar(
                       progress: _progressL,
                       isIndeterminate: true,
                       isRunning: _isRunningL,
                     ))),
             Padding(
                 padding: const EdgeInsets.all(8),
-                child: DSKButton(
-                  style: DSKButtonStyle.normal,
+                child: CXButton(
+                  style: CXButtonStyle.normal,
                   onPressed: () {
                     _toggleIndeterminateL();
                   },
@@ -99,7 +99,7 @@ class _LayoutProgressState extends State<LayoutProgress> {
                 )),
           ]),
       const Padding(
-          padding: EdgeInsets.all(8), child: Text('DSKProgressCircular:')),
+          padding: EdgeInsets.all(8), child: Text('CXProgressCircular:')),
       Wrap(
           alignment: WrapAlignment.start,
           crossAxisAlignment: WrapCrossAlignment.center,
@@ -108,7 +108,7 @@ class _LayoutProgressState extends State<LayoutProgress> {
                 padding: const EdgeInsets.all(8),
                 child: SizedBox(
                     width: 250,
-                    child: DSKProgressCircular(
+                    child: CXProgressCircular(
                       progress: _progressC,
                     ))),
             Padding(
@@ -118,8 +118,8 @@ class _LayoutProgressState extends State<LayoutProgress> {
             ),
             Padding(
                 padding: const EdgeInsets.all(8),
-                child: DSKButton(
-                  style: DSKButtonStyle.normal,
+                child: CXButton(
+                  style: CXButtonStyle.normal,
                   onPressed: () {
                     _increaseProgressC();
                   },
@@ -134,15 +134,15 @@ class _LayoutProgressState extends State<LayoutProgress> {
                 padding: const EdgeInsets.all(8),
                 child: SizedBox(
                     width: 250,
-                    child: DSKProgressCircular(
+                    child: CXProgressCircular(
                       progress: _progressC,
                       isIndeterminate: true,
                       isRunning: _isRunningC,
                     ))),
             Padding(
                 padding: const EdgeInsets.all(8),
-                child: DSKButton(
-                  style: DSKButtonStyle.normal,
+                child: CXButton(
+                  style: CXButtonStyle.normal,
                   onPressed: () {
                     _toggleIndeterminateC();
                   },

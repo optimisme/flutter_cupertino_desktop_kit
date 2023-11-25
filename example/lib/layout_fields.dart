@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_desktop_cupertino/dsk_widgets.dart';
+import 'package:flutter_desktop_cupertino/cx_widgets.dart';
 
 class LayoutFields extends StatefulWidget {
   const LayoutFields({super.key});
@@ -23,13 +23,13 @@ class _LayoutFieldsState extends State<LayoutFields> {
   Widget build(BuildContext context) {
     return ListView(children: [
       const SizedBox(height: 8),
-      const Padding(padding: EdgeInsets.all(8), child: Text('DSKFieldText:')),
+      const Padding(padding: EdgeInsets.all(8), child: Text('CXFieldText:')),
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
             child: SizedBox(
                 width: 100,
-                child: DSKFieldText(
+                child: CXFieldText(
                   controller: _textController,
                   isRounded: false,
                   onChanged: (value) {
@@ -46,7 +46,7 @@ class _LayoutFieldsState extends State<LayoutFields> {
             padding: const EdgeInsets.all(8),
             child: SizedBox(
                 width: 100,
-                child: DSKFieldText(
+                child: CXFieldText(
                   placeholder: 'Placeholder',
                   isRounded: false,
                   onChanged: (value) {
@@ -63,7 +63,7 @@ class _LayoutFieldsState extends State<LayoutFields> {
             padding: const EdgeInsets.all(8),
             child: SizedBox(
                 width: 100,
-                child: DSKFieldText(
+                child: CXFieldText(
                   controller: _passController,
                   obscureText: true,
                   isRounded: false,
@@ -78,14 +78,13 @@ class _LayoutFieldsState extends State<LayoutFields> {
                   focusNode: FocusNode(),
                 ))),
       ]),
-      const Padding(
-          padding: EdgeInsets.all(8), child: Text('DSKFieldNumeric:')),
+      const Padding(padding: EdgeInsets.all(8), child: Text('CXFieldNumeric:')),
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
             child: SizedBox(
                 width: 100,
-                child: DSKFieldNumeric(
+                child: CXFieldNumeric(
                   defaultValue: 5.0,
                   onValueChanged: (double value) {
                     // ignore: avoid_print
@@ -96,7 +95,7 @@ class _LayoutFieldsState extends State<LayoutFields> {
             padding: const EdgeInsets.all(8),
             child: SizedBox(
                 width: 100,
-                child: DSKFieldNumeric(
+                child: CXFieldNumeric(
                   defaultValue: -1.0,
                   decimals: 2,
                   min: -2,
@@ -112,7 +111,7 @@ class _LayoutFieldsState extends State<LayoutFields> {
             padding: const EdgeInsets.all(8),
             child: SizedBox(
                 width: 100,
-                child: DSKFieldNumeric(
+                child: CXFieldNumeric(
                   defaultValue: 5.0,
                   enabled: false,
                   onValueChanged: (double value) {
@@ -121,13 +120,13 @@ class _LayoutFieldsState extends State<LayoutFields> {
                   },
                 ))),
       ]),
-      const Padding(padding: EdgeInsets.all(8), child: Text('DSKField360:')),
+      const Padding(padding: EdgeInsets.all(8), child: Text('CXField360:')),
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
             child: SizedBox(
                 width: 150,
-                child: DSKField360(
+                child: CXField360(
                   defaultValue: 270,
                   onChanged: (double value) {
                     // ignore: avoid_print
@@ -138,7 +137,7 @@ class _LayoutFieldsState extends State<LayoutFields> {
             padding: const EdgeInsets.all(8),
             child: SizedBox(
                 width: 150,
-                child: DSKField360(
+                child: CXField360(
                   enabled: false,
                   onChanged: (double value) {
                     // ignore: avoid_print
@@ -147,13 +146,13 @@ class _LayoutFieldsState extends State<LayoutFields> {
                 ))),
       ]),
       const Padding(
-          padding: EdgeInsets.all(8), child: Text('DSKFieldNumericSlider:')),
+          padding: EdgeInsets.all(8), child: Text('CXFieldNumericSlider:')),
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
             child: SizedBox(
                 width: 150,
-                child: DSKFieldNumericSlider(
+                child: CXFieldNumericSlider(
                   defaultValue: 0.5,
                   onValueChanged: (double value) {
                     // ignore: avoid_print
@@ -164,7 +163,7 @@ class _LayoutFieldsState extends State<LayoutFields> {
             padding: const EdgeInsets.all(8),
             child: SizedBox(
                 width: 150,
-                child: DSKFieldNumericSlider(
+                child: CXFieldNumericSlider(
                   defaultValue: 50,
                   min: 0,
                   max: 100,
@@ -180,7 +179,7 @@ class _LayoutFieldsState extends State<LayoutFields> {
             padding: const EdgeInsets.all(8),
             child: SizedBox(
                 width: 150,
-                child: DSKFieldNumericSlider(
+                child: CXFieldNumericSlider(
                   defaultValue: 128,
                   min: 0,
                   max: 255,

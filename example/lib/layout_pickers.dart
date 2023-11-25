@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_desktop_cupertino/dsk_widgets.dart';
+import 'package:flutter_desktop_cupertino/cx_widgets.dart';
 
 class LayoutPickers extends StatefulWidget {
   const LayoutPickers({super.key});
@@ -16,11 +16,11 @@ class _LayoutPickersState extends State<LayoutPickers> {
   Widget build(BuildContext context) {
     return ListView(children: [
       const SizedBox(height: 8),
-      const Padding(padding: EdgeInsets.all(8), child: Text('DSKPicker360:')),
+      const Padding(padding: EdgeInsets.all(8), child: Text('CXPicker360:')),
       Wrap(crossAxisAlignment: WrapCrossAlignment.center, children: [
         Padding(
             padding: const EdgeInsets.all(8),
-            child: DSKPicker360(
+            child: CXPicker360(
               onChanged: (angle) {
                 _angle = angle;
                 setState(() {});
@@ -29,14 +29,13 @@ class _LayoutPickersState extends State<LayoutPickers> {
         Text(_angle.toStringAsFixed(2), style: const TextStyle(fontSize: 12)),
       ]),
       const SizedBox(height: 8),
-      const Padding(
-          padding: EdgeInsets.all(8), child: Text('DSKPickerSlider:')),
+      const Padding(padding: EdgeInsets.all(8), child: Text('CXPickerSlider:')),
       Wrap(crossAxisAlignment: WrapCrossAlignment.center, children: [
         Padding(
             padding: const EdgeInsets.all(8),
             child: SizedBox(
                 width: 100,
-                child: DSKPickerSlider(
+                child: CSPickerSlider(
                   onChanged: (value) {
                     _value = value;
                     setState(() {});
@@ -45,14 +44,13 @@ class _LayoutPickersState extends State<LayoutPickers> {
         Text(_value.toStringAsFixed(2), style: const TextStyle(fontSize: 12)),
       ]),
       const Padding(
-          padding: EdgeInsets.all(8),
-          child: Text('DSKPickerButtonsSegmented:')),
+          padding: EdgeInsets.all(8), child: Text('CXPickerButtonsSegmented:')),
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
             child: SizedBox(
                 width: 300,
-                child: DSKPickerButtonsSegmented(
+                child: CXPickerButtonsSegmented(
                   options: const [
                     Text('Car'),
                     Text('Motorbike'),
@@ -68,7 +66,7 @@ class _LayoutPickersState extends State<LayoutPickers> {
             padding: const EdgeInsets.all(8),
             child: SizedBox(
                 width: 250,
-                child: DSKPickerButtonsSegmented(
+                child: CXPickerButtonsSegmented(
                   options: const [
                     Icon(CupertinoIcons.ant),
                     Text('Flower'),
@@ -84,13 +82,13 @@ class _LayoutPickersState extends State<LayoutPickers> {
                 ))),
       ]),
       const Padding(
-          padding: EdgeInsets.all(8), child: Text('DSKPickerButtonsBar:')),
+          padding: EdgeInsets.all(8), child: Text('CXPickerButtonsBar:')),
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
             child: SizedBox(
                 width: 300,
-                child: DSKPickerButtonsBar(
+                child: CXPickerButtonsBar(
                   options: const [
                     {
                       "widget": Icon(CupertinoIcons.text_alignleft),
@@ -115,7 +113,7 @@ class _LayoutPickersState extends State<LayoutPickers> {
             padding: const EdgeInsets.all(8),
             child: SizedBox(
                 width: 250,
-                child: DSKPickerButtonsBar(
+                child: CXPickerButtonsBar(
                   options: const [
                     {"widget": Icon(CupertinoIcons.bold), "value": false},
                     {"widget": Icon(CupertinoIcons.italic), "value": false},
@@ -133,11 +131,11 @@ class _LayoutPickersState extends State<LayoutPickers> {
                 ))),
       ]),
       const Padding(
-          padding: EdgeInsets.all(8), child: Text('DSKPickerCheckList:')),
+          padding: EdgeInsets.all(8), child: Text('CXPickerCheckList:')),
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
-            child: DSKPickerCheckList(
+            child: CXPickerCheckList(
               options: const ['Car', 'Motorbike', 'Plane'],
               defaultIndex: 2,
               onSelect: (int index, String value) {
