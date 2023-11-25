@@ -89,12 +89,6 @@ class DSKTheme extends ChangeNotifier {
     notifyListeners();
   }
 
-  void addPostFrameCallback(
-      BuildContext context, String defaultAppearance, String colorName) {
-    setAppearanceConfig(context, type: defaultAppearance, notify: false);
-    setAccentColour(colorName);
-  }
-
   String setAppearanceConfig(BuildContext context,
       {String type = "system", bool notify = true}) {
     String appearance = ""; // only light or dark (no system)
