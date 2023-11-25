@@ -21,6 +21,21 @@ class _LayoutPickersState extends State<LayoutPickers> {
         child: ListView(children: [
           const SizedBox(height: 8),
           const Padding(
+              padding: EdgeInsets.all(8), child: Text('DSKPicker360:')),
+          Wrap(crossAxisAlignment: WrapCrossAlignment.center, children: [
+            Padding(
+                padding: const EdgeInsets.all(8),
+                child: DSKPicker360(
+                  onChanged: (angle) {
+                    _angle = angle;
+                    setState(() {});
+                  },
+                )),
+            Text(_angle.toStringAsFixed(2),
+                style: const TextStyle(fontSize: 12)),
+          ]),
+          const SizedBox(height: 8),
+          const Padding(
               padding: EdgeInsets.all(8), child: Text('DSKPickerSlider:')),
           Wrap(crossAxisAlignment: WrapCrossAlignment.center, children: [
             Padding(
@@ -34,21 +49,6 @@ class _LayoutPickersState extends State<LayoutPickers> {
                       },
                     ))),
             Text(_value.toStringAsFixed(2),
-                style: const TextStyle(fontSize: 12)),
-          ]),
-          const SizedBox(height: 8),
-          const Padding(
-              padding: EdgeInsets.all(8), child: Text('DSKPicker360:')),
-          Wrap(crossAxisAlignment: WrapCrossAlignment.center, children: [
-            Padding(
-                padding: const EdgeInsets.all(8),
-                child: DSKPicker360(
-                  onChanged: (angle) {
-                    _angle = angle;
-                    setState(() {});
-                  },
-                )),
-            Text(_angle.toStringAsFixed(2),
                 style: const TextStyle(fontSize: 12)),
           ]),
           const Padding(
