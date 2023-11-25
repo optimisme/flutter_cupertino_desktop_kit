@@ -34,14 +34,16 @@ class _LayoutIntroductionState extends State<LayoutIntroduction> {
           padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
           child: GestureDetector(
               onTapUp: (details) {
-                launchUrl(Uri.parse('https://github.com/optimisme'));
+                launchUrl(Uri.parse(
+                    'https://github.com/optimisme/flutter_cupertino_desktop'));
               },
               child: Row(
                   mainAxisSize: MainAxisSize.min, // Això és clau
                   children: [
                     MouseRegion(
                         cursor: SystemMouseCursors.click,
-                        child: Text('https://github.com/optimisme',
+                        child: Text(
+                            'https://github.com/optimisme/flutter_cupertino_desktop',
                             style: TextStyle(
                               color: theme.accent,
                             )))

@@ -205,7 +205,7 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
           )),
       const SizedBox(height: 8),
       const Padding(
-          padding: EdgeInsets.all(8), child: Text('CXDialogPopover:')),
+          padding: EdgeInsets.all(8), child: Text('CKDialogPopover:')),
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
@@ -255,7 +255,7 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
               child: const Text('Translucent with animation'),
             )),
       ]),
-      const Padding(padding: EdgeInsets.all(8), child: Text('CXDialogModal:')),
+      const Padding(padding: EdgeInsets.all(8), child: Text('CKDialogModal:')),
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
@@ -299,7 +299,7 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
             )),
       ]),
       const Padding(
-          padding: EdgeInsets.all(8), child: Text('CXDialogDraggable:')),
+          padding: EdgeInsets.all(8), child: Text('CKDialogDraggable:')),
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
@@ -346,7 +346,7 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
               child: const Text('Translucent with animation'),
             )),
       ]),
-      const Padding(padding: EdgeInsets.all(8), child: Text('CXDialogArrow:')),
+      const Padding(padding: EdgeInsets.all(8), child: Text('CKDialogArrow:')),
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),

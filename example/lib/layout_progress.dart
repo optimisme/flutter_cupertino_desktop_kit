@@ -48,7 +48,7 @@ class _LayoutProgressState extends State<LayoutProgress> {
   Widget build(BuildContext context) {
     return ListView(children: [
       const SizedBox(height: 8),
-      const Padding(padding: EdgeInsets.all(8), child: Text('CXProgressBar:')),
+      const Padding(padding: EdgeInsets.all(8), child: Text('CKProgressBar:')),
       Wrap(
           alignment: WrapAlignment.start,
           crossAxisAlignment: WrapCrossAlignment.center,
@@ -99,7 +99,7 @@ class _LayoutProgressState extends State<LayoutProgress> {
                 )),
           ]),
       const Padding(
-          padding: EdgeInsets.all(8), child: Text('CXProgressCircular:')),
+          padding: EdgeInsets.all(8), child: Text('CKProgressCircular:')),
       Wrap(
           alignment: WrapAlignment.start,
           crossAxisAlignment: WrapCrossAlignment.center,

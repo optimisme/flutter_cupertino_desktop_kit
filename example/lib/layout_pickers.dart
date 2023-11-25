@@ -16,7 +16,7 @@ class _LayoutPickersState extends State<LayoutPickers> {
   Widget build(BuildContext context) {
     return ListView(children: [
       const SizedBox(height: 8),
-      const Padding(padding: EdgeInsets.all(8), child: Text('CXPicker360:')),
+      const Padding(padding: EdgeInsets.all(8), child: Text('CKPicker360:')),
       Wrap(crossAxisAlignment: WrapCrossAlignment.center, children: [
         Padding(
             padding: const EdgeInsets.all(8),
@@ -29,7 +29,7 @@ class _LayoutPickersState extends State<LayoutPickers> {
         Text(_angle.toStringAsFixed(2), style: const TextStyle(fontSize: 12)),
       ]),
       const SizedBox(height: 8),
-      const Padding(padding: EdgeInsets.all(8), child: Text('CXPickerSlider:')),
+      const Padding(padding: EdgeInsets.all(8), child: Text('CKPickerSlider:')),
       Wrap(crossAxisAlignment: WrapCrossAlignment.center, children: [
         Padding(
             padding: const EdgeInsets.all(8),
@@ -44,7 +44,7 @@ class _LayoutPickersState extends State<LayoutPickers> {
         Text(_value.toStringAsFixed(2), style: const TextStyle(fontSize: 12)),
       ]),
       const Padding(
-          padding: EdgeInsets.all(8), child: Text('CXPickerButtonsSegmented:')),
+          padding: EdgeInsets.all(8), child: Text('CKPickerButtonsSegmented:')),
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
@@ -82,7 +82,7 @@ class _LayoutPickersState extends State<LayoutPickers> {
                 ))),
       ]),
       const Padding(
-          padding: EdgeInsets.all(8), child: Text('CXPickerButtonsBar:')),
+          padding: EdgeInsets.all(8), child: Text('CKPickerButtonsBar:')),
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
@@ -131,7 +131,7 @@ class _LayoutPickersState extends State<LayoutPickers> {
                 ))),
       ]),
       const Padding(
-          padding: EdgeInsets.all(8), child: Text('CXPickerCheckList:')),
+          padding: EdgeInsets.all(8), child: Text('CKPickerCheckList:')),
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),

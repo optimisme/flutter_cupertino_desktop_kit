@@ -16,7 +16,7 @@ class _LayoutButtonsState extends State<LayoutButtons> {
   Widget build(BuildContext context) {
     return ListView(children: [
       const SizedBox(height: 8),
-      const Padding(padding: EdgeInsets.all(8), child: Text('CXButton:')),
+      const Padding(padding: EdgeInsets.all(8), child: Text('CKButton:')),
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
@@ -87,13 +87,13 @@ class _LayoutButtonsState extends State<LayoutButtons> {
               child: const Icon(CupertinoIcons.bookmark),
             )),
       ]),
-      const Padding(padding: EdgeInsets.all(8), child: Text('CXButtonHelp:')),
+      const Padding(padding: EdgeInsets.all(8), child: Text('CKButtonHelp:')),
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
             child: CKButtonHelp(size: 24, onPressed: () {})),
       ]),
-      const Padding(padding: EdgeInsets.all(8), child: Text('CXButtonIcon:')),
+      const Padding(padding: EdgeInsets.all(8), child: Text('CKButtonIcon:')),
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
@@ -111,7 +111,7 @@ class _LayoutButtonsState extends State<LayoutButtons> {
                 isSelected: true,
                 onPressed: () {})),
       ]),
-      const Padding(padding: EdgeInsets.all(8), child: Text('CXButtonSwitch:')),
+      const Padding(padding: EdgeInsets.all(8), child: Text('CKButtonSwitch:')),
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
@@ -136,7 +136,7 @@ class _LayoutButtonsState extends State<LayoutButtons> {
             )),
       ]),
       const Padding(
-          padding: EdgeInsets.all(8), child: Text('CXButtonCheckbox:')),
+          padding: EdgeInsets.all(8), child: Text('CKButtonCheckbox:')),
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
@@ -150,7 +150,7 @@ class _LayoutButtonsState extends State<LayoutButtons> {
             )),
       ]),
       const Padding(
-          padding: EdgeInsets.all(8), child: Text('CXButtonDisclosure:')),
+          padding: EdgeInsets.all(8), child: Text('CKButtonDisclosure:')),
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
@@ -163,7 +163,7 @@ class _LayoutButtonsState extends State<LayoutButtons> {
               },
             )),
       ]),
-      const Padding(padding: EdgeInsets.all(8), child: Text('CXButtonRadio:')),
+      const Padding(padding: EdgeInsets.all(8), child: Text('CKButtonRadio:')),
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
@@ -188,7 +188,7 @@ class _LayoutButtonsState extends State<LayoutButtons> {
               child: const Text("You"),
             )),
       ]),
-      const Padding(padding: EdgeInsets.all(8), child: Text('CXButtonSelect:')),
+      const Padding(padding: EdgeInsets.all(8), child: Text('CKButtonSelect:')),
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),

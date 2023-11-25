@@ -10,7 +10,7 @@ The CK prefix strives to be distinctive within the Flutter ecosystem, while rema
 
 The project itself is just a set of libraries that define and manage widgets. However, it includes an example of how to use them. The example can be seen on this website:
 
-[CX Example](https://optimisme.github.io/flutter_cupertino_desktop/gh-pages/example/)
+[CK toolkit Example](https://optimisme.github.io/flutter_cupertino_desktop/gh-pages/example/)
 
 To run the example in a local application:
 

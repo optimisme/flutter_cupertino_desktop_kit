@@ -23,7 +23,7 @@ class _LayoutFieldsState extends State<LayoutFields> {
   Widget build(BuildContext context) {
     return ListView(children: [
       const SizedBox(height: 8),
-      const Padding(padding: EdgeInsets.all(8), child: Text('CXFieldText:')),
+      const Padding(padding: EdgeInsets.all(8), child: Text('CKFieldText:')),
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
@@ -78,7 +78,7 @@ class _LayoutFieldsState extends State<LayoutFields> {
                   focusNode: FocusNode(),
                 ))),
       ]),
-      const Padding(padding: EdgeInsets.all(8), child: Text('CXFieldNumeric:')),
+      const Padding(padding: EdgeInsets.all(8), child: Text('CKFieldNumeric:')),
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
@@ -120,7 +120,7 @@ class _LayoutFieldsState extends State<LayoutFields> {
                   },
                 ))),
       ]),
-      const Padding(padding: EdgeInsets.all(8), child: Text('CXField360:')),
+      const Padding(padding: EdgeInsets.all(8), child: Text('CKField360:')),
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
@@ -146,7 +146,7 @@ class _LayoutFieldsState extends State<LayoutFields> {
                 ))),
       ]),
       const Padding(
-          padding: EdgeInsets.all(8), child: Text('CXFieldNumericSlider:')),
+          padding: EdgeInsets.all(8), child: Text('CKFieldNumericSlider:')),
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
