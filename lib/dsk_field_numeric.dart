@@ -45,6 +45,11 @@ class DSKFieldNumericState extends State<DSKFieldNumeric> {
   @override
   void initState() {
     super.initState();
+    _checkInit();
+    _controller.addListener(_onTextChanged);
+  }
+
+  void _checkInit() {
     if (widget.max <= widget.min) {
       throw Exception("DSKFieldNumeric: max must be greater than min");
     }
@@ -54,7 +59,6 @@ class DSKFieldNumericState extends State<DSKFieldNumeric> {
     }
     _currentValue = _fixValue(widget.defaultValue.toString());
     _controller = TextEditingController(text: _fixText(_currentValue));
-    _controller.addListener(_onTextChanged);
   }
 
   @override
