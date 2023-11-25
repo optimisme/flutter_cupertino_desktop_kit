@@ -12,8 +12,7 @@ class LayoutIntroduction extends StatefulWidget {
 class _LayoutIntroductionState extends State<LayoutIntroduction> {
   @override
   Widget build(BuildContext context) {
-    DSKTheme theme =
-        DSKThemeNotifier.of(context)!.changeNotifier; // React to theme changes
+    DSKTheme theme = DSKThemeNotifier.of(context)!.changeNotifier;
 
     return Container(
         color: theme.background,

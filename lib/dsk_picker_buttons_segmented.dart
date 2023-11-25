@@ -123,8 +123,7 @@ class DSKPickerButtonsSegmentedState extends State<DSKPickerButtonsSegmented> {
 
   @override
   Widget build(BuildContext context) {
-    DSKTheme theme =
-        DSKThemeNotifier.of(context)!.changeNotifier; // React to theme changes
+    DSKTheme theme = DSKThemeNotifier.of(context)!.changeNotifier;
 
     // Schedule a post-frame callback to calculate positions
     WidgetsBinding.instance.addPostFrameCallback((_) {

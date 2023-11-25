@@ -150,8 +150,7 @@ class DSKDialogPopoverState extends State<DSKDialogPopover>
 
   @override
   Widget build(BuildContext context) {
-    DSKTheme theme =
-        DSKThemeNotifier.of(context)!.changeNotifier; // React to theme changes
+    DSKTheme theme = DSKThemeNotifier.of(context)!.changeNotifier;
 
     Color backgroundColor = !widget.isTranslucent
         ? theme.backgroundSecondary0

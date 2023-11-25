@@ -11,8 +11,7 @@ class LayoutUtils extends StatefulWidget {
 class _LayoutUtilsState extends State<LayoutUtils> {
   @override
   Widget build(BuildContext context) {
-    DSKTheme theme =
-        DSKThemeNotifier.of(context)!.changeNotifier; // React to theme changes
+    DSKTheme theme = DSKThemeNotifier.of(context)!.changeNotifier;
 
     Widget line = Container(
       decoration: BoxDecoration(

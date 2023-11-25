@@ -127,8 +127,7 @@ class DSKProgressBarState extends State<DSKProgressBar>
 
   @override
   Widget build(BuildContext context) {
-    DSKTheme theme =
-        DSKThemeNotifier.of(context)!.changeNotifier; // React to theme changes
+    DSKTheme theme = DSKThemeNotifier.of(context)!.changeNotifier;
 
     return AnimatedBuilder(
       animation: _controller,

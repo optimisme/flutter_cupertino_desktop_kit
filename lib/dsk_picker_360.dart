@@ -64,8 +64,7 @@ class DSKPicker360State extends State<DSKPicker360> {
 
   @override
   Widget build(BuildContext context) {
-    DSKTheme theme =
-        DSKThemeNotifier.of(context)!.changeNotifier; // React to theme changes
+    DSKTheme theme = DSKThemeNotifier.of(context)!.changeNotifier;
 
     return GestureDetector(
       onPanUpdate: !widget.enabled ? null : _onPanUpdate,

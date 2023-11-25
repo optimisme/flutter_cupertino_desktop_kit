@@ -72,8 +72,7 @@ class DSKPickerCheckListState extends State<DSKPickerCheckList> {
 
   @override
   Widget build(BuildContext context) {
-    DSKTheme theme =
-        DSKThemeNotifier.of(context)!.changeNotifier; // React to theme changes
+    DSKTheme theme = DSKThemeNotifier.of(context)!.changeNotifier;
 
     return IntrinsicWidth(
         child: ConstrainedBox(

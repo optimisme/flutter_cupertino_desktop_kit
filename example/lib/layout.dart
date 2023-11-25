@@ -53,8 +53,7 @@ class LayoutState extends State<Layout> {
 
   @override
   Widget build(BuildContext context) {
-    DSKTheme theme =
-        DSKThemeNotifier.of(context)!.changeNotifier; // React to theme changes
+    DSKTheme theme = DSKThemeNotifier.of(context)!.changeNotifier;
 
     Widget centralWidget;
     switch (_section) {

@@ -99,8 +99,7 @@ class DSKPickerButtonsBarState extends State<DSKPickerButtonsBar> {
 
   @override
   Widget build(BuildContext context) {
-    DSKTheme theme =
-        DSKThemeNotifier.of(context)!.changeNotifier; // React to theme changes
+    DSKTheme theme = DSKThemeNotifier.of(context)!.changeNotifier;
 
     List<Widget> buttonWidgets = List.generate(widget.options.length, (index) {
       // Determine border radius based on the position of the element

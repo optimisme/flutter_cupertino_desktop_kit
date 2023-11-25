@@ -39,8 +39,7 @@ class DSKButtonRadio extends StatefulWidget {
 class DSKButtonRadioState extends State<DSKButtonRadio> {
   @override
   Widget build(BuildContext context) {
-    DSKTheme theme =
-        DSKThemeNotifier.of(context)!.changeNotifier; // React to theme changes
+    DSKTheme theme = DSKThemeNotifier.of(context)!.changeNotifier;
 
     double boxSize = widget.size;
 

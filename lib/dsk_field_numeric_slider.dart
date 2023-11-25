@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'dsk_theme_notifier.dart';
 import 'dsk_field_numeric.dart';
 import 'dsk_picker_slider.dart';
 
@@ -56,8 +55,6 @@ class DSKFieldNumericSliderState extends State<DSKFieldNumericSlider> {
 
   @override
   Widget build(BuildContext context) {
-    DSKThemeNotifier.of(context)!.changeNotifier; // React to theme changes
-
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [

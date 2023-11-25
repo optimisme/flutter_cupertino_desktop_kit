@@ -97,8 +97,7 @@ class DSKButtonSelectState extends State<DSKButtonSelect> {
 
   @override
   Widget build(BuildContext context) {
-    DSKTheme theme =
-        DSKThemeNotifier.of(context)!.changeNotifier; // React to theme changes
+    DSKTheme theme = DSKThemeNotifier.of(context)!.changeNotifier;
 
     BoxDecoration decoration;
     TextStyle textStyle;

@@ -71,8 +71,7 @@ class DSKButtonIconState extends State<DSKButtonIcon> {
 
   @override
   Widget build(BuildContext context) {
-    DSKTheme theme =
-        DSKThemeNotifier.of(context)!.changeNotifier; // React to theme changes
+    DSKTheme theme = DSKThemeNotifier.of(context)!.changeNotifier;
 
     final Color backgroundColor = theme.isLight
         ? _isPressed

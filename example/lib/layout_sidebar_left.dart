@@ -18,8 +18,7 @@ class LayoutButtonsState extends State<LayoutSidebarLeft> {
 
   @override
   Widget build(BuildContext context) {
-    DSKTheme theme =
-        DSKThemeNotifier.of(context)!.changeNotifier; // React to theme changes
+    DSKTheme theme = DSKThemeNotifier.of(context)!.changeNotifier;
 
     String selectedRadio = theme.appearanceConfig;
     return Container(

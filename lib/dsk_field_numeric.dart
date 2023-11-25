@@ -1,6 +1,5 @@
 import 'dart:math';
 import 'package:flutter/cupertino.dart';
-import 'dsk_theme_notifier.dart';
 import 'dsk_field_text.dart';
 import 'dsk_buttons_up_down.dart';
 
@@ -133,8 +132,6 @@ class DSKFieldNumericState extends State<DSKFieldNumeric> {
 
   @override
   Widget build(BuildContext context) {
-    DSKThemeNotifier.of(context)!.changeNotifier; // React to theme changes
-
     bool enabledUp = _currentValue < widget.max;
     bool enabledDown = _currentValue > widget.min;
 

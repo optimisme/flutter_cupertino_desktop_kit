@@ -123,8 +123,7 @@ class DSKDialogDraggableState extends State<DSKDialogDraggable>
 
   @override
   Widget build(BuildContext context) {
-    DSKTheme theme =
-        DSKThemeNotifier.of(context)!.changeNotifier; // React to theme changes
+    DSKTheme theme = DSKThemeNotifier.of(context)!.changeNotifier;
 
     if (isSizeDetermined) {
       var leftPosition = position.dx;

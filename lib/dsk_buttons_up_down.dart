@@ -41,8 +41,7 @@ class DSKButtonsUpDownState extends State<DSKButtonsUpDown> {
 
   @override
   Widget build(BuildContext context) {
-    DSKTheme theme =
-        DSKThemeNotifier.of(context)!.changeNotifier; // React to theme changes
+    DSKTheme theme = DSKThemeNotifier.of(context)!.changeNotifier;
 
     // Definim l'ombra per al relleu
     var shadow = const BoxShadow(

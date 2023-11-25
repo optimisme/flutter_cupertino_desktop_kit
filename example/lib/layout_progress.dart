@@ -46,8 +46,7 @@ class _LayoutProgressState extends State<LayoutProgress> {
 
   @override
   Widget build(BuildContext context) {
-    DSKTheme theme =
-        DSKThemeNotifier.of(context)!.changeNotifier; // React to theme changes
+    DSKTheme theme = DSKThemeNotifier.of(context)!.changeNotifier;
 
     return Container(
         color: theme.background,

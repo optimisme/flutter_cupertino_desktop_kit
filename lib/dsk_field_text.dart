@@ -69,8 +69,7 @@ class DSKFieldTextState extends State<DSKFieldText> {
 
   @override
   Widget build(BuildContext context) {
-    DSKTheme theme =
-        DSKThemeNotifier.of(context)!.changeNotifier; // React to theme changes
+    DSKTheme theme = DSKThemeNotifier.of(context)!.changeNotifier;
 
     final BorderRadius borderRadius = widget.isRounded
         ? BorderRadius.circular(25.0)

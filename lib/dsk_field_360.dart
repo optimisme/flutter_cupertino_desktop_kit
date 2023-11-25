@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'dsk_theme_notifier.dart';
 import 'dsk_field_numeric.dart';
 import 'dsk_picker_360.dart';
 
@@ -55,8 +54,6 @@ class DSKField360State extends State<DSKField360> {
 
   @override
   Widget build(BuildContext context) {
-    DSKThemeNotifier.of(context)!.changeNotifier; // React to theme changes
-
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [

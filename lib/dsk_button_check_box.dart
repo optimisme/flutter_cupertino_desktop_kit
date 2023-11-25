@@ -44,8 +44,7 @@ class DSKButtonCheckBox extends StatefulWidget {
 class DSKButtonCheckBoxState extends State<DSKButtonCheckBox> {
   @override
   Widget build(BuildContext context) {
-    DSKTheme themeManager =
-        DSKThemeNotifier.of(context)!.changeNotifier; // React to theme changes
+    DSKTheme themeManager = DSKThemeNotifier.of(context)!.changeNotifier;
 
     /// Calculate the checkbox size based on the specified size property
     double boxSize = widget.size;

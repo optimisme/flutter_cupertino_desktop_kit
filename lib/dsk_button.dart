@@ -51,8 +51,7 @@ class DSKButtonState extends State<DSKButton> {
 
   @override
   Widget build(BuildContext context) {
-    DSKTheme theme =
-        DSKThemeNotifier.of(context)!.changeNotifier; // React to theme changes
+    DSKTheme theme = DSKThemeNotifier.of(context)!.changeNotifier;
 
     // Define styles and themes based on the button's state and style.
     BoxDecoration decoration;

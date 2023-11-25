@@ -37,8 +37,7 @@ class DSKButtonSwitchState extends State<DSKButtonSwitch> {
 
   @override
   Widget build(BuildContext context) {
-    DSKTheme theme =
-        DSKThemeNotifier.of(context)!.changeNotifier; // React to theme changes
+    DSKTheme theme = DSKThemeNotifier.of(context)!.changeNotifier;
 
     // Calculations for sizes and positions based on the provided `size`.
     double backRadius = widget.size * 12.0 / 24.0;

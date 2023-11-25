@@ -53,8 +53,7 @@ class DSKButtonHelpState extends State<DSKButtonHelp> {
 
   @override
   Widget build(BuildContext context) {
-    DSKTheme theme =
-        DSKThemeNotifier.of(context)!.changeNotifier; // React to theme changes
+    DSKTheme theme = DSKThemeNotifier.of(context)!.changeNotifier;
 
     /// Creates a GestureDetector widget to handle tap events.
     return GestureDetector(

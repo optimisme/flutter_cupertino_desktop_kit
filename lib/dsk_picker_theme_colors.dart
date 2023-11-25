@@ -39,8 +39,7 @@ class DSKPickerThemeColors extends StatefulWidget {
 class DSKPickerThemeColorsState extends State<DSKPickerThemeColors> {
   @override
   Widget build(BuildContext context) {
-    DSKTheme theme =
-        DSKThemeNotifier.of(context)!.changeNotifier; // React to theme changes
+    DSKTheme theme = DSKThemeNotifier.of(context)!.changeNotifier;
 
     // Index to keep track of each color's position.
     int index = -1;
