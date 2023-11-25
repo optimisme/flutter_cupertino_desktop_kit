@@ -23,38 +23,43 @@ class DSKTheme extends ChangeNotifier {
   };
 
   // Constant predefined colors
-  static const Color transparent = Color(0x00000000);
-  static const Color white = Color(0xFFFFFFFF);
-  static const Color black = Color(0xFF000000);
-  static const Color red = Color(0xFFFF0000);
-  static const Color green = Color(0xFF00FF00);
-  static const Color yellow = Color(0xFFFFFF00);
-  static const Color blue = Color(0xFF0000FF);
+  static const Color transparent = Color.fromRGBO(0, 0, 0, 0.0);
+  static const Color white = Color.fromRGBO(255, 255, 255, 1.0);
+  static const Color black = Color.fromRGBO(0, 0, 0, 1.0);
+  static const Color red = Color.fromRGBO(255, 0, 0, 1.0);
+  static const Color green = Color.fromRGBO(0, 255, 0, 1.0);
+  static const Color yellow = Color.fromRGBO(255, 255, 0, 1.0);
+  static const Color blue = Color.fromRGBO(0, 0, 255, 1.0);
 
-  static const Color grey50 = Color(0xffe7e7e8);
-  static const Color grey75 = Color(0xffd8d8da);
-  static const Color grey100 = Color(0xffbababd);
-  static const Color grey200 = Color(0xffacacaf);
-  static const Color grey300 = Color(0xff9d9da1);
+  static const Color grey50 = Color.fromRGBO(230, 230, 230, 1.0);
+  static const Color grey60 = Color.fromRGBO(222, 222, 222, 1.0);
+  static const Color grey70 = Color.fromRGBO(214, 214, 214, 1.0);
+  static const Color grey80 = Color.fromRGBO(204, 204, 204, 1.0);
+  static const Color grey90 = Color.fromRGBO(195, 195, 195, 1.0);
+  static const Color grey100 = Color.fromRGBO(186, 186, 189, 1.0);
+  static const Color grey200 = Color.fromRGBO(172, 172, 175, 1.0);
+  static const Color grey300 = Color.fromRGBO(157, 157, 161, 1.0);
   static const Color grey = CupertinoColors.systemGrey;
-  static const Color grey500 = Color(0xff7f7f85);
-  static const Color grey600 = Color(0xff717176);
-  static const Color grey700 = Color(0xff636367);
+  static const Color grey500 = Color.fromRGBO(127, 127, 133, 1.0);
+  static const Color grey600 = Color.fromRGBO(112, 112, 112, 1.0);
+  static const Color grey700 = Color.fromRGBO(99, 99, 103, 1.0);
+  static const Color grey800 = Color.fromRGBO(85, 85, 85, 1.0);
 
   // Default colors for bacground and text (modified by dark/light mode)
   Color background = CupertinoColors.white;
   Color backgroundSecondary0 = CupertinoColors.white;
   Color backgroundSecondary1 = CupertinoColors.systemGrey5;
-  Color text = CupertinoColors.black;
+  Color colorText = CupertinoColors.black;
+  Color colorTextSecondary = CupertinoColors.white;
 
   // Modified programatically
-  Color accent50 = const Color(0xff83bcfc);
-  Color accent100 = const Color(0xff51a2fb);
-  Color accent200 = const Color(0xff3895fa);
-  Color accent300 = const Color(0xff1f87fa);
+  Color accent50 = const Color.fromRGBO(131, 188, 252, 1.0);
+  Color accent100 = const Color.fromRGBO(81, 162, 251, 1.0);
+  Color accent200 = const Color.fromRGBO(56, 149, 250, 1.0);
+  Color accent300 = const Color.fromRGBO(31, 135, 250, 1.0);
   Color accent = CupertinoColors.systemBlue;
-  Color accent500 = const Color(0xff056ee0);
-  Color accent600 = const Color(0xff0562c7);
+  Color accent500 = const Color.fromRGBO(5, 110, 224, 1.0);
+  Color accent600 = const Color.fromRGBO(5, 98, 199, 1.0);
 
   CupertinoThemeData getThemeData(
       BuildContext context, String initialAppearance, String initialColor) {
@@ -121,13 +126,15 @@ class DSKTheme extends ChangeNotifier {
       background = CupertinoColors.white;
       backgroundSecondary0 = CupertinoColors.white;
       backgroundSecondary1 = CupertinoColors.systemGrey5;
-      text = CupertinoColors.black;
+      colorText = CupertinoColors.black;
+      colorTextSecondary = CupertinoColors.white;
     } else {
       isLight = false;
       background = const Color.fromARGB(255, 32, 32, 32);
       backgroundSecondary0 = const Color.fromRGBO(95, 95, 95, 1);
       backgroundSecondary1 = const Color.fromRGBO(55, 55, 55, 1);
-      text = CupertinoColors.white;
+      colorText = CupertinoColors.white;
+      colorTextSecondary = CupertinoColors.black;
     }
 
     if (notify) {
@@ -159,19 +166,6 @@ class DSKTheme extends ChangeNotifier {
     accent = color;
     accent500 = adjustColor(color, 1, 0.9);
     accent600 = adjustColor(color, 1, 0.8);
-
-    /* How grey colors where obtained:
-    // Original set of grey colors
-    Color greyColor = grey;
-    grey50 = adjustColor(greyColor, 1, 1.6);
-    grey75 = adjustColor(greyColor, 1, 1.5);
-    grey100 = adjustColor(greyColor, 1, 1.3);
-    grey200 = adjustColor(greyColor, 1, 1.2);
-    grey300 = adjustColor(greyColor, 1, 1.1);
-    accent = color;
-    grey500 = adjustColor(greyColor, 1, 0.9);
-    grey600 = adjustColor(greyColor, 1, 0.8);
-    grey700 = adjustColor(greyColor, 1, 0.7);*/
   }
 
   static Color adjustColor(
@@ -184,5 +178,35 @@ class DSKTheme extends ChangeNotifier {
       (hsl.lightness * brightnessFactor).clamp(0.0, 1.0),
     );
     return adjusted.toColor();
+  }
+
+  Color getSidebarColorText(bool isSelected, bool isAccent) {
+    return isLight
+        ? (isSelected
+            ? (isAppFocused
+                ? isAccent
+                    ? DSKTheme.white
+                    : DSKTheme.black
+                : DSKTheme.grey)
+            : (isAppFocused ? DSKTheme.black : DSKTheme.grey))
+        : (isAppFocused ? DSKTheme.white : DSKTheme.grey);
+  }
+
+  Color getSidebarColorBackground(bool isSelected, bool isAccent) {
+    return isLight
+        ? (isSelected
+            ? (isAppFocused
+                ? isAccent
+                    ? accent
+                    : DSKTheme.grey80
+                : DSKTheme.grey80)
+            : DSKTheme.transparent)
+        : (isSelected
+            ? (isAppFocused
+                ? isAccent
+                    ? accent
+                    : DSKTheme.grey700
+                : DSKTheme.grey800)
+            : DSKTheme.transparent);
   }
 }

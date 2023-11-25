@@ -19,14 +19,14 @@ class DSKButtonRadio extends StatefulWidget {
   final bool isSelected;
   final ValueChanged<bool>? onSelected;
   final double size;
-  final String label; // Propietat per al label
+  final Widget child; // Propietat per al label
 
   const DSKButtonRadio({
     Key? key,
     this.isSelected = false,
     this.onSelected,
     this.size = 16.0,
-    required this.label, // Requereix el label al crear l'objecte
+    required this.child, // Requereix el label al crear l'objecte
   }) : super(key: key);
 
   @override
@@ -68,10 +68,14 @@ class DSKButtonRadioState extends State<DSKButtonRadio> {
           Baseline(
             baseline: boxSize / 1.5,
             baselineType: TextBaseline.alphabetic,
-            child: Text(
-              widget.label,
-              style: const TextStyle(fontSize: 14),
-            ),
+            child: (widget.child is! Text)
+                ? widget.child
+                : Text(
+                    (widget.child as Text).data!,
+                    style:
+                        (widget.child as Text).style?.copyWith(fontSize: 14) ??
+                            const TextStyle(fontSize: 14),
+                  ),
           ),
         ],
       ),

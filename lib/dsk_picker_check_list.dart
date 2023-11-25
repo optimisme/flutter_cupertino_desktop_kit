@@ -107,14 +107,14 @@ class DSKPickerCheckListState extends State<DSKPickerCheckList> {
                                     size: widget.size,
                                     color: isHovered
                                         ? theme.background
-                                        : theme.text)),
+                                        : theme.colorText)),
                         Text(
                           widget.options[index],
                           style: TextStyle(
                               fontSize: widget.size,
                               color: theme.isLight && isHovered
                                   ? theme.background
-                                  : theme.text),
+                                  : theme.colorText),
                         ),
                       ],
                     ),

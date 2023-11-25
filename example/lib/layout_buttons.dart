@@ -169,24 +169,24 @@ class _LayoutButtonsState extends State<LayoutButtons> {
         Padding(
             padding: const EdgeInsets.all(8),
             child: DSKButtonRadio(
-              label: "Me",
               isSelected: selectedRadio == 1,
               onSelected: (bool? isSelected) {
                 setState(() {
                   selectedRadio = 1;
                 });
               },
+              child: const Text("Me"),
             )),
         Padding(
             padding: const EdgeInsets.all(8),
             child: DSKButtonRadio(
-              label: "You",
               isSelected: selectedRadio == 2,
               onSelected: (bool? isSelected) {
                 setState(() {
                   selectedRadio = 2;
                 });
               },
+              child: const Text("You"),
             )),
       ]),
       const Padding(

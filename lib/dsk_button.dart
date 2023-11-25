@@ -141,7 +141,7 @@ class DSKButtonState extends State<DSKButton> {
                       ? DSKTheme.grey500
                       : theme.backgroundSecondary0,
               border: theme.isLight
-                  ? Border.all(color: DSKTheme.grey75)
+                  ? Border.all(color: DSKTheme.grey70)
                   : Border.all(color: DSKTheme.grey600),
               borderRadius: BorderRadius.circular(6.0),
               boxShadow: [shadow]);
@@ -163,11 +163,11 @@ class DSKButtonState extends State<DSKButton> {
                       ? DSKTheme.grey500
                       : theme.backgroundSecondary0,
               border: theme.isLight
-                  ? Border.all(color: DSKTheme.grey75)
+                  ? Border.all(color: DSKTheme.grey70)
                   : Border.all(color: DSKTheme.grey600),
               borderRadius: BorderRadius.circular(6.0),
               boxShadow: [shadow]);
-          color = theme.text;
+          color = theme.colorText;
           textStyle = TextStyle(
             fontSize: _fontSize,
             color: color,

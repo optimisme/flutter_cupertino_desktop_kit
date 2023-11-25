@@ -121,7 +121,7 @@ class DSKButtonSelectState extends State<DSKButtonSelect> {
 
     textStyle = TextStyle(
       fontSize: _fontSize,
-      color: theme.text,
+      color: theme.colorText,
     );
 
     return MouseRegion(
@@ -173,7 +173,7 @@ class DSKButtonSelectState extends State<DSKButtonSelect> {
                                         theme.isLight &&
                                         theme.isAppFocused
                                     ? DSKTheme.white
-                                    : theme.text,
+                                    : theme.colorText,
                                 size: _fontSize * 1.2,
                               ),
                             )),

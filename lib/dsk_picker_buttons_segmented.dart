@@ -189,12 +189,12 @@ class DSKPickerButtonsSegmentedState extends State<DSKPickerButtonsSegmented> {
                     child: TweenAnimationBuilder(
                         duration: const Duration(milliseconds: 200),
                         tween: ColorTween(
-                          begin: theme.text,
+                          begin: theme.colorText,
                           end: widget.isAccent &&
                                   index == _selectedIndex &&
                                   theme.isAppFocused
                               ? DSKTheme.white
-                              : theme.text,
+                              : theme.colorText,
                         ),
                         builder: (BuildContext context, Color? color,
                             Widget? child) {

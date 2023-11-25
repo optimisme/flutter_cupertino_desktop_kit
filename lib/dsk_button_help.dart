@@ -71,14 +71,14 @@ class DSKButtonHelpState extends State<DSKButtonHelp> {
           shape: BoxShape.circle,
           boxShadow: [
             BoxShadow(
-              color: theme.text.withOpacity(0.1),
+              color: theme.colorText.withOpacity(0.1),
               spreadRadius: 0,
               blurRadius: 1,
               offset: const Offset(0, 1),
             ),
           ],
           border: theme.isLight
-              ? Border.all(color: DSKTheme.grey75)
+              ? Border.all(color: DSKTheme.grey70)
               : Border.all(color: DSKTheme.grey600),
         ),
         child: Container(
@@ -89,7 +89,7 @@ class DSKButtonHelpState extends State<DSKButtonHelp> {
             '?',
             style: TextStyle(
               fontSize: widget.size / 1.5,
-              color: theme.text,
+              color: theme.colorText,
               fontWeight: FontWeight.w300,
             ),
           ),

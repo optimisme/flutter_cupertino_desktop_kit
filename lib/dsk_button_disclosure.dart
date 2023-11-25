@@ -95,7 +95,7 @@ class DSKButtonDisclosureState extends State<DSKButtonDisclosure>
           return Transform.rotate(
             angle: _animation.value * 3.14159, // Rotació en radians
             child: Icon(
-              color: theme.text,
+              color: theme.colorText,
               CupertinoIcons.chevron_forward,
               size: widget.size,
             ),

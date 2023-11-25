@@ -20,8 +20,14 @@ class LayoutButtonsState extends State<LayoutSidebarLeft> {
   Widget build(BuildContext context) {
     DSKTheme theme = DSKThemeNotifier.of(context)!.changeNotifier;
 
+    bool isAccent = true;
+
+    Color colorText = theme.getSidebarColorText(false, isAccent);
+    TextStyle textStyle = TextStyle(fontSize: 14, color: colorText);
+
     String selectedRadio = theme.appearanceConfig;
     return ListView(children: [
+      const SizedBox(height: 8),
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: List.generate(widget.options.length, (int index) {
@@ -32,28 +38,16 @@ class LayoutButtonsState extends State<LayoutSidebarLeft> {
                 _selectedIndex = index;
               });
             },
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
-              child: Container(
-                width: double.infinity,
-                padding: const EdgeInsets.fromLTRB(8, 4, 8, 6),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(4.0),
-                  color: _selectedIndex == index ? theme.accent : null,
-                ),
-                child: Text(
-                  widget.options[index],
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                      fontSize: 14,
-                      color: _selectedIndex == index
-                          ? DSKTheme.white
-                          : theme.isLight
-                              ? DSKTheme.black
-                              : DSKTheme.white),
-                ),
-              ),
+            child: DSKButtonSidebar(
+              isSelected: _selectedIndex == index,
+              isAccent: true,
+              onSelected: () {
+                setState(() {
+                  widget.onSelect(index, widget.options[index]);
+                  _selectedIndex = index;
+                });
+              },
+              child: Text(widget.options[index]),
             ),
           );
         }),
@@ -65,10 +59,9 @@ class LayoutButtonsState extends State<LayoutSidebarLeft> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text("Theme: ", style: TextStyle(fontSize: 14)),
+                Text("Theme: ", style: textStyle),
                 const SizedBox(height: 8),
                 DSKButtonRadio(
-                  label: "Sytem",
                   isSelected: selectedRadio == "system",
                   onSelected: (bool? isSelected) {
                     setState(() {
@@ -76,10 +69,10 @@ class LayoutButtonsState extends State<LayoutSidebarLeft> {
                       theme.setAppearanceConfig(context);
                     });
                   },
+                  child: Text("System", style: textStyle),
                 ),
                 const SizedBox(height: 8),
                 DSKButtonRadio(
-                  label: "Light",
                   isSelected: selectedRadio == "light",
                   onSelected: (bool? isSelected) {
                     setState(() {
@@ -87,10 +80,10 @@ class LayoutButtonsState extends State<LayoutSidebarLeft> {
                       theme.setAppearanceConfig(context, type: "light");
                     });
                   },
+                  child: Text("Light", style: textStyle),
                 ),
                 const SizedBox(height: 8),
                 DSKButtonRadio(
-                  label: "Dark",
                   isSelected: selectedRadio == "dark",
                   onSelected: (bool? isSelected) {
                     setState(() {
@@ -98,9 +91,10 @@ class LayoutButtonsState extends State<LayoutSidebarLeft> {
                       theme.setAppearanceConfig(context, type: "dark");
                     });
                   },
+                  child: Text("Dark", style: textStyle),
                 ),
                 const SizedBox(height: 16),
-                const Text("Primary color: ", style: TextStyle(fontSize: 14)),
+                Text("Primary color: ", style: textStyle),
                 const SizedBox(height: 8),
                 DSKPickerThemeColors(
                   colors: DSKTheme.systemColors,

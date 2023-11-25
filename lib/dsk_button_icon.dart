@@ -75,7 +75,7 @@ class DSKButtonIconState extends State<DSKButtonIcon> {
 
     final Color backgroundColor = theme.isLight
         ? _isPressed
-            ? DSKTheme.grey75
+            ? DSKTheme.grey70
             : _isHovering
                 ? DSKTheme.grey50
                 : widget.isSelected
@@ -110,7 +110,7 @@ class DSKButtonIconState extends State<DSKButtonIcon> {
                       widget.icon,
                       color: widget.isSelected && theme.isAppFocused
                           ? theme.accent
-                          : theme.text,
+                          : theme.colorText,
                       size: widget.size * 0.5, // Icona més petita que el botó
                     )),
               )
@@ -124,7 +124,7 @@ class DSKButtonIconState extends State<DSKButtonIcon> {
                     alignment: Alignment.center,
                     child: Icon(
                       widget.icon,
-                      color: theme.text,
+                      color: theme.colorText,
                       size: widget.size * 0.75,
                     )),
               ),

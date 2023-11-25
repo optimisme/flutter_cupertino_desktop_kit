@@ -72,7 +72,7 @@ class DSKPicker360State extends State<DSKPicker360> {
         painter: DSKPicker360Painter(
             theme.backgroundSecondary0,
             _currentAngle,
-            widget.enabled ? theme.text : DSKTheme.grey,
+            widget.enabled ? theme.colorText : DSKTheme.grey,
             theme.isLight ? DSKTheme.grey100 : DSKTheme.grey),
         size: Size(widget.size, widget.size),
       ),

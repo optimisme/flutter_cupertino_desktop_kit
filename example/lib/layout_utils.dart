@@ -17,7 +17,7 @@ class _LayoutUtilsState extends State<LayoutUtils> {
       decoration: BoxDecoration(
         border: Border(
           top: BorderSide(
-            color: theme.text,
+            color: theme.colorText,
             width: 1.0,
           ),
         ),

@@ -91,7 +91,7 @@ class DSKFieldTextState extends State<DSKFieldText> {
             color: widget.enabled
                 ? DSKTheme.grey200
                 : theme.isLight
-                    ? DSKTheme.grey75
+                    ? DSKTheme.grey70
                     : DSKTheme.grey700,
             width: 1,
           ),
@@ -111,7 +111,7 @@ class DSKFieldTextState extends State<DSKFieldText> {
       style: TextStyle(
           fontSize: widget.textSize,
           color: widget.enabled
-              ? theme.text
+              ? theme.colorText
               : theme.isLight
                   ? DSKTheme.grey100
                   : DSKTheme.grey700),

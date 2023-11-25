@@ -7,6 +7,7 @@ export 'dsk_button_help.dart';
 export 'dsk_button_icon.dart';
 export 'dsk_button_radio.dart';
 export 'dsk_button_select.dart';
+export 'dsk_button_sidebar.dart';
 export 'dsk_button_switch.dart';
 export 'dsk_buttons_up_down.dart';
 export 'dsk_dialog_popover.dart';

@@ -192,7 +192,7 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
           padding: const EdgeInsets.all(8),
           child: RichText(
             text: TextSpan(
-              style: TextStyle(fontSize: 14, color: theme.text),
+              style: TextStyle(fontSize: 14, color: theme.colorText),
               children: const <TextSpan>[
                 TextSpan(
                     text: '*Important! ',

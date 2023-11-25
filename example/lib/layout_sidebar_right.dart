@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_desktop_cupertino/dsk_widgets.dart';
 
 class LayoutSidebarRight extends StatefulWidget {
   const LayoutSidebarRight({super.key});
