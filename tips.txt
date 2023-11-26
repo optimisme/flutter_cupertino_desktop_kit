@@ -1,6 +1,13 @@
 Exemple de path:
 export PATH="$PATH:${HOME}/Documents/Projects/flutter/flutter/bin/"
 
+Exemple d'iniciar el projecte:
+flutter create . --template=package
+rm lib/flutter_cupertino_desktop.dart
+rm -r test
+cd example
+flutter create . --platform macos
+
 Example publicar a github pages:
 cd example
 flutter build web --web-renderer canvaskit --base-href "/flutter_cupertino_desktop/gh-pages/example/"
