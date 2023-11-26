@@ -42,7 +42,7 @@ class CKField360State extends State<CKField360> {
       _isUpdating = true;
       _currentAngle = angle;
       if (origin == "picker") {
-        keyNumeric.currentState?.setValue(angle);
+        // TODO keyNumeric.currentState?.setValue(angle);
       }
       if (origin == "numeric") {
         // TODO keyPicker.currentState?.setValue(angle);
@@ -72,7 +72,7 @@ class CKField360State extends State<CKField360> {
           width: 64,
           child: CKFieldNumeric(
             key: keyNumeric,
-            defaultValue: _currentAngle,
+            value: _currentAngle,
             textSize: widget.textSize,
             min: 0,
             max: 360,

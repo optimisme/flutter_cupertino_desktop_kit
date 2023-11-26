@@ -11,6 +11,8 @@ class LayoutFields extends StatefulWidget {
 class _LayoutFieldsState extends State<LayoutFields> {
   late TextEditingController _textController;
   late TextEditingController _passController;
+  double _valueNumeric = 5.5;
+  double _valueNumericIncrement = -1.0;
 
   @override
   void initState() {
@@ -85,10 +87,9 @@ class _LayoutFieldsState extends State<LayoutFields> {
             child: SizedBox(
                 width: 100,
                 child: CKFieldNumeric(
-                  defaultValue: 5.0,
+                  value: _valueNumeric,
                   onValueChanged: (double value) {
-                    // ignore: avoid_print
-                    print("Numeric A: $value");
+                    setState(() { _valueNumeric = value; });
                   },
                 ))),
         Padding(
@@ -96,15 +97,14 @@ class _LayoutFieldsState extends State<LayoutFields> {
             child: SizedBox(
                 width: 100,
                 child: CKFieldNumeric(
-                  defaultValue: -1.0,
+                  value: _valueNumericIncrement,
                   decimals: 2,
                   min: -2,
                   max: 1.5,
                   increment: 0.15,
                   units: "px",
                   onValueChanged: (double value) {
-                    // ignore: avoid_print
-                    print("Numeric B: $value");
+                    setState(() { _valueNumericIncrement = value; });
                   },
                 ))),
         Padding(
@@ -112,7 +112,7 @@ class _LayoutFieldsState extends State<LayoutFields> {
             child: SizedBox(
                 width: 100,
                 child: CKFieldNumeric(
-                  defaultValue: 5.0,
+                  value: 5.0,
                   enabled: false,
                   onValueChanged: (double value) {
                     // ignore: avoid_print

@@ -70,7 +70,7 @@ class CKFieldNumericSliderState extends State<CKFieldNumericSlider> {
       _isUpdating = true;
       if (origin == "picker") {
         _currentValue = value * _distance + widget.min;
-        keyNumeric.currentState?.setValue(_currentValue);
+        // TODO keyNumeric.currentState?.setValue(_currentValue);
       }
       if (origin == "numeric") {
         _currentValue = value;
@@ -101,7 +101,7 @@ class CKFieldNumericSliderState extends State<CKFieldNumericSlider> {
           width: 64,
           child: CKFieldNumeric(
             key: keyNumeric,
-            defaultValue: _currentValue,
+            value: _currentValue,
             textSize: widget.textSize,
             min: widget.min,
             max: widget.max,

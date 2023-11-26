@@ -8,7 +8,7 @@ import 'ck_buttons_up_down.dart';
 
 class CKFieldNumeric extends StatefulWidget {
   final double? textSize;
-  final double defaultValue;
+  final double value;
   final double min;
   final double max;
   final double increment;
@@ -21,7 +21,7 @@ class CKFieldNumeric extends StatefulWidget {
   const CKFieldNumeric({
     Key? key,
     this.textSize = 12,
-    this.defaultValue = 0.0,
+    this.value = 0.0,
     this.min = -double.infinity,
     this.max = double.infinity,
     this.increment = double.infinity, // If infinity, buttons are hidden
@@ -38,26 +38,24 @@ class CKFieldNumeric extends StatefulWidget {
 
 class CKFieldNumericState extends State<CKFieldNumeric> {
   late TextEditingController _controller;
-  bool _isUpdating = false;
-  double _currentValue = 0;
+  double previousValue = double.infinity;
 
   @override
   void initState() {
     super.initState();
-    _checkInit();
+    _checkWidgetValue();
+    _controller = TextEditingController(text: _fixText(widget.value));
     _controller.addListener(_onTextChanged);
   }
 
-  void _checkInit() {
+  void _checkWidgetValue() {
     if (widget.max <= widget.min) {
       throw Exception("DSKFieldNumeric: max must be greater than min");
     }
-    if (widget.defaultValue < widget.min || widget.defaultValue > widget.max) {
+    if (widget.value < widget.min || widget.value > widget.max) {
       throw Exception(
           "DSKFieldNumeric: defaultValue must be between min and max");
     }
-    _currentValue = _fixValue(widget.defaultValue.toString());
-    _controller = TextEditingController(text: _fixText(_currentValue));
   }
 
   @override
@@ -67,18 +65,11 @@ class CKFieldNumericState extends State<CKFieldNumeric> {
     super.dispose();
   }
 
-  void setValue(double value) {
-    setState(() {
-      _currentValue = _fixValue(value.toString());
-      _setCurrentValue();
-    });
-  }
-
   double _fixValue(String text) {
     final match =
         RegExp(r'-?\d+(\.\d+)?').firstMatch(text.replaceAll(',', '.'));
     final numberStr =
-        match != null ? match.group(0)! : _currentValue.toString();
+        match != null ? match.group(0)! : widget.value.toString();
 
     final number = double.parse(numberStr);
     final powCal = pow(10, widget.decimals);
@@ -93,26 +84,19 @@ class CKFieldNumericState extends State<CKFieldNumeric> {
     return rst;
   }
 
-  void _setCurrentValue() {
-    if (_isUpdating) {
-      return;
-    }
-
-    _isUpdating = true;
-    _controller.text = _fixText(_currentValue);
+  void _setCurrentValue(String text) {
+    double newValue = _fixValue(text);
 
     // Set cursor to end of text
     _controller.selection = TextSelection.fromPosition(
         TextPosition(offset: _controller.text.length));
 
-    widget.onValueChanged?.call(_currentValue);
-    _isUpdating = false;
+    widget.onValueChanged?.call(newValue);
   }
 
   _focusChanged(bool hasFocus) {
     if (!hasFocus) {
-      _currentValue = _fixValue(_controller.text);
-      _setCurrentValue();
+      _setCurrentValue(_controller.text);
     }
   }
 
@@ -122,28 +106,27 @@ class CKFieldNumericState extends State<CKFieldNumeric> {
 
   void _incrementValue() {
     double value = _fixValue(_controller.text);
-    value = (value + widget.increment);
-    if (value < widget.min) value = widget.min;
-    if (value > widget.max) value = widget.max;
-    _currentValue = value;
-    _setCurrentValue();
-    setState(() {});
+    value = min(value + widget.increment, widget.max);
+    _setCurrentValue(value.toString());
   }
 
   void _decrementValue() {
     double value = _fixValue(_controller.text);
-    value = (value - widget.increment);
-    if (value < widget.min) value = widget.min;
-    if (value > widget.max) value = widget.max;
-    _currentValue = value;
-    _setCurrentValue();
-    setState(() {});
+    value = max(value - widget.increment, widget.min);
+    _setCurrentValue(value.toString());
   }
 
   @override
   Widget build(BuildContext context) {
-    bool enabledUp = _currentValue < widget.max;
-    bool enabledDown = _currentValue > widget.min;
+
+    if (previousValue != widget.value) {
+      _checkWidgetValue();
+      previousValue = widget.value;
+      _controller.text = _fixText(widget.value);
+    }
+    
+    bool enabledUp = widget.value < widget.max;
+    bool enabledDown = widget.value > widget.min;
 
     return Row(
       children: <Widget>[
@@ -154,12 +137,7 @@ class CKFieldNumericState extends State<CKFieldNumeric> {
             textSize: widget.textSize,
             textAlign: TextAlign.right,
             onFocusChanged: _focusChanged,
-            //keyboardType: TextInputType.numberWithOptions(
-            //    signed: true, decimal: widget.decimals > 0),
             keyboardType: TextInputType.text,
-            //inputFormatters: [
-            //  FilteringTextInputFormatter.allow(_decimalRegex),
-            //],
           ),
         ),
         widget.increment == double.infinity
