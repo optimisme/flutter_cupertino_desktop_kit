@@ -28,20 +28,14 @@ class CKButtonSelect extends StatefulWidget {
   CKButtonSelectState createState() => CKButtonSelectState();
 }
 
-/// Class `DSKButtonSelectState` - The state for `DSKButtonSelect`.
-///
-/// Manages the state and rendering of the selectable button.
+
 class CKButtonSelectState extends State<CKButtonSelect> {
-  // Font size for text.
   static const double _fontSize = 12.0;
 
-  // Hover state flag.
   bool _isMouseOver = false;
 
-  // Currently selected option's index.
   int _selectedIndex = 0;
 
-  // Global key for positioning.
   final GlobalKey _globalKey = GlobalKey();
 
   @override
