@@ -5,7 +5,7 @@ import 'ck_theme.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
-class CKButtonCheckBox extends StatefulWidget {
+class CKButtonCheckBox extends StatelessWidget {
   final bool value;
   final double size;
   final ValueChanged<bool>? onChanged;
@@ -18,42 +18,28 @@ class CKButtonCheckBox extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  CKButtonCheckBoxState createState() => CKButtonCheckBoxState();
-}
-
-class CKButtonCheckBoxState extends State<CKButtonCheckBox> {
-  @override
   Widget build(BuildContext context) {
     CKTheme themeManager = CKThemeNotifier.of(context)!.changeNotifier;
 
-    double boxSize = widget.size;
+    double boxSize = size;
 
     return GestureDetector(
-
-        onTap: () {
-          widget.onChanged?.call(!widget.value);
-        },
-
-        child: CustomPaint(
-          size: Size(boxSize, boxSize),
-
-          painter: VNTButtonCheckBoxPainter(
-
-              /// Set the action color based on the theme
-              colorAccent: themeManager.accent,
-              colorAccent200: themeManager.accent200,
-              colorBackgroundSecondary0: themeManager.backgroundSecondary0,
-
-              /// Set the isSelected flag based on the widget's value property
-              isSelected: widget.value,
-
-              /// Check whether the app has focus
-              hasAppFocus: themeManager.isAppFocused,
-
-              /// Set the checkbox size
-              size: boxSize,
-              isLightTheme: themeManager.isLight),
-        ));
+      onTap: () {
+        onChanged?.call(!value);
+      },
+      child: CustomPaint(
+        size: Size(boxSize, boxSize),
+        painter: VNTButtonCheckBoxPainter(
+          colorAccent: themeManager.accent,
+          colorAccent200: themeManager.accent200,
+          colorBackgroundSecondary0: themeManager.backgroundSecondary0,
+          isSelected: value,
+          hasAppFocus: themeManager.isAppFocused,
+          size: boxSize,
+          isLightTheme: themeManager.isLight,
+        ),
+      ),
+    );
   }
 }
 

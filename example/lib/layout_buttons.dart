@@ -9,8 +9,10 @@ class LayoutButtons extends StatefulWidget {
 }
 
 class _LayoutButtonsState extends State<LayoutButtons> {
-  bool isSwitched = false;
-  int selectedRadio = 1;
+  bool _isSwitched = false;
+  int _selectedRadio = 1;
+  int _indexButtonSelect0 = 1;
+  int _indexButtonSelect1 = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -116,21 +118,21 @@ class _LayoutButtonsState extends State<LayoutButtons> {
         Padding(
             padding: const EdgeInsets.all(8),
             child: CKButtonSwitch(
-              value: isSwitched,
+              value: _isSwitched,
               onChanged: (bool newValue) {
                 setState(() {
-                  isSwitched = newValue;
+                  _isSwitched = newValue;
                 });
               },
             )),
         Padding(
             padding: const EdgeInsets.all(8),
             child: CKButtonSwitch(
-              value: isSwitched,
+              value: _isSwitched,
               size: 12,
               onChanged: (bool newValue) {
                 setState(() {
-                  isSwitched = newValue;
+                  _isSwitched = newValue;
                 });
               },
             )),
@@ -141,10 +143,10 @@ class _LayoutButtonsState extends State<LayoutButtons> {
         Padding(
             padding: const EdgeInsets.all(8),
             child: CKButtonCheckBox(
-              value: isSwitched,
+              value: _isSwitched,
               onChanged: (bool? value) {
                 setState(() {
-                  isSwitched = value!;
+                  _isSwitched = value!;
                 });
               },
             )),
@@ -155,10 +157,10 @@ class _LayoutButtonsState extends State<LayoutButtons> {
         Padding(
             padding: const EdgeInsets.all(8),
             child: CKButtonDisclosure(
-              value: isSwitched,
+              value: _isSwitched,
               onChanged: (bool newValue) {
                 setState(() {
-                  isSwitched = newValue;
+                  _isSwitched = newValue;
                 });
               },
             )),
@@ -168,10 +170,10 @@ class _LayoutButtonsState extends State<LayoutButtons> {
         Padding(
             padding: const EdgeInsets.all(8),
             child: CKButtonRadio(
-              isSelected: selectedRadio == 1,
+              isSelected: _selectedRadio == 1,
               onSelected: (bool? isSelected) {
                 setState(() {
-                  selectedRadio = 1;
+                  _selectedRadio = 1;
                 });
               },
               child: const Text("Me"),
@@ -179,10 +181,10 @@ class _LayoutButtonsState extends State<LayoutButtons> {
         Padding(
             padding: const EdgeInsets.all(8),
             child: CKButtonRadio(
-              isSelected: selectedRadio == 2,
+              isSelected: _selectedRadio == 2,
               onSelected: (bool? isSelected) {
                 setState(() {
-                  selectedRadio = 2;
+                  _selectedRadio = 2;
                 });
               },
               child: const Text("You"),
@@ -194,22 +196,22 @@ class _LayoutButtonsState extends State<LayoutButtons> {
             padding: const EdgeInsets.all(8),
             child: CKButtonSelect(
               options: const ['One', 'Two', 'Three'],
-              defaultIndex: 0,
-              onSelected: (int index, String value) {
-                // ignore: avoid_print
-                print("ButtonSelect: $index $value");
+              selectedIndex: _indexButtonSelect0,
+              onSelected: (int index) {
+                setState(() {_indexButtonSelect0 = index; });
               },
             )),
         Padding(
             padding: const EdgeInsets.all(8),
             child: CKButtonSelect(
               options: const ['No', 'Yes', 'Maybe', 'Who knows?'],
-              defaultIndex: 1,
+              selectedIndex: _indexButtonSelect1,
               isFlat: true,
               isTranslucent: true,
-              onSelected: (int index, String value) {
-                // ignore: avoid_print
-                print("ButtonSelect: $index $value");
+              onSelected: (int index) {
+                setState(() {
+                  _indexButtonSelect1 = index;
+                });
               },
             )),
       ]),

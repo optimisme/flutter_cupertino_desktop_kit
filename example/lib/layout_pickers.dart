@@ -129,7 +129,7 @@ class _LayoutPickersState extends State<LayoutPickers> {
             child: CKPickerCheckList(
               options: const ['Car', 'Motorbike', 'Plane'],
               selectedIndex: _selectedIndexCheckList,
-              onSelected: (int index, String value) {
+              onSelected: (int index) {
                 setState(() {_selectedIndexCheckList = index;});
               },
             )),

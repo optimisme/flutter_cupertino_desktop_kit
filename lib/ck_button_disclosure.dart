@@ -6,16 +6,10 @@ import 'ck_theme_notifier.dart';
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
 class CKButtonDisclosure extends StatefulWidget {
-  /// The initial value of the toggle.
   final bool value;
-
-  /// A callback function that is called when the value of the toggle changes.
   final ValueChanged<bool>? onChanged;
-
-  /// The size of the chevron icon.
   final double size;
 
-  /// Creates a DSKButtonDisclosure widget.
   const CKButtonDisclosure({
     Key? key,
     required this.value,
@@ -30,13 +24,8 @@ class CKButtonDisclosure extends StatefulWidget {
 /// The state of the `DSKButtonDisclosure` widget.
 class CKButtonDisclosureState extends State<CKButtonDisclosure>
     with SingleTickerProviderStateMixin {
-  /// The duration of the animation in milliseconds.
   final int _animationMillis = 200;
-
-  /// An animation controller that controls the animation of the chevron icon.
   late AnimationController _controller;
-
-  /// An animation that interpolates between 0.0 and 0.5, representing the rotation of the chevron icon from 0 to 45 degrees.
   late Animation<double> _animation;
 
   @override

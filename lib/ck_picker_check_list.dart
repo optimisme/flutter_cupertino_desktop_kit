@@ -9,7 +9,7 @@ class CKPickerCheckList extends StatefulWidget {
   final List<String> options;
   final int selectedIndex;
   final double size;
-  final Function(int, String)? onSelected;
+  final Function(int)? onSelected;
 
   const CKPickerCheckList({
     Key? key,
@@ -35,10 +35,6 @@ class CKPickerCheckListState extends State<CKPickerCheckList> {
     }
   }
 
-
-
-
-
   @override
   Widget build(BuildContext context) {
     CKTheme theme = CKThemeNotifier.of(context)!.changeNotifier;
@@ -58,7 +54,7 @@ class CKPickerCheckListState extends State<CKPickerCheckList> {
                 onEnter: (_) => setState(() => _hoverIndex = index),
                 onExit: (_) => setState(() => _hoverIndex = null),
                 child: GestureDetector(
-                  onTap: () => widget.onSelected?.call(index, widget.options[index]),
+                  onTap: () => widget.onSelected?.call(index),
                   child: Container(
                     padding: const EdgeInsets.fromLTRB(4, 2, 4, 6),
                     decoration: BoxDecoration(

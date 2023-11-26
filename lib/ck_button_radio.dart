@@ -5,67 +5,56 @@ import 'ck_theme.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
-class CKButtonRadio extends StatefulWidget {
+class CKButtonRadio extends StatelessWidget {
   final bool isSelected;
   final ValueChanged<bool>? onSelected;
   final double size;
-  final Widget child; // Propietat per al label
+  final Widget child;
 
   const CKButtonRadio({
     Key? key,
     this.isSelected = false,
     this.onSelected,
     this.size = 16.0,
-    required this.child, // Requereix el label al crear l'objecte
+    required this.child,
   }) : super(key: key);
 
-  @override
-  CKButtonRadioState createState() => CKButtonRadioState();
-}
-
-/// Class `DSKButtonRadioState` - The state for `DSKButtonRadio`.
-///
-/// Manages the state and rendering of the radio button.
-class CKButtonRadioState extends State<CKButtonRadio> {
   @override
   Widget build(BuildContext context) {
     CKTheme theme = CKThemeNotifier.of(context)!.changeNotifier;
 
-    double boxSize = widget.size;
-
-    // Main widget that handles interaction and arranges elements.
     return GestureDetector(
       onTap: () {
-        widget.onSelected?.call(!widget.isSelected);
+        onSelected?.call(!isSelected);
       },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           CustomPaint(
-            size: Size(boxSize, boxSize),
+            size: Size(size, size),
             painter: VNTButtonRadioPainter(
               colorAccent: theme.accent,
               colorAccent200: theme.accent200,
               colorBackgroundSecondary0: theme.backgroundSecondary0,
-              isSelected: widget.isSelected,
+              isSelected: isSelected,
               hasAppFocus: theme.isAppFocused,
-              size: boxSize,
+              size: size,
               isLightTheme: theme.isLight,
             ),
           ),
           const SizedBox(width: 4),
           Baseline(
-            baseline: boxSize / 1.5,
+            baseline: size / 1.5,
             baselineType: TextBaseline.alphabetic,
-            child: (widget.child is! Text)
-                ? widget.child
-                : Text(
-                    (widget.child as Text).data!,
+            child: child is Text
+                ? Text(
+                    (child as Text).data!,
                     style:
-                        (widget.child as Text).style?.copyWith(fontSize: 14) ??
+                        (child as Text).style?.copyWith(fontSize: 14) ??
                             const TextStyle(fontSize: 14),
-                  ),
+                  )
+                : child,
           ),
         ],
       ),

@@ -9,19 +9,19 @@ import 'ck_dialog_popover.dart';
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
 class CKButtonSelect extends StatefulWidget {
-  final Function(int, String)? onSelected;
-  final int defaultIndex;
+  final int selectedIndex;
   final bool isFlat;
   final bool isTranslucent;
   final List<String> options;
+  final Function(int)? onSelected;
 
   const CKButtonSelect({
     Key? key,
-    this.onSelected,
-    required this.defaultIndex,
+    required this.selectedIndex,
     required this.options,
     this.isFlat = false,
     this.isTranslucent = false,
+    this.onSelected,
   }) : super(key: key);
 
   @override
@@ -31,23 +31,9 @@ class CKButtonSelect extends StatefulWidget {
 
 class CKButtonSelectState extends State<CKButtonSelect> {
   static const double _fontSize = 12.0;
-
   bool _isMouseOver = false;
-
-  int _selectedIndex = 0;
-
   final GlobalKey _globalKey = GlobalKey();
 
-  @override
-  void initState() {
-    super.initState();
-    _selectedIndex = widget.defaultIndex;
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   /// Method to show a popover list when the button is tapped.
   _showPopover(BuildContext context) {
@@ -65,13 +51,10 @@ class CKButtonSelectState extends State<CKButtonSelect> {
         padding: const EdgeInsets.all(5.0),
         child: CKPickerCheckList(
           options: widget.options,
-          selectedIndex: _selectedIndex,
-          onSelected: (int index, String value) {
+          selectedIndex: widget.selectedIndex,
+          onSelected: (int index) {
             key.currentState?.hide();
-            setState(() {
-              _selectedIndex = index;
-            });
-            widget.onSelected?.call(index, value);
+            widget.onSelected?.call(index);
           },
         ),
       ),
@@ -132,7 +115,7 @@ class CKButtonSelectState extends State<CKButtonSelect> {
                     children: [
                       DefaultTextStyle(
                         style: textStyle,
-                        child: Text(widget.options[_selectedIndex]),
+                        child: Text(widget.options[widget.selectedIndex]),
                       ),
                       const SizedBox(width: 5),
                       DecoratedBox(
