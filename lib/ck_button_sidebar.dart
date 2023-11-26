@@ -5,7 +5,7 @@ import 'ck_theme.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
-class CKButtonSidebar extends StatefulWidget {
+class CKButtonSidebar extends StatelessWidget {
   final VoidCallback? onPressed;
   final bool isSelected;
   final bool isAccent;
@@ -22,47 +22,37 @@ class CKButtonSidebar extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  CKButtonSidebarState createState() => CKButtonSidebarState();
-}
-
-class CKButtonSidebarState extends State<CKButtonSidebar> {
-  @override
   Widget build(BuildContext context) {
     CKTheme theme = CKThemeNotifier.of(context)!.changeNotifier;
 
     Color colorText =
-        theme.getSidebarColorText(widget.isSelected, widget.isAccent);
+        theme.getSidebarColorText(isSelected, isAccent);
 
     Color colorBackground =
-        theme.getSidebarColorBackground(widget.isSelected, widget.isAccent);
+        theme.getSidebarColorBackground(isSelected, isAccent);
 
     return GestureDetector(
-      onTap: () {
-        setState(() {
-          widget.onSelected();
-        });
-      },
+      onTap: onSelected,
       child: Padding(
           padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
           child: Container(
             width: double.infinity,
-            padding: widget.child is Text
+            padding: child is Text
                 ? const EdgeInsets.fromLTRB(8, 6, 8, 8)
                 : const EdgeInsets.fromLTRB(8, 6, 8, 6),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(4.0),
               color: colorBackground,
             ),
-            child: widget.child is! Text
-                ? widget.child
-                : Text(
-                    (widget.child as Text).data!,
+            child: child is Text
+                ? Text(
+                    (child as Text).data!,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style:
-                        (widget.child as Text).style?.copyWith(fontSize: 14) ??
-                            TextStyle(fontSize: 14, color: colorText),
-                  ),
+                    style: (child as Text).style?.copyWith(fontSize: 14, color: colorText) ??
+                          TextStyle(fontSize: 14, color: colorText),
+                  )
+                : child,
           )),
     );
   }
