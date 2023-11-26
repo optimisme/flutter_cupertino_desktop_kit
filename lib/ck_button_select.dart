@@ -71,8 +71,8 @@ class CKButtonSelectState extends State<CKButtonSelect> {
         padding: const EdgeInsets.all(5.0),
         child: CKPickerCheckList(
           options: widget.options,
-          defaultIndex: _selectedIndex,
-          onSelect: (int index, String value) {
+          selectedIndex: _selectedIndex,
+          onSelected: (int index, String value) {
             key.currentState?.hide();
             setState(() {
               _selectedIndex = index;

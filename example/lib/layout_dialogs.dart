@@ -111,30 +111,6 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
             const Text("Draggable:", style: TextStyle(fontSize: 16)),
             const SizedBox(width: 400, height: 250),
             const SizedBox(height: 10),
-            SizedBox(
-                width: 100,
-                child: GestureDetector(
-                    onTapDown: (details) {}, // prevent dragging
-                    onPanUpdate: (details) {}, // prevent dragging
-                    child: CKPickerButtonsBar(
-                      options: const [
-                        {"widget": Icon(CupertinoIcons.bold), "value": true},
-                        {"widget": Icon(CupertinoIcons.italic), "value": false},
-                        {
-                          "widget": Icon(CupertinoIcons.underline),
-                          "value": true
-                        },
-                        {
-                          "widget": Icon(CupertinoIcons.strikethrough),
-                          "value": false
-                        }
-                      ],
-                      allowsMultipleSelection: true,
-                      onChanged: (List<bool> options) {
-                        // ignore: avoid_print
-                        print("XX Segmented: $options");
-                      },
-                    ))),
             GestureDetector(
               onPanUpdate: (details) {}, // prevent dragging
               onTap: () {

@@ -7,17 +7,17 @@ import 'ck_theme.dart';
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
 class CKPicker360 extends StatefulWidget {
-  final double defaultValue;
+  final double value;
   final double size;
   final bool enabled;
   final Function(double)? onChanged;
 
   const CKPicker360(
       {Key? key,
-      this.defaultValue = 0,
+      required this.value,
       this.enabled = true,
       this.size = 16,
-      this.onChanged})
+      required this.onChanged})
       : super(key: key);
 
   @override
@@ -25,24 +25,6 @@ class CKPicker360 extends StatefulWidget {
 }
 
 class CKPicker360State extends State<CKPicker360> {
-  double _currentAngle = 0.0;
-
-  @override
-  void initState() {
-    super.initState();
-    _currentAngle = widget.defaultValue;
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
-  void setValue(double value) {
-    setState(() {
-      _currentAngle = value;
-    });
-  }
 
   void _onPanUpdate(DragUpdateDetails details) {
     RenderBox renderBox = context.findRenderObject() as RenderBox;
@@ -54,12 +36,7 @@ class CKPicker360State extends State<CKPicker360> {
                 math.pi) %
             360;
 
-    setState(() {
-      if (angle != _currentAngle) {
-        _currentAngle = angle;
-        widget.onChanged?.call(angle);
-      }
-    });
+    widget.onChanged?.call(angle);
   }
 
   @override
@@ -71,7 +48,7 @@ class CKPicker360State extends State<CKPicker360> {
       child: CustomPaint(
         painter: DSKPicker360Painter(
             theme.backgroundSecondary0,
-            _currentAngle,
+            widget.value,
             widget.enabled ? theme.colorText : CKTheme.grey,
             theme.isLight ? CKTheme.grey100 : CKTheme.grey),
         size: Size(widget.size, widget.size),

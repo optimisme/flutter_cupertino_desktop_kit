@@ -6,59 +6,38 @@ import 'ck_theme.dart';
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
 class CKPickerCheckList extends StatefulWidget {
-  /// The list of options to choose from.
   final List<String> options;
-
-  /// The size of the checkmark icon and the font size of the text.
-  final int defaultIndex;
-
-  /// The index of the option that is selected by default.
+  final int selectedIndex;
   final double size;
+  final Function(int, String)? onSelected;
 
-  /// A callback function that is called when an option is selected.
-  final Function(int, String)? onSelect;
-
-  /// Creates a DSKButtonCheckList widget.
   const CKPickerCheckList({
     Key? key,
     required this.options,
     this.size = 12.0,
-    this.defaultIndex = 0,
-    this.onSelect,
+    required this.selectedIndex,
+    required this.onSelected,
   }) : super(key: key);
 
   @override
   CKPickerCheckListState createState() => CKPickerCheckListState();
 }
 
-/// The state of the `DSKButtonCheckBox` widget.
-///
-/// This class manages the widget's internal state, including the current
-/// selection state and the app focus status.
-class CKPickerCheckListState extends State<CKPickerCheckList> {
-  /// The index of the option that is currently hovered over.
-  int? _hoverIndex;
 
-  /// The index of the option that is currently selected.
-  int _selectedIndex = 0;
+class CKPickerCheckListState extends State<CKPickerCheckList> {
+  int? _hoverIndex;
 
   @override
   void initState() {
     super.initState();
-    _selectedIndex = widget.defaultIndex;
+    if (widget.selectedIndex < 0 || widget.selectedIndex >= widget.options.length) {
+      throw Exception("CKPickerCheckListState initState: selectedIndex must be between 0 and options.length");
+    }
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
-  _select(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-    widget.onSelect?.call(index, widget.options[index]);
-  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -73,13 +52,13 @@ class CKPickerCheckListState extends State<CKPickerCheckList> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: List.generate(widget.options.length, (index) {
-            bool isSelected = index == _selectedIndex;
+            bool isSelected = index == widget.selectedIndex;
             bool isHovered = index == _hoverIndex;
             return MouseRegion(
                 onEnter: (_) => setState(() => _hoverIndex = index),
                 onExit: (_) => setState(() => _hoverIndex = null),
                 child: GestureDetector(
-                  onTap: () => _select(index),
+                  onTap: () => widget.onSelected?.call(index, widget.options[index]),
                   child: Container(
                     padding: const EdgeInsets.fromLTRB(4, 2, 4, 6),
                     decoration: BoxDecoration(

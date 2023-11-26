@@ -7,7 +7,8 @@ import 'ck_theme.dart';
 
 class CKPickerButtonsBar extends StatefulWidget {
   /// List of button options.
-  final List<Map<String, dynamic>> options;
+  final List<bool> selectedStates;
+  final List<Widget> options;
 
   /// Callback for selection changes.
   final Function(List<bool>)? onChanged;
@@ -17,6 +18,7 @@ class CKPickerButtonsBar extends StatefulWidget {
 
   const CKPickerButtonsBar({
     Key? key,
+    required this.selectedStates,
     required this.options,
     this.onChanged,
     this.allowsMultipleSelection = false,
@@ -33,13 +35,13 @@ class CKPickerButtonsBarState extends State<CKPickerButtonsBar> {
   // Border radius for button edges.
   final double _borderRadius = 4.0;
 
-  // States of button selections.
-  List<Map<String, dynamic>> _selectedStates = [];
-
   @override
   void initState() {
     super.initState();
-    _selectedStates = widget.options.map((option) => Map.of(option)).toList();
+    if (widget.selectedStates.length != widget.options.length) {
+      throw Exception(
+          "CKPickerButtonsBarState initState: selectedStates and options must have the same length");
+    }
   }
 
   @override
@@ -51,41 +53,41 @@ class CKPickerButtonsBarState extends State<CKPickerButtonsBar> {
   void _buttonTapped(int index) {
     setState(() {
       if (widget.allowsMultipleSelection) {
-        _selectedStates[index]['value'] = !_selectedStates[index]['value'];
+        widget.selectedStates[index] = !widget.selectedStates[index];
       } else {
-        for (int i = 0; i < _selectedStates.length; i++) {
-          _selectedStates[i]['value'] = i == index;
+        for (int i = 0; i < widget.selectedStates.length; i++) {
+          widget.selectedStates[i] = i == index;
         }
       }
     });
     widget.onChanged?.call(
-        _selectedStates.map((option) => option['value'] as bool).toList());
+        widget.selectedStates.map((option) => option).toList());
   }
 
-  Widget fixWidgetStyle(Widget widget, int index, CKTheme theme) {
+  Widget fixWidgetStyle(Widget child, int index, CKTheme theme) {
     Color color = theme.isLight
-        ? _selectedStates[index]['value'] && theme.isAppFocused
+        ? widget.selectedStates[index] && theme.isAppFocused
             ? CKTheme.white
             : CKTheme.black
-        : _selectedStates[index]['value'] && !theme.isAppFocused
+        : widget.selectedStates[index] && !theme.isAppFocused
             ? CKTheme.black
             : CKTheme.white;
-    if (widget is Text) {
+    if (child is Text) {
       double size = 12.0;
       return Text(
-        widget.data!,
-        style: widget.style?.copyWith(color: color, fontSize: size) ??
+        child.data!,
+        style: child.style?.copyWith(color: color, fontSize: size) ??
             TextStyle(color: color, fontSize: size),
       );
     }
-    if (widget is Icon) {
+    if (child is Icon) {
       return Icon(
-        widget.icon,
+        child.icon,
         color: color,
         size: 14.0,
       );
     }
-    return widget;
+    return child;
   }
 
   @override
@@ -118,7 +120,7 @@ class CKPickerButtonsBarState extends State<CKPickerButtonsBar> {
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                colors: _selectedStates[index]['value']
+                colors: widget.selectedStates[index]
                     ? theme.isAppFocused
                         ? [theme.accent200, theme.accent500]
                         : [CKTheme.grey200, CKTheme.grey300]
@@ -127,7 +129,7 @@ class CKPickerButtonsBarState extends State<CKPickerButtonsBar> {
               borderRadius: borderRadius,
             ),
             child:
-                fixWidgetStyle(widget.options[index]['widget'], index, theme),
+                fixWidgetStyle(widget.options[index], index, theme),
           ),
         ),
       );

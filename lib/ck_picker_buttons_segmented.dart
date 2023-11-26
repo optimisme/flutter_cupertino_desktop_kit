@@ -7,15 +7,15 @@ import 'ck_theme.dart';
 
 class CKPickerButtonsSegmented extends StatefulWidget {
   final List<Widget> options;
-  final int defaultIndex;
-  final Function(int)? onSelect;
+  final int selectedIndex;
+  final Function(int)? onSelected;
   final bool isAccent;
 
   const CKPickerButtonsSegmented({
     Key? key,
     required this.options,
-    this.defaultIndex = 0,
-    this.onSelect,
+    required this.selectedIndex,
+    required this.onSelected,
     this.isAccent = false,
   }) : super(key: key);
 
@@ -28,9 +28,7 @@ class CKPickerButtonsSegmented extends StatefulWidget {
 ///
 /// Manages the state and rendering of the segmented control.
 class CKPickerButtonsSegmentedState extends State<CKPickerButtonsSegmented> {
-  final int _animationMillis =
-      200; // Duration of the animation in milliseconds.
-  int _selectedIndex = 0; // Currently selected option's index.
+  final int _animationMillis = 200; 
   final List<GlobalKey> _keys = []; // Global keys for each option.
   final List<Rect> _rects = []; // Rectangles for the position of each option.
   double _width = 0.0; // Width of the entire widget.
@@ -38,16 +36,10 @@ class CKPickerButtonsSegmentedState extends State<CKPickerButtonsSegmented> {
   @override
   void initState() {
     super.initState();
-    _selectedIndex = widget.defaultIndex;
+    if (widget.selectedIndex < 0 || widget.selectedIndex >= widget.options.length) {
+      throw Exception("CKPickerButtonsSegmentedState initState: selectedIndex must be between 0 and options.length");
+    }
     _keys.addAll(List.generate(widget.options.length, (index) => GlobalKey()));
-  }
-
-  /// Handles the selection of an option.
-  _select(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-    widget.onSelect?.call(index);
   }
 
   /// Calculates the positions of each option for the animation.
@@ -141,10 +133,10 @@ class CKPickerButtonsSegmentedState extends State<CKPickerButtonsSegmented> {
             AnimatedPositioned(
               duration: Duration(milliseconds: _animationMillis),
               curve: Curves.easeInOut,
-              left: _getPositionLeft(_selectedIndex),
+              left: _getPositionLeft(widget.selectedIndex),
               top: 2,
-              width: _getPositionWidth(_selectedIndex),
-              height: _rects[_selectedIndex].height - 3,
+              width: _getPositionWidth(widget.selectedIndex),
+              height: _rects[widget.selectedIndex].height - 3,
               child: Container(
                 decoration: BoxDecoration(
                   color: widget.isAccent
@@ -173,7 +165,7 @@ class CKPickerButtonsSegmentedState extends State<CKPickerButtonsSegmented> {
             children: List.generate(widget.options.length, (index) {
               return GestureDetector(
                   key: _keys[index],
-                  onTap: () => _select(index),
+                  onTap: () => widget.onSelected?.call(index),
                   child: Container(
                     padding:
                         const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
@@ -182,7 +174,7 @@ class CKPickerButtonsSegmentedState extends State<CKPickerButtonsSegmented> {
                         tween: ColorTween(
                           begin: theme.colorText,
                           end: widget.isAccent &&
-                                  index == _selectedIndex &&
+                                  index == widget.selectedIndex &&
                                   theme.isAppFocused
                               ? CKTheme.white
                               : theme.colorText,

@@ -9,8 +9,13 @@ class LayoutPickers extends StatefulWidget {
 }
 
 class _LayoutPickersState extends State<LayoutPickers> {
-  double _value = 0.1;
   double _angle = 0.0;
+  double _value = 0.1;
+  int _selectedIndexButtonsSegmented0 = 1;
+  int _selectedIndexButtonsSegmented1 = 1;
+  List<bool> _selectedStatesButtonsBar0 = [true, false, false, false];
+  List<bool> _selectedStatesButtonsBar1 = [true, false, true, false];
+  int _selectedIndexCheckList = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +26,9 @@ class _LayoutPickersState extends State<LayoutPickers> {
         Padding(
             padding: const EdgeInsets.all(8),
             child: CKPicker360(
+              value: _angle,
               onChanged: (angle) {
-                _angle = angle;
-                setState(() {});
+                setState(() {_angle = angle;});
               },
             )),
         Text(_angle.toStringAsFixed(2), style: const TextStyle(fontSize: 12)),
@@ -36,9 +41,9 @@ class _LayoutPickersState extends State<LayoutPickers> {
             child: SizedBox(
                 width: 100,
                 child: CKPickerSlider(
+                  value: _value,
                   onChanged: (value) {
-                    _value = value;
-                    setState(() {});
+                    setState(() {_value = value;});
                   },
                 ))),
         Text(_value.toStringAsFixed(2), style: const TextStyle(fontSize: 12)),
@@ -51,15 +56,14 @@ class _LayoutPickersState extends State<LayoutPickers> {
             child: SizedBox(
                 width: 300,
                 child: CKPickerButtonsSegmented(
+                  selectedIndex: _selectedIndexButtonsSegmented0,
                   options: const [
                     Text('Car'),
                     Text('Motorbike'),
                     Icon(CupertinoIcons.airplane)
                   ],
-                  defaultIndex: 1,
-                  onSelect: (int index) {
-                    // ignore: avoid_print
-                    print("Segmented: $index");
+                  onSelected: (int index) {
+                    setState(() {_selectedIndexButtonsSegmented0 = index; });
                   },
                 ))),
         Padding(
@@ -67,6 +71,7 @@ class _LayoutPickersState extends State<LayoutPickers> {
             child: SizedBox(
                 width: 250,
                 child: CKPickerButtonsSegmented(
+                  selectedIndex: _selectedIndexButtonsSegmented1,
                   options: const [
                     Icon(CupertinoIcons.ant),
                     Text('Flower'),
@@ -74,10 +79,8 @@ class _LayoutPickersState extends State<LayoutPickers> {
                     Text('Bush')
                   ],
                   isAccent: true,
-                  defaultIndex: 1,
-                  onSelect: (int index) {
-                    // ignore: avoid_print
-                    print("Segmented: $index");
+                  onSelected: (int index) {
+                    setState(() {_selectedIndexButtonsSegmented1 = index; });
                   },
                 ))),
       ]),
@@ -89,24 +92,15 @@ class _LayoutPickersState extends State<LayoutPickers> {
             child: SizedBox(
                 width: 300,
                 child: CKPickerButtonsBar(
+                  selectedStates: _selectedStatesButtonsBar0,
                   options: const [
-                    {
-                      "widget": Icon(CupertinoIcons.text_alignleft),
-                      "value": true
-                    },
-                    {
-                      "widget": Icon(CupertinoIcons.text_aligncenter),
-                      "value": false
-                    },
-                    {
-                      "widget": Icon(CupertinoIcons.text_alignright),
-                      "value": false
-                    },
-                    {"widget": Text("Justify"), "value": false}
+                    Icon(CupertinoIcons.text_alignleft),
+                    Icon(CupertinoIcons.text_aligncenter),
+                    Icon(CupertinoIcons.text_alignright),
+                    Text("Justify")
                   ],
                   onChanged: (List<bool> options) {
-                    // ignore: avoid_print
-                    print("Segmented: $options");
+                    setState(() {_selectedStatesButtonsBar0 = options; });
                   },
                 ))),
         Padding(
@@ -114,19 +108,16 @@ class _LayoutPickersState extends State<LayoutPickers> {
             child: SizedBox(
                 width: 250,
                 child: CKPickerButtonsBar(
+                  selectedStates: _selectedStatesButtonsBar1,
                   options: const [
-                    {"widget": Icon(CupertinoIcons.bold), "value": false},
-                    {"widget": Icon(CupertinoIcons.italic), "value": false},
-                    {"widget": Icon(CupertinoIcons.underline), "value": true},
-                    {
-                      "widget": Icon(CupertinoIcons.strikethrough),
-                      "value": false
-                    }
+                    Icon(CupertinoIcons.bold), 
+                    Icon(CupertinoIcons.italic),
+                    Icon(CupertinoIcons.underline), 
+                    Icon(CupertinoIcons.strikethrough)
                   ],
                   allowsMultipleSelection: true,
                   onChanged: (List<bool> options) {
-                    // ignore: avoid_print
-                    print("Segmented: $options");
+                    setState(() {_selectedStatesButtonsBar1 = options; });
                   },
                 ))),
       ]),
@@ -137,11 +128,9 @@ class _LayoutPickersState extends State<LayoutPickers> {
             padding: const EdgeInsets.all(8),
             child: CKPickerCheckList(
               options: const ['Car', 'Motorbike', 'Plane'],
-              defaultIndex: 2,
-              onSelect: (int index, String value) {
-                // ignore: avoid_print
-                print("Checkmark: $index $value");
-                setState(() {});
+              selectedIndex: _selectedIndexCheckList,
+              onSelected: (int index, String value) {
+                setState(() {_selectedIndexCheckList = index;});
               },
             )),
       ]),

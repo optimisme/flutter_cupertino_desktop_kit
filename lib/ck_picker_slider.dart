@@ -3,17 +3,17 @@ import 'ck_theme_notifier.dart';
 import 'ck_theme.dart';
 
 class CKPickerSlider extends StatefulWidget {
-  final double defaultValue;
+  final double value;
   final double size;
   final bool enabled;
   final Function(double)? onChanged;
 
   const CKPickerSlider({
     Key? key,
-    this.defaultValue = 0,
+    required this.value,
     this.enabled = true,
     this.size = 16,
-    this.onChanged,
+    required this.onChanged,
   }) : super(key: key);
 
   @override
@@ -21,18 +21,14 @@ class CKPickerSlider extends StatefulWidget {
 }
 
 class CKPickerSliderState extends State<CKPickerSlider> {
-  double _currentValue = 0.0;
 
   @override
   void initState() {
     super.initState();
-    _currentValue = widget.defaultValue;
-  }
-
-  void setValue(double value) {
-    setState(() {
-      _currentValue = value.clamp(0.0, 1.0);
-    });
+    if (widget.value <0 || widget.value > 1) {
+      throw Exception(
+          "CKPickerSliderState initState: value must be between 0 and 1");
+    }
   }
 
   void _getValue(Offset globalPosition) {
@@ -51,12 +47,7 @@ class CKPickerSliderState extends State<CKPickerSlider> {
       newValue = 1;
     }
 
-    setState(() {
-      if (newValue != _currentValue) {
-        _currentValue = newValue;
-        widget.onChanged?.call(newValue);
-      }
-    });
+    widget.onChanged?.call(newValue);
   }
 
   void _onTapDown(TapDownDetails details) {
@@ -81,7 +72,7 @@ class CKPickerSliderState extends State<CKPickerSlider> {
           colorAccent: theme.accent,
           colorBar: theme.backgroundSecondary1,
           colorCircle: theme.backgroundSecondary0,
-          value: _currentValue,
+          value: widget.value,
           hasAppFocus: theme.isAppFocused, // Border color
         ),
         size: Size(widget.size, widget.size),
