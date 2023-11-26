@@ -7,13 +7,13 @@ import 'ck_theme.dart';
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
 class CKProgressBar extends StatefulWidget {
-  final double progress;
+  final double value;
   final bool isIndeterminate;
   final bool isRunning;
 
   const CKProgressBar({
     Key? key,
-    this.progress = 0.0,
+    this.value = 0.0,
     this.isIndeterminate = false,
     this.isRunning = false,
   }) : super(key: key);
@@ -41,7 +41,7 @@ class CKProgressBarState extends State<CKProgressBar>
 
     _progressAnimation = Tween<double>(
       begin: 0.0,
-      end: widget.progress,
+      end: widget.value,
     ).animate(CurvedAnimation(
       parent: _controller,
       curve: Curves.linear,
@@ -51,7 +51,7 @@ class CKProgressBarState extends State<CKProgressBar>
       });
 
     if (!widget.isIndeterminate) {
-      _controller.value = widget.progress;
+      _controller.value = widget.value;
     }
 
     if (widget.isIndeterminate && widget.isRunning) {
@@ -78,17 +78,17 @@ class CKProgressBarState extends State<CKProgressBar>
         stopIndeterminateAnimation();
       }
     } else if (!widget.isIndeterminate) {
-      if (oldWidget.progress >= 0.95 && widget.progress <= 0.05) {
+      if (oldWidget.value >= 0.95 && widget.value <= 0.05) {
         // Si el canvi és de 100 a 0, actualitza directament el progress sense animació
         _controller.value = 0.0;
         _controller.duration = const Duration(milliseconds: 0);
         _progressAnimation =
             Tween<double>(begin: 0.0, end: 0.0).animate(_controller);
-      } else if (widget.progress != oldWidget.progress) {
+      } else if (widget.value != oldWidget.value) {
         // En cas contrari, crea una nova Tween i inicia l'animació
         _controller.duration = Duration(milliseconds: _animationMillis);
         var tween = Tween<double>(
-            begin: _progressAnimation.value, end: widget.progress);
+            begin: _progressAnimation.value, end: widget.value);
         _progressAnimation = tween.animate(_controller)
           ..addListener(() {
             setState(() {});

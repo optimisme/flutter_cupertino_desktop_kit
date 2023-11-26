@@ -58,7 +58,7 @@ class _LayoutProgressState extends State<LayoutProgress> {
                 child: SizedBox(
                     width: 250,
                     child: CKProgressBar(
-                      progress: _progressL,
+                      value: _progressL,
                     ))),
             Padding(
               padding: const EdgeInsets.all(8),
@@ -84,7 +84,7 @@ class _LayoutProgressState extends State<LayoutProgress> {
                 child: SizedBox(
                     width: 250,
                     child: CKProgressBar(
-                      progress: _progressL,
+                      value: _progressL,
                       isIndeterminate: true,
                       isRunning: _isRunningL,
                     ))),
@@ -109,7 +109,7 @@ class _LayoutProgressState extends State<LayoutProgress> {
                 child: SizedBox(
                     width: 250,
                     child: CKProgressCircular(
-                      progress: _progressC,
+                      value: _progressC,
                     ))),
             Padding(
               padding: const EdgeInsets.all(8),
@@ -135,7 +135,7 @@ class _LayoutProgressState extends State<LayoutProgress> {
                 child: SizedBox(
                     width: 250,
                     child: CKProgressCircular(
-                      progress: _progressC,
+                      value: _progressC,
                       isIndeterminate: true,
                       isRunning: _isRunningC,
                     ))),
