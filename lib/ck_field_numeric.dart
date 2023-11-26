@@ -38,7 +38,7 @@ class CKFieldNumeric extends StatefulWidget {
 
 class CKFieldNumericState extends State<CKFieldNumeric> {
   late TextEditingController _controller;
-  double previousValue = double.infinity;
+  double _previousValue = double.infinity;
 
   @override
   void initState() {
@@ -90,9 +90,9 @@ class CKFieldNumericState extends State<CKFieldNumeric> {
         TextPosition(offset: _controller.text.length));
 
     // Notifica el canvi al pare si el valor ha canviat
-    if (valueChanged || newValue != previousValue) {
+    if (valueChanged || newValue != _previousValue) {
       widget.onValueChanged?.call(newValue);
-      previousValue = newValue;
+      _previousValue = newValue;
     }
   }
 
@@ -125,8 +125,8 @@ class CKFieldNumericState extends State<CKFieldNumeric> {
       _setCurrentValue(value.toString());
     }
 
-    if (previousValue != widget.value) {
-      previousValue = widget.value;
+    if (_previousValue != widget.value) {
+      _previousValue = widget.value;
       _controller.text = _fixText(value);
     }
 

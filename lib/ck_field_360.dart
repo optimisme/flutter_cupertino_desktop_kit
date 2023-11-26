@@ -23,12 +23,12 @@ class CKField360 extends StatefulWidget {
 }
 
 class CKField360State extends State<CKField360> {
-  double _previousValue = 0.0;
+  double previousValue = 0.0;
 
   @override
   void initState() {
     super.initState();
-    _previousValue = _adjustAngle(widget.value);
+    previousValue = _adjustAngle(widget.value);
   }
 
   double _adjustAngle(double angle) {
@@ -37,8 +37,8 @@ class CKField360State extends State<CKField360> {
 
   void _onValueChanged(double newValue) {
     final adjustedValue = _adjustAngle(newValue);
-    if (adjustedValue != _previousValue) {
-      _previousValue = adjustedValue;
+    if (adjustedValue != previousValue) {
+      previousValue = adjustedValue;
       widget.onChanged?.call(adjustedValue);
     }
   }

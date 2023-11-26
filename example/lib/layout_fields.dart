@@ -14,6 +14,9 @@ class _LayoutFieldsState extends State<LayoutFields> {
   double _valueNumeric = 5.5;
   double _valueNumericIncrement = -1.0;
   double _valueNumeric360 = 270;
+  double _valueNumericSlider0 = 0.5;
+  double _valueNumericSlider1 = 0.5;
+  double _valueNumericSlider2 = 0.5;
 
   @override
   void initState() {
@@ -154,12 +157,13 @@ class _LayoutFieldsState extends State<LayoutFields> {
         Padding(
             padding: const EdgeInsets.all(8),
             child: SizedBox(
-                width: 150,
+                width: _valueNumericSlider0,
                 child: CKFieldNumericSlider(
-                  defaultValue: 0.5,
+                  value: 0.5,
                   onValueChanged: (double value) {
-                    // ignore: avoid_print
-                    print("Numeric slider default: $value");
+                    setState(() {
+                      _valueNumericSlider0 = value;
+                    });
                   },
                 ))),
         Padding(
@@ -167,15 +171,16 @@ class _LayoutFieldsState extends State<LayoutFields> {
             child: SizedBox(
                 width: 150,
                 child: CKFieldNumericSlider(
-                  defaultValue: 50,
+                  value: _valueNumericSlider1,
                   min: 0,
                   max: 100,
                   increment: 1,
                   decimals: 0,
                   units: "%",
                   onValueChanged: (double value) {
-                    // ignore: avoid_print
-                    print("Numeric slider %: $value");
+                    setState(() {
+                      _valueNumericSlider1 = value;
+                    });
                   },
                 ))),
         Padding(
@@ -183,14 +188,15 @@ class _LayoutFieldsState extends State<LayoutFields> {
             child: SizedBox(
                 width: 150,
                 child: CKFieldNumericSlider(
-                  defaultValue: 128,
+                  value: _valueNumericSlider2,
                   min: 0,
                   max: 255,
                   increment: 1,
                   decimals: 0,
                   onValueChanged: (double value) {
-                    // ignore: avoid_print
-                    print("Numeric slider %: $value");
+                    setState(() {
+                      _valueNumericSlider2 = value;
+                    });
                   },
                 ))),
       ]),

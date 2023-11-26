@@ -6,6 +6,103 @@ import 'ck_picker_slider.dart';
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
 class CKFieldNumericSlider extends StatefulWidget {
+  final double value;
+  final double textSize;
+  final double min;
+  final double max;
+  final double increment;
+  final int decimals;
+  final bool enabled;
+  final String units;
+  final Function(double)? onValueChanged;
+  final Function(double)? onTextChanged;
+  const CKFieldNumericSlider({
+    Key? key,
+    this.value = 0.0,
+    this.textSize = 12,
+    this.min = 0,
+    this.max = 1,
+    this.increment = double.infinity, // If infinity, buttons are hidden
+    this.decimals = 1, // Valor per defecte, sense decimals si no s'especifica
+    this.units = "",
+    this.enabled = true,
+    this.onValueChanged,
+    this.onTextChanged,
+  }) : super(key: key);
+
+  @override
+  CKFieldNumericSliderState createState() => CKFieldNumericSliderState();
+}
+
+class CKFieldNumericSliderState extends State<CKFieldNumericSlider> {
+  double _previousValue = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _previousValue = widget.value;
+  }
+
+  void _onValueChanged(double newValue) {
+    bool valueChanged = false;
+
+    if (newValue < widget.min) {
+      newValue = widget.min;
+      valueChanged = true;
+    } else if (newValue > widget.max) {
+      newValue = widget.max;
+      valueChanged = true;
+    }
+    if (valueChanged || newValue != _previousValue) {
+      widget.onValueChanged?.call(newValue);
+      _previousValue = newValue;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    double distance = (widget.max - widget.min).abs();
+    double sliderValue = ((widget.value - widget.min) / distance).clamp(0, 1);
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Expanded(
+            child: CKPickerSlider(
+          value: sliderValue,
+          size: widget.textSize + 8,
+          enabled: widget.enabled,
+          onChanged: (value) {
+            _onValueChanged(value);
+          },
+        )),
+        const SizedBox(width: 4),
+        SizedBox(
+          width: 64,
+          child: CKFieldNumeric(
+            value: widget.value,
+            textSize: widget.textSize,
+            min: widget.min,
+            max: widget.max,
+            increment: widget.increment,
+            decimals: widget.decimals,
+            enabled: widget.enabled,
+            units: widget.units,
+            onValueChanged: (value) {
+              _onValueChanged(value);
+            },
+            onTextChanged: (value) {
+              widget.onTextChanged?.call(value);
+            },
+          ),
+        )
+      ],
+    );
+  }
+}
+
+
+/* OLD 
+class CKFieldNumericSlider extends StatefulWidget {
   final double defaultValue;
   final double textSize;
   final double min;
@@ -121,3 +218,4 @@ class CKFieldNumericSliderState extends State<CKFieldNumericSlider> {
     );
   }
 }
+*/
