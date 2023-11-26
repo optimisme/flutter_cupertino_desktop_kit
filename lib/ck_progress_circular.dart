@@ -34,6 +34,11 @@ class CKProgressCircularState extends State<CKProgressCircular>
   @override
   void initState() {
     super.initState();
+    if (widget.value <0 || widget.value > 1) {
+      throw Exception(
+          "CKProgressCircularState initState: value must be between 0 and 1");
+    }
+
     _controller = AnimationController(
       vsync: this,
       duration: Duration(milliseconds: _animationMillis),

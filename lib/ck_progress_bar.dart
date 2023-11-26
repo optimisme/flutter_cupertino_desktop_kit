@@ -34,6 +34,11 @@ class CKProgressBarState extends State<CKProgressBar>
   void initState() {
     super.initState();
 
+    if (widget.value <0 || widget.value > 1) {
+      throw Exception(
+          "CKProgressBarState initState: value must be between 0 and 1");
+    }
+
     _controller = AnimationController(
       vsync: this,
       duration: Duration(milliseconds: _animationMillis),
