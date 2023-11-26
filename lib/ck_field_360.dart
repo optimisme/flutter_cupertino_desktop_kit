@@ -63,8 +63,6 @@ class CKField360State extends State<CKField360> {
           child: CKFieldNumeric(
             value: value,
             textSize: widget.textSize,
-            min: 0,
-            max: 360,
             increment: 1,
             decimals: 0,
             enabled: widget.enabled,

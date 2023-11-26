@@ -28,7 +28,9 @@ class _LayoutPickersState extends State<LayoutPickers> {
             child: CKPicker360(
               value: _angle,
               onChanged: (angle) {
-                setState(() {_angle = angle;});
+                setState(() {
+                  _angle = angle;
+                });
               },
             )),
         Text(_angle.toStringAsFixed(2), style: const TextStyle(fontSize: 12)),
@@ -43,7 +45,9 @@ class _LayoutPickersState extends State<LayoutPickers> {
                 child: CKPickerSlider(
                   value: _value,
                   onChanged: (value) {
-                    setState(() {_value = value;});
+                    setState(() {
+                      _value = value;
+                    });
                   },
                 ))),
         Text(_value.toStringAsFixed(2), style: const TextStyle(fontSize: 12)),
@@ -63,7 +67,9 @@ class _LayoutPickersState extends State<LayoutPickers> {
                     Icon(CupertinoIcons.airplane)
                   ],
                   onSelected: (int index) {
-                    setState(() {_selectedIndexButtonsSegmented0 = index; });
+                    setState(() {
+                      _selectedIndexButtonsSegmented0 = index;
+                    });
                   },
                 ))),
         Padding(
@@ -80,7 +86,9 @@ class _LayoutPickersState extends State<LayoutPickers> {
                   ],
                   isAccent: true,
                   onSelected: (int index) {
-                    setState(() {_selectedIndexButtonsSegmented1 = index; });
+                    setState(() {
+                      _selectedIndexButtonsSegmented1 = index;
+                    });
                   },
                 ))),
       ]),
@@ -100,7 +108,9 @@ class _LayoutPickersState extends State<LayoutPickers> {
                     Text("Justify")
                   ],
                   onChanged: (List<bool> options) {
-                    setState(() {_selectedStatesButtonsBar0 = options; });
+                    setState(() {
+                      _selectedStatesButtonsBar0 = options;
+                    });
                   },
                 ))),
         Padding(
@@ -110,14 +120,16 @@ class _LayoutPickersState extends State<LayoutPickers> {
                 child: CKPickerButtonsBar(
                   selectedStates: _selectedStatesButtonsBar1,
                   options: const [
-                    Icon(CupertinoIcons.bold), 
+                    Icon(CupertinoIcons.bold),
                     Icon(CupertinoIcons.italic),
-                    Icon(CupertinoIcons.underline), 
+                    Icon(CupertinoIcons.underline),
                     Icon(CupertinoIcons.strikethrough)
                   ],
                   allowsMultipleSelection: true,
                   onChanged: (List<bool> options) {
-                    setState(() {_selectedStatesButtonsBar1 = options; });
+                    setState(() {
+                      _selectedStatesButtonsBar1 = options;
+                    });
                   },
                 ))),
       ]),
@@ -130,7 +142,9 @@ class _LayoutPickersState extends State<LayoutPickers> {
               options: const ['Car', 'Motorbike', 'Plane'],
               selectedIndex: _selectedIndexCheckList,
               onSelected: (int index) {
-                setState(() {_selectedIndexCheckList = index;});
+                setState(() {
+                  _selectedIndexCheckList = index;
+                });
               },
             )),
       ]),
