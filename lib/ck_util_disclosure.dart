@@ -4,12 +4,12 @@ import 'ck_button_disclosure.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
-class CKUtilDisclosure extends StatefulWidget {
+class CDKUtilDisclosure extends StatefulWidget {
   final Widget title;
   final Widget child;
   final ValueChanged<bool>? onChanged;
 
-  const CKUtilDisclosure({
+  const CDKUtilDisclosure({
     Key? key,
     required this.title,
     required this.child,
@@ -17,10 +17,10 @@ class CKUtilDisclosure extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  CKUtilDisclosureState createState() => CKUtilDisclosureState();
+  CDKUtilDisclosureState createState() => CDKUtilDisclosureState();
 }
 
-class CKUtilDisclosureState extends State<CKUtilDisclosure>
+class CDKUtilDisclosureState extends State<CDKUtilDisclosure>
     with SingleTickerProviderStateMixin {
   final int _animationMillis = 200;
   late AnimationController _controller;
@@ -63,7 +63,7 @@ class CKUtilDisclosureState extends State<CKUtilDisclosure>
       children: [
         Row(
           children: [
-            CKButtonDisclosure(
+            CDKButtonDisclosure(
               value: _isExpanded,
               onChanged: (newValue) => _toggleDisclosure(),
             ),

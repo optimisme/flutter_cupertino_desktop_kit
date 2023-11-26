@@ -57,7 +57,7 @@ class _LayoutProgressState extends State<LayoutProgress> {
                 padding: const EdgeInsets.all(8),
                 child: SizedBox(
                     width: 250,
-                    child: CKProgressBar(
+                    child: CDKProgressBar(
                       value: _progressL,
                     ))),
             Padding(
@@ -68,7 +68,7 @@ class _LayoutProgressState extends State<LayoutProgress> {
             Padding(
                 padding: const EdgeInsets.all(8),
                 child: CKButton(
-                  style: CKButtonStyle.normal,
+                  style: CDKButtonStyle.normal,
                   onPressed: () {
                     _increaseProgressL();
                   },
@@ -83,7 +83,7 @@ class _LayoutProgressState extends State<LayoutProgress> {
                 padding: const EdgeInsets.all(8),
                 child: SizedBox(
                     width: 250,
-                    child: CKProgressBar(
+                    child: CDKProgressBar(
                       value: _progressL,
                       isIndeterminate: true,
                       isRunning: _isRunningL,
@@ -91,7 +91,7 @@ class _LayoutProgressState extends State<LayoutProgress> {
             Padding(
                 padding: const EdgeInsets.all(8),
                 child: CKButton(
-                  style: CKButtonStyle.normal,
+                  style: CDKButtonStyle.normal,
                   onPressed: () {
                     _toggleIndeterminateL();
                   },
@@ -108,7 +108,7 @@ class _LayoutProgressState extends State<LayoutProgress> {
                 padding: const EdgeInsets.all(8),
                 child: SizedBox(
                     width: 250,
-                    child: CKProgressCircular(
+                    child: CDKProgressCircular(
                       value: _progressC,
                     ))),
             Padding(
@@ -119,7 +119,7 @@ class _LayoutProgressState extends State<LayoutProgress> {
             Padding(
                 padding: const EdgeInsets.all(8),
                 child: CKButton(
-                  style: CKButtonStyle.normal,
+                  style: CDKButtonStyle.normal,
                   onPressed: () {
                     _increaseProgressC();
                   },
@@ -134,7 +134,7 @@ class _LayoutProgressState extends State<LayoutProgress> {
                 padding: const EdgeInsets.all(8),
                 child: SizedBox(
                     width: 250,
-                    child: CKProgressCircular(
+                    child: CDKProgressCircular(
                       value: _progressC,
                       isIndeterminate: true,
                       isRunning: _isRunningC,
@@ -142,7 +142,7 @@ class _LayoutProgressState extends State<LayoutProgress> {
             Padding(
                 padding: const EdgeInsets.all(8),
                 child: CKButton(
-                  style: CKButtonStyle.normal,
+                  style: CDKButtonStyle.normal,
                   onPressed: () {
                     _toggleIndeterminateC();
                   },

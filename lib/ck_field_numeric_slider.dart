@@ -5,7 +5,7 @@ import 'ck_picker_slider.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
-class CKFieldNumericSlider extends StatefulWidget {
+class CDKFieldNumericSlider extends StatefulWidget {
   final double value;
   final double textSize;
   final double min;
@@ -16,7 +16,7 @@ class CKFieldNumericSlider extends StatefulWidget {
   final String units;
   final Function(double)? onValueChanged;
   final Function(double)? onTextChanged;
-  const CKFieldNumericSlider({
+  const CDKFieldNumericSlider({
     Key? key,
     this.value = 0.0,
     this.textSize = 12,
@@ -31,10 +31,10 @@ class CKFieldNumericSlider extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  CKFieldNumericSliderState createState() => CKFieldNumericSliderState();
+  CDKFieldNumericSliderState createState() => CDKFieldNumericSliderState();
 }
 
-class CKFieldNumericSliderState extends State<CKFieldNumericSlider> {
+class CDKFieldNumericSliderState extends State<CDKFieldNumericSlider> {
   double _previousValue = 0;
 
   @override
@@ -73,7 +73,7 @@ class CKFieldNumericSliderState extends State<CKFieldNumericSlider> {
       mainAxisSize: MainAxisSize.min,
       children: [
         Expanded(
-            child: CKPickerSlider(
+            child: CDKPickerSlider(
           value: sliderValue,
           size: widget.textSize + 8,
           enabled: widget.enabled,
@@ -84,7 +84,7 @@ class CKFieldNumericSliderState extends State<CKFieldNumericSlider> {
         const SizedBox(width: 4),
         SizedBox(
           width: 64,
-          child: CKFieldNumeric(
+          child: CDKFieldNumeric(
             value: widget.value,
             textSize: widget.textSize,
             min: widget.min,

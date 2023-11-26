@@ -5,13 +5,13 @@ import 'ck_theme.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
-class CKButtonRadio extends StatelessWidget {
+class CDKButtonRadio extends StatelessWidget {
   final bool isSelected;
   final ValueChanged<bool>? onSelected;
   final double size;
   final Widget child;
 
-  const CKButtonRadio({
+  const CDKButtonRadio({
     Key? key,
     this.isSelected = false,
     this.onSelected,
@@ -21,7 +21,7 @@ class CKButtonRadio extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    CKTheme theme = CKThemeNotifier.of(context)!.changeNotifier;
+    CDKTheme theme = CDKThemeNotifier.of(context)!.changeNotifier;
 
     return GestureDetector(
       onTap: () {
@@ -95,12 +95,12 @@ class CDKButtonRadioPainter extends CustomPainter {
     if (isLightTheme) {
       shadowOffset = const Offset(0, -10);
       shadowPaint = Paint()
-        ..color = CKTheme.black.withOpacity(0.25)
+        ..color = CDKTheme.black.withOpacity(0.25)
         ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 10);
     } else {
       shadowOffset = const Offset(0, -8);
       shadowPaint = Paint()
-        ..color = CKTheme.black.withOpacity(0.5)
+        ..color = CDKTheme.black.withOpacity(0.5)
         ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 6);
     }
 
@@ -141,9 +141,9 @@ class CDKButtonRadioPainter extends CustomPainter {
       drawShadow(canvas, size, center, radius);
     }
     // Draw outer circle
-    Color outerColor = CKTheme.grey;
+    Color outerColor = CDKTheme.grey;
     if (!isLightTheme) {
-      outerColor = CKTheme.grey600;
+      outerColor = CDKTheme.grey600;
     }
     paint = Paint()
       ..style = PaintingStyle.stroke
@@ -153,9 +153,9 @@ class CDKButtonRadioPainter extends CustomPainter {
     canvas.drawCircle(center, radius, paint);
 
     if (isSelected) {
-      Color selectColor = CKTheme.white;
+      Color selectColor = CDKTheme.white;
       if (isLightTheme && !hasAppFocus) {
-        selectColor = CKTheme.black;
+        selectColor = CDKTheme.black;
       }
       paint = Paint()
         ..style = PaintingStyle.fill

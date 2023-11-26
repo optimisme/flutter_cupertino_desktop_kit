@@ -7,12 +7,12 @@ import 'ck_theme.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
-class CKProgressCircular extends StatefulWidget {
+class CDKProgressCircular extends StatefulWidget {
   final double value;
   final bool isIndeterminate;
   final bool isRunning;
 
-  const CKProgressCircular({
+  const CDKProgressCircular({
     Key? key,
     this.value = 0.0,
     this.isIndeterminate = false,
@@ -20,10 +20,10 @@ class CKProgressCircular extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  CKProgressCircularState createState() => CKProgressCircularState();
+  CDKProgressCircularState createState() => CDKProgressCircularState();
 }
 
-class CKProgressCircularState extends State<CKProgressCircular>
+class CDKProgressCircularState extends State<CDKProgressCircular>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _progressAnimation; // Animació per al progrés
@@ -72,7 +72,7 @@ class CKProgressCircularState extends State<CKProgressCircular>
   }
 
   @override
-  void didUpdateWidget(CKProgressCircular oldWidget) {
+  void didUpdateWidget(CDKProgressCircular oldWidget) {
     super.didUpdateWidget(oldWidget);
     super.didUpdateWidget(oldWidget);
     if (widget.isIndeterminate != oldWidget.isIndeterminate ||
@@ -132,7 +132,7 @@ class CKProgressCircularState extends State<CKProgressCircular>
 
   @override
   Widget build(BuildContext context) {
-    CKTheme theme = CKThemeNotifier.of(context)!.changeNotifier;
+    CDKTheme theme = CDKThemeNotifier.of(context)!.changeNotifier;
 
     return AnimatedBuilder(
       animation: _controller,
@@ -205,9 +205,9 @@ class ProgressCircularPainter extends CustomPainter {
           if (diff > 4) diff = 8 - diff;
           final int alpha = (255 * (1 - (diff / 4))).toInt().clamp(0, 255);
           if (isLightTheme) {
-            lineColor = CKTheme.grey700.withAlpha(alpha);
+            lineColor = CDKTheme.grey700.withAlpha(alpha);
           } else {
-            lineColor = CKTheme.grey.withAlpha(alpha);
+            lineColor = CDKTheme.grey.withAlpha(alpha);
           }
         }
 
@@ -234,7 +234,7 @@ class ProgressCircularPainter extends CustomPainter {
         ..style = PaintingStyle.fill;
 
       Paint progressPaint = Paint()
-        ..color = hasAppFocus ? colorAccent : CKTheme.grey
+        ..color = hasAppFocus ? colorAccent : CDKTheme.grey
         ..style = PaintingStyle.fill;
 
       // Center the circle within the canvas

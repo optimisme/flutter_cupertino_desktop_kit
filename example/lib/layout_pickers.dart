@@ -25,7 +25,7 @@ class _LayoutPickersState extends State<LayoutPickers> {
       Wrap(crossAxisAlignment: WrapCrossAlignment.center, children: [
         Padding(
             padding: const EdgeInsets.all(8),
-            child: CKPicker360(
+            child: CDKPicker360(
               value: _angle,
               onChanged: (angle) {
                 setState(() {
@@ -42,7 +42,7 @@ class _LayoutPickersState extends State<LayoutPickers> {
             padding: const EdgeInsets.all(8),
             child: SizedBox(
                 width: 100,
-                child: CKPickerSlider(
+                child: CDKPickerSlider(
                   value: _value,
                   onChanged: (value) {
                     setState(() {
@@ -59,7 +59,7 @@ class _LayoutPickersState extends State<LayoutPickers> {
             padding: const EdgeInsets.all(8),
             child: SizedBox(
                 width: 300,
-                child: CKPickerButtonsSegmented(
+                child: CDKPickerButtonsSegmented(
                   selectedIndex: _selectedIndexButtonsSegmented0,
                   options: const [
                     Text('Car'),
@@ -76,7 +76,7 @@ class _LayoutPickersState extends State<LayoutPickers> {
             padding: const EdgeInsets.all(8),
             child: SizedBox(
                 width: 250,
-                child: CKPickerButtonsSegmented(
+                child: CDKPickerButtonsSegmented(
                   selectedIndex: _selectedIndexButtonsSegmented1,
                   options: const [
                     Icon(CupertinoIcons.ant),
@@ -99,7 +99,7 @@ class _LayoutPickersState extends State<LayoutPickers> {
             padding: const EdgeInsets.all(8),
             child: SizedBox(
                 width: 300,
-                child: CKPickerButtonsBar(
+                child: CDKPickerButtonsBar(
                   selectedStates: _selectedStatesButtonsBar0,
                   options: const [
                     Icon(CupertinoIcons.text_alignleft),
@@ -117,7 +117,7 @@ class _LayoutPickersState extends State<LayoutPickers> {
             padding: const EdgeInsets.all(8),
             child: SizedBox(
                 width: 250,
-                child: CKPickerButtonsBar(
+                child: CDKPickerButtonsBar(
                   selectedStates: _selectedStatesButtonsBar1,
                   options: const [
                     Icon(CupertinoIcons.bold),
@@ -138,7 +138,7 @@ class _LayoutPickersState extends State<LayoutPickers> {
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
-            child: CKPickerCheckList(
+            child: CDKPickerCheckList(
               options: const ['Car', 'Motorbike', 'Plane'],
               selectedIndex: _selectedIndexCheckList,
               onSelected: (int index) {

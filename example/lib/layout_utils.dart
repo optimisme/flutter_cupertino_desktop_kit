@@ -11,7 +11,7 @@ class LayoutUtils extends StatefulWidget {
 class _LayoutUtilsState extends State<LayoutUtils> {
   @override
   Widget build(BuildContext context) {
-    CKTheme theme = CKThemeNotifier.of(context)!.changeNotifier;
+    CDKTheme theme = CDKThemeNotifier.of(context)!.changeNotifier;
 
     Widget line = Container(
       decoration: BoxDecoration(
@@ -32,7 +32,7 @@ class _LayoutUtilsState extends State<LayoutUtils> {
       Wrap(crossAxisAlignment: WrapCrossAlignment.center, children: [
         Padding(
           padding: const EdgeInsets.all(8),
-          child: CKUtilDisclosure(
+          child: CDKUtilDisclosure(
               title: const Text('Show/Hide', style: TextStyle(fontSize: 14)),
               child: SizedBox(
                   width: 300,

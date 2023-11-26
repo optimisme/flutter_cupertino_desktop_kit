@@ -7,7 +7,7 @@ import 'ck_dialog_popover_arrowed.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
-class CKDialogsManager {
+class CDKDialogsManager {
   static final Map<GlobalKey, GlobalKey> _activePopoverKeys = {};
   static GlobalKey? _activeModalKey;
   static final Map<GlobalKey, GlobalKey> _activeDraggableKeys = {};
@@ -17,7 +17,7 @@ class CKDialogsManager {
     required GlobalKey key,
     required BuildContext context,
     required GlobalKey anchorKey,
-    CKDialogPopoverType type = CKDialogPopoverType.center,
+    CDKDialogPopoverType type = CDKDialogPopoverType.center,
     bool isAnimated = false,
     bool isTranslucent = false,
     Function? onHide,
@@ -64,15 +64,15 @@ class CKDialogsManager {
     Function? onHide,
     required Widget child,
   }) {
-    if (_activeModalKey is CKDialogModalState) {
-      var refKey = _activeModalKey as GlobalKey<CKDialogModalState>;
+    if (_activeModalKey is CDKDialogModalState) {
+      var refKey = _activeModalKey as GlobalKey<CDKDialogModalState>;
       refKey.currentState?.hide();
     }
     _activeModalKey = key;
 
     OverlayEntry? overlayEntry;
     overlayEntry = OverlayEntry(
-      builder: (BuildContext context) => CKDialogModal(
+      builder: (BuildContext context) => CDKDialogModal(
         key: key,
         isAnimated: isAnimated,
         isTranslucent: isTranslucent,
@@ -107,7 +107,7 @@ class CKDialogsManager {
 
     OverlayEntry? overlayEntry;
     overlayEntry = OverlayEntry(
-      builder: (BuildContext context) => CKDialogDraggable(
+      builder: (BuildContext context) => CDKDialogDraggable(
         key: key,
         anchorKey: anchorKey,
         isAnimated: isAnimated,
@@ -151,7 +151,7 @@ class CKDialogsManager {
 
     OverlayEntry? overlayEntry;
     overlayEntry = OverlayEntry(
-      builder: (BuildContext context) => CKDialogPopoverArrowed(
+      builder: (BuildContext context) => CDKDialogPopoverArrowed(
         key: key,
         anchorKey: anchorKey,
         isAnimated: isAnimated,

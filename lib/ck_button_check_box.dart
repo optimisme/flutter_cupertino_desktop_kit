@@ -5,12 +5,12 @@ import 'ck_theme.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
-class CKButtonCheckBox extends StatelessWidget {
+class CDKButtonCheckBox extends StatelessWidget {
   final bool value;
   final double size;
   final ValueChanged<bool>? onChanged;
 
-  const CKButtonCheckBox({
+  const CDKButtonCheckBox({
     Key? key,
     required this.value,
     this.onChanged,
@@ -19,7 +19,7 @@ class CKButtonCheckBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    CKTheme themeManager = CKThemeNotifier.of(context)!.changeNotifier;
+    CDKTheme themeManager = CDKThemeNotifier.of(context)!.changeNotifier;
 
     double boxSize = size;
 
@@ -81,12 +81,12 @@ class CDKButtonCheckBoxPainter extends CustomPainter {
     if (isLightTheme) {
       shadowOffset = const Offset(0, -10);
       shadowPaint = Paint()
-        ..color = CKTheme.black.withOpacity(0.25)
+        ..color = CDKTheme.black.withOpacity(0.25)
         ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 10);
     } else {
       shadowOffset = const Offset(0, -8);
       shadowPaint = Paint()
-        ..color = CKTheme.black.withOpacity(0.5)
+        ..color = CDKTheme.black.withOpacity(0.5)
         ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 6);
     }
 
@@ -134,9 +134,9 @@ class CDKButtonCheckBoxPainter extends CustomPainter {
     }
 
     // Draw outer square
-    Color outerColor = CKTheme.grey;
+    Color outerColor = CDKTheme.grey;
     if (!isLightTheme) {
-      outerColor = CKTheme.grey600;
+      outerColor = CDKTheme.grey600;
     }
     paint = Paint()
       ..style = PaintingStyle.stroke
@@ -146,9 +146,9 @@ class CDKButtonCheckBoxPainter extends CustomPainter {
     canvas.drawRRect(roundedSquare, paint);
 
     if (isSelected) {
-      Color selectColor = CKTheme.white;
+      Color selectColor = CDKTheme.white;
       if (isLightTheme && !hasAppFocus) {
-        selectColor = CKTheme.black;
+        selectColor = CDKTheme.black;
       }
       Paint linePaint = Paint()
         ..color = selectColor

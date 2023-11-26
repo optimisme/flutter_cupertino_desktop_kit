@@ -9,14 +9,14 @@ import 'ck_theme.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
-class CKDialogDraggable extends StatefulWidget {
+class CDKDialogDraggable extends StatefulWidget {
   final GlobalKey anchorKey;
   final bool isAnimated;
   final bool isTranslucent;
   final Function? onHide;
   final Widget child;
 
-  const CKDialogDraggable({
+  const CDKDialogDraggable({
     Key? key,
     required this.anchorKey,
     this.isAnimated = false,
@@ -26,10 +26,10 @@ class CKDialogDraggable extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  CKDialogDraggableState createState() => CKDialogDraggableState();
+  CDKDialogDraggableState createState() => CDKDialogDraggableState();
 }
 
-class CKDialogDraggableState extends State<CKDialogDraggable>
+class CDKDialogDraggableState extends State<CDKDialogDraggable>
     with SingleTickerProviderStateMixin {
   OverlayEntry? overlayEntry;
   final int _animationMillis = 200;
@@ -95,9 +95,9 @@ class CKDialogDraggableState extends State<CKDialogDraggable>
 
           final rectContour = Rect.fromLTWH(8, 8, width!, height!);
           pathContour =
-              CKDialogOuterShadowPainter.createContourPath(rectContour);
+              CDKDialogOuterShadowPainter.createContourPath(rectContour);
           final rectClip = Rect.fromLTWH(0, 0, width!, height!);
-          pathClip = CKDialogOuterShadowPainter.createContourPath(rectClip);
+          pathClip = CDKDialogOuterShadowPainter.createContourPath(rectClip);
 
           isSizeDetermined = true;
         });
@@ -123,7 +123,7 @@ class CKDialogDraggableState extends State<CKDialogDraggable>
 
   @override
   Widget build(BuildContext context) {
-    CKTheme theme = CKThemeNotifier.of(context)!.changeNotifier;
+    CDKTheme theme = CDKThemeNotifier.of(context)!.changeNotifier;
 
     if (isSizeDetermined) {
       var leftPosition = position.dx;
@@ -166,7 +166,7 @@ class CKDialogDraggableState extends State<CKDialogDraggable>
         : Stack(
             children: [
               CustomPaint(
-                painter: CKDialogOuterShadowPainter(
+                painter: CDKDialogOuterShadowPainter(
                     pathContour: pathContour,
                     colorBackground: backgroundColor,
                     isLightTheme: theme.isLight),
@@ -179,7 +179,7 @@ class CKDialogDraggableState extends State<CKDialogDraggable>
                       ? dialogContents
                       : ClipPath(
                           clipper:
-                              CKPopoverClipper(pathClip), // Aplica el clip aquí
+                              CDKPopoverClipper(pathClip), // Aplica el clip aquí
                           child: BackdropFilter(
                             filter: ImageFilter.blur(
                                 sigmaX: 7.5,
@@ -200,7 +200,7 @@ class CKDialogDraggableState extends State<CKDialogDraggable>
                 width: width! + 16,
                 child: GestureDetector(
                     onTapDown: (details) {
-                      CKDialogsManager.moveDraggableToTop(
+                      CDKDialogsManager.moveDraggableToTop(
                           context, widget.anchorKey);
                     },
                     onPanUpdate: (details) {

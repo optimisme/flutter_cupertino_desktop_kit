@@ -5,14 +5,14 @@ import 'ck_theme.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
-class CKButtonSidebar extends StatelessWidget {
+class CDKButtonSidebar extends StatelessWidget {
   final VoidCallback? onPressed;
   final bool isSelected;
   final bool isAccent;
   final Function() onSelected;
   final Widget child;
 
-  const CKButtonSidebar({
+  const CDKButtonSidebar({
     Key? key,
     this.onPressed,
     this.isSelected = false,
@@ -23,7 +23,7 @@ class CKButtonSidebar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    CKTheme theme = CKThemeNotifier.of(context)!.changeNotifier;
+    CDKTheme theme = CDKThemeNotifier.of(context)!.changeNotifier;
 
     Color colorText =
         theme.getSidebarColorText(isSelected, isAccent);

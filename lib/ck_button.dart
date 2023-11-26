@@ -6,12 +6,12 @@ import 'ck_theme.dart';
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
 // Custom enum for button styles
-enum CKButtonStyle { action, normal, destructive }
+enum CDKButtonStyle { action, normal, destructive }
 
 class CKButton extends StatefulWidget {
   final VoidCallback? onPressed;
   final Widget child;
-  final CKButtonStyle style;
+  final CDKButtonStyle style;
   final bool isLarge;
   final bool enabled;
 
@@ -19,7 +19,7 @@ class CKButton extends StatefulWidget {
     Key? key,
     this.onPressed,
     required this.child,
-    this.style = CKButtonStyle.normal,
+    this.style = CDKButtonStyle.normal,
     this.isLarge = false,
     this.enabled = true,
   }) : super(key: key);
@@ -37,7 +37,7 @@ class CKButtonState extends State<CKButton> {
 
   @override
   Widget build(BuildContext context) {
-    CKTheme theme = CKThemeNotifier.of(context)!.changeNotifier;
+    CDKTheme theme = CDKThemeNotifier.of(context)!.changeNotifier;
 
     // Define styles and themes based on the button's state and style.
     BoxDecoration decoration;
@@ -45,7 +45,7 @@ class CKButtonState extends State<CKButton> {
     TextStyle textStyle;
     IconThemeData iconTheme;
     BoxShadow shadow = BoxShadow(
-      color: CKTheme.black.withOpacity(0.1),
+      color: CDKTheme.black.withOpacity(0.1),
       spreadRadius: 0,
       blurRadius: 1,
       offset: const Offset(0, 1),
@@ -54,12 +54,12 @@ class CKButtonState extends State<CKButton> {
     // Styling logic depending on the button's style and state.
     if (!widget.enabled) {
       switch (widget.style) {
-        case CKButtonStyle.action:
+        case CDKButtonStyle.action:
           decoration = BoxDecoration(
-              color: theme.isAppFocused ? theme.accent200 : CKTheme.grey200,
+              color: theme.isAppFocused ? theme.accent200 : CDKTheme.grey200,
               borderRadius: BorderRadius.circular(6.0),
               boxShadow: [shadow]);
-          color = theme.isAppFocused ? theme.accent600 : CKTheme.grey;
+          color = theme.isAppFocused ? theme.accent600 : CDKTheme.grey;
           textStyle = TextStyle(
             fontSize: _fontSize,
             color: color,
@@ -67,13 +67,13 @@ class CKButtonState extends State<CKButton> {
           iconTheme = IconThemeData(color: color, size: _fontSize + 2);
           break;
 
-        case CKButtonStyle.normal:
-        case CKButtonStyle.destructive:
+        case CDKButtonStyle.normal:
+        case CDKButtonStyle.destructive:
           decoration = BoxDecoration(
               color: theme.backgroundSecondary0,
               borderRadius: BorderRadius.circular(6.0),
               boxShadow: [shadow]);
-          color = CKTheme.grey;
+          color = CDKTheme.grey;
           textStyle = TextStyle(
             fontSize: _fontSize,
             color: color,
@@ -83,7 +83,7 @@ class CKButtonState extends State<CKButton> {
       }
     } else {
       switch (widget.style) {
-        case CKButtonStyle.action:
+        case CDKButtonStyle.action:
           if (theme.isAppFocused) {
             decoration = BoxDecoration(
                 gradient: LinearGradient(
@@ -95,7 +95,7 @@ class CKButtonState extends State<CKButton> {
                 ),
                 borderRadius: BorderRadius.circular(6.0),
                 boxShadow: [shadow]);
-            color = _isPressed ? theme.accent50 : CKTheme.white;
+            color = _isPressed ? theme.accent50 : CDKTheme.white;
             textStyle = TextStyle(
               fontSize: _fontSize,
               color: color,
@@ -104,11 +104,11 @@ class CKButtonState extends State<CKButton> {
           } else {
             decoration = BoxDecoration(
                 color:
-                    _isPressed ? CKTheme.grey200 : theme.backgroundSecondary0,
+                    _isPressed ? CDKTheme.grey200 : theme.backgroundSecondary0,
                 border: Border.all(color: theme.backgroundSecondary1),
                 borderRadius: BorderRadius.circular(6.0),
                 boxShadow: [shadow]);
-            color = CKTheme.black;
+            color = CDKTheme.black;
             textStyle = TextStyle(
               fontSize: _fontSize,
               color: color,
@@ -117,21 +117,21 @@ class CKButtonState extends State<CKButton> {
           }
           break;
 
-        case CKButtonStyle.destructive:
+        case CDKButtonStyle.destructive:
           decoration = BoxDecoration(
               color: theme.isLight
                   ? _isPressed
-                      ? CKTheme.grey50
-                      : CKTheme.white
+                      ? CDKTheme.grey50
+                      : CDKTheme.white
                   : _isPressed
-                      ? CKTheme.grey500
+                      ? CDKTheme.grey500
                       : theme.backgroundSecondary0,
               border: theme.isLight
-                  ? Border.all(color: CKTheme.grey70)
-                  : Border.all(color: CKTheme.grey600),
+                  ? Border.all(color: CDKTheme.grey70)
+                  : Border.all(color: CDKTheme.grey600),
               borderRadius: BorderRadius.circular(6.0),
               boxShadow: [shadow]);
-          color = CKTheme.red;
+          color = CDKTheme.red;
           textStyle = TextStyle(
             fontSize: _fontSize,
             color: color,
@@ -143,14 +143,14 @@ class CKButtonState extends State<CKButton> {
           decoration = BoxDecoration(
               color: theme.isLight
                   ? _isPressed
-                      ? CKTheme.grey50
-                      : CKTheme.white
+                      ? CDKTheme.grey50
+                      : CDKTheme.white
                   : _isPressed
-                      ? CKTheme.grey500
+                      ? CDKTheme.grey500
                       : theme.backgroundSecondary0,
               border: theme.isLight
-                  ? Border.all(color: CKTheme.grey70)
-                  : Border.all(color: CKTheme.grey600),
+                  ? Border.all(color: CDKTheme.grey70)
+                  : Border.all(color: CDKTheme.grey600),
               borderRadius: BorderRadius.circular(6.0),
               boxShadow: [shadow]);
           color = theme.colorText;

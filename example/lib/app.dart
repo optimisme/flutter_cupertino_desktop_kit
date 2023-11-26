@@ -14,7 +14,7 @@ class App extends StatefulWidget {
 class AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
-    return const CKApp(
+    return const CDKApp(
       defaultAppearance: "system", // system, light, dark
       defaultColor:
           "systemBlue", // systemBlue, systemPurple, systemPink, systemRed, systemOrange, systemYellow, systemGreen, systemGray

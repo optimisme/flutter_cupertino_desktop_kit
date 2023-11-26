@@ -6,12 +6,12 @@ import 'ck_theme.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
-class CKProgressBar extends StatefulWidget {
+class CDKProgressBar extends StatefulWidget {
   final double value;
   final bool isIndeterminate;
   final bool isRunning;
 
-  const CKProgressBar({
+  const CDKProgressBar({
     Key? key,
     this.value = 0.0,
     this.isIndeterminate = false,
@@ -19,10 +19,10 @@ class CKProgressBar extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  CKProgressBarState createState() => CKProgressBarState();
+  CDKProgressBarState createState() => CDKProgressBarState();
 }
 
-class CKProgressBarState extends State<CKProgressBar>
+class CDKProgressBarState extends State<CDKProgressBar>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _progressAnimation; // Animació per al progrés
@@ -72,7 +72,7 @@ class CKProgressBarState extends State<CKProgressBar>
   }
 
   @override
-  void didUpdateWidget(CKProgressBar oldWidget) {
+  void didUpdateWidget(CDKProgressBar oldWidget) {
     super.didUpdateWidget(oldWidget);
     super.didUpdateWidget(oldWidget);
     if (widget.isIndeterminate != oldWidget.isIndeterminate ||
@@ -132,7 +132,7 @@ class CKProgressBarState extends State<CKProgressBar>
 
   @override
   Widget build(BuildContext context) {
-    CKTheme theme = CKThemeNotifier.of(context)!.changeNotifier;
+    CDKTheme theme = CDKThemeNotifier.of(context)!.changeNotifier;
 
     return AnimatedBuilder(
       animation: _controller,
@@ -178,7 +178,7 @@ class ProgressBarPainter extends CustomPainter {
       ..style = PaintingStyle.fill;
 
     Paint progressPaint = Paint()
-      ..color = hasAppFocus ? colorAccent : CKTheme.grey
+      ..color = hasAppFocus ? colorAccent : CDKTheme.grey
       ..style = PaintingStyle.fill;
 
     // Calcula l'alçada i la posició vertical centrada de la barra

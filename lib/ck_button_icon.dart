@@ -5,14 +5,14 @@ import 'ck_theme.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
-class CKButtonIcon extends StatefulWidget {
+class CDKButtonIcon extends StatefulWidget {
   final VoidCallback? onPressed;
   final IconData icon;
   final double size;
   final bool isCircle;
   final bool isSelected;
 
-  const CKButtonIcon({
+  const CDKButtonIcon({
     Key? key,
     this.onPressed,
     this.icon = CupertinoIcons.bell_fill,
@@ -22,10 +22,10 @@ class CKButtonIcon extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  CKButtonIconState createState() => CKButtonIconState();
+  CDKButtonIconState createState() => CDKButtonIconState();
 }
 
-class CKButtonIconState extends State<CKButtonIcon> {
+class CDKButtonIconState extends State<CDKButtonIcon> {
   bool _isPressed = false;
   bool _isHovering = false;
   void _onTapDown(TapDownDetails details) {
@@ -50,23 +50,23 @@ class CKButtonIconState extends State<CKButtonIcon> {
 
   @override
   Widget build(BuildContext context) {
-    CKTheme theme = CKThemeNotifier.of(context)!.changeNotifier;
+    CDKTheme theme = CDKThemeNotifier.of(context)!.changeNotifier;
 
     final Color backgroundColor = theme.isLight
         ? _isPressed
-            ? CKTheme.grey70
+            ? CDKTheme.grey70
             : _isHovering
-                ? CKTheme.grey50
+                ? CDKTheme.grey50
                 : widget.isSelected
                     ? theme.backgroundSecondary1
-                    : CKTheme.transparent
+                    : CDKTheme.transparent
         : _isPressed
-            ? CKTheme.grey
+            ? CDKTheme.grey
             : _isHovering
-                ? CKTheme.grey600
+                ? CDKTheme.grey600
                 : widget.isSelected
                     ? theme.backgroundSecondary1
-                    : CKTheme.transparent;
+                    : CDKTheme.transparent;
 
     return MouseRegion(
       onEnter: _onMouseEnter,

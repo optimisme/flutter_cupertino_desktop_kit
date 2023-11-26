@@ -23,7 +23,7 @@ class _LayoutButtonsState extends State<LayoutButtons> {
         Padding(
             padding: const EdgeInsets.all(8),
             child: CKButton(
-              style: CKButtonStyle.action,
+              style: CDKButtonStyle.action,
               isLarge: true,
               onPressed: () {},
               child: const Text('Action large'),
@@ -31,35 +31,35 @@ class _LayoutButtonsState extends State<LayoutButtons> {
         Padding(
             padding: const EdgeInsets.all(8),
             child: CKButton(
-              style: CKButtonStyle.action,
+              style: CDKButtonStyle.action,
               onPressed: () {},
               child: const Text('Action'),
             )),
         Padding(
             padding: const EdgeInsets.all(8),
             child: CKButton(
-              style: CKButtonStyle.destructive,
+              style: CDKButtonStyle.destructive,
               onPressed: () {},
               child: const Text('Destructive'),
             )),
         Padding(
             padding: const EdgeInsets.all(8),
             child: CKButton(
-              style: CKButtonStyle.normal,
+              style: CDKButtonStyle.normal,
               onPressed: () {},
               child: const Text('Normal'),
             )),
         Padding(
             padding: const EdgeInsets.all(8),
             child: CKButton(
-              style: CKButtonStyle.normal,
+              style: CDKButtonStyle.normal,
               onPressed: () {},
               child: const Icon(CupertinoIcons.bookmark),
             )),
         Padding(
             padding: const EdgeInsets.all(8),
             child: CKButton(
-              style: CKButtonStyle.action,
+              style: CDKButtonStyle.action,
               enabled: false,
               onPressed: () {},
               child: const Text('Action disabled'),
@@ -67,7 +67,7 @@ class _LayoutButtonsState extends State<LayoutButtons> {
         Padding(
             padding: const EdgeInsets.all(8),
             child: CKButton(
-              style: CKButtonStyle.destructive,
+              style: CDKButtonStyle.destructive,
               enabled: false,
               onPressed: () {},
               child: const Text('Destructive disabled'),
@@ -75,7 +75,7 @@ class _LayoutButtonsState extends State<LayoutButtons> {
         Padding(
             padding: const EdgeInsets.all(8),
             child: CKButton(
-              style: CKButtonStyle.normal,
+              style: CDKButtonStyle.normal,
               enabled: false,
               onPressed: () {},
               child: const Text('Normal disabled'),
@@ -83,7 +83,7 @@ class _LayoutButtonsState extends State<LayoutButtons> {
         Padding(
             padding: const EdgeInsets.all(8),
             child: CKButton(
-              style: CKButtonStyle.normal,
+              style: CDKButtonStyle.normal,
               enabled: false,
               onPressed: () {},
               child: const Icon(CupertinoIcons.bookmark),
@@ -93,20 +93,20 @@ class _LayoutButtonsState extends State<LayoutButtons> {
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
-            child: CKButtonHelp(size: 24, onPressed: () {})),
+            child: CDKButtonHelp(size: 24, onPressed: () {})),
       ]),
       const Padding(padding: EdgeInsets.all(8), child: Text('CKButtonIcon:')),
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
-            child: CKButtonIcon(
+            child: CDKButtonIcon(
                 size: 28, icon: CupertinoIcons.back, onPressed: () {})),
         Padding(
             padding: const EdgeInsets.all(8),
-            child: CKButtonIcon(size: 28, isCircle: true, onPressed: () {})),
+            child: CDKButtonIcon(size: 28, isCircle: true, onPressed: () {})),
         Padding(
             padding: const EdgeInsets.all(8),
-            child: CKButtonIcon(
+            child: CDKButtonIcon(
                 size: 28,
                 icon: CupertinoIcons.cloud_fill,
                 isCircle: true,
@@ -117,7 +117,7 @@ class _LayoutButtonsState extends State<LayoutButtons> {
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
-            child: CKButtonSwitch(
+            child: CDKButtonSwitch(
               value: _isSwitched,
               onChanged: (bool newValue) {
                 setState(() {
@@ -127,7 +127,7 @@ class _LayoutButtonsState extends State<LayoutButtons> {
             )),
         Padding(
             padding: const EdgeInsets.all(8),
-            child: CKButtonSwitch(
+            child: CDKButtonSwitch(
               value: _isSwitched,
               size: 12,
               onChanged: (bool newValue) {
@@ -142,7 +142,7 @@ class _LayoutButtonsState extends State<LayoutButtons> {
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
-            child: CKButtonCheckBox(
+            child: CDKButtonCheckBox(
               value: _isSwitched,
               onChanged: (bool? value) {
                 setState(() {
@@ -156,7 +156,7 @@ class _LayoutButtonsState extends State<LayoutButtons> {
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
-            child: CKButtonDisclosure(
+            child: CDKButtonDisclosure(
               value: _isSwitched,
               onChanged: (bool newValue) {
                 setState(() {
@@ -169,7 +169,7 @@ class _LayoutButtonsState extends State<LayoutButtons> {
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
-            child: CKButtonRadio(
+            child: CDKButtonRadio(
               isSelected: _selectedRadio == 1,
               onSelected: (bool? isSelected) {
                 setState(() {
@@ -180,7 +180,7 @@ class _LayoutButtonsState extends State<LayoutButtons> {
             )),
         Padding(
             padding: const EdgeInsets.all(8),
-            child: CKButtonRadio(
+            child: CDKButtonRadio(
               isSelected: _selectedRadio == 2,
               onSelected: (bool? isSelected) {
                 setState(() {
@@ -194,7 +194,7 @@ class _LayoutButtonsState extends State<LayoutButtons> {
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
-            child: CKButtonSelect(
+            child: CDKButtonSelect(
               options: const ['One', 'Two', 'Three'],
               selectedIndex: _indexButtonSelect0,
               onSelected: (int index) {
@@ -203,7 +203,7 @@ class _LayoutButtonsState extends State<LayoutButtons> {
             )),
         Padding(
             padding: const EdgeInsets.all(8),
-            child: CKButtonSelect(
+            child: CDKButtonSelect(
               options: const ['No', 'Yes', 'Maybe', 'Who knows?'],
               selectedIndex: _indexButtonSelect1,
               isFlat: true,

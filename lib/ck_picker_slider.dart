@@ -2,13 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'ck_theme_notifier.dart';
 import 'ck_theme.dart';
 
-class CKPickerSlider extends StatefulWidget {
+class CDKPickerSlider extends StatefulWidget {
   final double value;
   final double size;
   final bool enabled;
   final Function(double)? onChanged;
 
-  const CKPickerSlider({
+  const CDKPickerSlider({
     Key? key,
     required this.value,
     this.enabled = true,
@@ -17,10 +17,10 @@ class CKPickerSlider extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  CKPickerSliderState createState() => CKPickerSliderState();
+  CDKPickerSliderState createState() => CDKPickerSliderState();
 }
 
-class CKPickerSliderState extends State<CKPickerSlider> {
+class CDKPickerSliderState extends State<CDKPickerSlider> {
 
   @override
   void initState() {
@@ -60,7 +60,7 @@ class CKPickerSliderState extends State<CKPickerSlider> {
 
   @override
   Widget build(BuildContext context) {
-    CKTheme theme = CKThemeNotifier.of(context)!.changeNotifier;
+    CDKTheme theme = CDKThemeNotifier.of(context)!.changeNotifier;
 
     return GestureDetector(
       onTapDown: (details) {
@@ -102,7 +102,7 @@ class CDKPicker01Painter extends CustomPainter {
       ..style = PaintingStyle.fill;
 
     Paint progressPaint = Paint()
-      ..color = hasAppFocus ? colorAccent : CKTheme.grey
+      ..color = hasAppFocus ? colorAccent : CDKTheme.grey
       ..style = PaintingStyle.fill;
 
     // Calcula l'alçada i la posició vertical centrada de la barra
@@ -140,7 +140,7 @@ class CDKPicker01Painter extends CustomPainter {
     final circleProgress = (progressWidth * circleRail) / size.width;
     final Offset center = Offset(radius + circleProgress, size.height / 2);
     final shadowPaint = Paint()
-      ..color = CKTheme.grey50
+      ..color = CDKTheme.grey50
       ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 1.0);
     final circlePath = Path()
       ..addOval(Rect.fromCircle(center: center, radius: radius));
@@ -155,7 +155,7 @@ class CDKPicker01Painter extends CustomPainter {
     final paintBorder = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = 0.75
-      ..color = CKTheme.grey100;
+      ..color = CDKTheme.grey100;
     canvas.drawCircle(center, radius, paintBorder);
   }
 

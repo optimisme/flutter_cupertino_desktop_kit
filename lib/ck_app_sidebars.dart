@@ -5,7 +5,7 @@ import 'ck_theme_notifier.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
-class CKAppSidebars extends StatefulWidget {
+class CDKAppSidebars extends StatefulWidget {
   final Widget central;
   final bool sidebarLeftIsResizable;
   final bool sidebarLeftDefaultsVisible;
@@ -16,7 +16,7 @@ class CKAppSidebars extends StatefulWidget {
   final double sidebarRightWidth;
   final Widget? sidebarRight;
 
-  const CKAppSidebars({
+  const CDKAppSidebars({
     Key? key,
     required this.central,
     this.sidebarLeftIsResizable = true,
@@ -30,10 +30,10 @@ class CKAppSidebars extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  CKAppSidebarsState createState() => CKAppSidebarsState();
+  CDKAppSidebarsState createState() => CDKAppSidebarsState();
 }
 
-class CKAppSidebarsState extends State<CKAppSidebars> {
+class CDKAppSidebarsState extends State<CDKAppSidebars> {
   MouseCursor _cursor =
       SystemMouseCursors.basic; // The current cursor for the mouse.
   int _animationMillis = 200; // The duration of the sidebar animation.
@@ -144,7 +144,7 @@ class CKAppSidebarsState extends State<CKAppSidebars> {
           child: Container(
               width: 2.5,
               decoration: const BoxDecoration(
-                color: CKTheme.transparent,
+                color: CDKTheme.transparent,
               )),
         ));
   }
@@ -160,7 +160,7 @@ class CKAppSidebarsState extends State<CKAppSidebars> {
 
   @override
   Widget build(BuildContext context) {
-    CKTheme theme = CKThemeNotifier.of(context)!.changeNotifier;
+    CDKTheme theme = CDKThemeNotifier.of(context)!.changeNotifier;
 
     if (widget.sidebarLeft == null) {
       _sidebarLeftIsVisible = false;
@@ -226,7 +226,7 @@ class CKAppSidebarsState extends State<CKAppSidebars> {
                     color: theme.background,
                     boxShadow: [
                       BoxShadow(
-                        color: CKTheme.grey500.withOpacity(0.3),
+                        color: CDKTheme.grey500.withOpacity(0.3),
                         spreadRadius: 0,
                         blurRadius: 2,
                         offset: const Offset(0, 2),

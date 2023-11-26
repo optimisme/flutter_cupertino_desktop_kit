@@ -6,7 +6,7 @@ import 'ck_theme.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
-class CKFieldText extends StatefulWidget {
+class CDKFieldText extends StatefulWidget {
   final bool isRounded;
   final bool obscureText;
   final String placeholder;
@@ -22,7 +22,7 @@ class CKFieldText extends StatefulWidget {
   final Function? onFocusChanged;
   final TextAlign textAlign;
 
-  const CKFieldText({
+  const CDKFieldText({
     Key? key,
     this.isRounded = false,
     this.obscureText = false,
@@ -41,10 +41,10 @@ class CKFieldText extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  CKFieldTextState createState() => CKFieldTextState();
+  CDKFieldTextState createState() => CDKFieldTextState();
 }
 
-class CKFieldTextState extends State<CKFieldText> {
+class CDKFieldTextState extends State<CDKFieldText> {
   late FocusNode _internalFocusNode;
 
   @override
@@ -69,7 +69,7 @@ class CKFieldTextState extends State<CKFieldText> {
 
   @override
   Widget build(BuildContext context) {
-    CKTheme theme = CKThemeNotifier.of(context)!.changeNotifier;
+    CDKTheme theme = CDKThemeNotifier.of(context)!.changeNotifier;
 
     final BorderRadius borderRadius = widget.isRounded
         ? BorderRadius.circular(25.0)
@@ -89,10 +89,10 @@ class CKFieldTextState extends State<CKFieldText> {
           borderRadius: borderRadius,
           border: Border.all(
             color: widget.enabled
-                ? CKTheme.grey200
+                ? CDKTheme.grey200
                 : theme.isLight
-                    ? CKTheme.grey70
-                    : CKTheme.grey700,
+                    ? CDKTheme.grey70
+                    : CDKTheme.grey700,
             width: 1,
           ),
           boxShadow: _internalFocusNode.hasFocus
@@ -100,7 +100,7 @@ class CKFieldTextState extends State<CKFieldText> {
                   BoxShadow(
                     color: theme.isAppFocused
                         ? theme.accent200
-                        : CKTheme.transparent,
+                        : CDKTheme.transparent,
                     spreadRadius: 1.5,
                     blurRadius: 0.7,
                     offset: const Offset(0, 0),
@@ -113,11 +113,11 @@ class CKFieldTextState extends State<CKFieldText> {
           color: widget.enabled
               ? theme.colorText
               : theme.isLight
-                  ? CKTheme.grey100
-                  : CKTheme.grey700),
+                  ? CDKTheme.grey100
+                  : CDKTheme.grey700),
       prefix: widget.prefixIcon == null
           ? null
-          : Icon(widget.prefixIcon, color: CKTheme.grey),
+          : Icon(widget.prefixIcon, color: CDKTheme.grey),
       keyboardType: widget.keyboardType,
       inputFormatters: widget.inputFormatters,
     );

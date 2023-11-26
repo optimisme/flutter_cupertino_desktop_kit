@@ -5,13 +5,13 @@ import 'ck_theme.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
-class CKPickerButtonsSegmented extends StatefulWidget {
+class CDKPickerButtonsSegmented extends StatefulWidget {
   final List<Widget> options;
   final int selectedIndex;
   final Function(int)? onSelected;
   final bool isAccent;
 
-  const CKPickerButtonsSegmented({
+  const CDKPickerButtonsSegmented({
     Key? key,
     required this.options,
     required this.selectedIndex,
@@ -20,11 +20,11 @@ class CKPickerButtonsSegmented extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  CKPickerButtonsSegmentedState createState() =>
-      CKPickerButtonsSegmentedState();
+  CDKPickerButtonsSegmentedState createState() =>
+      CDKPickerButtonsSegmentedState();
 }
 
-class CKPickerButtonsSegmentedState extends State<CKPickerButtonsSegmented> {
+class CDKPickerButtonsSegmentedState extends State<CDKPickerButtonsSegmented> {
   final int _animationMillis = 200; 
   final List<GlobalKey> _keys = []; // Global keys for each option.
   final List<Rect> _rects = []; // Rectangles for the position of each option.
@@ -103,7 +103,7 @@ class CKPickerButtonsSegmentedState extends State<CKPickerButtonsSegmented> {
 
   @override
   Widget build(BuildContext context) {
-    CKTheme theme = CKThemeNotifier.of(context)!.changeNotifier;
+    CDKTheme theme = CDKThemeNotifier.of(context)!.changeNotifier;
 
     // Schedule a post-frame callback to calculate positions
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -120,7 +120,7 @@ class CKPickerButtonsSegmentedState extends State<CKPickerButtonsSegmented> {
               color: theme.backgroundSecondary1,
               borderRadius: BorderRadius.circular(4.0),
               border: Border.all(
-                color: CKTheme.grey300,
+                color: CDKTheme.grey300,
                 width: 0.5,
               ),
             ),
@@ -139,16 +139,16 @@ class CKPickerButtonsSegmentedState extends State<CKPickerButtonsSegmented> {
                   color: widget.isAccent
                       ? theme.isAppFocused
                           ? theme.accent
-                          : CKTheme.grey300
+                          : CDKTheme.grey300
                       : theme.isAppFocused
                           ? theme.backgroundSecondary0
-                          : CKTheme.grey300,
+                          : CDKTheme.grey300,
                   borderRadius: BorderRadius.circular(4.0),
                   boxShadow: widget.isAccent
                       ? []
                       : [
                           BoxShadow(
-                            color: CKTheme.black.withOpacity(0.15),
+                            color: CDKTheme.black.withOpacity(0.15),
                             spreadRadius: 0,
                             blurRadius: 1,
                             offset: const Offset(0, 1),
@@ -173,7 +173,7 @@ class CKPickerButtonsSegmentedState extends State<CKPickerButtonsSegmented> {
                           end: widget.isAccent &&
                                   index == widget.selectedIndex &&
                                   theme.isAppFocused
-                              ? CKTheme.white
+                              ? CDKTheme.white
                               : theme.colorText,
                         ),
                         builder: (BuildContext context, Color? color,

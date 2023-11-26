@@ -5,10 +5,10 @@ import 'ck_theme.dart';
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
 // To notify widgets of theme changes
-class CKThemeNotifier extends InheritedWidget {
-  final CKTheme changeNotifier;
+class CDKThemeNotifier extends InheritedWidget {
+  final CDKTheme changeNotifier;
 
-  const CKThemeNotifier({
+  const CDKThemeNotifier({
     Key? key,
     required Widget child,
     required this.changeNotifier,
@@ -19,7 +19,7 @@ class CKThemeNotifier extends InheritedWidget {
     return true;
   }
 
-  static CKThemeNotifier? of(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType<CKThemeNotifier>();
+  static CDKThemeNotifier? of(BuildContext context) {
+    return context.dependOnInheritedWidgetOfExactType<CDKThemeNotifier>();
   }
 }

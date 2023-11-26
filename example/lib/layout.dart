@@ -19,7 +19,7 @@ class Layout extends StatefulWidget {
 
 class LayoutState extends State<Layout> {
   bool isSidebarLeftVisible = true;
-  GlobalKey<CKAppSidebarsState> keyAppStructure = GlobalKey();
+  GlobalKey<CDKAppSidebarsState> keyAppStructure = GlobalKey();
   String _section = "Introduction";
   List<String> options = [
     "Introduction",
@@ -32,14 +32,14 @@ class LayoutState extends State<Layout> {
   ];
 
   void toggleLeftSidebar() {
-    final CKAppSidebarsState? state = keyAppStructure.currentState;
+    final CDKAppSidebarsState? state = keyAppStructure.currentState;
     if (state != null) {
       state.setSidebarLeftVisibility(!state.isSidebarLeftVisible);
     }
   }
 
   void toggleRightSidebar() {
-    final CKAppSidebarsState? state = keyAppStructure.currentState;
+    final CDKAppSidebarsState? state = keyAppStructure.currentState;
     if (state != null) {
       state.setSidebarRightVisibility(!state.isSidebarRightVisible);
     }
@@ -53,7 +53,7 @@ class LayoutState extends State<Layout> {
 
   @override
   Widget build(BuildContext context) {
-    CKTheme theme = CKThemeNotifier.of(context)!.changeNotifier;
+    CDKTheme theme = CDKThemeNotifier.of(context)!.changeNotifier;
 
     Widget centralWidget;
     switch (_section) {
@@ -89,20 +89,20 @@ class LayoutState extends State<Layout> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                CKButtonIcon(
+                CDKButtonIcon(
                     icon: CupertinoIcons.sidebar_left,
                     onPressed: () {
                       toggleLeftSidebar();
                     }),
                 Text(_section),
-                CKButtonIcon(
+                CDKButtonIcon(
                     icon: CupertinoIcons.sidebar_left,
                     onPressed: () {
                       toggleRightSidebar();
                     }),
               ]),
         ),
-        child: CKAppSidebars(
+        child: CDKAppSidebars(
           key: keyAppStructure,
           sidebarLeftIsResizable: true,
           sidebarLeftDefaultsVisible: true,

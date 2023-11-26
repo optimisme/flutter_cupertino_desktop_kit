@@ -6,13 +6,13 @@ import 'ck_theme.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
-class CKPicker360 extends StatefulWidget {
+class CDKPicker360 extends StatefulWidget {
   final double value;
   final double size;
   final bool enabled;
   final Function(double)? onChanged;
 
-  const CKPicker360(
+  const CDKPicker360(
       {Key? key,
       required this.value,
       this.enabled = true,
@@ -21,10 +21,10 @@ class CKPicker360 extends StatefulWidget {
       : super(key: key);
 
   @override
-  CKPicker360State createState() => CKPicker360State();
+  CDKPicker360State createState() => CDKPicker360State();
 }
 
-class CKPicker360State extends State<CKPicker360> {
+class CDKPicker360State extends State<CDKPicker360> {
 
   void _onPanUpdate(DragUpdateDetails details) {
     RenderBox renderBox = context.findRenderObject() as RenderBox;
@@ -41,7 +41,7 @@ class CKPicker360State extends State<CKPicker360> {
 
   @override
   Widget build(BuildContext context) {
-    CKTheme theme = CKThemeNotifier.of(context)!.changeNotifier;
+    CDKTheme theme = CDKThemeNotifier.of(context)!.changeNotifier;
 
     return GestureDetector(
       onPanUpdate: !widget.enabled ? null : _onPanUpdate,
@@ -49,8 +49,8 @@ class CKPicker360State extends State<CKPicker360> {
         painter: CDKPicker360Painter(
             theme.backgroundSecondary0,
             widget.value,
-            widget.enabled ? theme.colorText : CKTheme.grey,
-            theme.isLight ? CKTheme.grey100 : CKTheme.grey),
+            widget.enabled ? theme.colorText : CDKTheme.grey,
+            theme.isLight ? CDKTheme.grey100 : CDKTheme.grey),
         size: Size(widget.size, widget.size),
       ),
     );
@@ -74,7 +74,7 @@ class CDKPicker360Painter extends CustomPainter {
 
     // Dibuixar la sombra
     final shadowPaint = Paint()
-      ..color = CKTheme.grey50
+      ..color = CDKTheme.grey50
       ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 1.0);
     final circlePath = Path()
       ..addOval(Rect.fromCircle(center: center, radius: radius));

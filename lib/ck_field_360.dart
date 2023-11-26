@@ -5,12 +5,12 @@ import 'ck_picker_360.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
-class CKField360 extends StatefulWidget {
+class CDKField360 extends StatefulWidget {
   final double value;
   final double textSize;
   final bool enabled;
   final Function(double)? onChanged;
-  const CKField360({
+  const CDKField360({
     Key? key,
     this.value = 0.0,
     this.textSize = 12,
@@ -19,10 +19,10 @@ class CKField360 extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  CKField360State createState() => CKField360State();
+  CDKField360State createState() => CDKField360State();
 }
 
-class CKField360State extends State<CKField360> {
+class CDKField360State extends State<CDKField360> {
   double previousValue = 0.0;
 
   @override
@@ -51,7 +51,7 @@ class CKField360State extends State<CKField360> {
       mainAxisSize: MainAxisSize.min,
       children: [
         Expanded(child: Container()),
-        CKPicker360(
+        CDKPicker360(
           value: value,
           size: widget.textSize + 8,
           enabled: widget.enabled,
@@ -60,7 +60,7 @@ class CKField360State extends State<CKField360> {
         const SizedBox(width: 4),
         SizedBox(
           width: 64,
-          child: CKFieldNumeric(
+          child: CDKFieldNumeric(
             value: value,
             textSize: widget.textSize,
             increment: 1,

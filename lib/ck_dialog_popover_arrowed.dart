@@ -8,14 +8,14 @@ import 'ck_theme.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
-class CKDialogPopoverArrowed extends StatefulWidget {
+class CDKDialogPopoverArrowed extends StatefulWidget {
   final GlobalKey anchorKey;
   final bool isAnimated;
   final bool isTranslucent;
   final Function? onHide;
   final Widget child;
 
-  const CKDialogPopoverArrowed({
+  const CDKDialogPopoverArrowed({
     Key? key,
     required this.anchorKey,
     this.isAnimated = false,
@@ -25,10 +25,10 @@ class CKDialogPopoverArrowed extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  CKDialogPopoverArrowedState createState() => CKDialogPopoverArrowedState();
+  CDKDialogPopoverArrowedState createState() => CDKDialogPopoverArrowedState();
 }
 
-class CKDialogPopoverArrowedState extends State<CKDialogPopoverArrowed>
+class CDKDialogPopoverArrowedState extends State<CDKDialogPopoverArrowed>
     with SingleTickerProviderStateMixin {
   OverlayEntry? overlayEntry;
   final int _animationMillis = 200;
@@ -124,11 +124,11 @@ class CKDialogPopoverArrowedState extends State<CKDialogPopoverArrowed>
           position = Offset(leftPosition, topPosition);
           final rectContour = Rect.fromLTWH(8, 8, width!,
               height! - 8); // -8 To give space for the shadow if at top
-          pathContour = CKDialogOuterShadowPainter.createContourPathArrowed(
+          pathContour = CDKDialogOuterShadowPainter.createContourPathArrowed(
               rectContour, arrowDiff, arrowAtBottom);
           final rectClip = Rect.fromLTWH(0, 0, width!,
               height! - 8); // -8 To give space for the shadow if at top
-          pathClip = CKDialogOuterShadowPainter.createContourPathArrowed(
+          pathClip = CDKDialogOuterShadowPainter.createContourPathArrowed(
               rectClip, arrowDiff, arrowAtBottom);
 
           isSizeDetermined = true;
@@ -155,7 +155,7 @@ class CKDialogPopoverArrowedState extends State<CKDialogPopoverArrowed>
 
   @override
   Widget build(BuildContext context) {
-    CKTheme theme = CKThemeNotifier.of(context)!.changeNotifier;
+    CDKTheme theme = CDKThemeNotifier.of(context)!.changeNotifier;
 
     Color backgroundColor = !widget.isTranslucent
         ? theme.backgroundSecondary0
@@ -176,7 +176,7 @@ class CKDialogPopoverArrowedState extends State<CKDialogPopoverArrowed>
         : Stack(
             children: [
               CustomPaint(
-                painter: CKDialogOuterShadowPainter(
+                painter: CDKDialogOuterShadowPainter(
                     pathContour: pathContour,
                     colorBackground: backgroundColor,
                     isLightTheme: theme.isLight),
@@ -189,7 +189,7 @@ class CKDialogPopoverArrowedState extends State<CKDialogPopoverArrowed>
                       ? dialogContents
                       : ClipPath(
                           clipper:
-                              CKPopoverClipper(pathClip), // Aplica el clip aquí
+                              CDKPopoverClipper(pathClip), // Aplica el clip aquí
                           child: BackdropFilter(
                             filter: ImageFilter.blur(
                                 sigmaX: 7.5,
@@ -210,7 +210,7 @@ class CKDialogPopoverArrowedState extends State<CKDialogPopoverArrowed>
                 },
                 behavior: HitTestBehavior.translucent,
                 child: Container(
-                  color: CKTheme.transparent,
+                  color: CDKTheme.transparent,
                   width: screenSize!.width,
                   height: screenSize!.height,
                 ),

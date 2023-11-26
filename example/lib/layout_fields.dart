@@ -35,7 +35,7 @@ class _LayoutFieldsState extends State<LayoutFields> {
             padding: const EdgeInsets.all(8),
             child: SizedBox(
                 width: 100,
-                child: CKFieldText(
+                child: CDKFieldText(
                   controller: _textController,
                   isRounded: false,
                   onChanged: (value) {
@@ -52,7 +52,7 @@ class _LayoutFieldsState extends State<LayoutFields> {
             padding: const EdgeInsets.all(8),
             child: SizedBox(
                 width: 100,
-                child: CKFieldText(
+                child: CDKFieldText(
                   placeholder: 'Placeholder',
                   isRounded: false,
                   onChanged: (value) {
@@ -69,7 +69,7 @@ class _LayoutFieldsState extends State<LayoutFields> {
             padding: const EdgeInsets.all(8),
             child: SizedBox(
                 width: 100,
-                child: CKFieldText(
+                child: CDKFieldText(
                   controller: _passController,
                   obscureText: true,
                   isRounded: false,
@@ -90,7 +90,7 @@ class _LayoutFieldsState extends State<LayoutFields> {
             padding: const EdgeInsets.all(8),
             child: SizedBox(
                 width: 100,
-                child: CKFieldNumeric(
+                child: CDKFieldNumeric(
                   value: _valueNumeric,
                   onValueChanged: (double value) {
                     setState(() {
@@ -102,7 +102,7 @@ class _LayoutFieldsState extends State<LayoutFields> {
             padding: const EdgeInsets.all(8),
             child: SizedBox(
                 width: 100,
-                child: CKFieldNumeric(
+                child: CDKFieldNumeric(
                   value: _valueNumericIncrement,
                   decimals: 2,
                   min: -2,
@@ -119,7 +119,7 @@ class _LayoutFieldsState extends State<LayoutFields> {
             padding: const EdgeInsets.all(8),
             child: SizedBox(
                 width: 100,
-                child: CKFieldNumeric(
+                child: CDKFieldNumeric(
                   value: 5.0,
                   enabled: false,
                   onValueChanged: (double value) {},
@@ -131,7 +131,7 @@ class _LayoutFieldsState extends State<LayoutFields> {
             padding: const EdgeInsets.all(8),
             child: SizedBox(
                 width: 150,
-                child: CKField360(
+                child: CDKField360(
                   value: _valueNumeric360,
                   onChanged: (double value) {
                     setState(() {
@@ -143,7 +143,7 @@ class _LayoutFieldsState extends State<LayoutFields> {
             padding: const EdgeInsets.all(8),
             child: SizedBox(
                 width: 150,
-                child: CKField360(
+                child: CDKField360(
                   enabled: false,
                   onChanged: (double value) {
                     // ignore: avoid_print
@@ -158,7 +158,7 @@ class _LayoutFieldsState extends State<LayoutFields> {
             padding: const EdgeInsets.all(8),
             child: SizedBox(
                 width: 150,
-                child: CKFieldNumericSlider(
+                child: CDKFieldNumericSlider(
                   value: _valueNumericSlider0,
                   onValueChanged: (double value) {
                     setState(() {
@@ -170,7 +170,7 @@ class _LayoutFieldsState extends State<LayoutFields> {
             padding: const EdgeInsets.all(8),
             child: SizedBox(
                 width: 150,
-                child: CKFieldNumericSlider(
+                child: CDKFieldNumericSlider(
                   value: _valueNumericSlider1,
                   min: 0,
                   max: 100,
@@ -187,7 +187,7 @@ class _LayoutFieldsState extends State<LayoutFields> {
             padding: const EdgeInsets.all(8),
             child: SizedBox(
                 width: 150,
-                child: CKFieldNumericSlider(
+                child: CDKFieldNumericSlider(
                   value: _valueNumericSlider2,
                   min: 0,
                   max: 255,

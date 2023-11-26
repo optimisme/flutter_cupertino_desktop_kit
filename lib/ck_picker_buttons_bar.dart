@@ -5,7 +5,7 @@ import 'ck_theme.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
-class CKPickerButtonsBar extends StatefulWidget {
+class CDKPickerButtonsBar extends StatefulWidget {
   /// List of button options.
   final List<bool> selectedStates;
   final List<Widget> options;
@@ -16,7 +16,7 @@ class CKPickerButtonsBar extends StatefulWidget {
   /// Flag for multiple selection.
   final bool allowsMultipleSelection;
 
-  const CKPickerButtonsBar({
+  const CDKPickerButtonsBar({
     Key? key,
     required this.selectedStates,
     required this.options,
@@ -25,10 +25,10 @@ class CKPickerButtonsBar extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  CKPickerButtonsBarState createState() => CKPickerButtonsBarState();
+  CDKPickerButtonsBarState createState() => CDKPickerButtonsBarState();
 }
 
-class CKPickerButtonsBarState extends State<CKPickerButtonsBar> {
+class CDKPickerButtonsBarState extends State<CDKPickerButtonsBar> {
   // Border radius for button edges.
   final double _borderRadius = 4.0;
 
@@ -61,14 +61,14 @@ class CKPickerButtonsBarState extends State<CKPickerButtonsBar> {
         widget.selectedStates.map((option) => option).toList());
   }
 
-  Widget fixWidgetStyle(Widget child, int index, CKTheme theme) {
+  Widget fixWidgetStyle(Widget child, int index, CDKTheme theme) {
     Color color = theme.isLight
         ? widget.selectedStates[index] && theme.isAppFocused
-            ? CKTheme.white
-            : CKTheme.black
+            ? CDKTheme.white
+            : CDKTheme.black
         : widget.selectedStates[index] && !theme.isAppFocused
-            ? CKTheme.black
-            : CKTheme.white;
+            ? CDKTheme.black
+            : CDKTheme.white;
     if (child is Text) {
       double size = 12.0;
       return Text(
@@ -89,7 +89,7 @@ class CKPickerButtonsBarState extends State<CKPickerButtonsBar> {
 
   @override
   Widget build(BuildContext context) {
-    CKTheme theme = CKThemeNotifier.of(context)!.changeNotifier;
+    CDKTheme theme = CDKThemeNotifier.of(context)!.changeNotifier;
 
     List<Widget> buttonWidgets = List.generate(widget.options.length, (index) {
       // Determine border radius based on the position of the element
@@ -120,7 +120,7 @@ class CKPickerButtonsBarState extends State<CKPickerButtonsBar> {
                 colors: widget.selectedStates[index]
                     ? theme.isAppFocused
                         ? [theme.accent200, theme.accent500]
-                        : [CKTheme.grey200, CKTheme.grey300]
+                        : [CDKTheme.grey200, CDKTheme.grey300]
                     : [theme.backgroundSecondary0, theme.backgroundSecondary1],
               ),
               borderRadius: borderRadius,
@@ -135,11 +135,11 @@ class CKPickerButtonsBarState extends State<CKPickerButtonsBar> {
     return Container(
         padding: const EdgeInsets.all(0.5),
         decoration: BoxDecoration(
-            color: CKTheme.grey200,
+            color: CDKTheme.grey200,
             borderRadius: BorderRadius.circular(4),
             boxShadow: [
               BoxShadow(
-                color: CKTheme.black.withOpacity(0.1),
+                color: CDKTheme.black.withOpacity(0.1),
                 spreadRadius: 0,
                 blurRadius: 1,
                 offset: const Offset(0, 1),

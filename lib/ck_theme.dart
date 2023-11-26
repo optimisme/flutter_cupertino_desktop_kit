@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
-class CKTheme extends ChangeNotifier {
+class CDKTheme extends ChangeNotifier {
   // Appearance
   bool isLight = true;
   bool isAppFocused = true;
@@ -185,11 +185,11 @@ class CKTheme extends ChangeNotifier {
         ? (isSelected
             ? (isAppFocused
                 ? isAccent
-                    ? CKTheme.white
-                    : CKTheme.black
-                : CKTheme.grey)
-            : (isAppFocused ? CKTheme.black : CKTheme.grey))
-        : (isAppFocused ? CKTheme.white : CKTheme.grey);
+                    ? CDKTheme.white
+                    : CDKTheme.black
+                : CDKTheme.grey)
+            : (isAppFocused ? CDKTheme.black : CDKTheme.grey))
+        : (isAppFocused ? CDKTheme.white : CDKTheme.grey);
   }
 
   Color getSidebarColorBackground(bool isSelected, bool isAccent) {
@@ -198,15 +198,15 @@ class CKTheme extends ChangeNotifier {
             ? (isAppFocused
                 ? isAccent
                     ? accent
-                    : CKTheme.grey80
-                : CKTheme.grey80)
-            : CKTheme.transparent)
+                    : CDKTheme.grey80
+                : CDKTheme.grey80)
+            : CDKTheme.transparent)
         : (isSelected
             ? (isAppFocused
                 ? isAccent
                     ? accent
-                    : CKTheme.grey700
-                : CKTheme.grey800)
-            : CKTheme.transparent);
+                    : CDKTheme.grey700
+                : CDKTheme.grey800)
+            : CDKTheme.transparent);
   }
 }

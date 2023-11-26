@@ -5,12 +5,12 @@ import 'ck_theme_notifier.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
-class CKButtonDisclosure extends StatefulWidget {
+class CDKButtonDisclosure extends StatefulWidget {
   final bool value;
   final ValueChanged<bool>? onChanged;
   final double size;
 
-  const CKButtonDisclosure({
+  const CDKButtonDisclosure({
     Key? key,
     required this.value,
     this.onChanged,
@@ -18,10 +18,10 @@ class CKButtonDisclosure extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  CKButtonDisclosureState createState() => CKButtonDisclosureState();
+  CDKButtonDisclosureState createState() => CDKButtonDisclosureState();
 }
 
-class CKButtonDisclosureState extends State<CKButtonDisclosure>
+class CDKButtonDisclosureState extends State<CDKButtonDisclosure>
     with SingleTickerProviderStateMixin {
   final int _animationMillis = 200;
   late AnimationController _controller;
@@ -55,7 +55,7 @@ class CKButtonDisclosureState extends State<CKButtonDisclosure>
   }
 
   @override
-  void didUpdateWidget(CKButtonDisclosure oldWidget) {
+  void didUpdateWidget(CDKButtonDisclosure oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.value != oldWidget.value) {
       widget.value ? _controller.forward() : _controller.reverse();
@@ -64,7 +64,7 @@ class CKButtonDisclosureState extends State<CKButtonDisclosure>
 
   @override
   Widget build(BuildContext context) {
-    CKTheme theme = CKThemeNotifier.of(context)!.changeNotifier;
+    CDKTheme theme = CDKThemeNotifier.of(context)!.changeNotifier;
 
     return GestureDetector(
       onTap: () => widget.onChanged?.call(!widget.value),

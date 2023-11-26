@@ -5,22 +5,22 @@ import 'ck_theme.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
-class CKButtonHelp extends StatefulWidget {
+class CDKButtonHelp extends StatefulWidget {
   final double size;
 
   final VoidCallback? onPressed;
 
-  const CKButtonHelp({
+  const CDKButtonHelp({
     Key? key,
     this.onPressed,
     this.size = 24.0,
   }) : super(key: key);
 
   @override
-  CKButtonHelpState createState() => CKButtonHelpState();
+  CDKButtonHelpState createState() => CDKButtonHelpState();
 }
 
-class CKButtonHelpState extends State<CKButtonHelp> {
+class CDKButtonHelpState extends State<CDKButtonHelp> {
   /// Whether the button is currently pressed.
   bool _isPressed = false;
 
@@ -41,7 +41,7 @@ class CKButtonHelpState extends State<CKButtonHelp> {
 
   @override
   Widget build(BuildContext context) {
-    CKTheme theme = CKThemeNotifier.of(context)!.changeNotifier;
+    CDKTheme theme = CDKThemeNotifier.of(context)!.changeNotifier;
 
     /// Creates a GestureDetector widget to handle tap events.
     return GestureDetector(
@@ -53,8 +53,8 @@ class CKButtonHelpState extends State<CKButtonHelp> {
         decoration: BoxDecoration(
           color: _isPressed
               ? theme.isLight
-                  ? CKTheme.grey50
-                  : CKTheme.grey500
+                  ? CDKTheme.grey50
+                  : CDKTheme.grey500
               : theme.backgroundSecondary0,
           shape: BoxShape.circle,
           boxShadow: [
@@ -66,8 +66,8 @@ class CKButtonHelpState extends State<CKButtonHelp> {
             ),
           ],
           border: theme.isLight
-              ? Border.all(color: CKTheme.grey70)
-              : Border.all(color: CKTheme.grey600),
+              ? Border.all(color: CDKTheme.grey70)
+              : Border.all(color: CDKTheme.grey600),
         ),
         child: Container(
           width: widget.size,

@@ -5,13 +5,13 @@ import 'ck_theme.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
-class CKPickerCheckList extends StatefulWidget {
+class CDKPickerCheckList extends StatefulWidget {
   final List<String> options;
   final int selectedIndex;
   final double size;
   final Function(int)? onSelected;
 
-  const CKPickerCheckList({
+  const CDKPickerCheckList({
     Key? key,
     required this.options,
     this.size = 12.0,
@@ -20,11 +20,11 @@ class CKPickerCheckList extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  CKPickerCheckListState createState() => CKPickerCheckListState();
+  CDKPickerCheckListState createState() => CDKPickerCheckListState();
 }
 
 
-class CKPickerCheckListState extends State<CKPickerCheckList> {
+class CDKPickerCheckListState extends State<CDKPickerCheckList> {
   int? _hoverIndex;
 
   @override
@@ -37,7 +37,7 @@ class CKPickerCheckListState extends State<CKPickerCheckList> {
 
   @override
   Widget build(BuildContext context) {
-    CKTheme theme = CKThemeNotifier.of(context)!.changeNotifier;
+    CDKTheme theme = CDKThemeNotifier.of(context)!.changeNotifier;
 
     return IntrinsicWidth(
         child: ConstrainedBox(
@@ -59,7 +59,7 @@ class CKPickerCheckListState extends State<CKPickerCheckList> {
                     padding: const EdgeInsets.fromLTRB(4, 2, 4, 6),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(4.0),
-                      color: isHovered ? theme.accent : CKTheme.transparent,
+                      color: isHovered ? theme.accent : CDKTheme.transparent,
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,

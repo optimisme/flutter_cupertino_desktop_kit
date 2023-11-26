@@ -8,14 +8,14 @@ import 'ck_dialog_popover.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
-class CKButtonSelect extends StatefulWidget {
+class CDKButtonSelect extends StatefulWidget {
   final int selectedIndex;
   final bool isFlat;
   final bool isTranslucent;
   final List<String> options;
   final Function(int)? onSelected;
 
-  const CKButtonSelect({
+  const CDKButtonSelect({
     Key? key,
     required this.selectedIndex,
     required this.options,
@@ -25,11 +25,11 @@ class CKButtonSelect extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  CKButtonSelectState createState() => CKButtonSelectState();
+  CDKButtonSelectState createState() => CDKButtonSelectState();
 }
 
 
-class CKButtonSelectState extends State<CKButtonSelect> {
+class CDKButtonSelectState extends State<CDKButtonSelect> {
   static const double _fontSize = 12.0;
   bool _isMouseOver = false;
   final GlobalKey _globalKey = GlobalKey();
@@ -40,16 +40,16 @@ class CKButtonSelectState extends State<CKButtonSelect> {
     final GlobalKey<CKDialogPopoverState> key = GlobalKey();
 
     // Show popover with selectable options.
-    CKDialogsManager.showPopover(
+    CDKDialogsManager.showPopover(
       key: key,
       context: context,
       anchorKey: _globalKey,
-      type: CKDialogPopoverType.center,
+      type: CDKDialogPopoverType.center,
       isAnimated: false,
       isTranslucent: widget.isTranslucent,
       child: Padding(
         padding: const EdgeInsets.all(5.0),
-        child: CKPickerCheckList(
+        child: CDKPickerCheckList(
           options: widget.options,
           selectedIndex: widget.selectedIndex,
           onSelected: (int index) {
@@ -63,12 +63,12 @@ class CKButtonSelectState extends State<CKButtonSelect> {
 
   @override
   Widget build(BuildContext context) {
-    CKTheme theme = CKThemeNotifier.of(context)!.changeNotifier;
+    CDKTheme theme = CDKThemeNotifier.of(context)!.changeNotifier;
 
     BoxDecoration decoration;
     TextStyle textStyle;
     BoxShadow shadow = BoxShadow(
-      color: CKTheme.black.withOpacity(0.1),
+      color: CDKTheme.black.withOpacity(0.1),
       spreadRadius: 0,
       blurRadius: 1,
       offset: const Offset(0, 1),
@@ -123,7 +123,7 @@ class CKButtonSelectState extends State<CKButtonSelect> {
                           color: !widget.isFlat
                               ? theme.isAppFocused
                                   ? theme.accent300
-                                  : CKTheme.transparent
+                                  : CDKTheme.transparent
                               : _isMouseOver
                                   ? null
                                   : theme.backgroundSecondary1,
@@ -138,7 +138,7 @@ class CKButtonSelectState extends State<CKButtonSelect> {
                                 color: !widget.isFlat &&
                                         theme.isLight &&
                                         theme.isAppFocused
-                                    ? CKTheme.white
+                                    ? CDKTheme.white
                                     : theme.colorText,
                                 size: _fontSize * 1.2,
                               ),

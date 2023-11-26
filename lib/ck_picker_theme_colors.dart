@@ -5,24 +5,24 @@ import 'ck_theme.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
-class CKPickerThemeColors extends StatefulWidget {
+class CDKPickerThemeColors extends StatefulWidget {
   final Map<String, Color> colors;
   final Function(String)? onColorChanged;
 
-  const CKPickerThemeColors({
+  const CDKPickerThemeColors({
     Key? key,
     required this.colors,
     this.onColorChanged,
   }) : super(key: key);
 
   @override
-  CKPickerThemeColorsState createState() => CKPickerThemeColorsState();
+  CDKPickerThemeColorsState createState() => CDKPickerThemeColorsState();
 }
 
-class CKPickerThemeColorsState extends State<CKPickerThemeColors> {
+class CDKPickerThemeColorsState extends State<CDKPickerThemeColors> {
   @override
   Widget build(BuildContext context) {
-    CKTheme theme = CKThemeNotifier.of(context)!.changeNotifier;
+    CDKTheme theme = CDKThemeNotifier.of(context)!.changeNotifier;
 
     // Index to keep track of each color's position.
     int index = -1;
@@ -34,9 +34,9 @@ class CKPickerThemeColorsState extends State<CKPickerThemeColors> {
 
         // Adjust the border color based on the theme and color brightness.
         if (theme.isLight) {
-          colorBorder = CKTheme.adjustColor(color, 1, 0.75);
+          colorBorder = CDKTheme.adjustColor(color, 1, 0.75);
         } else {
-          colorBorder = CKTheme.adjustColor(color, 1, 1.25);
+          colorBorder = CDKTheme.adjustColor(color, 1, 1.25);
         }
         index = index + 1;
         return GestureDetector(
@@ -60,7 +60,7 @@ class CKPickerThemeColorsState extends State<CKPickerThemeColors> {
                       height: 6,
                       decoration: const BoxDecoration(
                         shape: BoxShape.circle,
-                        color: CKTheme.white,
+                        color: CDKTheme.white,
                       ),
                     )
                   : null, // Si no està seleccionat, no mostra res

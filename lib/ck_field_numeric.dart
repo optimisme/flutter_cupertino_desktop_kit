@@ -6,7 +6,7 @@ import 'ck_buttons_up_down.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
-class CKFieldNumeric extends StatefulWidget {
+class CDKFieldNumeric extends StatefulWidget {
   final double? textSize;
   final double value;
   final double min;
@@ -18,7 +18,7 @@ class CKFieldNumeric extends StatefulWidget {
   final Function(double)? onValueChanged;
   final Function(double)? onTextChanged;
 
-  const CKFieldNumeric({
+  const CDKFieldNumeric({
     Key? key,
     this.textSize = 12,
     this.value = 0.0,
@@ -33,10 +33,10 @@ class CKFieldNumeric extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  CKFieldNumericState createState() => CKFieldNumericState();
+  CDKFieldNumericState createState() => CDKFieldNumericState();
 }
 
-class CKFieldNumericState extends State<CKFieldNumeric> {
+class CDKFieldNumericState extends State<CDKFieldNumeric> {
   late TextEditingController _controller;
   double _previousValue = double.infinity;
 
@@ -136,7 +136,7 @@ class CKFieldNumericState extends State<CKFieldNumeric> {
     return Row(
       children: <Widget>[
         Expanded(
-          child: CKFieldText(
+          child: CDKFieldText(
             controller: _controller,
             enabled: widget.enabled,
             textSize: widget.textSize,
@@ -150,7 +150,7 @@ class CKFieldNumericState extends State<CKFieldNumeric> {
             : const SizedBox(width: 4),
         widget.increment == double.infinity
             ? Container()
-            : CKButtonsUpDown(
+            : CDKButtonsUpDown(
                 enabledUp: widget.enabled && enabledUp,
                 enabledDown: widget.enabled && enabledDown,
                 onUpPressed: _incrementValue,

@@ -2,12 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'ck_theme_notifier.dart';
 import 'ck_theme.dart';
 
-class CKButtonSwitch extends StatelessWidget {
+class CDKButtonSwitch extends StatelessWidget {
   final bool value;
   final double size;
   final ValueChanged<bool>? onChanged;
 
-  const CKButtonSwitch({
+  const CDKButtonSwitch({
     Key? key,
     required this.value,
     this.onChanged,
@@ -16,7 +16,7 @@ class CKButtonSwitch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    CKTheme theme = CKThemeNotifier.of(context)!.changeNotifier;
+    CDKTheme theme = CDKThemeNotifier.of(context)!.changeNotifier;
 
     double backRadius = size * 12.0 / 24.0;
     double backHeight = size * 24.0 / 24.0;
@@ -61,7 +61,7 @@ class CKButtonSwitch extends StatelessWidget {
                 width: circleSize,
                 decoration: const BoxDecoration(
                   shape: BoxShape.circle,
-                  color: CKTheme.white,
+                  color: CDKTheme.white,
                 ),
               ),
             ),

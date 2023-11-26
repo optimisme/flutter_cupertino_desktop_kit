@@ -6,11 +6,11 @@ import 'ck_theme_notifier.dart';
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
 // Main application widget
-class CKApp extends StatefulWidget {
+class CDKApp extends StatefulWidget {
   final String defaultAppearance;
   final String defaultColor;
   final Widget child;
-  const CKApp(
+  const CDKApp(
       {Key? key,
       this.defaultAppearance = "system",
       this.defaultColor = "systemBlue",
@@ -18,12 +18,12 @@ class CKApp extends StatefulWidget {
       : super(key: key);
 
   @override
-  CKAppState createState() => CKAppState();
+  CDKAppState createState() => CDKAppState();
 }
 
 // Main application state
-class CKAppState extends State<CKApp> with WidgetsBindingObserver {
-  late final CKTheme _themeManager = CKTheme();
+class CDKAppState extends State<CDKApp> with WidgetsBindingObserver {
+  late final CDKTheme _themeManager = CDKTheme();
 
   @override
   void initState() {
@@ -57,7 +57,7 @@ class CKAppState extends State<CKApp> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    return CKThemeNotifier(
+    return CDKThemeNotifier(
         changeNotifier: _themeManager,
         child: CupertinoApp(
           debugShowCheckedModeBanner: false,

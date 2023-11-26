@@ -8,13 +8,13 @@ import 'ck_theme.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
-class CKDialogModal extends StatefulWidget {
+class CDKDialogModal extends StatefulWidget {
   final bool isAnimated;
   final bool isTranslucent;
   final Function? onHide;
   final Widget child;
 
-  const CKDialogModal({
+  const CDKDialogModal({
     Key? key,
     this.isAnimated = false,
     this.isTranslucent = false,
@@ -23,10 +23,10 @@ class CKDialogModal extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  CKDialogModalState createState() => CKDialogModalState();
+  CDKDialogModalState createState() => CDKDialogModalState();
 }
 
-class CKDialogModalState extends State<CKDialogModal>
+class CDKDialogModalState extends State<CDKDialogModal>
     with SingleTickerProviderStateMixin {
   OverlayEntry? overlayEntry;
   final int _animationMillis = 200;
@@ -89,9 +89,9 @@ class CKDialogModalState extends State<CKDialogModal>
 
           final rectContour = Rect.fromLTWH(8, 8, width!, height!);
           pathContour =
-              CKDialogOuterShadowPainter.createContourPath(rectContour);
+              CDKDialogOuterShadowPainter.createContourPath(rectContour);
           final rectClip = Rect.fromLTWH(0, 0, width!, height!);
-          pathClip = CKDialogOuterShadowPainter.createContourPath(rectClip);
+          pathClip = CDKDialogOuterShadowPainter.createContourPath(rectClip);
 
           isSizeDetermined = true;
         });
@@ -115,7 +115,7 @@ class CKDialogModalState extends State<CKDialogModal>
 
   @override
   Widget build(BuildContext context) {
-    CKTheme theme = CKThemeNotifier.of(context)!.changeNotifier;
+    CDKTheme theme = CDKThemeNotifier.of(context)!.changeNotifier;
 
     Color backgroundColor = !widget.isTranslucent
         ? theme.backgroundSecondary0
@@ -136,7 +136,7 @@ class CKDialogModalState extends State<CKDialogModal>
         : Stack(
             children: [
               CustomPaint(
-                painter: CKDialogOuterShadowPainter(
+                painter: CDKDialogOuterShadowPainter(
                     pathContour: pathContour,
                     colorBackground: backgroundColor,
                     isLightTheme: theme.isLight),
@@ -149,7 +149,7 @@ class CKDialogModalState extends State<CKDialogModal>
                       ? dialogContents
                       : ClipPath(
                           clipper:
-                              CKPopoverClipper(pathClip), // Aplica el clip aquí
+                              CDKPopoverClipper(pathClip), // Aplica el clip aquí
                           child: BackdropFilter(
                             filter: ImageFilter.blur(
                                 sigmaX: 7.5,

@@ -4,12 +4,12 @@ import 'ck_theme.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
-class CKDialogOuterShadowPainter extends CustomPainter {
+class CDKDialogOuterShadowPainter extends CustomPainter {
   final Color colorBackground;
   final Path pathContour;
   final bool isLightTheme;
 
-  CKDialogOuterShadowPainter(
+  CDKDialogOuterShadowPainter(
       {required this.colorBackground,
       required this.pathContour,
       required this.isLightTheme});
@@ -29,7 +29,7 @@ class CKDialogOuterShadowPainter extends CustomPainter {
     // Pinta el contorn
     final paintLine = Paint()
       ..strokeWidth = 0.5
-      ..color = isLightTheme ? CKTheme.grey200 : CKTheme.grey500
+      ..color = isLightTheme ? CDKTheme.grey200 : CDKTheme.grey500
       ..style = PaintingStyle.stroke;
 
     canvas.drawPath(pathContour, paintLine);
@@ -47,7 +47,7 @@ class CKDialogOuterShadowPainter extends CustomPainter {
 
     // Defineix i dibuixa l'ombra
     Color shadowColor =
-        isLightTheme ? CKTheme.black.withOpacity(0.5) : CKTheme.black;
+        isLightTheme ? CDKTheme.black.withOpacity(0.5) : CDKTheme.black;
     final shadowPaint = Paint()
       ..color = shadowColor
       ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 4);
@@ -57,7 +57,7 @@ class CKDialogOuterShadowPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant CKDialogOuterShadowPainter oldDelegate) {
+  bool shouldRepaint(covariant CDKDialogOuterShadowPainter oldDelegate) {
     return colorBackground != oldDelegate.colorBackground ||
         pathContour != oldDelegate.pathContour ||
         isLightTheme != oldDelegate.isLightTheme;
