@@ -6,13 +6,13 @@ import 'ck_picker_360.dart';
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
 class CKField360 extends StatefulWidget {
-  final double defaultValue;
+  final double value;
   final double textSize;
   final bool enabled;
   final Function(double)? onChanged;
   const CKField360({
     Key? key,
-    this.defaultValue = 0.0,
+    this.value = 0.0,
     this.textSize = 12,
     this.enabled = true,
     this.onChanged,
@@ -23,56 +23,45 @@ class CKField360 extends StatefulWidget {
 }
 
 class CKField360State extends State<CKField360> {
-  GlobalKey<CKPicker360State> keyPicker = GlobalKey();
-  GlobalKey<CKFieldNumericState> keyNumeric = GlobalKey();
-  double _currentAngle = 0;
-  bool _isUpdating = false;
+  double _previousValue = 0.0;
 
   @override
   void initState() {
     super.initState();
-    _currentAngle = widget.defaultValue;
+    _previousValue = _adjustAngle(widget.value);
   }
 
-  void _onChanged(String origin, double angle) {
-    if (_isUpdating) {
-      return;
+  double _adjustAngle(double angle) {
+    return (angle % 360 + 360) % 360;
+  }
+
+  void _onValueChanged(double newValue) {
+    final adjustedValue = _adjustAngle(newValue);
+    if (adjustedValue != _previousValue) {
+      _previousValue = adjustedValue;
+      widget.onChanged?.call(adjustedValue);
     }
-    setState(() {
-      _isUpdating = true;
-      _currentAngle = angle;
-      if (origin == "picker") {
-        // TODO keyNumeric.currentState?.setValue(angle);
-      }
-      if (origin == "numeric") {
-        // TODO keyPicker.currentState?.setValue(angle);
-      }
-      widget.onChanged?.call(angle);
-      _isUpdating = false;
-    });
   }
 
   @override
   Widget build(BuildContext context) {
+    double value = _adjustAngle(widget.value);
+
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
         Expanded(child: Container()),
         CKPicker360(
-          key: keyPicker,
-          value: _currentAngle,
+          value: value,
           size: widget.textSize + 8,
           enabled: widget.enabled,
-          onChanged: (angle) {
-            _onChanged("picker", angle);
-          },
+          onChanged: _onValueChanged,
         ),
         const SizedBox(width: 4),
         SizedBox(
           width: 64,
           child: CKFieldNumeric(
-            key: keyNumeric,
-            value: _currentAngle,
+            value: value,
             textSize: widget.textSize,
             min: 0,
             max: 360,
@@ -80,9 +69,7 @@ class CKField360State extends State<CKField360> {
             decimals: 0,
             enabled: widget.enabled,
             units: "°",
-            onValueChanged: (angle) {
-              _onChanged("numeric", angle);
-            },
+            onValueChanged: _onValueChanged,
           ),
         )
       ],

@@ -43,19 +43,8 @@ class CKFieldNumericState extends State<CKFieldNumeric> {
   @override
   void initState() {
     super.initState();
-    _checkWidgetValue();
     _controller = TextEditingController(text: _fixText(widget.value));
     _controller.addListener(_onTextChanged);
-  }
-
-  void _checkWidgetValue() {
-    if (widget.max <= widget.min) {
-      throw Exception("DSKFieldNumeric: max must be greater than min");
-    }
-    if (widget.value < widget.min || widget.value > widget.max) {
-      throw Exception(
-          "DSKFieldNumeric: defaultValue must be between min and max");
-    }
   }
 
   @override
@@ -68,8 +57,7 @@ class CKFieldNumericState extends State<CKFieldNumeric> {
   double _fixValue(String text) {
     final match =
         RegExp(r'-?\d+(\.\d+)?').firstMatch(text.replaceAll(',', '.'));
-    final numberStr =
-        match != null ? match.group(0)! : widget.value.toString();
+    final numberStr = match != null ? match.group(0)! : widget.value.toString();
 
     final number = double.parse(numberStr);
     final powCal = pow(10, widget.decimals);
@@ -86,12 +74,26 @@ class CKFieldNumericState extends State<CKFieldNumeric> {
 
   void _setCurrentValue(String text) {
     double newValue = _fixValue(text);
+    bool valueChanged = false;
 
-    // Set cursor to end of text
+    if (newValue < widget.min) {
+      newValue = widget.min;
+      valueChanged = true;
+    } else if (newValue > widget.max) {
+      newValue = widget.max;
+      valueChanged = true;
+    }
+
+    // Actualitza el text i el cursor
+    _controller.text = _fixText(newValue);
     _controller.selection = TextSelection.fromPosition(
         TextPosition(offset: _controller.text.length));
 
-    widget.onValueChanged?.call(newValue);
+    // Notifica el canvi al pare si el valor ha canviat
+    if (valueChanged || newValue != previousValue) {
+      widget.onValueChanged?.call(newValue);
+      previousValue = newValue;
+    }
   }
 
   _focusChanged(bool hasFocus) {
@@ -118,13 +120,16 @@ class CKFieldNumericState extends State<CKFieldNumeric> {
 
   @override
   Widget build(BuildContext context) {
+    double value = widget.value;
+    if (value < widget.min || value > widget.max) {
+      _setCurrentValue(value.toString());
+    }
 
     if (previousValue != widget.value) {
-      _checkWidgetValue();
       previousValue = widget.value;
-      _controller.text = _fixText(widget.value);
+      _controller.text = _fixText(value);
     }
-    
+
     bool enabledUp = widget.value < widget.max;
     bool enabledDown = widget.value > widget.min;
 

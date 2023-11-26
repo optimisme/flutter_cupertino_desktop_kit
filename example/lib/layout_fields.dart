@@ -13,6 +13,7 @@ class _LayoutFieldsState extends State<LayoutFields> {
   late TextEditingController _passController;
   double _valueNumeric = 5.5;
   double _valueNumericIncrement = -1.0;
+  double _valueNumeric360 = 270;
 
   @override
   void initState() {
@@ -89,7 +90,9 @@ class _LayoutFieldsState extends State<LayoutFields> {
                 child: CKFieldNumeric(
                   value: _valueNumeric,
                   onValueChanged: (double value) {
-                    setState(() { _valueNumeric = value; });
+                    setState(() {
+                      _valueNumeric = value;
+                    });
                   },
                 ))),
         Padding(
@@ -104,7 +107,9 @@ class _LayoutFieldsState extends State<LayoutFields> {
                   increment: 0.15,
                   units: "px",
                   onValueChanged: (double value) {
-                    setState(() { _valueNumericIncrement = value; });
+                    setState(() {
+                      _valueNumericIncrement = value;
+                    });
                   },
                 ))),
         Padding(
@@ -114,10 +119,7 @@ class _LayoutFieldsState extends State<LayoutFields> {
                 child: CKFieldNumeric(
                   value: 5.0,
                   enabled: false,
-                  onValueChanged: (double value) {
-                    // ignore: avoid_print
-                    print("Numeric C: $value");
-                  },
+                  onValueChanged: (double value) {},
                 ))),
       ]),
       const Padding(padding: EdgeInsets.all(8), child: Text('CKField360:')),
@@ -127,10 +129,11 @@ class _LayoutFieldsState extends State<LayoutFields> {
             child: SizedBox(
                 width: 150,
                 child: CKField360(
-                  defaultValue: 270,
+                  value: _valueNumeric360,
                   onChanged: (double value) {
-                    // ignore: avoid_print
-                    print("Field360: $value");
+                    setState(() {
+                      _valueNumeric360 = value;
+                    });
                   },
                 ))),
         Padding(
