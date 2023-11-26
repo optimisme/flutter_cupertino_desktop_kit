@@ -6,15 +6,8 @@ import 'ck_theme.dart';
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
 class CKButtonCheckBox extends StatefulWidget {
-  /// The current selection state of the checkbox.
   final bool value;
-
-  /// The size of the checkbox in logical pixels.
-  /// Defaults to 16.0.
   final double size;
-
-  /// The callback function that is called when the checkbox is tapped.
-  /// The function receives the new value of the checkbox as a parameter.
   final ValueChanged<bool>? onChanged;
 
   const CKButtonCheckBox({
@@ -28,32 +21,22 @@ class CKButtonCheckBox extends StatefulWidget {
   CKButtonCheckBoxState createState() => CKButtonCheckBoxState();
 }
 
-/// The state of the `DSKButtonCheckBox` widget.
-///
-/// This class manages the widget's internal state, including the current
-/// selection state and the app focus status.
 class CKButtonCheckBoxState extends State<CKButtonCheckBox> {
   @override
   Widget build(BuildContext context) {
     CKTheme themeManager = CKThemeNotifier.of(context)!.changeNotifier;
 
-    /// Calculate the checkbox size based on the specified size property
     double boxSize = widget.size;
 
-    /// Create a GestureDetector widget to handle tap interactions
     return GestureDetector(
 
-        /// Call the onChanged callback when the checkbox is tapped
         onTap: () {
           widget.onChanged?.call(!widget.value);
         },
 
-        /// Use a CustomPaint widget to draw the checkbox's visual representation
         child: CustomPaint(
-          /// Set the size of the CustomPaint widget to match the checkbox size
           size: Size(boxSize, boxSize),
 
-          /// Create a VNTButtonCheckBoxPainter instance to handle the painting
           painter: VNTButtonCheckBoxPainter(
 
               /// Set the action color based on the theme
@@ -74,27 +57,15 @@ class CKButtonCheckBoxState extends State<CKButtonCheckBox> {
   }
 }
 
-/// The custom painter responsible for drawing the checkbox's visual elements.
-///
-/// It handles the painting of the checkbox's background, border, and checkmark.
+
 class VNTButtonCheckBoxPainter extends CustomPainter {
-  /// The color used for the checkbox's action area
   final Color colorAccent;
   final Color colorAccent200;
-
-  /// The color used for the checkbox's background
   final Color colorBackgroundSecondary0;
-
-  /// Whether the checkbox is currently selected
   final bool isSelected;
-
-  /// Whether the app has focus
   final bool hasAppFocus;
-
-  /// The size of the checkbox in logical pixels
   final double size;
 
-  /// Whether the app is using the light theme
   final bool isLightTheme;
 
   VNTButtonCheckBoxPainter({
