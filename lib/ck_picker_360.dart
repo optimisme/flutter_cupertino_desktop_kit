@@ -46,7 +46,7 @@ class CKPicker360State extends State<CKPicker360> {
     return GestureDetector(
       onPanUpdate: !widget.enabled ? null : _onPanUpdate,
       child: CustomPaint(
-        painter: DSKPicker360Painter(
+        painter: CDKPicker360Painter(
             theme.backgroundSecondary0,
             widget.value,
             widget.enabled ? theme.colorText : CKTheme.grey,
@@ -57,13 +57,13 @@ class CKPicker360State extends State<CKPicker360> {
   }
 }
 
-class DSKPicker360Painter extends CustomPainter {
+class CDKPicker360Painter extends CustomPainter {
   final Color colorBackgroundSecondary0;
   final double angle;
   final Color borderColor;
   final Color pickerColor;
 
-  DSKPicker360Painter(this.colorBackgroundSecondary0, this.angle,
+  CDKPicker360Painter(this.colorBackgroundSecondary0, this.angle,
       this.pickerColor, this.borderColor);
 
   @override
@@ -105,7 +105,7 @@ class DSKPicker360Painter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant DSKPicker360Painter oldDelegate) {
+  bool shouldRepaint(covariant CDKPicker360Painter oldDelegate) {
     return oldDelegate.angle != angle ||
         oldDelegate.colorBackgroundSecondary0 != colorBackgroundSecondary0 ||
         oldDelegate.pickerColor != pickerColor ||

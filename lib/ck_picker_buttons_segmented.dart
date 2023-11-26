@@ -24,9 +24,6 @@ class CKPickerButtonsSegmented extends StatefulWidget {
       CKPickerButtonsSegmentedState();
 }
 
-/// Class `DSKButtonsSegmentedState` - The state for `DSKButtonsSegmented`.
-///
-/// Manages the state and rendering of the segmented control.
 class CKPickerButtonsSegmentedState extends State<CKPickerButtonsSegmented> {
   final int _animationMillis = 200; 
   final List<GlobalKey> _keys = []; // Global keys for each option.

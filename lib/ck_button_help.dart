@@ -6,13 +6,10 @@ import 'ck_theme.dart';
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
 class CKButtonHelp extends StatefulWidget {
-  /// The size of the button and the question mark icon.
   final double size;
 
-  /// A callback function that is called when the button is tapped.
   final VoidCallback? onPressed;
 
-  /// Creates a DSKButtonHelp widget.
   const CKButtonHelp({
     Key? key,
     this.onPressed,
@@ -23,7 +20,6 @@ class CKButtonHelp extends StatefulWidget {
   CKButtonHelpState createState() => CKButtonHelpState();
 }
 
-/// The state of the `DSKButtonHelp` widget.
 class CKButtonHelpState extends State<CKButtonHelp> {
   /// Whether the button is currently pressed.
   bool _isPressed = false;

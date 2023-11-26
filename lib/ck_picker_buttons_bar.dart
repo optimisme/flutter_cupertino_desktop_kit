@@ -28,9 +28,6 @@ class CKPickerButtonsBar extends StatefulWidget {
   CKPickerButtonsBarState createState() => CKPickerButtonsBarState();
 }
 
-/// Class `DSKButtonsBarState` - The state for `DSKButtonsBar`.
-///
-/// Manages the state and rendering of the buttons bar.
 class CKPickerButtonsBarState extends State<CKPickerButtonsBar> {
   // Border radius for button edges.
   final double _borderRadius = 4.0;

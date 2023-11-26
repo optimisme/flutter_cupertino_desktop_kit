@@ -21,7 +21,6 @@ class CKButtonDisclosure extends StatefulWidget {
   CKButtonDisclosureState createState() => CKButtonDisclosureState();
 }
 
-/// The state of the `DSKButtonDisclosure` widget.
 class CKButtonDisclosureState extends State<CKButtonDisclosure>
     with SingleTickerProviderStateMixin {
   final int _animationMillis = 200;

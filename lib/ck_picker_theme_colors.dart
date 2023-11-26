@@ -6,12 +6,7 @@ import 'ck_theme.dart';
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
 class CKPickerThemeColors extends StatefulWidget {
-  /// Map of color names to color values.
   final Map<String, Color> colors;
-
-  /// Name of the currently selected color.
-
-  /// Callback for color selection.
   final Function(String)? onColorChanged;
 
   const CKPickerThemeColors({
@@ -24,9 +19,6 @@ class CKPickerThemeColors extends StatefulWidget {
   CKPickerThemeColorsState createState() => CKPickerThemeColorsState();
 }
 
-/// Class `DSKButtonsColorsState` - The state for `DSKButtonsColors`.
-///
-/// Manages the rendering of the color selection buttons.
 class CKPickerThemeColorsState extends State<CKPickerThemeColors> {
   @override
   Widget build(BuildContext context) {

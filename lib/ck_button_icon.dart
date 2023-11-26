@@ -25,35 +25,25 @@ class CKButtonIcon extends StatefulWidget {
   CKButtonIconState createState() => CKButtonIconState();
 }
 
-/// The state of the `DSKButtonIcon` widget.
 class CKButtonIconState extends State<CKButtonIcon> {
-  /// Whether the button is currently pressed.
   bool _isPressed = false;
-
-  /// Whether the mouse is currently hovering over the button.
   bool _isHovering = false;
-
-  /// Handles the `onTapDown` event, updating the `_isPressed` state variable.
   void _onTapDown(TapDownDetails details) {
     setState(() => _isPressed = true);
   }
 
-  /// Handles the `onTapUp` event, updating the `_isPressed` state variable and calling the `onPressed` callback function.
   void _onTapUp(TapUpDetails details) {
     setState(() => _isPressed = false);
   }
 
-  /// Handles the `onTapCancel` event, updating the `_isPressed` state variable.
   void _onTapCancel() {
     setState(() => _isPressed = false);
   }
 
-  /// Handles the `onEnter` event, updating the `_isHovering` state variable.
   void _onMouseEnter(PointerEvent details) {
     setState(() => _isHovering = true);
   }
 
-  /// Handles the `onExit` event, updating the `_isHovering` state variable.
   void _onMouseExit(PointerEvent details) {
     setState(() => _isHovering = false);
   }

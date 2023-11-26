@@ -68,7 +68,7 @@ class CKPickerSliderState extends State<CKPickerSlider> {
       },
       onPanUpdate: !widget.enabled ? null : _onPanUpdate,
       child: CustomPaint(
-        painter: DSKPicker01Painter(
+        painter: CDKPicker01Painter(
           colorAccent: theme.accent,
           colorBar: theme.backgroundSecondary1,
           colorCircle: theme.backgroundSecondary0,
@@ -81,14 +81,14 @@ class CKPickerSliderState extends State<CKPickerSlider> {
   }
 }
 
-class DSKPicker01Painter extends CustomPainter {
+class CDKPicker01Painter extends CustomPainter {
   final Color colorAccent;
   final Color colorBar;
   final Color colorCircle;
   final double value;
   final bool hasAppFocus;
 
-  DSKPicker01Painter(
+  CDKPicker01Painter(
       {required this.colorAccent,
       required this.colorBar,
       required this.colorCircle,
@@ -160,7 +160,7 @@ class DSKPicker01Painter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant DSKPicker01Painter oldDelegate) {
+  bool shouldRepaint(covariant CDKPicker01Painter oldDelegate) {
     return oldDelegate.colorAccent != colorAccent ||
         oldDelegate.colorBar != colorBar ||
         oldDelegate.colorCircle != colorCircle ||

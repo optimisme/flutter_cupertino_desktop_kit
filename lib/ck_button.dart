@@ -28,9 +28,6 @@ class CKButton extends StatefulWidget {
   CKButtonState createState() => CKButtonState();
 }
 
-/// Class `DSKButtonState` - The state for `DSKButton`.
-///
-/// Manages the state and rendering of the customizable button.
 class CKButtonState extends State<CKButton> {
   // Default font size.
   static const double _fontSize = 12.0;

@@ -23,9 +23,6 @@ class CKButtonsUpDown extends StatefulWidget {
   CKButtonsUpDownState createState() => CKButtonsUpDownState();
 }
 
-/// Class `DSKButtonsUpDownState` - The state for `DSKButtonsUpDown`.
-///
-/// Manages the state and rendering of the up and down buttons.
 class CKButtonsUpDownState extends State<CKButtonsUpDown> {
   bool _isPressedUp = false; // State flag for the up button press.
   bool _isPressedDown = false; // State flag for the down button press.

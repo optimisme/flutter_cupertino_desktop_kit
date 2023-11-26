@@ -33,10 +33,6 @@ class CKAppSidebars extends StatefulWidget {
   CKAppSidebarsState createState() => CKAppSidebarsState();
 }
 
-/// The state of the `DSKAppSidebars` widget.
-///
-/// This class manages the state of the sidebars, including their visibility
-/// and width.
 class CKAppSidebarsState extends State<CKAppSidebars> {
   MouseCursor _cursor =
       SystemMouseCursors.basic; // The current cursor for the mouse.
