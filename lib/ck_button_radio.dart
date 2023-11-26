@@ -33,7 +33,7 @@ class CKButtonRadio extends StatelessWidget {
         children: [
           CustomPaint(
             size: Size(size, size),
-            painter: VNTButtonRadioPainter(
+            painter: CDKButtonRadioPainter(
               colorAccent: theme.accent,
               colorAccent200: theme.accent200,
               colorBackgroundSecondary0: theme.backgroundSecondary0,
@@ -62,10 +62,7 @@ class CKButtonRadio extends StatelessWidget {
   }
 }
 
-/// Class `VNTButtonRadioPainter` - A `CustomPainter` for drawing the radio button.
-///
-/// This class uses canvas drawing methods to create the visual appearance of the radio button.
-class VNTButtonRadioPainter extends CustomPainter {
+class CDKButtonRadioPainter extends CustomPainter {
   final Color colorAccent;
   final Color colorAccent200;
   final Color colorBackgroundSecondary0;
@@ -74,7 +71,7 @@ class VNTButtonRadioPainter extends CustomPainter {
   final double size;
   final bool isLightTheme;
 
-  VNTButtonRadioPainter({
+  CDKButtonRadioPainter({
     required this.colorAccent,
     required this.colorAccent200,
     required this.colorBackgroundSecondary0,
@@ -170,7 +167,7 @@ class VNTButtonRadioPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant VNTButtonRadioPainter oldDelegate) {
+  bool shouldRepaint(covariant CDKButtonRadioPainter oldDelegate) {
     return oldDelegate.colorAccent != colorAccent ||
         oldDelegate.colorAccent200 != colorAccent200 ||
         oldDelegate.colorBackgroundSecondary0 != colorBackgroundSecondary0 ||

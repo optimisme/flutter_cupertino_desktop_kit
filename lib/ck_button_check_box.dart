@@ -29,7 +29,7 @@ class CKButtonCheckBox extends StatelessWidget {
       },
       child: CustomPaint(
         size: Size(boxSize, boxSize),
-        painter: VNTButtonCheckBoxPainter(
+        painter: CDKButtonCheckBoxPainter(
           colorAccent: themeManager.accent,
           colorAccent200: themeManager.accent200,
           colorBackgroundSecondary0: themeManager.backgroundSecondary0,
@@ -44,7 +44,7 @@ class CKButtonCheckBox extends StatelessWidget {
 }
 
 
-class VNTButtonCheckBoxPainter extends CustomPainter {
+class CDKButtonCheckBoxPainter extends CustomPainter {
   final Color colorAccent;
   final Color colorAccent200;
   final Color colorBackgroundSecondary0;
@@ -54,7 +54,7 @@ class VNTButtonCheckBoxPainter extends CustomPainter {
 
   final bool isLightTheme;
 
-  VNTButtonCheckBoxPainter({
+  CDKButtonCheckBoxPainter({
     required this.colorAccent,
     required this.colorAccent200,
     required this.colorBackgroundSecondary0,
@@ -168,7 +168,7 @@ class VNTButtonCheckBoxPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant VNTButtonCheckBoxPainter oldDelegate) {
+  bool shouldRepaint(covariant CDKButtonCheckBoxPainter oldDelegate) {
     return oldDelegate.colorAccent != colorAccent ||
         oldDelegate.colorAccent200 != colorAccent200 ||
         oldDelegate.colorBackgroundSecondary0 != colorBackgroundSecondary0 ||
