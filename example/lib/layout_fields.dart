@@ -15,8 +15,8 @@ class _LayoutFieldsState extends State<LayoutFields> {
   double _valueNumericIncrement = -1.0;
   double _valueNumeric360 = 270;
   double _valueNumericSlider0 = 0.5;
-  double _valueNumericSlider1 = 0.5;
-  double _valueNumericSlider2 = 0.5;
+  double _valueNumericSlider1 = 50;
+  double _valueNumericSlider2 = 128;
 
   @override
   void initState() {
@@ -157,9 +157,9 @@ class _LayoutFieldsState extends State<LayoutFields> {
         Padding(
             padding: const EdgeInsets.all(8),
             child: SizedBox(
-                width: _valueNumericSlider0,
+                width: 150,
                 child: CKFieldNumericSlider(
-                  value: 0.5,
+                  value: _valueNumericSlider0,
                   onValueChanged: (double value) {
                     setState(() {
                       _valueNumericSlider0 = value;

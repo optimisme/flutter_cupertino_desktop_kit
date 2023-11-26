@@ -43,8 +43,13 @@ class CKFieldNumericSliderState extends State<CKFieldNumericSlider> {
     _previousValue = widget.value;
   }
 
-  void _onValueChanged(double newValue) {
+  void _onValueChanged(String origin, double newValue) {
     bool valueChanged = false;
+    double distance = (widget.max - widget.min).abs();
+
+    if (origin == "picker") {
+      newValue = newValue * distance + widget.min;
+    }
 
     if (newValue < widget.min) {
       newValue = widget.min;
@@ -53,6 +58,7 @@ class CKFieldNumericSliderState extends State<CKFieldNumericSlider> {
       newValue = widget.max;
       valueChanged = true;
     }
+
     if (valueChanged || newValue != _previousValue) {
       widget.onValueChanged?.call(newValue);
       _previousValue = newValue;
@@ -72,7 +78,7 @@ class CKFieldNumericSliderState extends State<CKFieldNumericSlider> {
           size: widget.textSize + 8,
           enabled: widget.enabled,
           onChanged: (value) {
-            _onValueChanged(value);
+            _onValueChanged("picker", value);
           },
         )),
         const SizedBox(width: 4),
@@ -88,7 +94,7 @@ class CKFieldNumericSliderState extends State<CKFieldNumericSlider> {
             enabled: widget.enabled,
             units: widget.units,
             onValueChanged: (value) {
-              _onValueChanged(value);
+              _onValueChanged("numeric", value);
             },
             onTextChanged: (value) {
               widget.onTextChanged?.call(value);
