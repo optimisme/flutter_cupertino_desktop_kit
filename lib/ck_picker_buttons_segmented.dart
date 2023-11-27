@@ -25,7 +25,7 @@ class CDKPickerButtonsSegmented extends StatefulWidget {
 }
 
 class CDKPickerButtonsSegmentedState extends State<CDKPickerButtonsSegmented> {
-  final int _animationMillis = 200; 
+  final int _animationMillis = 200;
   final List<GlobalKey> _keys = []; // Global keys for each option.
   final List<Rect> _rects = []; // Rectangles for the position of each option.
   double _width = 0.0; // Width of the entire widget.
@@ -33,8 +33,10 @@ class CDKPickerButtonsSegmentedState extends State<CDKPickerButtonsSegmented> {
   @override
   void initState() {
     super.initState();
-    if (widget.selectedIndex < 0 || widget.selectedIndex >= widget.options.length) {
-      throw Exception("CKPickerButtonsSegmentedState initState: selectedIndex must be between 0 and options.length");
+    if (widget.selectedIndex < 0 ||
+        widget.selectedIndex >= widget.options.length) {
+      throw Exception(
+          "CDKPickerButtonsSegmentedState initState: selectedIndex must be between 0 and options.length");
     }
     _keys.addAll(List.generate(widget.options.length, (index) => GlobalKey()));
   }

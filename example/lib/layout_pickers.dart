@@ -21,7 +21,7 @@ class _LayoutPickersState extends State<LayoutPickers> {
   Widget build(BuildContext context) {
     return ListView(children: [
       const SizedBox(height: 8),
-      const Padding(padding: EdgeInsets.all(8), child: Text('CKPicker360:')),
+      const Padding(padding: EdgeInsets.all(8), child: Text('CDKPicker360:')),
       Wrap(crossAxisAlignment: WrapCrossAlignment.center, children: [
         Padding(
             padding: const EdgeInsets.all(8),
@@ -36,7 +36,8 @@ class _LayoutPickersState extends State<LayoutPickers> {
         Text(_angle.toStringAsFixed(2), style: const TextStyle(fontSize: 12)),
       ]),
       const SizedBox(height: 8),
-      const Padding(padding: EdgeInsets.all(8), child: Text('CKPickerSlider:')),
+      const Padding(
+          padding: EdgeInsets.all(8), child: Text('CDKPickerSlider:')),
       Wrap(crossAxisAlignment: WrapCrossAlignment.center, children: [
         Padding(
             padding: const EdgeInsets.all(8),
@@ -53,7 +54,8 @@ class _LayoutPickersState extends State<LayoutPickers> {
         Text(_value.toStringAsFixed(2), style: const TextStyle(fontSize: 12)),
       ]),
       const Padding(
-          padding: EdgeInsets.all(8), child: Text('CKPickerButtonsSegmented:')),
+          padding: EdgeInsets.all(8),
+          child: Text('CDKPickerButtonsSegmented:')),
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
@@ -93,7 +95,7 @@ class _LayoutPickersState extends State<LayoutPickers> {
                 ))),
       ]),
       const Padding(
-          padding: EdgeInsets.all(8), child: Text('CKPickerButtonsBar:')),
+          padding: EdgeInsets.all(8), child: Text('CDKPickerButtonsBar:')),
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
@@ -134,12 +136,12 @@ class _LayoutPickersState extends State<LayoutPickers> {
                 ))),
       ]),
       const Padding(
-          padding: EdgeInsets.all(8), child: Text('CKPickerCheckList:')),
+          padding: EdgeInsets.all(8), child: Text('CDKPickerCheckList:')),
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
             child: CDKPickerCheckList(
-              options: const ['Car', 'Motorbike', 'Plane'],
+              options: const ['Dog', 'Cat', 'Parrot'],
               selectedIndex: _selectedIndexCheckList,
               onSelected: (int index) {
                 setState(() {

@@ -10,22 +10,22 @@ class LayoutDialogs extends StatefulWidget {
 
 class _LayoutDialogsState extends State<LayoutDialogs> {
   // Used to tell the popover where to show up
-  final GlobalKey<CKDialogPopoverState> _anchorPopover0 = GlobalKey();
-  final GlobalKey<CKDialogPopoverState> _anchorPopover1 = GlobalKey();
-  final GlobalKey<CKDialogPopoverState> _anchorPopover2 = GlobalKey();
-  final GlobalKey<CKDialogPopoverState> _anchorPopover3 = GlobalKey();
-  final GlobalKey<CKDialogPopoverState> _anchorDraggable0 = GlobalKey();
-  final GlobalKey<CKDialogPopoverState> _anchorDraggable1 = GlobalKey();
-  final GlobalKey<CKDialogPopoverState> _anchorDraggable2 = GlobalKey();
-  final GlobalKey<CKDialogPopoverState> _anchorDraggable3 = GlobalKey();
-  final GlobalKey<CKDialogPopoverState> _anchorArrowed0 = GlobalKey();
-  final GlobalKey<CKDialogPopoverState> _anchorArrowed1 = GlobalKey();
-  final GlobalKey<CKDialogPopoverState> _anchorArrowed2 = GlobalKey();
-  final GlobalKey<CKDialogPopoverState> _anchorArrowed3 = GlobalKey();
+  final GlobalKey<CDKDialogPopoverState> _anchorPopover0 = GlobalKey();
+  final GlobalKey<CDKDialogPopoverState> _anchorPopover1 = GlobalKey();
+  final GlobalKey<CDKDialogPopoverState> _anchorPopover2 = GlobalKey();
+  final GlobalKey<CDKDialogPopoverState> _anchorPopover3 = GlobalKey();
+  final GlobalKey<CDKDialogPopoverState> _anchorDraggable0 = GlobalKey();
+  final GlobalKey<CDKDialogPopoverState> _anchorDraggable1 = GlobalKey();
+  final GlobalKey<CDKDialogPopoverState> _anchorDraggable2 = GlobalKey();
+  final GlobalKey<CDKDialogPopoverState> _anchorDraggable3 = GlobalKey();
+  final GlobalKey<CDKDialogPopoverState> _anchorArrowed0 = GlobalKey();
+  final GlobalKey<CDKDialogPopoverState> _anchorArrowed1 = GlobalKey();
+  final GlobalKey<CDKDialogPopoverState> _anchorArrowed2 = GlobalKey();
+  final GlobalKey<CDKDialogPopoverState> _anchorArrowed3 = GlobalKey();
 
   _showPopover(BuildContext context, GlobalKey anchorKey, CDKTheme theme,
       bool centered, bool animated, bool translucent) {
-    final GlobalKey<CKDialogPopoverState> key = GlobalKey();
+    final GlobalKey<CDKDialogPopoverState> key = GlobalKey();
     CDKDialogsManager.showPopover(
       key: key,
       context: context,
@@ -181,11 +181,11 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
           )),
       const SizedBox(height: 8),
       const Padding(
-          padding: EdgeInsets.all(8), child: Text('CKDialogPopover:')),
+          padding: EdgeInsets.all(8), child: Text('CDKDialogPopover:')),
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
-            child: CKButton(
+            child: CDKButton(
               key: _anchorPopover0,
               style: CDKButtonStyle.normal,
               isLarge: false,
@@ -197,7 +197,7 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
             )),
         Padding(
             padding: const EdgeInsets.all(8),
-            child: CKButton(
+            child: CDKButton(
               key: _anchorPopover1,
               style: CDKButtonStyle.normal,
               isLarge: false,
@@ -209,7 +209,7 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
             )),
         Padding(
             padding: const EdgeInsets.all(8),
-            child: CKButton(
+            child: CDKButton(
               key: _anchorPopover2,
               style: CDKButtonStyle.normal,
               isLarge: false,
@@ -221,7 +221,7 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
             )),
         Padding(
             padding: const EdgeInsets.all(8),
-            child: CKButton(
+            child: CDKButton(
               key: _anchorPopover3,
               style: CDKButtonStyle.normal,
               isLarge: false,
@@ -231,11 +231,11 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
               child: const Text('Translucent with animation'),
             )),
       ]),
-      const Padding(padding: EdgeInsets.all(8), child: Text('CKDialogModal:')),
+      const Padding(padding: EdgeInsets.all(8), child: Text('CDKDialogModal:')),
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
-            child: CKButton(
+            child: CDKButton(
               style: CDKButtonStyle.normal,
               isLarge: false,
               onPressed: () {
@@ -245,7 +245,7 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
             )),
         Padding(
             padding: const EdgeInsets.all(8),
-            child: CKButton(
+            child: CDKButton(
               style: CDKButtonStyle.normal,
               isLarge: false,
               onPressed: () {
@@ -255,7 +255,7 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
             )),
         Padding(
             padding: const EdgeInsets.all(8),
-            child: CKButton(
+            child: CDKButton(
               style: CDKButtonStyle.normal,
               isLarge: false,
               onPressed: () {
@@ -265,7 +265,7 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
             )),
         Padding(
             padding: const EdgeInsets.all(8),
-            child: CKButton(
+            child: CDKButton(
               style: CDKButtonStyle.normal,
               isLarge: false,
               onPressed: () {
@@ -275,11 +275,11 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
             )),
       ]),
       const Padding(
-          padding: EdgeInsets.all(8), child: Text('CKDialogDraggable:')),
+          padding: EdgeInsets.all(8), child: Text('CDKDialogDraggable:')),
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
-            child: CKButton(
+            child: CDKButton(
               key: _anchorDraggable0,
               style: CDKButtonStyle.normal,
               isLarge: false,
@@ -290,7 +290,7 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
             )),
         Padding(
             padding: const EdgeInsets.all(8),
-            child: CKButton(
+            child: CDKButton(
               key: _anchorDraggable1,
               style: CDKButtonStyle.normal,
               isLarge: false,
@@ -301,7 +301,7 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
             )),
         Padding(
             padding: const EdgeInsets.all(8),
-            child: CKButton(
+            child: CDKButton(
               key: _anchorDraggable2,
               style: CDKButtonStyle.normal,
               isLarge: false,
@@ -312,7 +312,7 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
             )),
         Padding(
             padding: const EdgeInsets.all(8),
-            child: CKButton(
+            child: CDKButton(
               key: _anchorDraggable3,
               style: CDKButtonStyle.normal,
               isLarge: false,
@@ -322,11 +322,11 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
               child: const Text('Translucent with animation'),
             )),
       ]),
-      const Padding(padding: EdgeInsets.all(8), child: Text('CKDialogArrow:')),
+      const Padding(padding: EdgeInsets.all(8), child: Text('CDKDialogArrow:')),
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
-            child: CKButton(
+            child: CDKButton(
               key: _anchorArrowed0,
               style: CDKButtonStyle.normal,
               isLarge: false,
@@ -338,7 +338,7 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
             )),
         Padding(
             padding: const EdgeInsets.all(8),
-            child: CKButton(
+            child: CDKButton(
               key: _anchorArrowed1,
               style: CDKButtonStyle.normal,
               isLarge: false,
@@ -350,7 +350,7 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
             )),
         Padding(
             padding: const EdgeInsets.all(8),
-            child: CKButton(
+            child: CDKButton(
               key: _anchorArrowed2,
               style: CDKButtonStyle.normal,
               isLarge: false,
@@ -362,7 +362,7 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
             )),
         Padding(
             padding: const EdgeInsets.all(8),
-            child: CKButton(
+            child: CDKButton(
               key: _anchorArrowed3,
               style: CDKButtonStyle.normal,
               isLarge: false,

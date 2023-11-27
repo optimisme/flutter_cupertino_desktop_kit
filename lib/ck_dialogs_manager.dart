@@ -31,7 +31,7 @@ class CDKDialogsManager {
 
     OverlayEntry? overlayEntry;
     overlayEntry = OverlayEntry(
-      builder: (BuildContext context) => CKDialogPopover(
+      builder: (BuildContext context) => CDKDialogPopover(
         key: key,
         isAnimated: isAnimated,
         type: type,
@@ -44,7 +44,7 @@ class CDKDialogsManager {
           // Close all other popovers
           while (_activePopoverKeys.isNotEmpty) {
             var refKey = _activePopoverKeys.values.first;
-            var state = refKey.currentState as CKDialogPopoverState;
+            var state = refKey.currentState as CDKDialogPopoverState;
             state.hide();
           }
         },
@@ -163,7 +163,7 @@ class CDKDialogsManager {
           // Close all other popovers
           while (_activePopoverKeys.isNotEmpty) {
             var refKey = _activePopoverKeys.values.first;
-            var state = refKey.currentState as CKDialogPopoverState;
+            var state = refKey.currentState as CDKDialogPopoverState;
             state.hide();
           }
         },

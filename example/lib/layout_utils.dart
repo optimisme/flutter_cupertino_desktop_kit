@@ -28,7 +28,7 @@ class _LayoutUtilsState extends State<LayoutUtils> {
     return ListView(children: [
       const SizedBox(height: 8),
       const Padding(
-          padding: EdgeInsets.all(8), child: Text('CKUtilsDisclosure:')),
+          padding: EdgeInsets.all(8), child: Text('CDKUtilsDisclosure:')),
       Wrap(crossAxisAlignment: WrapCrossAlignment.center, children: [
         Padding(
           padding: const EdgeInsets.all(8),

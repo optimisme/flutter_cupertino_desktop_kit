@@ -23,15 +23,16 @@ class CDKPickerCheckList extends StatefulWidget {
   CDKPickerCheckListState createState() => CDKPickerCheckListState();
 }
 
-
 class CDKPickerCheckListState extends State<CDKPickerCheckList> {
   int? _hoverIndex;
 
   @override
   void initState() {
     super.initState();
-    if (widget.selectedIndex < 0 || widget.selectedIndex >= widget.options.length) {
-      throw Exception("CKPickerCheckListState initState: selectedIndex must be between 0 and options.length");
+    if (widget.selectedIndex < 0 ||
+        widget.selectedIndex >= widget.options.length) {
+      throw Exception(
+          "CDKPickerCheckListState initState: selectedIndex must be between 0 and options.length");
     }
   }
 

@@ -34,9 +34,9 @@ class CDKProgressBarState extends State<CDKProgressBar>
   void initState() {
     super.initState();
 
-    if (widget.value <0 || widget.value > 1) {
+    if (widget.value < 0 || widget.value > 1) {
       throw Exception(
-          "CKProgressBarState initState: value must be between 0 and 1");
+          "CDKProgressBarState initState: value must be between 0 and 1");
     }
 
     _controller = AnimationController(
@@ -92,8 +92,8 @@ class CDKProgressBarState extends State<CDKProgressBar>
       } else if (widget.value != oldWidget.value) {
         // En cas contrari, crea una nova Tween i inicia l'animació
         _controller.duration = Duration(milliseconds: _animationMillis);
-        var tween = Tween<double>(
-            begin: _progressAnimation.value, end: widget.value);
+        var tween =
+            Tween<double>(begin: _progressAnimation.value, end: widget.value);
         _progressAnimation = tween.animate(_controller)
           ..addListener(() {
             setState(() {});

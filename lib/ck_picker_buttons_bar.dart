@@ -37,7 +37,7 @@ class CDKPickerButtonsBarState extends State<CDKPickerButtonsBar> {
     super.initState();
     if (widget.selectedStates.length != widget.options.length) {
       throw Exception(
-          "CKPickerButtonsBarState initState: selectedStates and options must have the same length");
+          "CDKPickerButtonsBarState initState: selectedStates and options must have the same length");
     }
   }
 
@@ -57,8 +57,8 @@ class CDKPickerButtonsBarState extends State<CDKPickerButtonsBar> {
         }
       }
     });
-    widget.onChanged?.call(
-        widget.selectedStates.map((option) => option).toList());
+    widget.onChanged
+        ?.call(widget.selectedStates.map((option) => option).toList());
   }
 
   Widget fixWidgetStyle(Widget child, int index, CDKTheme theme) {
@@ -125,8 +125,7 @@ class CDKPickerButtonsBarState extends State<CDKPickerButtonsBar> {
               ),
               borderRadius: borderRadius,
             ),
-            child:
-                fixWidgetStyle(widget.options[index], index, theme),
+            child: fixWidgetStyle(widget.options[index], index, theme),
           ),
         ),
       );

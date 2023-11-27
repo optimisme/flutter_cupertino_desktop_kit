@@ -8,14 +8,14 @@ import 'ck_theme.dart';
 // Custom enum for button styles
 enum CDKButtonStyle { action, normal, destructive }
 
-class CKButton extends StatefulWidget {
+class CDKButton extends StatefulWidget {
   final VoidCallback? onPressed;
   final Widget child;
   final CDKButtonStyle style;
   final bool isLarge;
   final bool enabled;
 
-  const CKButton({
+  const CDKButton({
     Key? key,
     this.onPressed,
     required this.child,
@@ -25,10 +25,10 @@ class CKButton extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  CKButtonState createState() => CKButtonState();
+  CDKButtonState createState() => CDKButtonState();
 }
 
-class CKButtonState extends State<CKButton> {
+class CDKButtonState extends State<CDKButton> {
   // Default font size.
   static const double _fontSize = 12.0;
 

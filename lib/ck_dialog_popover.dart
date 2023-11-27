@@ -11,7 +11,7 @@ import 'ck_theme.dart';
 enum CDKDialogPopoverType { down, center, side }
 // TODO 'side' type
 
-class CKDialogPopover extends StatefulWidget {
+class CDKDialogPopover extends StatefulWidget {
   final GlobalKey anchorKey;
   final CDKDialogPopoverType type;
   final bool isAnimated;
@@ -19,7 +19,7 @@ class CKDialogPopover extends StatefulWidget {
   final Function? onHide;
   final Widget child;
 
-  const CKDialogPopover({
+  const CDKDialogPopover({
     Key? key,
     required this.anchorKey,
     this.type = CDKDialogPopoverType.center,
@@ -30,10 +30,10 @@ class CKDialogPopover extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  CKDialogPopoverState createState() => CKDialogPopoverState();
+  CDKDialogPopoverState createState() => CDKDialogPopoverState();
 }
 
-class CKDialogPopoverState extends State<CKDialogPopover>
+class CDKDialogPopoverState extends State<CDKDialogPopover>
     with SingleTickerProviderStateMixin {
   OverlayEntry? overlayEntry;
   final int _animationMillis = 200;
@@ -183,8 +183,8 @@ class CKDialogPopoverState extends State<CKDialogPopover>
                   child: !widget.isTranslucent
                       ? dialogContents
                       : ClipPath(
-                          clipper:
-                              CDKPopoverClipper(pathClip), // Aplica el clip aquí
+                          clipper: CDKPopoverClipper(
+                              pathClip), // Aplica el clip aquí
                           child: BackdropFilter(
                             filter: ImageFilter.blur(
                                 sigmaX: 7.5,

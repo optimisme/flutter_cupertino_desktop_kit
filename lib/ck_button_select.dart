@@ -28,16 +28,14 @@ class CDKButtonSelect extends StatefulWidget {
   CDKButtonSelectState createState() => CDKButtonSelectState();
 }
 
-
 class CDKButtonSelectState extends State<CDKButtonSelect> {
   static const double _fontSize = 12.0;
   bool _isMouseOver = false;
   final GlobalKey _globalKey = GlobalKey();
 
-
   /// Method to show a popover list when the button is tapped.
   _showPopover(BuildContext context) {
-    final GlobalKey<CKDialogPopoverState> key = GlobalKey();
+    final GlobalKey<CDKDialogPopoverState> key = GlobalKey();
 
     // Show popover with selectable options.
     CDKDialogsManager.showPopover(

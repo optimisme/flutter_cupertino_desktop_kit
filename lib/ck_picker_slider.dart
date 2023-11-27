@@ -21,13 +21,12 @@ class CDKPickerSlider extends StatefulWidget {
 }
 
 class CDKPickerSliderState extends State<CDKPickerSlider> {
-
   @override
   void initState() {
     super.initState();
-    if (widget.value <0 || widget.value > 1) {
+    if (widget.value < 0 || widget.value > 1) {
       throw Exception(
-          "CKPickerSliderState initState: value must be between 0 and 1");
+          "CDKPickerSliderState initState: value must be between 0 and 1");
     }
   }
 

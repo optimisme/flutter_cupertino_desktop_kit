@@ -48,7 +48,7 @@ class _LayoutProgressState extends State<LayoutProgress> {
   Widget build(BuildContext context) {
     return ListView(children: [
       const SizedBox(height: 8),
-      const Padding(padding: EdgeInsets.all(8), child: Text('CKProgressBar:')),
+      const Padding(padding: EdgeInsets.all(8), child: Text('CDKProgressBar:')),
       Wrap(
           alignment: WrapAlignment.start,
           crossAxisAlignment: WrapCrossAlignment.center,
@@ -67,7 +67,7 @@ class _LayoutProgressState extends State<LayoutProgress> {
             ),
             Padding(
                 padding: const EdgeInsets.all(8),
-                child: CKButton(
+                child: CDKButton(
                   style: CDKButtonStyle.normal,
                   onPressed: () {
                     _increaseProgressL();
@@ -90,7 +90,7 @@ class _LayoutProgressState extends State<LayoutProgress> {
                     ))),
             Padding(
                 padding: const EdgeInsets.all(8),
-                child: CKButton(
+                child: CDKButton(
                   style: CDKButtonStyle.normal,
                   onPressed: () {
                     _toggleIndeterminateL();
@@ -99,7 +99,7 @@ class _LayoutProgressState extends State<LayoutProgress> {
                 )),
           ]),
       const Padding(
-          padding: EdgeInsets.all(8), child: Text('CKProgressCircular:')),
+          padding: EdgeInsets.all(8), child: Text('CDKProgressCircular:')),
       Wrap(
           alignment: WrapAlignment.start,
           crossAxisAlignment: WrapCrossAlignment.center,
@@ -118,7 +118,7 @@ class _LayoutProgressState extends State<LayoutProgress> {
             ),
             Padding(
                 padding: const EdgeInsets.all(8),
-                child: CKButton(
+                child: CDKButton(
                   style: CDKButtonStyle.normal,
                   onPressed: () {
                     _increaseProgressC();
@@ -141,7 +141,7 @@ class _LayoutProgressState extends State<LayoutProgress> {
                     ))),
             Padding(
                 padding: const EdgeInsets.all(8),
-                child: CKButton(
+                child: CDKButton(
                   style: CDKButtonStyle.normal,
                   onPressed: () {
                     _toggleIndeterminateC();
