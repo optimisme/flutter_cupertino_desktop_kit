@@ -203,7 +203,7 @@ class _LayoutPickersState extends State<LayoutPickers> {
                   },
                 ))),
         Container(width: 10, height: 10, color: valueSliderSBColor),
-        Text("S: " + _valueSliderSaturation.toStringAsFixed(2) + " B: " + _valueSliderBrightness.toStringAsFixed(2),
+        Text("S: ${_valueSliderSaturation.toStringAsFixed(2)} B: ${_valueSliderBrightness.toStringAsFixed(2)}",
             style: const TextStyle(fontSize: 12)),
       ]),
       const SizedBox(height: 8),
