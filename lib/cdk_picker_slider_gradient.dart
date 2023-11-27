@@ -119,7 +119,7 @@ class CDKPickerSliderGradientPainter extends CustomPainter {
       0,
       0,
       size.width,
-      size.height - 4,
+      size.height - 2,
       const Radius.circular(4.0),
     );
     Paint gradientPaint = Paint()
