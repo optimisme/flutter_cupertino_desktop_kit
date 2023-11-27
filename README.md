@@ -1,6 +1,6 @@
-# Flutter macOS GUI
+# Flutter Cupertino Desktop Kit (CDK)
 
-This project, Flutter Cupertino Desktop Kit (CDK), defines Flutter widgets for Desktop, providing a macOS-style aesthetic, built upon the foundation of Cupertino widgets.
+This project, defines Flutter widgets for Desktop, providing a macOS-style aesthetic, built upon the foundation of Cupertino widgets.
 
 The goal is to be able to develop applications for all desktop systems, including the web, filling in the gaps in the Cupertino theme.
 
@@ -10,10 +10,18 @@ The CDK prefix strives to be distinctive within the Flutter ecosystem, while rem
 
 The project itself is just a set of libraries that define and manage widgets. However, it includes an example of how to use them. The example can be seen on this website:
 
-[CK toolkit Example](https://optimisme.github.io/flutter_cupertino_desktop/gh-pages/example/)
+[CDK toolkit Example](https://optimisme.github.io/flutter_cupertino_desktop/gh-pages/example/)
 
 To run the example in a local application:
 
 cd example
 flutter create .
 flutter run
+
+Create the project if necessary
+flutter create . --template=package
+rm lib/flutter_cupertino_desktop_kit.dart
+rm -r test
+cd example
+flutter create . --platform macos # Or the platform of your choice
+flutter run -d macos --enable-impeller

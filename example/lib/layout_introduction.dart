@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter_cupertino_desktop/ck_widgets.dart';
+import 'package:flutter_cupertino_desktop_kit/cdk_widgets.dart';
 
 class LayoutIntroduction extends StatefulWidget {
   const LayoutIntroduction({super.key});
