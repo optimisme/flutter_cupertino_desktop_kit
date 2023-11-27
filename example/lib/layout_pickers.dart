@@ -189,7 +189,8 @@ class _LayoutPickersState extends State<LayoutPickers> {
         Padding(
             padding: const EdgeInsets.all(8),
             child: SizedBox(
-                width: 100,
+                height: 150,
+                width: 200,
                 child: CDKPickerSliderSB(
                   staturation: _valueSliderSaturation,
                   brightness: _valueSliderBrightness,

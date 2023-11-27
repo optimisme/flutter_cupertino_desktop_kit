@@ -149,6 +149,14 @@ class CDKPickerSliderGradientPainter extends CustomPainter {
     thumbPath.lineTo(limitLeft + 1, thumbCenter.dy + 8);
     thumbPath.lineTo(limitLeft, thumbCenter.dy + 7);
     thumbPath.close();
+
+    Paint thumbStrokePaint = Paint()
+      ..color = CDKTheme.grey700
+      ..strokeWidth = 1
+      ..style = PaintingStyle.stroke;
+    canvas.drawPath(thumbPath, thumbStrokePaint);
+
+
     Paint thumbPaint = Paint()
       ..color = CDKTheme.grey
       ..style = PaintingStyle.fill;

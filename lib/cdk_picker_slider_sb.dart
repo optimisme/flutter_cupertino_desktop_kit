@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
-
+import 'package:flutter/cupertino.dart';
+import 'cdk_theme.dart';
 
 class CDKPickerSliderSB extends StatefulWidget {
   final double staturation;
@@ -27,21 +27,17 @@ class CDKPickerSliderSB extends StatefulWidget {
 }
 
 class CDKPickerSliderSBState extends State<CDKPickerSliderSB> {
-  
+  final double _thumbSize = 16.0;
+  final double _thumbHalf = 8;
+
   void _updatePosition(Offset globalPosition) {
     RenderBox renderBox = context.findRenderObject() as RenderBox;
     Offset localPosition = renderBox.globalToLocal(globalPosition);
 
-    double saturation = (localPosition.dx / renderBox.size.width).clamp(0.0, 1.0);
-    double brightness = 1 - (localPosition.dy / renderBox.size.height).clamp(0.0, 1.0);
 
-    HSVColor hsvColor = HSVColor.fromColor(widget.initialColor);
-    final Color selectedColor = HSVColor.fromAHSV(
-      1.0, // Alpha
-      hsvColor.hue, // Hue from the initial color
-      saturation,
-      brightness,
-    ).toColor();
+
+    double saturation = ((localPosition.dx - _thumbHalf) / (renderBox.size.width - _thumbSize)).clamp(0.0, 1.0);
+    double brightness = 1 - ((localPosition.dy - _thumbHalf) / (renderBox.size.height - _thumbSize)).clamp(0.0, 1.0);
 
     if (widget.onChanged != null) {
       widget.onChanged!(saturation, brightness);
@@ -68,6 +64,8 @@ class CDKPickerSliderSBState extends State<CDKPickerSliderSB> {
           saturation: widget.staturation,
           brightness: widget.brightness,
           initialColor: widget.initialColor,
+          thumbSize: _thumbSize,
+          thumbHalf: _thumbHalf,
         ),
         size: Size(widget.width, widget.height),
       ),
@@ -79,11 +77,15 @@ class CDKPickerSliderGradient2DPainter extends CustomPainter {
   final double saturation;
   final double brightness;
   final Color initialColor;
+  final double thumbSize;
+  final double thumbHalf;
 
   CDKPickerSliderGradient2DPainter({
     required this.saturation,
     required this.brightness,
     required this.initialColor,
+    required this.thumbSize,
+    required this.thumbHalf,
   });
 
   @override
@@ -91,45 +93,80 @@ class CDKPickerSliderGradient2DPainter extends CustomPainter {
     // Draw the 2D gradient
     _draw2DGradient(canvas, size);
 
-    // Paint the thumb as a circle
-    const double thumbRadius = 10.0;
-    Paint thumbPaint = Paint()..color = Colors.white;
-    canvas.drawCircle(Offset(saturation * size.width, (1 - brightness) * size.height),
-        thumbRadius, thumbPaint);
+  // Draw the custom thumb
+    // Calculate the center position of the thumb on the slider
+
+    final double thumbX = thumbHalf + (saturation * (size.width - thumbSize));
+    final double thumbY = thumbHalf + ((1 - brightness) * (size.height - thumbSize));
+    final Offset thumbCenter = Offset(thumbX, thumbY);
+    double limitLeft = thumbCenter.dx - thumbHalf;
+    double limitTop = thumbCenter.dy - thumbHalf;
+
+    // Create the thumb path
+    RRect thumbRRect = RRect.fromRectAndRadius(
+      Rect.fromLTWH(limitLeft, limitTop, thumbSize, thumbSize),
+      const Radius.circular(4), // Arrodoniment de 4 pixels
+    );   
+
+    Color thumbColor = HSVColor.fromAHSV(
+      1.0, // Alpha
+      HSVColor.fromColor(initialColor).hue, 
+      saturation,
+      brightness,
+    ).toColor();
+
+    Paint thumbStrokePaint = Paint()
+      ..color = thumbColor
+      ..style = PaintingStyle.fill;
+    canvas.drawRRect(thumbRRect, thumbStrokePaint);
+
+    Paint thumbPaint0 = Paint()
+      ..color = CDKTheme.black
+      ..strokeWidth = 1.5
+      ..style = PaintingStyle.stroke;
+    canvas.drawRRect(thumbRRect, thumbPaint0);
+
+    Paint thumbPaint1 = Paint()
+      ..color = CDKTheme.white
+      ..strokeWidth = 1
+      ..style = PaintingStyle.stroke;
+    canvas.drawRRect(thumbRRect, thumbPaint1);
   }
 
   void _draw2DGradient(Canvas canvas, Size size) {
-  Rect rect = Rect.fromLTWH(0, 0, size.width, size.height);
-  HSVColor hsvColor = HSVColor.fromColor(initialColor);
+    RRect roundedRect = RRect.fromRectAndRadius(
+      Rect.fromLTWH(0, 0, size.width, size.height),
+      const Radius.circular(4), // Arrodoniment de 4 pixels
+    );   
+    HSVColor hsvColor = HSVColor.fromColor(initialColor);
 
-  // Gradient for brightness (black to transparent)
-  var brightnessGradient = ui.Gradient.linear(
-    const Offset(0, 0),
-    Offset(size.width, 0),
-    [Colors.white, hsvColor.toColor()],
-  );
+    // Gradient for brightness (black to transparent)
+    var brightnessGradient = ui.Gradient.linear(
+      const Offset(0, 0),
+      Offset(size.width, 0),
+      [CDKTheme.white, hsvColor.toColor()],
+    );
 
-  // Gradient for saturation (color to white)
-  var saturationGradient = ui.Gradient.linear(
-    const Offset(0, 0),
-    Offset(0, size.height),
-    [Colors.transparent, Colors.black],
-  );
+    // Gradient for saturation (color to white)
+    var saturationGradient = ui.Gradient.linear(
+      const Offset(0, 0),
+      Offset(0, size.height),
+      [CDKTheme.transparent, CDKTheme.black],
+    );
 
-  // Apply the gradients using a Paint object
-  var paint = Paint()..blendMode = BlendMode.multiply;
-  // Draw the brightness gradient
-  canvas.drawRect(
-    rect,
-    paint..shader = brightnessGradient,
-  );
-  // Draw the saturation gradient
-  canvas.drawRect(
-    rect,
-    paint..shader = saturationGradient,
-  );
-}
-
+    // Apply the gradients using a Paint object
+    var paint = Paint()..blendMode = BlendMode.multiply;
+    // Draw the brightness gradient
+    canvas.drawRRect(
+      roundedRect,
+      paint..shader = brightnessGradient,
+    );
+    // Draw the saturation gradient
+    canvas.drawRRect(
+      roundedRect,
+      paint..shader = saturationGradient,
+    );
+  }
 
   @override
   bool shouldRepaint(covariant CDKPickerSliderGradient2DPainter oldDelegate) {
