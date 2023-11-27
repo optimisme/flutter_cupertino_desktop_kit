@@ -2,7 +2,7 @@ import 'dart:ui' as ui;
 import 'package:flutter/cupertino.dart';
 import 'cdk_theme.dart';
 
-class CDKPickerSliderSB extends StatefulWidget {
+class CDKPickerSliderChroma extends StatefulWidget {
   final double staturation;
   final double brightness;
   final double width;
@@ -11,7 +11,7 @@ class CDKPickerSliderSB extends StatefulWidget {
   final Color hueColor;
   final Function(double, double)? onChanged;
 
-  const CDKPickerSliderSB({
+  const CDKPickerSliderChroma({
     Key? key,
     required this.staturation,
     required this.brightness,
@@ -23,10 +23,10 @@ class CDKPickerSliderSB extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  CDKPickerSliderSBState createState() => CDKPickerSliderSBState();
+  CDKPickerSliderChromaState createState() => CDKPickerSliderChromaState();
 }
 
-class CDKPickerSliderSBState extends State<CDKPickerSliderSB> {
+class CDKPickerSliderChromaState extends State<CDKPickerSliderChroma> {
   final double _thumbSize = 16.0;
   final double _thumbHalf = 8;
 

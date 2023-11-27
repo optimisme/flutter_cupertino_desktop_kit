@@ -23,7 +23,7 @@ export 'cdk_picker_360.dart';
 export 'cdk_picker_buttons_bar.dart';
 export 'cdk_picker_buttons_segmented.dart';
 export 'cdk_picker_check_list.dart';
-export 'cdk_picker_slider_sb.dart';
+export 'cdk_picker_slider_chroma.dart';
 export 'cdk_picker_slider_gradient.dart';
 export 'cdk_picker_slider.dart';
 export 'cdk_picker_theme_colors.dart';

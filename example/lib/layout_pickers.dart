@@ -184,14 +184,14 @@ class _LayoutPickersState extends State<LayoutPickers> {
       const SizedBox(height: 8),
       const Padding(
           padding: EdgeInsets.all(8),
-          child: Text('CDKPickerSliderSB:')),
+          child: Text('CDKPickerSliderChroma:')),
       Wrap(crossAxisAlignment: WrapCrossAlignment.center, children: [
         Padding(
             padding: const EdgeInsets.all(8),
             child: SizedBox(
                 height: 150,
                 width: 200,
-                child: CDKPickerSliderSB(
+                child: CDKPickerSliderChroma(
                   staturation: _valueSliderSaturation,
                   brightness: _valueSliderBrightness,
                   hueColor: _valueSliderSB,
