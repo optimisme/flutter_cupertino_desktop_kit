@@ -10,15 +10,25 @@ class LayoutPickers extends StatefulWidget {
 
 class _LayoutPickersState extends State<LayoutPickers> {
   double _angle = 0.0;
-  double _value = 0.1;
+  double _valueSlider = 0.5;
   int _selectedIndexButtonsSegmented0 = 1;
   int _selectedIndexButtonsSegmented1 = 1;
   List<bool> _selectedStatesButtonsBar0 = [true, false, false, false];
   List<bool> _selectedStatesButtonsBar1 = [true, false, true, false];
   int _selectedIndexCheckList = 1;
 
+  late List<Color> _valueSliderColors;
+  final List<double> _valueSliderStops = const [0.0, 1.0];
+  double _valueSliderGradient = 0.75;
+
   @override
   Widget build(BuildContext context) {
+    CDKTheme theme = CDKThemeNotifier.of(context)!.changeNotifier;
+
+    _valueSliderColors = [CDKTheme.black, theme.accent];
+    Color valueSliderGradientColor = CDKPickerSliderGradient.getColorAtValue(
+        _valueSliderColors, _valueSliderStops, _valueSliderGradient);
+
     return ListView(children: [
       const SizedBox(height: 8),
       const Padding(padding: EdgeInsets.all(8), child: Text('CDKPicker360:')),
@@ -44,15 +54,17 @@ class _LayoutPickersState extends State<LayoutPickers> {
             child: SizedBox(
                 width: 100,
                 child: CDKPickerSlider(
-                  value: _value,
+                  value: _valueSlider,
                   onChanged: (value) {
                     setState(() {
-                      _value = value;
+                      _valueSlider = value;
                     });
                   },
                 ))),
-        Text(_value.toStringAsFixed(2), style: const TextStyle(fontSize: 12)),
+        Text(_valueSlider.toStringAsFixed(2),
+            style: const TextStyle(fontSize: 12)),
       ]),
+      const SizedBox(height: 8),
       const Padding(
           padding: EdgeInsets.all(8),
           child: Text('CDKPickerButtonsSegmented:')),
@@ -94,6 +106,7 @@ class _LayoutPickersState extends State<LayoutPickers> {
                   },
                 ))),
       ]),
+      const SizedBox(height: 8),
       const Padding(
           padding: EdgeInsets.all(8), child: Text('CDKPickerButtonsBar:')),
       Wrap(children: [
@@ -135,6 +148,30 @@ class _LayoutPickersState extends State<LayoutPickers> {
                   },
                 ))),
       ]),
+      const SizedBox(height: 8),
+      const Padding(
+          padding: EdgeInsets.all(8), child: Text('CDKPickerSliderGradient:')),
+      Wrap(crossAxisAlignment: WrapCrossAlignment.center, children: [
+        Padding(
+            padding: const EdgeInsets.all(8),
+            child: SizedBox(
+                width: 100,
+                child: CDKPickerSliderGradient(
+                  colors: _valueSliderColors,
+                  stops: _valueSliderStops,
+                  value: _valueSliderGradient,
+                  onChanged: (value, color) {
+                    setState(() {
+                      _valueSliderGradient = value;
+                      valueSliderGradientColor = color;
+                    });
+                  },
+                ))),
+        Container(width: 10, height: 10, color: valueSliderGradientColor),
+        Text(_valueSliderGradient.toStringAsFixed(2),
+            style: const TextStyle(fontSize: 12)),
+      ]),
+      const SizedBox(height: 8),
       const Padding(
           padding: EdgeInsets.all(8), child: Text('CDKPickerCheckList:')),
       Wrap(children: [
