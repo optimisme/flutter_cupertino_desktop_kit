@@ -154,6 +154,11 @@ class CDKPickerSliderGradient2DPainter extends CustomPainter {
       [CDKTheme.transparent, CDKTheme.black],
     );
 
+    Paint whiteBackground = Paint()
+      ..color = CDKTheme.white
+      ..style = PaintingStyle.fill;
+    canvas.drawRRect(roundedRect, whiteBackground);
+
     // Apply the gradients using a Paint object
     var paint = Paint()..blendMode = BlendMode.multiply;
     // Draw the brightness gradient
