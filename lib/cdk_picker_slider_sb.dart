@@ -8,7 +8,7 @@ class CDKPickerSliderSB extends StatefulWidget {
   final double width;
   final double height;
   final bool enabled;
-  final Color initialColor;
+  final Color hueColor;
   final Function(double, double)? onChanged;
 
   const CDKPickerSliderSB({
@@ -18,7 +18,7 @@ class CDKPickerSliderSB extends StatefulWidget {
     this.enabled = true,
     this.width = 150,
     this.height = 100,
-    required this.initialColor,
+    required this.hueColor,
     this.onChanged,
   }) : super(key: key);
 
@@ -63,7 +63,7 @@ class CDKPickerSliderSBState extends State<CDKPickerSliderSB> {
         painter: CDKPickerSliderGradient2DPainter(
           saturation: widget.staturation,
           brightness: widget.brightness,
-          initialColor: widget.initialColor,
+          hueColor: widget.hueColor,
           thumbSize: _thumbSize,
           thumbHalf: _thumbHalf,
         ),
@@ -76,14 +76,14 @@ class CDKPickerSliderSBState extends State<CDKPickerSliderSB> {
 class CDKPickerSliderGradient2DPainter extends CustomPainter {
   final double saturation;
   final double brightness;
-  final Color initialColor;
+  final Color hueColor;
   final double thumbSize;
   final double thumbHalf;
 
   CDKPickerSliderGradient2DPainter({
     required this.saturation,
     required this.brightness,
-    required this.initialColor,
+    required this.hueColor,
     required this.thumbSize,
     required this.thumbHalf,
   });
@@ -110,7 +110,7 @@ class CDKPickerSliderGradient2DPainter extends CustomPainter {
 
     Color thumbColor = HSVColor.fromAHSV(
       1.0, // Alpha
-      HSVColor.fromColor(initialColor).hue, 
+      HSVColor.fromColor(hueColor).hue, 
       saturation,
       brightness,
     ).toColor();
@@ -138,7 +138,7 @@ class CDKPickerSliderGradient2DPainter extends CustomPainter {
       Rect.fromLTWH(0, 0, size.width, size.height),
       const Radius.circular(4), // Arrodoniment de 4 pixels
     );   
-    HSVColor hsvColor = HSVColor.fromColor(initialColor);
+    HSVColor hsvColor = HSVColor.fromColor(hueColor);
 
     // Gradient for brightness (black to transparent)
     var brightnessGradient = ui.Gradient.linear(
@@ -177,6 +177,6 @@ class CDKPickerSliderGradient2DPainter extends CustomPainter {
   bool shouldRepaint(covariant CDKPickerSliderGradient2DPainter oldDelegate) {
     return oldDelegate.saturation != saturation || 
       oldDelegate.brightness != brightness ||
-      oldDelegate.initialColor != initialColor;
+      oldDelegate.hueColor != hueColor;
   }
 }

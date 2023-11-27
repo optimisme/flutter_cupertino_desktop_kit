@@ -194,7 +194,7 @@ class _LayoutPickersState extends State<LayoutPickers> {
                 child: CDKPickerSliderSB(
                   staturation: _valueSliderSaturation,
                   brightness: _valueSliderBrightness,
-                  initialColor: _valueSliderSB,
+                  hueColor: _valueSliderSB,
                   onChanged: (saturation, brightness) {
                     setState(() {
                       _valueSliderSaturation = saturation;
