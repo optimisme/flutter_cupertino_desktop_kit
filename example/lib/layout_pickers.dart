@@ -21,6 +21,9 @@ class _LayoutPickersState extends State<LayoutPickers> {
   final List<double> _valueSliderStops = const [0.0, 1.0];
   double _valueSliderGradient = 0.75;
 
+  double _valueSliderGradient2DX = 0.5;
+  double _valueSliderGradient2DY = 0.5;
+
   @override
   Widget build(BuildContext context) {
     CDKTheme theme = CDKThemeNotifier.of(context)!.changeNotifier;
@@ -164,6 +167,29 @@ class _LayoutPickersState extends State<LayoutPickers> {
                     setState(() {
                       _valueSliderGradient = value;
                       valueSliderGradientColor = color;
+                    });
+                  },
+                ))),
+        Container(width: 10, height: 10, color: valueSliderGradientColor),
+        Text(_valueSliderGradient.toStringAsFixed(2),
+            style: const TextStyle(fontSize: 12)),
+      ]),
+      const SizedBox(height: 8),
+      const Padding(
+          padding: EdgeInsets.all(8),
+          child: Text('CDKPickerSliderGradient2D:')),
+      Wrap(crossAxisAlignment: WrapCrossAlignment.center, children: [
+        Padding(
+            padding: const EdgeInsets.all(8),
+            child: SizedBox(
+                width: 100,
+                child: CDKPickerSliderGradient2D(
+                  value: CDKPickerPoint(
+                      _valueSliderGradient2DX, _valueSliderGradient2DY),
+                  onChanged: (point) {
+                    setState(() {
+                      _valueSliderGradient2DX = point.x;
+                      _valueSliderGradient2DY = point.y;
                     });
                   },
                 ))),
