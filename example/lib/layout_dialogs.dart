@@ -160,7 +160,7 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
     );
   }
 
-  _showPopoverSlider(
+  _showDialogArrowedSlider(
       BuildContext context, GlobalKey anchorKey, CDKTheme theme) {
     final GlobalKey<CDKDialogPopoverArrowedState> key = GlobalKey();
     CDKDialogsManager.showPopoverArrowed(
@@ -171,7 +171,7 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
       isTranslucent: false,
       onHide: () {
         // ignore: avoid_print
-        print("hide popover $key");
+        print("hide slider $key");
       },
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -182,6 +182,7 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text("Slider:", style: TextStyle(fontSize: 16)),
+                    const SizedBox(height: 8),
                     Text(value.toStringAsFixed(2),
                         style: const TextStyle(fontSize: 12)),
                     SizedBox(
@@ -194,12 +195,17 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
                         },
                       ),
                     ),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 8),
+                    const Text('Using a value notifier to',
+                        style: TextStyle(fontSize: 12)),
+                    const Text('communicate with the dialog.',
+                        style: TextStyle(fontSize: 12)),
+                    const SizedBox(height: 8),
                     GestureDetector(
                       onTap: () {
                         key.currentState?.hide();
                       },
-                      child: Text('Close popover',
+                      child: Text('Close slider',
                           style: TextStyle(fontSize: 12, color: theme.accent)),
                     ),
                   ]);
@@ -414,9 +420,9 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
               style: CDKButtonStyle.normal,
               isLarge: false,
               onPressed: () {
-                _showPopoverSlider(context, _anchorPopoverSlider, theme);
+                _showDialogArrowedSlider(context, _anchorPopoverSlider, theme);
               },
-              child: const Text('Popover with slider'),
+              child: const Text('DialogArrow with slider'),
             )),
         ValueListenableBuilder<double>(
           valueListenable: _sliderValueNotifier,
