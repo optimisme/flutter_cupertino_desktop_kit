@@ -29,7 +29,9 @@ class CDKTheme extends ChangeNotifier {
   static const Color red = Color.fromRGBO(255, 0, 0, 1.0);
   static const Color green = Color.fromRGBO(0, 255, 0, 1.0);
   static const Color yellow = Color.fromRGBO(255, 255, 0, 1.0);
+  static const Color cyan = Color.fromRGBO(0, 255, 255, 1.0);
   static const Color blue = Color.fromRGBO(0, 0, 255, 1.0);
+  static const Color magenta = Color.fromRGBO(255, 0, 255, 1.0);
 
   static const Color grey50 = Color.fromRGBO(230, 230, 230, 1.0);
   static const Color grey60 = Color.fromRGBO(222, 222, 222, 1.0);

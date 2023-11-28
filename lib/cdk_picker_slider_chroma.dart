@@ -16,8 +16,8 @@ class CDKPickerSliderChroma extends StatefulWidget {
     required this.staturation,
     required this.brightness,
     this.enabled = true,
-    this.width = 150,
-    this.height = 100,
+    this.width = 200,
+    this.height = 150,
     required this.hueColor,
     this.onChanged,
   }) : super(key: key);

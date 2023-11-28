@@ -21,9 +21,7 @@ class _LayoutPickersState extends State<LayoutPickers> {
   final List<double> _valueSliderStops = const [0.0, 1.0];
   double _valueSliderGradient = 0.75;
 
-  double _valueSliderSaturation = 0.5;
-  double _valueSliderBrightness = 0.5;
-  final Color _valueSliderSB = CDKTheme.red;
+  Color _valueColor = CDKTheme.cyan;
 
   @override
   Widget build(BuildContext context) {
@@ -32,12 +30,6 @@ class _LayoutPickersState extends State<LayoutPickers> {
     _valueSliderColors = [CDKTheme.black, theme.accent];
     Color valueSliderGradientColor = CDKPickerSliderGradient.getColorAtValue(
         _valueSliderColors, _valueSliderStops, _valueSliderGradient);
-    Color valueSliderSBColor = HSVColor.fromAHSV(
-                        1.0, // Alpha
-                        HSVColor.fromColor(_valueSliderSB).hue, 
-                        _valueSliderSaturation,
-                        _valueSliderBrightness,
-                      ).toColor();
 
     return ListView(children: [
       const SizedBox(height: 8),
@@ -184,43 +176,20 @@ class _LayoutPickersState extends State<LayoutPickers> {
       const SizedBox(height: 8),
       const Padding(
           padding: EdgeInsets.all(8),
-          child: Text('CDKPickerSliderChroma:')),
-      Wrap(crossAxisAlignment: WrapCrossAlignment.center, children: [
-        Padding(
-            padding: const EdgeInsets.all(8),
-            child: SizedBox(
-                height: 150,
-                width: 200,
-                child: CDKPickerSliderChroma(
-                  staturation: _valueSliderSaturation,
-                  brightness: _valueSliderBrightness,
-                  hueColor: _valueSliderSB,
-                  onChanged: (saturation, brightness) {
-                    setState(() {
-                      _valueSliderSaturation = saturation;
-                      _valueSliderBrightness = brightness;
-                    });
-                  },
-                ))),
-        Container(width: 10, height: 10, color: valueSliderSBColor),
-        Text("S: ${_valueSliderSaturation.toStringAsFixed(2)} B: ${_valueSliderBrightness.toStringAsFixed(2)}",
-            style: const TextStyle(fontSize: 12)),
-      ]),
-      const SizedBox(height: 8),
-      const Padding(
-          padding: EdgeInsets.all(8),
           child: Text('CDKPickerColorDialog:')),
       Wrap(crossAxisAlignment: WrapCrossAlignment.center, children: [
         Padding(
             padding: const EdgeInsets.all(8),
-            child: CDKPickerColorDialog(
+            child: SizedBox(width: 250, child:
+                  CDKPickerColorDialog(
+                  value: _valueColor,
                   onChanged: (color) {
                     setState(() {
-
+                      _valueColor = color;
                     });
                   },
-                )),
-        Container(width: 50, height: 25, color: valueSliderSBColor),
+                ))),
+        Container(width: 50, height: 25, color: _valueColor),
       ]),
       const SizedBox(height: 8),
       const Padding(
