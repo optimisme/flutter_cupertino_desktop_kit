@@ -5,8 +5,6 @@ import 'cdk_theme.dart';
 class CDKPickerSliderChroma extends StatefulWidget {
   final double staturation;
   final double brightness;
-  final double width;
-  final double height;
   final bool enabled;
   final Color hueColor;
   final Function(double, double)? onChanged;
@@ -16,8 +14,6 @@ class CDKPickerSliderChroma extends StatefulWidget {
     required this.staturation,
     required this.brightness,
     this.enabled = true,
-    this.width = 200,
-    this.height = 150,
     required this.hueColor,
     this.onChanged,
   }) : super(key: key);
@@ -56,7 +52,8 @@ class CDKPickerSliderChromaState extends State<CDKPickerSliderChroma> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return LayoutBuilder(builder: (context, constraints) {
+      return GestureDetector(
       onPanUpdate: _onPanUpdate,
       onTapDown: _onTapDown,
       child: CustomPaint(
@@ -67,9 +64,10 @@ class CDKPickerSliderChromaState extends State<CDKPickerSliderChroma> {
           thumbSize: _thumbSize,
           thumbHalf: _thumbHalf,
         ),
-        size: Size(widget.width, widget.height),
+        size: Size(constraints.maxWidth, constraints.maxHeight),
       ),
-    );
+    );    
+    });
   }
 }
 
@@ -93,7 +91,7 @@ class CDKPickerSliderGradient2DPainter extends CustomPainter {
     // Draw the 2D gradient
     _draw2DGradient(canvas, size);
 
-  // Draw the custom thumb
+    // Draw the custom thumb
     // Calculate the center position of the thumb on the slider
 
     final double thumbX = thumbHalf + (saturation * (size.width - thumbSize));

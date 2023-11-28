@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'cdk_picker_slider_chroma.dart';
-import 'cdk_picker_slider_gradient.dart';
-import 'cdk_theme.dart';
+import 'package:flutter_cupertino_desktop_kit/cdk_widgets.dart';
 
 class CDKPickerColorDialog extends StatefulWidget {
   final Color value;
@@ -18,89 +16,111 @@ class CDKPickerColorDialog extends StatefulWidget {
 }
 
 class CDKPickerColorDialogState extends State<CDKPickerColorDialog> {
-  double _saturation = 0.5;
-  double _brightness = 0.5;
-  double _hue = 0.5;
-  double _alpha = 0.5;
 
-  final List<Color> _gradientHueColors = [CDKTheme.red, CDKTheme.yellow, CDKTheme.green, CDKTheme.cyan, CDKTheme.blue, CDKTheme.magenta, CDKTheme.red];
-  final List<double> _gradientHueStops = const [0.0, 0.17, 0.33, 0.5, 0.67, 0.83, 1.0];
-
-  final List<Color> _gradientAlphaColors = [CDKTheme.white, CDKTheme.black];
-  final List<double> _gradientAlphaStops = const [0.0, 1.0];
-
+  TextEditingController _controllerHex = TextEditingController();
+  double _rgbRed = 0;
+  double _rgbGreen = 0;
+  double _rgbBlue = 0;
+  double _rgbAlpha = 0;
 
   @override
   void initState() {
     super.initState();
-    HSVColor color = HSVColor.fromColor(widget.value); 
-    _saturation = color.saturation;
-    _brightness = color.value;
-    _hue = color.hue / 360;
-    _alpha = color.alpha;
+    _controllerHex.text = widget.value.value.toRadixString(16).toUpperCase().padLeft(8, '0');
   }
 
-  void _callback() {
-    if (widget.onChanged != null) {
-      Color result = HSVColor.fromAHSV(
-        _alpha, 
-        _hue * 360, 
-        _saturation,
-        _brightness,
-      ).toColor();
-      widget.onChanged!(result);
-    }
+  _callbackRGB() {
+    Color result = Color.fromARGB(
+              (_rgbAlpha * 255).toInt(), 
+              _rgbRed.toInt(),
+              _rgbGreen.toInt(),
+              _rgbBlue.toInt(),
+            );
+    widget.onChanged!.call(result);
   }
 
   @override
   Widget build(BuildContext context) {
 
-    Color hueSliderToColor = CDKPickerSliderGradient.getColorAtValue(
-        _gradientHueColors, _gradientHueStops, _hue);
+    _rgbRed = widget.value.red.toDouble();
+    _rgbGreen = widget.value.green.toDouble();
+    _rgbBlue = widget.value.blue.toDouble();
+    _rgbAlpha = widget.value.alpha.toDouble() / 255;
 
-    return Column( 
+    return Container(width: 200, child: Column( 
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-      CDKPickerSliderChroma(
-        width: 150,
-            staturation: _saturation,
-            brightness: _brightness,
-            hueColor: hueSliderToColor,
-            onChanged: (saturation, brightness) {
-              setState(() {
-                _saturation = saturation;
-                _brightness = brightness;
-                _callback();
-              });
-            },
+        CDKPickerColorDialogHSV(value: widget.value, onChanged: (value) {
+          widget.onChanged!.call(value);
+        }),
+      const SizedBox(height: 8),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+        SizedBox(width: 45, child: CDKFieldNumeric(
+          value: _rgbRed,
+          min: 0,
+          max: 255,
+          decimals: 0,
+          units: "R",
+          onValueChanged: (value) {
+            _rgbRed = value;
+            _callbackRGB();
+          },
+        )),        
+        SizedBox(width: 45, child: CDKFieldNumeric(
+          value: _rgbGreen,
+          min: 0,
+          max: 255,
+          decimals: 0,
+          units: "G",
+          onValueChanged: (value) {
+            _rgbGreen = value;
+            _callbackRGB();
+          },)),
+        SizedBox(width: 45, child: CDKFieldNumeric(
+          value: _rgbBlue,
+          min: 0,
+          max: 255,
+          decimals: 0,
+          units: "B",
+          onValueChanged: (value) {
+            _rgbBlue = value;
+            _callbackRGB();
+          },
+        )),
+        SizedBox(width: 45, child: CDKFieldNumeric(
+          value: _rgbAlpha,
+          min: 0,
+          max: 1,
+          decimals: 2,
+          units: "A",
+          onValueChanged: (value) {
+            _rgbAlpha = value;
+            _callbackRGB();
+          },
+        ))
+      ]),
+      const SizedBox(height: 8),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+        Container(
+          width: 96,
+          height: 22,
+          decoration: BoxDecoration(
+            color: widget.value,
+            borderRadius: BorderRadius.circular(4),
           ),
-      const SizedBox(height: 8),
-      SizedBox(width: 150, child:
-        CDKPickerSliderGradient(
-                    colors: _gradientHueColors,
-                    stops: _gradientHueStops,
-                    value: _hue,
-                    onChanged: (value, color) {
-                      setState(() {
-                        _hue = value;
-                        _callback();
-                      });
-                    },
-                  )),
-      const SizedBox(height: 8),
-      SizedBox(width: 150, child:
-        CDKPickerSliderGradient(
-                    colors: _gradientAlphaColors,
-                    stops: _gradientAlphaStops,
-                    value: _alpha,
-                    onChanged: (value, color) {
-                      setState(() {
-                        _alpha = value;
-                        _callback();
-                      });
-                    },
-                  )),
-    ],);
+        ),
+        SizedBox(width: 96, child: CDKFieldText(
+          controller: _controllerHex,
+          onChanged: (value) {
+            print(value);
+          },
+        )),
+      ]),
+    ],));
   }
 }

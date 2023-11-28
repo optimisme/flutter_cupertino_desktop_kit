@@ -6,7 +6,6 @@ class CDKPickerSliderGradient extends StatefulWidget {
   final List<Color> colors;
   final List<double> stops;
   final double value;
-  final double size;
   final bool enabled;
   final Function(double, Color)? onChanged;
 
@@ -16,7 +15,6 @@ class CDKPickerSliderGradient extends StatefulWidget {
     required this.stops,
     required this.value,
     this.enabled = true,
-    this.size = 16,
     required this.onChanged,
   }) : super(key: key);
 
@@ -79,7 +77,8 @@ class CDKPickerSliderGradientState extends State<CDKPickerSliderGradient> {
   Widget build(BuildContext context) {
     CDKTheme theme = CDKThemeNotifier.of(context)!.changeNotifier;
 
-    return GestureDetector(
+    return LayoutBuilder(builder: (context, constraints) {
+      return GestureDetector(
       onTapDown: (details) {
         _onTapDown(details);
       },
@@ -93,9 +92,10 @@ class CDKPickerSliderGradientState extends State<CDKPickerSliderGradient> {
               widget.colors, widget.stops, widget.value),
           hasAppFocus: theme.isAppFocused, // Border color
         ),
-        size: Size(widget.size, widget.size),
+        size: Size(constraints.maxWidth, constraints.maxHeight),
       ),
     );
+    });
   }
 }
 
