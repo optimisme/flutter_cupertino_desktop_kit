@@ -137,15 +137,6 @@ class CDKPickerSliderGradientPainter extends CustomPainter {
 
     // Draw the custom thumb
     // Calculate the center position of the thumb on the slider
-    /*const double thumbSize = 10.0;
-    const double thumbSizeHalf = thumbSize / 2;
-    final thumbRail = size.width - (thumbSizeHalf * 2);
-    final thumbProgress = (value * thumbRail) / size.width;
-    final Offset thumbCenter =
-        Offset(thumbSizeHalf + thumbProgress, (size.height / 2) + 1);
-    double limitLeft = thumbCenter.dx - thumbSizeHalf;
-    double limitRight = thumbCenter.dx + thumbSizeHalf;*/
-
     const double thumbSize = 10.0;
     const double thumbSizeHalf = thumbSize / 2;
     final thumbRail = size.width - thumbSize;
@@ -154,15 +145,6 @@ class CDKPickerSliderGradientPainter extends CustomPainter {
     final Offset thumbCenter = Offset(thumbX, thumbY);
     double limitLeft = thumbCenter.dx - thumbSizeHalf;
     double limitRight = thumbCenter.dx + thumbSizeHalf;
-
-/*
-    const double thumbSize = 10.0;
-    const double thumbSizeHalf = thumbSize / 2;
-    final double thumbX = value * size.width;
-    final double thumbY = (size.height / 2) + 1;
-    final Offset thumbCenter = Offset(thumbX, thumbY);
-    double limitLeft = thumbCenter.dx - thumbSizeHalf;
-    double limitRight = thumbCenter.dx + thumbSizeHalf;*/
 
     // Create the thumb path
     Path thumbPath = Path();
