@@ -28,8 +28,6 @@ class CDKPickerColorDialogState extends State<CDKPickerColorDialog> {
     super.initState();
     _controllerHex.text =
         widget.value.value.toRadixString(16).toUpperCase().padLeft(8, '0');
-
-    CDKUtilShaderGrid.initGridImage();
   }
 
   _callbackRGB() {

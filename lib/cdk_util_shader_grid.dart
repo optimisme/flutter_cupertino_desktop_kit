@@ -5,25 +5,29 @@ import 'cdk_theme.dart';
 
 class CDKUtilShaderGrid extends CustomPainter {
   static ui.Image? gridImage;
+  bool _isInitializing = false;
 
   CDKUtilShaderGrid();
 
-  static initGridImage() async {
+  static initGridImage(double size) async {
     ui.PictureRecorder recorder = ui.PictureRecorder();
     Canvas imageCanvas = Canvas(recorder);
     final paint = Paint()..color = CDKTheme.grey50;
-    imageCanvas.drawRect(const Rect.fromLTWH(0, 0, 10, 10), paint);
-    imageCanvas.drawRect(const Rect.fromLTWH(10, 10, 10, 10), paint);
+    imageCanvas.drawRect(Rect.fromLTWH(0, 0, size, size), paint);
+    imageCanvas.drawRect(Rect.fromLTWH(size, size, size, size), paint);
     paint.color = CDKTheme.grey100;
-    imageCanvas.drawRect(const Rect.fromLTWH(10, 0, 10, 10), paint);
-    imageCanvas.drawRect(const Rect.fromLTWH(0, 10, 10, 10), paint);
-
-    gridImage = await recorder.endRecording().toImage(20, 20);
+    imageCanvas.drawRect(Rect.fromLTWH(size, 0, size, size), paint);
+    imageCanvas.drawRect(Rect.fromLTWH(0, size, size, size), paint);
+    int s = (size * 2).toInt();
+    gridImage = await recorder.endRecording().toImage(s, s);
   }
 
   @override
-  void paint(Canvas canvas, Size size) {
-    if (gridImage == null) {
+  void paint(Canvas canvas, Size size) async {
+    if (gridImage == null && !_isInitializing) {
+      _isInitializing = true;
+      await initGridImage(5);
+      _isInitializing = false;
       return;
     }
 
