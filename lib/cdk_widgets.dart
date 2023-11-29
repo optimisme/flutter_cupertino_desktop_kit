@@ -34,3 +34,4 @@ export 'cdk_progress_circular.dart';
 export 'cdk_theme_notifier.dart';
 export 'cdk_theme.dart';
 export 'cdk_util_disclosure.dart';
+export 'cdk_util_shader_grid.dart';

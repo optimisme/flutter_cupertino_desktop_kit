@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_cupertino_desktop_kit/cdk_widgets.dart';
+import 'cdk_util_shader_grid.dart';
 
 class CDKPickerColorDialog extends StatefulWidget {
   final Color value;
@@ -27,6 +28,8 @@ class CDKPickerColorDialogState extends State<CDKPickerColorDialog> {
     super.initState();
     _controllerHex.text =
         widget.value.value.toRadixString(16).toUpperCase().padLeft(8, '0');
+
+    CDKUtilShaderGrid.initGridImage();
   }
 
   _callbackRGB() {
@@ -104,12 +107,13 @@ class CDKPickerColorDialogState extends State<CDKPickerColorDialog> {
             ]),
             const SizedBox(height: 8),
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-              Container(
-                width: 65,
-                height: 22,
-                decoration: BoxDecoration(
+              CustomPaint(
+                painter: CDKUtilShaderGrid(),
+                child: Container(
                   color: widget.value,
-                  borderRadius: BorderRadius.circular(4),
+                  width: 65,
+                  height: 22,
+                  alignment: Alignment.center,
                 ),
               ),
               SizedBox(
