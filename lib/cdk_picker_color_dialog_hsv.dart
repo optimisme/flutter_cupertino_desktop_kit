@@ -27,7 +27,7 @@ class CDKPickerColorDialogHSVState extends State<CDKPickerColorDialogHSV> {
   final List<Color> _gradientHueColors = [CDKTheme.red, CDKTheme.yellow, CDKTheme.green, CDKTheme.cyan, CDKTheme.blue, CDKTheme.magenta, CDKTheme.red];
   final List<double> _gradientHueStops = const [0.0, 0.17, 0.33, 0.5, 0.67, 0.83, 1.0];
 
-  final List<Color> _gradientAlphaColors = [CDKTheme.white, CDKTheme.black];
+  final List<Color> _gradientAlphaColors = [const Color.fromRGBO(0, 0, 0, 0), CDKTheme.black];
   final List<double> _gradientAlphaStops = const [0.0, 1.0];
 
   @override
