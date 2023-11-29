@@ -106,7 +106,7 @@ class CDKPickerColorDialogState extends State<CDKPickerColorDialog> {
             const SizedBox(height: 8),
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
               CustomPaint(
-                painter: CDKUtilShaderGrid(),
+                painter: CDKUtilShaderGrid(8),
                 child: Container(
                   color: widget.value,
                   width: 65,
