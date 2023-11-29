@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_cupertino_desktop_kit/cdk_widgets.dart';
-import 'cdk_util_shader_grid.dart';
+import 'cdk_widgets.dart';
 
 class CDKPickerColorDialog extends StatefulWidget {
   final Color value;
