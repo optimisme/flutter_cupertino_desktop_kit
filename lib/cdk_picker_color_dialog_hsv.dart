@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'cdk_picker_slider_chroma.dart';
 import 'cdk_picker_slider_gradient.dart';
 import 'cdk_theme.dart';
+import 'cdk_theme_notifier.dart';
 
 class CDKPickerColorDialogHSV extends StatefulWidget {
   final Color value;
@@ -24,10 +25,26 @@ class CDKPickerColorDialogHSVState extends State<CDKPickerColorDialogHSV> {
   late double _alpha;
   bool _isInternalUpdate = false;
 
-  final List<Color> _gradientHueColors = [CDKTheme.red, CDKTheme.yellow, CDKTheme.green, CDKTheme.cyan, CDKTheme.blue, CDKTheme.magenta, CDKTheme.red];
-  final List<double> _gradientHueStops = const [0.0, 0.17, 0.33, 0.5, 0.67, 0.83, 1.0];
+  final List<Color> _gradientHueColors = [
+    CDKTheme.red,
+    CDKTheme.yellow,
+    CDKTheme.green,
+    CDKTheme.cyan,
+    CDKTheme.blue,
+    CDKTheme.magenta,
+    CDKTheme.red
+  ];
+  final List<double> _gradientHueStops = const [
+    0.0,
+    0.17,
+    0.33,
+    0.5,
+    0.67,
+    0.83,
+    1.0
+  ];
 
-  final List<Color> _gradientAlphaColors = [const Color.fromRGBO(0, 0, 0, 0), CDKTheme.black];
+  List<Color> _gradientAlphaColors = [CDKTheme.transparent, CDKTheme.black];
   final List<double> _gradientAlphaStops = const [0.0, 1.0];
 
   @override
@@ -57,8 +74,8 @@ class CDKPickerColorDialogHSVState extends State<CDKPickerColorDialogHSV> {
     _isInternalUpdate = true; // Set the flag to indicate internal update
     if (widget.onChanged != null) {
       Color result = HSVColor.fromAHSV(
-        _alpha, 
-        _hue * 360, 
+        _alpha,
+        _hue * 360,
         _saturation,
         _brightness,
       ).toColor();
@@ -68,61 +85,68 @@ class CDKPickerColorDialogHSVState extends State<CDKPickerColorDialogHSV> {
 
   @override
   Widget build(BuildContext context) {
+    CDKTheme theme = CDKThemeNotifier.of(context)!.changeNotifier;
 
     Color hueSliderToColor = CDKPickerSliderGradient.getColorAtValue(
         _gradientHueColors, _gradientHueStops, _hue);
 
-    return Column( 
+    if (theme.isLight) {
+      _gradientAlphaColors[1] = CDKTheme.black;
+    } else {
+      _gradientAlphaColors[1] = CDKTheme.white;
+    }
+
+    return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-      SizedBox(
-        width: double.infinity,
-        height: 150,
-        child: CDKPickerSliderChroma(
-            staturation: _saturation,
-            brightness: _brightness,
-            hueColor: hueSliderToColor,
-            onChanged: (saturation, brightness) {
-              setState(() {
-                _saturation = saturation;
-                _brightness = brightness;
-                _callback();
-              });
-            },
-          )),
-      const SizedBox(height: 8),
-      SizedBox(
-                width: double.infinity,
-        height: 16,
-         child:
-        CDKPickerSliderGradient(
-                    colors: _gradientHueColors,
-                    stops: _gradientHueStops,
-                    value: _hue,
-                    onChanged: (value, color) {
-                      setState(() {
-                        _hue = value;
-                        _callback();
-                      });
-                    },
-                  )),
-      const SizedBox(height: 8),
-      SizedBox(
-        width: double.infinity,
-        height: 16,
-        child:
-        CDKPickerSliderGradient(
-                    colors: _gradientAlphaColors,
-                    stops: _gradientAlphaStops,
-                    value: _alpha,
-                    onChanged: (value, color) {
-                      setState(() {
-                        _alpha = value;
-                        _callback();
-                      });
-                    },
-                  )),
-    ],);
+        SizedBox(
+            width: double.infinity,
+            height: 150,
+            child: CDKPickerSliderChroma(
+              staturation: _saturation,
+              brightness: _brightness,
+              hueColor: hueSliderToColor,
+              onChanged: (saturation, brightness) {
+                setState(() {
+                  _saturation = saturation;
+                  _brightness = brightness;
+                  _callback();
+                });
+              },
+            )),
+        const SizedBox(height: 8),
+        SizedBox(
+            width: double.infinity,
+            height: 16,
+            child: CDKPickerSliderGradient(
+              colors: _gradientHueColors,
+              stops: _gradientHueStops,
+              value: _hue,
+              onChanged: (value, color) {
+                setState(() {
+                  _hue = value;
+                  _callback();
+                });
+              },
+            )),
+        const SizedBox(height: 8),
+        SizedBox(
+            width: double.infinity,
+            height: 16,
+            child: CDKPickerSliderGradient(
+              colors: _gradientAlphaColors,
+              stops: _gradientAlphaStops,
+              thumbColorBackground: theme.background,
+              value: _alpha,
+              onChanged: (value, color) {
+                setState(() {
+                  _alpha = value;
+                  _callback();
+                });
+              },
+            )),
+      ],
+    );
   }
 }

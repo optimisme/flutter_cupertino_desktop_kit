@@ -5,6 +5,7 @@ import 'cdk_theme.dart';
 class CDKPickerSliderGradient extends StatefulWidget {
   final List<Color> colors;
   final List<double> stops;
+  final Color thumbColorBackground;
   final double value;
   final bool enabled;
   final Function(double, Color)? onChanged;
@@ -13,6 +14,7 @@ class CDKPickerSliderGradient extends StatefulWidget {
     Key? key,
     required this.colors,
     required this.stops,
+    this.thumbColorBackground = CDKTheme.transparent,
     required this.value,
     this.enabled = true,
     required this.onChanged,
@@ -48,10 +50,11 @@ class CDKPickerSliderGradientState extends State<CDKPickerSliderGradient> {
     RenderBox renderBox = context.findRenderObject() as RenderBox;
     final position = renderBox.globalToLocal(globalPosition);
 
-    final double radius = renderBox.size.height / 3;
-    final circleRail = renderBox.size.width - radius * 2;
-
-    double newValue = ((position.dx - radius) / circleRail).clamp(0.0, 1.0);
+    const double thumbSize = 10.0;
+    const double thumbSizeHalf = thumbSize / 2;
+    final thumbRail = renderBox.size.width - thumbSize;
+    double newValue =
+        ((position.dx - thumbSizeHalf) / thumbRail).clamp(0.0, 1.0);
 
     if (newValue < 0) {
       newValue = 0;
@@ -79,22 +82,23 @@ class CDKPickerSliderGradientState extends State<CDKPickerSliderGradient> {
 
     return LayoutBuilder(builder: (context, constraints) {
       return GestureDetector(
-      onTapDown: (details) {
-        _onTapDown(details);
-      },
-      onPanUpdate: !widget.enabled ? null : _onPanUpdate,
-      child: CustomPaint(
-        painter: CDKPickerSliderGradientPainter(
-          colors: widget.colors,
-          stops: widget.stops,
-          value: widget.value,
-          thumbColor: CDKPickerSliderGradient.getColorAtValue(
-              widget.colors, widget.stops, widget.value),
-          hasAppFocus: theme.isAppFocused, // Border color
+        onTapDown: (details) {
+          _onTapDown(details);
+        },
+        onPanUpdate: !widget.enabled ? null : _onPanUpdate,
+        child: CustomPaint(
+          painter: CDKPickerSliderGradientPainter(
+            colors: widget.colors,
+            stops: widget.stops,
+            thumbColorBackground: widget.thumbColorBackground,
+            value: widget.value,
+            thumbColor: CDKPickerSliderGradient.getColorAtValue(
+                widget.colors, widget.stops, widget.value),
+            hasAppFocus: theme.isAppFocused, // Border color
+          ),
+          size: Size(constraints.maxWidth, constraints.maxHeight),
         ),
-        size: Size(constraints.maxWidth, constraints.maxHeight),
-      ),
-    );
+      );
     });
   }
 }
@@ -104,6 +108,7 @@ class CDKPickerSliderGradientPainter extends CustomPainter {
   final List<double> stops;
   final double value;
   final Color thumbColor;
+  final Color thumbColorBackground;
   final bool hasAppFocus;
 
   CDKPickerSliderGradientPainter(
@@ -111,6 +116,7 @@ class CDKPickerSliderGradientPainter extends CustomPainter {
       required this.colors,
       required this.value,
       required this.thumbColor,
+      required this.thumbColorBackground,
       this.hasAppFocus = true});
 
   @override
@@ -131,13 +137,32 @@ class CDKPickerSliderGradientPainter extends CustomPainter {
 
     // Draw the custom thumb
     // Calculate the center position of the thumb on the slider
+    /*const double thumbSize = 10.0;
+    const double thumbSizeHalf = thumbSize / 2;
+    final thumbRail = size.width - (thumbSizeHalf * 2);
+    final thumbProgress = (value * thumbRail) / size.width;
+    final Offset thumbCenter =
+        Offset(thumbSizeHalf + thumbProgress, (size.height / 2) + 1);
+    double limitLeft = thumbCenter.dx - thumbSizeHalf;
+    double limitRight = thumbCenter.dx + thumbSizeHalf;*/
+
+    const double thumbSize = 10.0;
+    const double thumbSizeHalf = thumbSize / 2;
+    final thumbRail = size.width - thumbSize;
+    final double thumbX = thumbSizeHalf + (value * thumbRail);
+    final double thumbY = (size.height / 2) + 1;
+    final Offset thumbCenter = Offset(thumbX, thumbY);
+    double limitLeft = thumbCenter.dx - thumbSizeHalf;
+    double limitRight = thumbCenter.dx + thumbSizeHalf;
+
+/*
+    const double thumbSize = 10.0;
+    const double thumbSizeHalf = thumbSize / 2;
     final double thumbX = value * size.width;
     final double thumbY = (size.height / 2) + 1;
     final Offset thumbCenter = Offset(thumbX, thumbY);
-    const double thumbWidth = 10.0;
-    const double thumbWidthHalf = thumbWidth / 2;
-    double limitLeft = thumbCenter.dx - thumbWidthHalf;
-    double limitRight = thumbCenter.dx + thumbWidthHalf;
+    double limitLeft = thumbCenter.dx - thumbSizeHalf;
+    double limitRight = thumbCenter.dx + thumbSizeHalf;*/
 
     // Create the thumb path
     Path thumbPath = Path();
@@ -156,7 +181,6 @@ class CDKPickerSliderGradientPainter extends CustomPainter {
       ..style = PaintingStyle.stroke;
     canvas.drawPath(thumbPath, thumbStrokePaint);
 
-
     Paint thumbPaint = Paint()
       ..color = CDKTheme.grey
       ..style = PaintingStyle.fill;
@@ -169,6 +193,14 @@ class CDKPickerSliderGradientPainter extends CustomPainter {
     thumbSquarePath.lineTo(limitRight - 1, thumbCenter.dy + 7);
     thumbSquarePath.lineTo(limitLeft + 1, thumbCenter.dy + 7);
     thumbSquarePath.close();
+
+    // Paint the background of the thumb
+    Paint thumbSquarePaintBackground = Paint()
+      ..color = thumbColorBackground
+      ..style = PaintingStyle.fill;
+    canvas.drawPath(thumbSquarePath, thumbSquarePaintBackground);
+
+    // Create the thumb colored square path
     Paint thumbSquarePaint = Paint()
       ..color = thumbColor
       ..style = PaintingStyle.fill;
@@ -180,6 +212,7 @@ class CDKPickerSliderGradientPainter extends CustomPainter {
     return oldDelegate.colors != colors ||
         oldDelegate.stops != stops ||
         oldDelegate.thumbColor != thumbColor ||
+        oldDelegate.thumbColorBackground != thumbColorBackground ||
         oldDelegate.value != value ||
         oldDelegate.hasAppFocus != hasAppFocus;
   }
