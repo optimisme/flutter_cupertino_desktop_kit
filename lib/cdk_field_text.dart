@@ -76,7 +76,7 @@ class CDKFieldTextState extends State<CDKFieldText> {
         : BorderRadius.circular(4.0);
 
     return CupertinoTextField(
-      textAlign: widget.textAlign,
+      //textAlign: TextAlign.right, // Flutter Bug: https://github.com/flutter/flutter/issues/139201
       obscureText: widget.obscureText,
       enabled: widget.enabled,
       controller: widget.controller,

@@ -86,10 +86,9 @@ class CDKFieldNumericState extends State<CDKFieldNumeric> {
 
     // Actualitza el text i el cursor
     _controller.text = _fixText(newValue);
-    /*
     _controller.selection = TextSelection.fromPosition(
         TextPosition(offset: _controller.text.length));
-*/
+
     // Notifica el canvi al pare si el valor ha canviat
     if (valueChanged || newValue != _previousValue) {
       widget.onValueChanged?.call(newValue);
