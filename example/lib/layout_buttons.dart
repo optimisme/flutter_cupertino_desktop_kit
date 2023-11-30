@@ -13,6 +13,44 @@ class _LayoutButtonsState extends State<LayoutButtons> {
   int _selectedRadio = 1;
   int _indexButtonSelect0 = 1;
   int _indexButtonSelect1 = 1;
+  final GlobalKey<CDKDialogPopoverState> _anchorColorButton = GlobalKey();
+  final ValueNotifier<Color> _valueColorNotifier =
+      ValueNotifier(const Color(0x800080FF));
+
+  _showPopoverColor(BuildContext context, GlobalKey anchorKey) {
+    final GlobalKey<CDKDialogPopoverArrowedState> key = GlobalKey();
+    if (anchorKey.currentContext == null) {
+      // ignore: avoid_print
+      print("Error: anchorKey not assigned to a widget");
+      return;
+    }
+    CDKDialogsManager.showPopoverArrowed(
+      key: key,
+      context: context,
+      anchorKey: anchorKey,
+      isAnimated: true,
+      isTranslucent: false,
+      onHide: () {
+        // ignore: avoid_print
+        print("hide slider $key");
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ValueListenableBuilder<Color>(
+            valueListenable: _valueColorNotifier,
+            builder: (context, value, child) {
+              return CDKPickerColorDialog(
+                color: _valueColorNotifier.value,
+                onChanged: (color) {
+                  setState(() {
+                    _valueColorNotifier.value = color;
+                  });
+                },
+              );
+            }),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -93,18 +131,16 @@ class _LayoutButtonsState extends State<LayoutButtons> {
       Wrap(children: [
         Padding(
             padding: const EdgeInsets.all(8),
-            child: CDKButtonColor(
-                color: const Color(0xAA00AAFF), onPressed: () {})),
-        Padding(
-            padding: const EdgeInsets.all(8),
-            child: CDKButtonSwitch(
-              value: _isSwitched,
-              onChanged: (bool newValue) {
-                setState(() {
-                  _isSwitched = newValue;
-                });
-              },
-            )),
+            child: ValueListenableBuilder<Color>(
+                valueListenable: _valueColorNotifier,
+                builder: (context, value, child) {
+                  return CDKButtonColor(
+                      key: _anchorColorButton,
+                      color: _valueColorNotifier.value,
+                      onPressed: () {
+                        _showPopoverColor(context, _anchorColorButton);
+                      });
+                })),
       ]),
       const Padding(padding: EdgeInsets.all(8), child: Text('CDKButtonHelp:')),
       Wrap(children: [

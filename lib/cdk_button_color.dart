@@ -31,7 +31,7 @@ class CDKButtonColorState extends State<CDKButtonColor> {
     Color color = theme.isLight
         ? _isPressed
             ? CDKTheme.grey90
-            : CDKTheme.grey60
+            : CDKTheme.grey50
         : _isPressed
             ? CDKTheme.grey800
             : CDKTheme.grey600;

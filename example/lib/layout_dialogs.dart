@@ -28,6 +28,11 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
   _showPopover(BuildContext context, GlobalKey anchorKey, CDKTheme theme,
       bool centered, bool animated, bool translucent) {
     final GlobalKey<CDKDialogPopoverState> key = GlobalKey();
+    if (anchorKey.currentContext == null) {
+      // ignore: avoid_print
+      print("Error: anchorKey not assigned to a widget");
+      return;
+    }
     CDKDialogsManager.showPopover(
       key: key,
       context: context,
@@ -95,6 +100,11 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
   void _showDraggable(BuildContext context, GlobalKey anchorKey, CDKTheme theme,
       bool animated, bool translucent) {
     final GlobalKey<CDKDialogDraggableState> key = GlobalKey();
+    if (anchorKey.currentContext == null) {
+      // ignore: avoid_print
+      print("Error: anchorKey not assigned to a widget");
+      return;
+    }
     CDKDialogsManager.showDraggable(
       key: key,
       context: context,
@@ -130,6 +140,11 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
   _showPopoverArrowed(BuildContext context, GlobalKey anchorKey, CDKTheme theme,
       bool animated, bool translucent) {
     final GlobalKey<CDKDialogPopoverArrowedState> key = GlobalKey();
+    if (anchorKey.currentContext == null) {
+      // ignore: avoid_print
+      print("Error: anchorKey not assigned to a widget");
+      return;
+    }
     CDKDialogsManager.showPopoverArrowed(
       key: key,
       context: context,
@@ -163,6 +178,11 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
   _showDialogArrowedSlider(
       BuildContext context, GlobalKey anchorKey, CDKTheme theme) {
     final GlobalKey<CDKDialogPopoverArrowedState> key = GlobalKey();
+    if (anchorKey.currentContext == null) {
+      // ignore: avoid_print
+      print("Error: anchorKey not assigned to a widget");
+      return;
+    }
     CDKDialogsManager.showPopoverArrowed(
       key: key,
       context: context,
