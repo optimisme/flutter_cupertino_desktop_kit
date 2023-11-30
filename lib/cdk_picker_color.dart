@@ -19,11 +19,11 @@ class CDKPickerColorState extends State<CDKPickerColor> {
   double _rgbRed = 0;
   double _rgbGreen = 0;
   double _rgbBlue = 0;
-  double _rgbAlpha = 0;
+  double _rgbOpacity = 0;
 
   _callbackRGB() {
     Color result = Color.fromARGB(
-      (_rgbAlpha * 255).toInt(),
+      (_rgbOpacity * 255).toInt(),
       _rgbRed.toInt(),
       _rgbGreen.toInt(),
       _rgbBlue.toInt(),
@@ -36,7 +36,7 @@ class CDKPickerColorState extends State<CDKPickerColor> {
     _rgbRed = widget.color.red.toDouble();
     _rgbGreen = widget.color.green.toDouble();
     _rgbBlue = widget.color.blue.toDouble();
-    _rgbAlpha = widget.color.alpha.toDouble() / 255;
+    _rgbOpacity = widget.color.alpha.toDouble() / 255;
 
     return SizedBox(
         width: 225,
@@ -99,14 +99,14 @@ class CDKPickerColorState extends State<CDKPickerColor> {
               SizedBox(
                   width: 65,
                   child: CDKFieldNumeric(
-                    value: _rgbAlpha,
+                    value: _rgbOpacity,
                     min: 0,
                     max: 1,
                     decimals: 2,
                     increment: 0.1,
-                    units: "A",
+                    units: "O",
                     onValueChanged: (value) {
-                      _rgbAlpha = value;
+                      _rgbOpacity = value;
                       _callbackRGB();
                     },
                   )),
