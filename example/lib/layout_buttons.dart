@@ -89,6 +89,13 @@ class _LayoutButtonsState extends State<LayoutButtons> {
               child: const Icon(CupertinoIcons.bookmark),
             )),
       ]),
+      const Padding(padding: EdgeInsets.all(8), child: Text('CDKButtonColor:')),
+      Wrap(children: [
+        Padding(
+            padding: const EdgeInsets.all(8),
+            child: CDKButtonColor(
+                color: const Color(0xAA00AAFF), onPressed: () {})),
+      ]),
       const Padding(padding: EdgeInsets.all(8), child: Text('CDKButtonHelp:')),
       Wrap(children: [
         Padding(

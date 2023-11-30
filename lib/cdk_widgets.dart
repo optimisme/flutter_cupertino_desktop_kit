@@ -2,6 +2,7 @@ export 'cdk_app.dart';
 export 'cdk_app_sidebars.dart';
 export 'cdk_button.dart';
 export 'cdk_button_check_box.dart';
+export 'cdk_button_color.dart';
 export 'cdk_button_disclosure.dart';
 export 'cdk_button_help.dart';
 export 'cdk_button_icon.dart';

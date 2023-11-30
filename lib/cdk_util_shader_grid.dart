@@ -7,13 +7,14 @@ import 'cdk_theme.dart';
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
 class CDKUtilShaderGrid extends CustomPainter {
+  final double borderRadius;
   int size = 0;
   static final List<ui.ImageShader> _shaders = [];
   static final List<double> _sizes = [];
   static bool _isInitializing = false;
   static bool _initialized = false;
 
-  CDKUtilShaderGrid(this.size);
+  CDKUtilShaderGrid(this.size, {this.borderRadius = 0.0});
 
   static initShaders() async {
     if (_isInitializing) {
@@ -79,6 +80,6 @@ class CDKUtilShaderGrid extends CustomPainter {
 
   @override
   bool shouldRepaint(CDKUtilShaderGrid oldDelegate) {
-    return oldDelegate.size != size;
+    return oldDelegate.size != size || oldDelegate.borderRadius != borderRadius;
   }
 }
