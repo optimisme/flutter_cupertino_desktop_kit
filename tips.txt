@@ -7,10 +7,13 @@ rm lib/flutter_cupertino_desktop.dart
 rm -r test
 cd example
 flutter create . --platform macos
+flutter create . --platform web
+rm -r test
 
 Example publicar a github pages:
 cd example
-flutter build web --web-renderer canvaskit --base-href "/flutter_cupertino_desktop/gh-pages/example/"
+flutter config --enable-web
+flutter build web --web-renderer canvaskit --base-href "/flutter_cupertino_desktop_kit/gh-pages/example/"
 cp -r ./build/web/* ../gh-pages/example/
 
 python3 -m http.server 9000
