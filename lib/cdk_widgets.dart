@@ -26,7 +26,7 @@ export 'cdk_picker_buttons_bar.dart';
 export 'cdk_picker_buttons_segmented.dart';
 export 'cdk_picker_check_list.dart';
 export 'cdk_picker_color_dialog_hsv.dart';
-export 'cdk_picker_color_dialog.dart';
+export 'cdk_picker_color.dart';
 export 'cdk_picker_slider_chroma.dart';
 export 'cdk_picker_slider_gradient.dart';
 export 'cdk_picker_slider.dart';

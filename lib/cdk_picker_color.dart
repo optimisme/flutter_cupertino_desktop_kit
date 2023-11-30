@@ -1,21 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'cdk_widgets.dart';
 
-class CDKPickerColorDialog extends StatefulWidget {
+class CDKPickerColor extends StatefulWidget {
   final Color color;
   final Function(Color)? onChanged;
 
-  const CDKPickerColorDialog({
+  const CDKPickerColor({
     Key? key,
     required this.color,
     this.onChanged,
   }) : super(key: key);
 
   @override
-  CDKPickerColorDialogState createState() => CDKPickerColorDialogState();
+  CDKPickerColorState createState() => CDKPickerColorState();
 }
 
-class CDKPickerColorDialogState extends State<CDKPickerColorDialog> {
+class CDKPickerColorState extends State<CDKPickerColor> {
   double _rgbRed = 0;
   double _rgbGreen = 0;
   double _rgbBlue = 0;

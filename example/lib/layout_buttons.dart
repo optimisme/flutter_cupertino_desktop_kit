@@ -39,7 +39,7 @@ class _LayoutButtonsState extends State<LayoutButtons> {
         child: ValueListenableBuilder<Color>(
             valueListenable: _valueColorNotifier,
             builder: (context, value, child) {
-              return CDKPickerColorDialog(
+              return CDKPickerColor(
                 color: _valueColorNotifier.value,
                 onChanged: (color) {
                   setState(() {

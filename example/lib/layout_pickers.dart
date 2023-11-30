@@ -180,7 +180,7 @@ class _LayoutPickersState extends State<LayoutPickers> {
       Wrap(crossAxisAlignment: WrapCrossAlignment.center, children: [
         Padding(
             padding: const EdgeInsets.all(8),
-            child: CDKPickerColorDialog(
+            child: CDKPickerColor(
               color: _valueColor,
               onChanged: (color) {
                 setState(() {
