@@ -98,6 +98,20 @@ class CDKPickerColorDialogState extends State<CDKPickerColorDialog> {
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
               SizedBox(
                   width: 65,
+                  child: CDKFieldNumeric(
+                    value: _rgbAlpha,
+                    min: 0,
+                    max: 1,
+                    decimals: 2,
+                    increment: 0.1,
+                    units: "A",
+                    onValueChanged: (value) {
+                      _rgbAlpha = value;
+                      _callbackRGB();
+                    },
+                  )),
+              SizedBox(
+                  width: 65,
                   child: CDKFieldColorHex(
                     value: widget.color.value,
                     onValueChanged: (value) {
@@ -124,33 +138,19 @@ class CDKPickerColorDialogState extends State<CDKPickerColorDialog> {
                     painter: CDKUtilShaderGrid(8),
                     child: Row(
                       children: [
-                        Container(
-                          width: 20,
-                          color: Color(widget.color.value | 0xFF000000),
-                        ),
                         Expanded(
                             child: Container(
                           color: widget.color,
                         )),
+                        Container(
+                          width: 20,
+                          color: Color(widget.color.value | 0xFF000000),
+                        ),
                       ],
                     ),
                   ),
                 ),
               ),
-              SizedBox(
-                  width: 65,
-                  child: CDKFieldNumeric(
-                    value: _rgbAlpha,
-                    min: 0,
-                    max: 1,
-                    decimals: 2,
-                    increment: 0.1,
-                    units: "A",
-                    onValueChanged: (value) {
-                      _rgbAlpha = value;
-                      _callbackRGB();
-                    },
-                  )),
             ]),
           ],
         ));
