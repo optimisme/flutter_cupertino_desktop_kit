@@ -176,19 +176,18 @@ class _LayoutPickersState extends State<LayoutPickers> {
       ]),
       const SizedBox(height: 8),
       const Padding(
-          padding: EdgeInsets.all(8),
-          child: Text('CDKPickerColorDialog:')),
+          padding: EdgeInsets.all(8), child: Text('CDKPickerColorDialog:')),
       Wrap(crossAxisAlignment: WrapCrossAlignment.center, children: [
         Padding(
             padding: const EdgeInsets.all(8),
             child: CDKPickerColorDialog(
-                  value: _valueColor,
-                  onChanged: (color) {
-                    setState(() {
-                      _valueColor = color;
-                    });
-                  },
-                )),
+              color: _valueColor,
+              onChanged: (color) {
+                setState(() {
+                  _valueColor = color;
+                });
+              },
+            )),
         Container(width: 50, height: 25, color: _valueColor),
       ]),
       const SizedBox(height: 8),

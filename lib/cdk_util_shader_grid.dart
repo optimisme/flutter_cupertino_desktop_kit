@@ -3,6 +3,9 @@ import 'dart:ui' as ui;
 import 'package:flutter/cupertino.dart';
 import 'cdk_theme.dart';
 
+// Copyright © 2023 Albert Palacios. All Rights Reserved.
+// Licensed under the BSD 3-clause license, see LICENSE file for details.
+
 class CDKUtilShaderGrid extends CustomPainter {
   int size = 0;
   static final List<ui.ImageShader> _shaders = [];
@@ -21,7 +24,7 @@ class CDKUtilShaderGrid extends CustomPainter {
       double size = 5.0 + i;
       ui.PictureRecorder recorder = ui.PictureRecorder();
       Canvas imageCanvas = Canvas(recorder);
-      final paint = Paint()..color = CDKTheme.grey50;
+      final paint = Paint()..color = CDKTheme.white;
       imageCanvas.drawRect(Rect.fromLTWH(0, 0, size, size), paint);
       imageCanvas.drawRect(Rect.fromLTWH(size, size, size, size), paint);
       paint.color = CDKTheme.grey100;

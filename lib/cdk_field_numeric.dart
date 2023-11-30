@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'cdk_field_text.dart';
 import 'cdk_buttons_up_down.dart';
 
@@ -133,7 +134,7 @@ class CDKFieldNumericState extends State<CDKFieldNumeric> {
     bool enabledUp = widget.value < widget.max;
     bool enabledDown = widget.value > widget.min;
 
-    return Row(
+    Widget child = Row(
       children: <Widget>[
         Expanded(
           child: CDKFieldText(
@@ -158,5 +159,21 @@ class CDKFieldNumericState extends State<CDKFieldNumeric> {
               ),
       ],
     );
+
+    return widget.increment == double.infinity
+        ? child
+        : RawKeyboardListener(
+            focusNode: FocusNode(),
+            onKey: (RawKeyEvent event) {
+              if (event is RawKeyDownEvent) {
+                if (event.logicalKey == LogicalKeyboardKey.arrowUp) {
+                  _incrementValue();
+                } else if (event.logicalKey == LogicalKeyboardKey.arrowDown) {
+                  _decrementValue();
+                }
+              }
+            },
+            child: child,
+          );
   }
 }

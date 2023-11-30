@@ -2,12 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'cdk_widgets.dart';
 
 class CDKPickerColorDialog extends StatefulWidget {
-  final Color value;
+  final Color color;
   final Function(Color)? onChanged;
 
   const CDKPickerColorDialog({
     Key? key,
-    required this.value,
+    required this.color,
     this.onChanged,
   }) : super(key: key);
 
@@ -16,18 +16,10 @@ class CDKPickerColorDialog extends StatefulWidget {
 }
 
 class CDKPickerColorDialogState extends State<CDKPickerColorDialog> {
-  TextEditingController _controllerHex = TextEditingController();
   double _rgbRed = 0;
   double _rgbGreen = 0;
   double _rgbBlue = 0;
   double _rgbAlpha = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    _controllerHex.text =
-        widget.value.value.toRadixString(16).toUpperCase().padLeft(8, '0');
-  }
 
   _callbackRGB() {
     Color result = Color.fromARGB(
@@ -41,10 +33,10 @@ class CDKPickerColorDialogState extends State<CDKPickerColorDialog> {
 
   @override
   Widget build(BuildContext context) {
-    _rgbRed = widget.value.red.toDouble();
-    _rgbGreen = widget.value.green.toDouble();
-    _rgbBlue = widget.value.blue.toDouble();
-    _rgbAlpha = widget.value.alpha.toDouble() / 255;
+    _rgbRed = widget.color.red.toDouble();
+    _rgbGreen = widget.color.green.toDouble();
+    _rgbBlue = widget.color.blue.toDouble();
+    _rgbAlpha = widget.color.alpha.toDouble() / 255;
 
     return SizedBox(
         width: 225,
@@ -53,7 +45,7 @@ class CDKPickerColorDialogState extends State<CDKPickerColorDialog> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CDKPickerColorDialogHSV(
-                value: widget.value,
+                value: widget.color,
                 onChanged: (value) {
                   widget.onChanged!.call(value);
                 }),
@@ -104,23 +96,47 @@ class CDKPickerColorDialogState extends State<CDKPickerColorDialog> {
             ]),
             const SizedBox(height: 8),
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-              CustomPaint(
-                painter: CDKUtilShaderGrid(8),
-                child: Container(
-                  color: widget.value,
-                  width: 65,
-                  height: 22,
-                  alignment: Alignment.center,
-                ),
-              ),
               SizedBox(
                   width: 65,
-                  child: CDKFieldText(
-                    controller: _controllerHex,
-                    onChanged: (value) {
-                      print(value);
+                  child: CDKFieldColorHex(
+                    value: widget.color.value,
+                    onValueChanged: (value) {
+                      Color color = Color(value | 0xFF000000);
+                      _rgbRed = color.red.toDouble();
+                      _rgbGreen = color.green.toDouble();
+                      _rgbBlue = color.blue.toDouble();
+                      _callbackRGB();
                     },
                   )),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(4.0),
+                child: Container(
+                  width: 65,
+                  height: 22,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: CDKTheme.grey100, // Color del border
+                      width: 1, // Amplada del border
+                    ),
+                    borderRadius: BorderRadius.circular(4.0),
+                  ),
+                  child: CustomPaint(
+                    painter: CDKUtilShaderGrid(8),
+                    child: Row(
+                      children: [
+                        Container(
+                          width: 20,
+                          color: Color(widget.color.value | 0xFF000000),
+                        ),
+                        Expanded(
+                            child: Container(
+                          color: widget.color,
+                        )),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
               SizedBox(
                   width: 65,
                   child: CDKFieldNumeric(

@@ -16,6 +16,7 @@ export 'cdk_dialog_draggable.dart';
 export 'cdk_dialog_modal.dart';
 export 'cdk_dialogs_manager.dart';
 export 'cdk_field_360.dart';
+export 'cdk_field_color_hex.dart';
 export 'cdk_field_numeric_slider.dart';
 export 'cdk_field_numeric.dart';
 export 'cdk_field_text.dart';
