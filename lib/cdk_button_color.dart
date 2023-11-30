@@ -28,7 +28,13 @@ class CDKButtonColorState extends State<CDKButtonColor> {
   @override
   Widget build(BuildContext context) {
     CDKTheme theme = CDKThemeNotifier.of(context)!.changeNotifier;
-    Color iconColor = !_isPressed ? CDKTheme.white : CDKTheme.grey70;
+    Color color = theme.isLight
+        ? _isPressed
+            ? CDKTheme.grey90
+            : CDKTheme.grey60
+        : _isPressed
+            ? CDKTheme.grey800
+            : CDKTheme.grey600;
 
     // Define styles and themes based on the button's state and style.
     BoxDecoration decoration;
@@ -84,7 +90,7 @@ class CDKButtonColorState extends State<CDKButtonColor> {
                 ),
                 Container(
                   decoration: BoxDecoration(
-                    border: Border.all(color: CDKTheme.grey90, width: 1),
+                    border: Border.all(color: color, width: 1),
                     borderRadius: BorderRadius.circular(6.0),
                   ),
                 ),
@@ -96,8 +102,8 @@ class CDKButtonColorState extends State<CDKButtonColor> {
                         width: 20,
                         child: IconTheme(
                           data: const IconThemeData(size: 14),
-                          child: Icon(CupertinoIcons.chevron_down,
-                              color: iconColor),
+                          child:
+                              Icon(CupertinoIcons.chevron_down, color: color),
                         ),
                       ),
                     ),

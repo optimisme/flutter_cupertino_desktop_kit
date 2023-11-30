@@ -11,7 +11,7 @@ class CDKButtonSwitch extends StatelessWidget {
     Key? key,
     required this.value,
     this.onChanged,
-    this.size = 24.0,
+    this.size = 22.0,
   }) : super(key: key);
 
   @override

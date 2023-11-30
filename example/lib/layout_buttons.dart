@@ -95,6 +95,16 @@ class _LayoutButtonsState extends State<LayoutButtons> {
             padding: const EdgeInsets.all(8),
             child: CDKButtonColor(
                 color: const Color(0xAA00AAFF), onPressed: () {})),
+        Padding(
+            padding: const EdgeInsets.all(8),
+            child: CDKButtonSwitch(
+              value: _isSwitched,
+              onChanged: (bool newValue) {
+                setState(() {
+                  _isSwitched = newValue;
+                });
+              },
+            )),
       ]),
       const Padding(padding: EdgeInsets.all(8), child: Text('CDKButtonHelp:')),
       Wrap(children: [
