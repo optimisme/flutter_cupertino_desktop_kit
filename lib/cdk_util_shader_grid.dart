@@ -12,13 +12,12 @@ class CDKUtilShaderGrid extends CustomPainter {
 
   CDKUtilShaderGrid(this.size);
 
-  static initGridShaders() async {
+  static initShaders() async {
     if (_isInitializing) {
       return;
     }
     _isInitializing = true;
     for (int i = 0; i < 5; i++) {
-
       double size = 5.0 + i;
       ui.PictureRecorder recorder = ui.PictureRecorder();
       Canvas imageCanvas = Canvas(recorder);
@@ -38,11 +37,27 @@ class CDKUtilShaderGrid extends CustomPainter {
         TileMode.repeated,
         TileMode.repeated,
         // ignore: flutter_format_ignore
-        Float64List.fromList([ 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0,  0, 0, 0, 1, ]),
+        Float64List.fromList([
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+        ]),
       ));
     }
-    print(_sizes);
-    print(_shaders.length);
+
     _isInitializing = false;
     _initialized = true;
   }
@@ -50,7 +65,7 @@ class CDKUtilShaderGrid extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) async {
     if (!_initialized && !_isInitializing) {
-      await initGridShaders();
+      await initShaders();
       return;
     }
 

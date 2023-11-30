@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_cupertino_desktop_kit/cdk_widgets.dart';
 import 'cdk_theme.dart';
 import 'cdk_theme_notifier.dart';
 
@@ -32,6 +33,7 @@ class CDKAppState extends State<CDKApp> with WidgetsBindingObserver {
     _themeManager.addListener(() {
       setState(() {});
     });
+    CDKUtilShaderGrid.initShaders();
   }
 
   @override
