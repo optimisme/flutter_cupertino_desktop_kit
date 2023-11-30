@@ -28,13 +28,24 @@ class CDKButtonColorState extends State<CDKButtonColor> {
   @override
   Widget build(BuildContext context) {
     CDKTheme theme = CDKThemeNotifier.of(context)!.changeNotifier;
-    Color color = theme.isLight
+    Color colorBorder = theme.isLight
         ? _isPressed
             ? CDKTheme.grey90
-            : CDKTheme.grey50
+            : CDKTheme.grey60
         : _isPressed
             ? CDKTheme.grey800
             : CDKTheme.grey600;
+    Color colorIcon = theme.isLight
+        ? _isPressed
+            ? CDKTheme.grey90
+            : _isHovered
+                ? CDKTheme.white
+                : CDKTheme.grey50
+        : _isPressed
+            ? CDKTheme.grey800
+            : _isHovered
+                ? CDKTheme.grey800
+                : CDKTheme.grey600;
 
     // Define styles and themes based on the button's state and style.
     BoxDecoration decoration;
@@ -90,24 +101,23 @@ class CDKButtonColorState extends State<CDKButtonColor> {
                 ),
                 Container(
                   decoration: BoxDecoration(
-                    border: Border.all(color: color, width: 1),
+                    border: Border.all(color: colorBorder, width: 1),
                     borderRadius: BorderRadius.circular(6.0),
                   ),
                 ),
-                if (_isHovered)
-                  Positioned.fill(
-                    child: Align(
-                      alignment: Alignment.centerRight,
-                      child: SizedBox(
-                        width: 20,
-                        child: IconTheme(
-                          data: const IconThemeData(size: 14),
-                          child:
-                              Icon(CupertinoIcons.chevron_down, color: color),
-                        ),
+                Positioned.fill(
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: SizedBox(
+                      width: 20,
+                      child: IconTheme(
+                        data: const IconThemeData(size: 12),
+                        child:
+                            Icon(CupertinoIcons.chevron_down, color: colorIcon),
                       ),
                     ),
                   ),
+                ),
               ],
             ),
           ),
