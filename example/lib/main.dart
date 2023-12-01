@@ -1,7 +1,8 @@
 import 'dart:io' show Platform;
 import 'package:flutter/material.dart';
+import 'package:flutter_cupertino_desktop_kit/cdk_widgets.dart';
 import 'package:window_manager/window_manager.dart';
-import 'app.dart';
+import 'layout.dart';
 
 void main() async {
   // For Linux, macOS and Windows, initialize WindowManager
@@ -16,7 +17,12 @@ void main() async {
     print(e);
   }
 
-  runApp(const App());
+  runApp(const CDKApp(
+      defaultAppearance: "system", // system, light, dark
+      defaultColor:
+          "systemBlue", // systemBlue, systemPurple, systemPink, systemRed, systemOrange, systemYellow, systemGreen, systemGray
+      child: Layout(),
+    ));
 }
 
 // Show the window when it's ready

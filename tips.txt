@@ -26,4 +26,8 @@ flutter pub global activate dartdoc
 flutter pub global run dartdoc:dartdoc --output gh-pages/doc/
 
 Recorda fer servir el mail anònim per pub.dev
+cd lib
+dart format .
+cd ..
 dart pub publish --dry-run
+dart pub publish
