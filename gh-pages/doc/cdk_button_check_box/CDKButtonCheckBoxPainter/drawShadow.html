@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the drawShadow method from the CDKButtonCheckBoxPainter class, for the Dart programming language.">
+  <title>drawShadow method - CDKButtonCheckBoxPainter class - cdk_button_check_box library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+
+  
+</head>
+
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">flutter_cupertino_desktop_kit</a></li>
+    <li><a href="../../cdk_button_check_box/cdk_button_check_box-library.html">cdk_button_check_box.dart</a></li>
+    <li><a href="../../cdk_button_check_box/CDKButtonCheckBoxPainter-class.html">CDKButtonCheckBoxPainter</a></li>
+    <li class="self-crumb">drawShadow method</li>
+  </ol>
+  <div class="self-name">drawShadow</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <div class="toggle" id="theme-button">
+    <label for="theme">
+      <input type="checkbox" id="theme" value="light-theme">
+      <span id="dark-theme-button" class="material-symbols-outlined">
+        brightness_4
+      </span>
+      <span id="light-theme-button" class="material-symbols-outlined">
+        brightness_5
+      </span>
+    </label>
+  </div>
+</header>
+<main>
+
+  <div
+      id="dartdoc-main-content"
+      class="main-content"
+      data-above-sidebar="cdk_button_check_box&#47;CDKButtonCheckBoxPainter-class-sidebar.html"
+      data-below-sidebar="">
+      <div>
+<h1><span class="kind-method">drawShadow</span> method 
+</h1></div>
+
+    <section class="multi-line-signature">
+      
+
+<span class="returntype">void</span>
+<span class="name ">drawShadow</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="drawShadow-param-canvas"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-ui/Canvas-class.html">Canvas</a></span> <span class="parameter-name">canvas</span>, </span></li>
+<li><span class="parameter" id="drawShadow-param-size"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-ui/Size-class.html">Size</a></span> <span class="parameter-name">size</span>, </span></li>
+<li><span class="parameter" id="drawShadow-param-rect"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-ui/Rect-class.html">Rect</a></span> <span class="parameter-name">rect</span></span></li>
+</ol>)
+
+      
+
+    </section>
+    
+<section class="desc markdown">
+  <p>Draws a shadow around the checkbox to provide visual depth</p>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">void drawShadow(Canvas canvas, Size size, Rect rect) {
+  &#47;&#47;&#47; Define the path for the rounded square
+  Path squarePath = Path()
+    ..addRRect(RRect.fromRectAndRadius(rect, const Radius.circular(4)));
+
+  &#47;&#47;&#47; Restrict the shadow painting to the checkbox area
+  canvas.clipPath(squarePath);
+
+  &#47;&#47;&#47; Create a Paint object for the shadow
+  Paint shadowPaint = Paint();
+
+  &#47;&#47;&#47; Offset the shadow based on the theme
+  Offset shadowOffset = const Offset(0, 0);
+  if (isLightTheme) {
+    shadowOffset = const Offset(0, -10);
+    shadowPaint = Paint()
+      ..color = CDKTheme.black.withOpacity(0.25)
+      ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 10);
+  } else {
+    shadowOffset = const Offset(0, -8);
+    shadowPaint = Paint()
+      ..color = CDKTheme.black.withOpacity(0.5)
+      ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 6);
+  }
+
+  &#47;&#47; Draw shadow
+  canvas.drawRRect(
+      RRect.fromRectAndRadius(
+          rect.shift(shadowOffset), const Radius.circular(4)),
+      shadowPaint);
+
+  &#47;&#47; Restore drawing clip
+  canvas.clipRect(Rect.fromLTWH(0, 0, size.width, size.height));
+}</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">flutter_cupertino_desktop_kit</a></li>
+    <li><a href="../../cdk_button_check_box/cdk_button_check_box-library.html">cdk_button_check_box</a></li>
+    <li><a href="../../cdk_button_check_box/CDKButtonCheckBoxPainter-class.html">CDKButtonCheckBoxPainter</a></li>
+    <li class="self-crumb">drawShadow method</li>
+</ol>
+
+
+    <h5>CDKButtonCheckBoxPainter class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-->
+
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    flutter_cupertino_desktop_kit
+      0.0.1
+  </span>
+
+  
+</footer>
+
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+
+
+</body>
+
+</html>
+

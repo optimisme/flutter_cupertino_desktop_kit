@@ -10,7 +10,7 @@ The CDK prefix strives to be distinctive within the Flutter ecosystem, while rem
 
 The project itself is just a set of libraries that define and manage widgets. However, it includes an example of how to use them. The example can be seen on this website:
 
-[CDK toolkit Example](https://optimisme.github.io/flutter_cupertino_desktop/gh-pages/example/)
+[CDK toolkit Example](https://optimisme.github.io/flutter_cupertino_desktopkit/gh-pages/example/)
 
 To run the example in a local application:
 

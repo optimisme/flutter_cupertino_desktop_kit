@@ -43,7 +43,7 @@ class _LayoutIntroductionState extends State<LayoutIntroduction> {
                     MouseRegion(
                         cursor: SystemMouseCursors.click,
                         child: Text(
-                            'https://github.com/optimisme/flutter_cupertino_desktop',
+                            'https://github.com/optimisme/flutter_cupertino_desktop_kit',
                             style: TextStyle(
                               color: theme.accent,
                             )))

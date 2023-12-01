@@ -3,6 +3,24 @@ import 'package:flutter/cupertino.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
+/// A class representing the theme configuration for a Flutter application.
+///
+/// The `CDKTheme` class provides a mechanism to define and update the visual
+/// appearance of an application, including colors that change based on the
+/// theme (light or dark) and application focus state. These dynamic colors are
+/// accessed via a notifier: `CDKTheme theme = CDKThemeNotifier.of(context)!.changeNotifier;`.
+///
+/// Static colors are predefined and constant, while dynamic colors change
+/// according to the application's theme and focus state.
+///
+/// ```dart
+/// CDKTheme theme = CDKThemeNotifier.of(context)!.changeNotifier;
+/// Color backgroundColor = theme.isLight ? CDKTheme.white : CDKTheme.black;
+/// ```
+///
+/// ![CDKTheme Example](URL_of_the_image)
+///
+/// This class also provides a set of predefined static colors for convenience.
 class CDKTheme extends ChangeNotifier {
   // Appearance
   bool isLight = true;

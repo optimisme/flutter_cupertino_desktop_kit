@@ -6,7 +6,26 @@ import 'cdk_theme_notifier.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
-// Main application widget
+/// `CDKApp` serves as the entry point for a customized Flutter application,
+/// managing the theme and color of the app.
+///
+/// The initialization of appearance (`defaultAppearance`) and color (`defaultColor`)
+/// can be set at creation, but these values can dynamically change and are not
+/// preserved across redraws. This allows for greater flexibility and adaptability
+/// of the app's theme according to user preferences and system conditions.
+///
+/// ```dart
+/// CDKApp(
+///   defaultAppearance: "light",
+///   defaultColor: "systemBlue",
+///   child: YourMainWidget(),
+/// )
+/// ```
+///
+/// This class also observes changes in the app lifecycle state and platform brightness,
+/// updating the theme and colors as needed. It ensures that the appearance and colors
+/// remain consistent and responsive to system settings and user interactions.
+
 class CDKApp extends StatefulWidget {
   final String defaultAppearance;
   final String defaultColor;

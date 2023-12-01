@@ -5,9 +5,36 @@ import 'cdk_theme.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
-// Custom enum for button styles
+/// Custom enum for button styles
 enum CDKButtonStyle { action, normal, destructive }
 
+/// A customizable button widget for Flutter applications.
+///
+/// The [CDKButton] allows for various styles, sizes, and states, making it versatile
+/// for different UI needs.
+///
+/// ![CDKButton Example](URL_of_the_image)
+///
+/// ```dart
+/// CDKButton(
+///   onPressed: () {
+///     // Handle button press
+///   },
+///   child: Text('Click Me'),
+///   style: CDKButtonStyle.action,
+///   isLarge: true,
+/// )
+/// ```
+///
+/// Parameters:
+/// * `onPressed`: A callback function that is called when the button is pressed.
+///   If null, the button will be disabled.
+/// * `child`: The content of the button. Typically a `Text` or `Icon` widget.
+/// * `style`: The style of the button, with options like `action`, `normal`,
+///   and `destructive`. Defaults to `normal`.
+/// * `isLarge`: A flag to determine if the button should be displayed in a large
+///   size. Defaults to `false`.
+/// * `enabled`: A flag to enable or disable the button. Defaults to `true`.
 class CDKButton extends StatefulWidget {
   final VoidCallback? onPressed;
   final Widget child;
