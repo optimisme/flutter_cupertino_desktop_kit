@@ -47,7 +47,7 @@ class CDKPickerColorState extends State<CDKPickerColor> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CDKPickerColorDialogHSV(
+            CDKPickerColorHSV(
                 value: widget.color,
                 onChanged: (value) {
                   widget.onChanged!.call(value);

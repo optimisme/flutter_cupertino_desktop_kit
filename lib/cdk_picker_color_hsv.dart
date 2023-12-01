@@ -7,21 +7,21 @@ import 'cdk_theme_notifier.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
-class CDKPickerColorDialogHSV extends StatefulWidget {
+class CDKPickerColorHSV extends StatefulWidget {
   final Color value;
   final Function(Color)? onChanged;
 
-  const CDKPickerColorDialogHSV({
+  const CDKPickerColorHSV({
     Key? key,
     required this.value,
     this.onChanged,
   }) : super(key: key);
 
   @override
-  CDKPickerColorDialogHSVState createState() => CDKPickerColorDialogHSVState();
+  CDKPickerColorHSVState createState() => CDKPickerColorHSVState();
 }
 
-class CDKPickerColorDialogHSVState extends State<CDKPickerColorDialogHSV> {
+class CDKPickerColorHSVState extends State<CDKPickerColorHSV> {
   late double _saturation;
   late double _brightness;
   late double _hue;
@@ -57,7 +57,7 @@ class CDKPickerColorDialogHSVState extends State<CDKPickerColorDialogHSV> {
   }
 
   @override
-  void didUpdateWidget(CDKPickerColorDialogHSV oldWidget) {
+  void didUpdateWidget(CDKPickerColorHSV oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.value != oldWidget.value && !_isInternalUpdate) {
       _updateValuesFromColor(widget.value);
