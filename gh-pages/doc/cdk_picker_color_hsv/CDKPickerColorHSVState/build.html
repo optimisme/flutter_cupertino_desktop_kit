@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the build method from the CDKPickerColorState class, for the Dart programming language.">
-  <title>build method - CDKPickerColorState class - cdk_picker_color library - Dart API</title>
+  <meta name="description" content="API docs for the build method from the CDKPickerColorHSVState class, for the Dart programming language.">
+  <title>build method - CDKPickerColorHSVState class - cdk_picker_color_hsv library - Dart API</title>
 
 
   
@@ -29,8 +29,8 @@
   <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">flutter_cupertino_desktop_kit</a></li>
-    <li><a href="../../cdk_picker_color/cdk_picker_color-library.html">cdk_picker_color.dart</a></li>
-    <li><a href="../../cdk_picker_color/CDKPickerColorState-class.html">CDKPickerColorState</a></li>
+    <li><a href="../../cdk_picker_color_hsv/cdk_picker_color_hsv-library.html">cdk_picker_color_hsv.dart</a></li>
+    <li><a href="../../cdk_picker_color_hsv/CDKPickerColorHSVState-class.html">CDKPickerColorHSVState</a></li>
     <li class="self-crumb">build method</li>
   </ol>
   <div class="self-name">build</div>
@@ -54,7 +54,7 @@
   <div
       id="dartdoc-main-content"
       class="main-content"
-      data-above-sidebar="cdk_picker_color&#47;CDKPickerColorState-class-sidebar.html"
+      data-above-sidebar="cdk_picker_color_hsv&#47;CDKPickerColorHSVState-class-sidebar.html"
       data-below-sidebar="">
       <div>
 <h1><span class="kind-method">build</span> method 
@@ -81,11 +81,11 @@
 <p>The framework calls this method in a number of different situations. For
 example:</p>
 <ul>
-<li>After calling <a href="https://api.flutter.dev/flutter/widgets/State/initState.html">initState</a>.</li>
-<li>After calling <a href="https://api.flutter.dev/flutter/widgets/State/didUpdateWidget.html">didUpdateWidget</a>.</li>
+<li>After calling <a href="../../cdk_picker_color_hsv/CDKPickerColorHSVState/initState.html">initState</a>.</li>
+<li>After calling <a href="../../cdk_picker_color_hsv/CDKPickerColorHSVState/didUpdateWidget.html">didUpdateWidget</a>.</li>
 <li>After receiving a call to <a href="https://api.flutter.dev/flutter/widgets/State/setState.html">setState</a>.</li>
 <li>After a dependency of this <a href="https://api.flutter.dev/flutter/widgets/State-class.html">State</a> object changes (e.g., an
-<a href="https://api.flutter.dev/flutter/widgets/InheritedWidget-class.html">InheritedWidget</a> referenced by the previous <a href="../../cdk_picker_color/CDKPickerColorState/build.html">build</a> changes).</li>
+<a href="https://api.flutter.dev/flutter/widgets/InheritedWidget-class.html">InheritedWidget</a> referenced by the previous <a href="../../cdk_picker_color_hsv/CDKPickerColorHSVState/build.html">build</a> changes).</li>
 <li>After calling <a href="https://api.flutter.dev/flutter/widgets/State/deactivate.html">deactivate</a> and then reinserting the <a href="https://api.flutter.dev/flutter/widgets/State-class.html">State</a> object into
 the tree at another location.</li>
 </ul>
@@ -107,23 +107,23 @@ this <a href="https://api.flutter.dev/flutter/widgets/State-class.html">State</a
 object. The <a href="https://api.flutter.dev/flutter/widgets/BuildContext-class.html">BuildContext</a> argument is provided redundantly here so that
 this method matches the signature for a <a href="https://api.flutter.dev/flutter/widgets/WidgetBuilder.html">WidgetBuilder</a>.</p>
 <h2 id="design-discussion">Design discussion</h2>
-<h3 id="why-is-the-build-method-on-state-and-not-statefulwidget">Why is the <a href="../../cdk_picker_color/CDKPickerColorState/build.html">build</a> method on <a href="https://api.flutter.dev/flutter/widgets/State-class.html">State</a>, and not <a href="https://api.flutter.dev/flutter/widgets/StatefulWidget-class.html">StatefulWidget</a>?</h3>
+<h3 id="why-is-the-build-method-on-state-and-not-statefulwidget">Why is the <a href="../../cdk_picker_color_hsv/CDKPickerColorHSVState/build.html">build</a> method on <a href="https://api.flutter.dev/flutter/widgets/State-class.html">State</a>, and not <a href="https://api.flutter.dev/flutter/widgets/StatefulWidget-class.html">StatefulWidget</a>?</h3>
 <p>Putting a <code>Widget build(BuildContext context)</code> method on <a href="https://api.flutter.dev/flutter/widgets/State-class.html">State</a> rather
 than putting a <code>Widget build(BuildContext context, State state)</code> method
 on <a href="https://api.flutter.dev/flutter/widgets/StatefulWidget-class.html">StatefulWidget</a> gives developers more flexibility when subclassing
 <a href="https://api.flutter.dev/flutter/widgets/StatefulWidget-class.html">StatefulWidget</a>.</p>
 <p>For example, <a href="https://api.flutter.dev/flutter/widgets/AnimatedWidget-class.html">AnimatedWidget</a> is a subclass of <a href="https://api.flutter.dev/flutter/widgets/StatefulWidget-class.html">StatefulWidget</a> that
 introduces an abstract <code>Widget build(BuildContext context)</code> method for its
-subclasses to implement. If <a href="https://api.flutter.dev/flutter/widgets/StatefulWidget-class.html">StatefulWidget</a> already had a <a href="../../cdk_picker_color/CDKPickerColorState/build.html">build</a> method
+subclasses to implement. If <a href="https://api.flutter.dev/flutter/widgets/StatefulWidget-class.html">StatefulWidget</a> already had a <a href="../../cdk_picker_color_hsv/CDKPickerColorHSVState/build.html">build</a> method
 that took a <a href="https://api.flutter.dev/flutter/widgets/State-class.html">State</a> argument, <a href="https://api.flutter.dev/flutter/widgets/AnimatedWidget-class.html">AnimatedWidget</a> would be forced to provide
 its <a href="https://api.flutter.dev/flutter/widgets/State-class.html">State</a> object to subclasses even though its <a href="https://api.flutter.dev/flutter/widgets/State-class.html">State</a> object is an
 internal implementation detail of <a href="https://api.flutter.dev/flutter/widgets/AnimatedWidget-class.html">AnimatedWidget</a>.</p>
 <p>Conceptually, <a href="https://api.flutter.dev/flutter/widgets/StatelessWidget-class.html">StatelessWidget</a> could also be implemented as a subclass of
-<a href="https://api.flutter.dev/flutter/widgets/StatefulWidget-class.html">StatefulWidget</a> in a similar manner. If the <a href="../../cdk_picker_color/CDKPickerColorState/build.html">build</a> method were on
+<a href="https://api.flutter.dev/flutter/widgets/StatefulWidget-class.html">StatefulWidget</a> in a similar manner. If the <a href="../../cdk_picker_color_hsv/CDKPickerColorHSVState/build.html">build</a> method were on
 <a href="https://api.flutter.dev/flutter/widgets/StatefulWidget-class.html">StatefulWidget</a> rather than <a href="https://api.flutter.dev/flutter/widgets/State-class.html">State</a>, that would not be possible anymore.</p>
-<p>Putting the <a href="../../cdk_picker_color/CDKPickerColorState/build.html">build</a> function on <a href="https://api.flutter.dev/flutter/widgets/State-class.html">State</a> rather than <a href="https://api.flutter.dev/flutter/widgets/StatefulWidget-class.html">StatefulWidget</a> also
+<p>Putting the <a href="../../cdk_picker_color_hsv/CDKPickerColorHSVState/build.html">build</a> function on <a href="https://api.flutter.dev/flutter/widgets/State-class.html">State</a> rather than <a href="https://api.flutter.dev/flutter/widgets/StatefulWidget-class.html">StatefulWidget</a> also
 helps avoid a category of bugs related to closures implicitly capturing
-<code>this</code>. If you defined a closure in a <a href="../../cdk_picker_color/CDKPickerColorState/build.html">build</a> function on a
+<code>this</code>. If you defined a closure in a <a href="../../cdk_picker_color_hsv/CDKPickerColorHSVState/build.html">build</a> function on a
 <a href="https://api.flutter.dev/flutter/widgets/StatefulWidget-class.html">StatefulWidget</a>, that closure would implicitly capture <code>this</code>, which is
 the current widget instance, and would have the (immutable) fields of that
 instance in scope:</p>
@@ -148,8 +148,8 @@ the first build still implicitly refers to the original widget and the
 <code>$color</code> still prints blue even through the widget has been updated to
 green; should that closure outlive its widget, it would print outdated
 information.</p>
-<p>In contrast, with the <a href="../../cdk_picker_color/CDKPickerColorState/build.html">build</a> function on the <a href="https://api.flutter.dev/flutter/widgets/State-class.html">State</a> object, closures
-created during <a href="../../cdk_picker_color/CDKPickerColorState/build.html">build</a> implicitly capture the <a href="https://api.flutter.dev/flutter/widgets/State-class.html">State</a> instance instead of
+<p>In contrast, with the <a href="../../cdk_picker_color_hsv/CDKPickerColorHSVState/build.html">build</a> function on the <a href="https://api.flutter.dev/flutter/widgets/State-class.html">State</a> object, closures
+created during <a href="../../cdk_picker_color_hsv/CDKPickerColorHSVState/build.html">build</a> implicitly capture the <a href="https://api.flutter.dev/flutter/widgets/State-class.html">State</a> instance instead of
 the widget instance:</p>
 <pre class="language-dart"><code class="language-dart">class MyButton extends StatefulWidget {
   const MyButton({super.key, this.color = Colors.teal});
@@ -185,127 +185,69 @@ prints green, as expected.</p>
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">@override
 Widget build(BuildContext context) {
-  _rgbRed = widget.color.red.toDouble();
-  _rgbGreen = widget.color.green.toDouble();
-  _rgbBlue = widget.color.blue.toDouble();
-  _rgbAlpha = widget.color.alpha.toDouble() &#47; 255;
+  CDKTheme theme = CDKThemeNotifier.of(context)!.changeNotifier;
 
-  return SizedBox(
-      width: 225,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          CDKPickerColorHSV(
-              value: widget.color,
-              onChanged: (value) {
-                widget.onChanged!.call(value);
-              }),
-          const SizedBox(height: 8),
-          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            SizedBox(
-                width: 65,
-                child: CDKFieldNumeric(
-                  value: _rgbRed,
-                  min: 0,
-                  max: 255,
-                  decimals: 0,
-                  increment: 1,
-                  units: &quot;R&quot;,
-                  onValueChanged: (value) {
-                    _rgbRed = value;
-                    _callbackRGB();
-                  },
-                )),
-            SizedBox(
-                width: 65,
-                child: CDKFieldNumeric(
-                  value: _rgbGreen,
-                  min: 0,
-                  max: 255,
-                  decimals: 0,
-                  increment: 1,
-                  units: &quot;G&quot;,
-                  onValueChanged: (value) {
-                    _rgbGreen = value;
-                    _callbackRGB();
-                  },
-                )),
-            SizedBox(
-                width: 65,
-                child: CDKFieldNumeric(
-                  value: _rgbBlue,
-                  min: 0,
-                  max: 255,
-                  decimals: 0,
-                  increment: 1,
-                  units: &quot;B&quot;,
-                  onValueChanged: (value) {
-                    _rgbBlue = value;
-                    _callbackRGB();
-                  },
-                )),
-          ]),
-          const SizedBox(height: 8),
-          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            SizedBox(
-                width: 65,
-                child: CDKFieldNumeric(
-                  value: _rgbAlpha,
-                  min: 0,
-                  max: 1,
-                  decimals: 2,
-                  increment: 0.1,
-                  units: &quot;A&quot;,
-                  onValueChanged: (value) {
-                    _rgbAlpha = value;
-                    _callbackRGB();
-                  },
-                )),
-            SizedBox(
-                width: 65,
-                child: CDKFieldColorHex(
-                  value: widget.color.value,
-                  onValueChanged: (value) {
-                    Color color = Color(value | 0xFF000000);
-                    _rgbRed = color.red.toDouble();
-                    _rgbGreen = color.green.toDouble();
-                    _rgbBlue = color.blue.toDouble();
-                    _callbackRGB();
-                  },
-                )),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(4.0),
-              child: Container(
-                width: 65,
-                height: 22,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: CDKTheme.grey100, &#47;&#47; Color del border
-                    width: 1, &#47;&#47; Amplada del border
-                  ),
-                  borderRadius: BorderRadius.circular(4.0),
-                ),
-                child: CustomPaint(
-                  painter: CDKUtilShaderGrid(8),
-                  child: Row(
-                    children: [
-                      Expanded(
-                          child: Container(
-                        color: widget.color,
-                      )),
-                      Container(
-                        width: 20,
-                        color: Color(widget.color.value | 0xFF000000),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ]),
-        ],
-      ));
+  Color hueSliderToColor = CDKPickerSliderGradient.getColorAtValue(
+      _gradientHueColors, _gradientHueStops, _hue);
+
+  if (theme.isLight) {
+    _gradientAlphaColors[1] = CDKTheme.black;
+  } else {
+    _gradientAlphaColors[1] = CDKTheme.white;
+  }
+
+  return Column(
+    mainAxisAlignment: MainAxisAlignment.start,
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      SizedBox(
+          width: double.infinity,
+          height: 150,
+          child: CDKPickerSliderChroma(
+            staturation: _saturation,
+            brightness: _brightness,
+            hueColor: hueSliderToColor,
+            onChanged: (saturation, brightness) {
+              setState(() {
+                _saturation = saturation;
+                _brightness = brightness;
+                _callback();
+              });
+            },
+          )),
+      const SizedBox(height: 8),
+      SizedBox(
+          width: double.infinity,
+          height: 16,
+          child: CDKPickerSliderGradient(
+            colors: _gradientHueColors,
+            stops: _gradientHueStops,
+            value: _hue,
+            onChanged: (value, color) {
+              setState(() {
+                _hue = value;
+                _callback();
+              });
+            },
+          )),
+      const SizedBox(height: 8),
+      SizedBox(
+          width: double.infinity,
+          height: 16,
+          child: CDKPickerSliderGradient(
+            colors: _gradientAlphaColors,
+            stops: _gradientAlphaStops,
+            thumbColorBackground: theme.background,
+            value: _alpha,
+            onChanged: (value, color) {
+              setState(() {
+                _alpha = value;
+                _callback();
+              });
+            },
+          )),
+    ],
+  );
 }</code></pre>
 </section>
 
@@ -322,13 +264,13 @@ Widget build(BuildContext context) {
 
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../../index.html">flutter_cupertino_desktop_kit</a></li>
-    <li><a href="../../cdk_picker_color/cdk_picker_color-library.html">cdk_picker_color</a></li>
-    <li><a href="../../cdk_picker_color/CDKPickerColorState-class.html">CDKPickerColorState</a></li>
+    <li><a href="../../cdk_picker_color_hsv/cdk_picker_color_hsv-library.html">cdk_picker_color_hsv</a></li>
+    <li><a href="../../cdk_picker_color_hsv/CDKPickerColorHSVState-class.html">CDKPickerColorHSVState</a></li>
     <li class="self-crumb">build method</li>
 </ol>
 
 
-    <h5>CDKPickerColorState class</h5>
+    <h5>CDKPickerColorHSVState class</h5>
     <div id="dartdoc-sidebar-left-content"></div>
   </div><!--/.sidebar-offcanvas-->
 

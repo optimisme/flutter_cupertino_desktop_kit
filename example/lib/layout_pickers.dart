@@ -15,13 +15,10 @@ class _LayoutPickersState extends State<LayoutPickers> {
   int _selectedIndexButtonsSegmented1 = 1;
   List<bool> _selectedStatesButtonsBar0 = [true, false, false, false];
   List<bool> _selectedStatesButtonsBar1 = [true, false, true, false];
-  int _selectedIndexCheckList = 1;
 
   late List<Color> _valueSliderColors;
   final List<double> _valueSliderStops = const [0.0, 1.0];
   double _valueSliderGradient = 0.75;
-
-  Color _valueColor = CDKTheme.cyan;
 
   @override
   Widget build(BuildContext context) {
@@ -173,38 +170,6 @@ class _LayoutPickersState extends State<LayoutPickers> {
         Container(width: 10, height: 10, color: valueSliderGradientColor),
         Text(_valueSliderGradient.toStringAsFixed(2),
             style: const TextStyle(fontSize: 12)),
-      ]),
-      const SizedBox(height: 8),
-      const Padding(
-          padding: EdgeInsets.all(8), child: Text('CDKPickerColorDialog:')),
-      Wrap(crossAxisAlignment: WrapCrossAlignment.center, children: [
-        Padding(
-            padding: const EdgeInsets.all(8),
-            child: CDKPickerColor(
-              color: _valueColor,
-              onChanged: (color) {
-                setState(() {
-                  _valueColor = color;
-                });
-              },
-            )),
-        Container(width: 50, height: 25, color: _valueColor),
-      ]),
-      const SizedBox(height: 8),
-      const Padding(
-          padding: EdgeInsets.all(8), child: Text('CDKPickerCheckList:')),
-      Wrap(children: [
-        Padding(
-            padding: const EdgeInsets.all(8),
-            child: CDKPickerCheckList(
-              options: const ['Dog', 'Cat', 'Parrot'],
-              selectedIndex: _selectedIndexCheckList,
-              onSelected: (int index) {
-                setState(() {
-                  _selectedIndexCheckList = index;
-                });
-              },
-            )),
       ]),
       const SizedBox(height: 50),
     ]);
