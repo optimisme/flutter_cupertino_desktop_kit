@@ -37,7 +37,7 @@ class CDKButtonSwitch extends StatelessWidget {
         onChanged?.call(newState);
       },
       child: AnimatedContainer(
-        duration: Duration(milliseconds: 200),
+        duration: const Duration(milliseconds: 200),
         height: backHeight,
         width: backWidth,
         decoration: BoxDecoration(
@@ -54,7 +54,7 @@ class CDKButtonSwitch extends StatelessWidget {
         child: Stack(
           children: [
             AnimatedPositioned(
-              duration: Duration(milliseconds: 200),
+              duration: const Duration(milliseconds: 200),
               curve: Curves.easeIn,
               top: circleTop,
               left: value ? circleMovement : 0.0,
