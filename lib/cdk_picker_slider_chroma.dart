@@ -2,6 +2,9 @@ import 'dart:ui' as ui;
 import 'package:flutter/cupertino.dart';
 import 'cdk_theme.dart';
 
+// Copyright © 2023 Albert Palacios. All Rights Reserved.
+// Licensed under the BSD 3-clause license, see LICENSE file for details.
+
 class CDKPickerSliderChroma extends StatefulWidget {
   final double staturation;
   final double brightness;
