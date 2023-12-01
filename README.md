@@ -27,3 +27,27 @@ rm -r test
 cd example
 flutter create . --platform macos # Or the platform of your choice
 flutter run -d macos --enable-impeller
+
+### Add the library as a dependency at pubspec.yaml
+
+```yaml
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_cupertino_desktop_kit: ^0.0.2
+```
+
+### Import the library
+
+```dart
+import 'package:flutter_cupertino_desktop_kit/cdk_widgets.dart';
+```
+
+### Use it
+```dart
+return const CDKApp(
+    defaultAppearance: "system", // system, light, dark
+    defaultColor:
+        "systemBlue", 
+    child: LayoutDesktop(title: "App Desktop Title"));
+```
