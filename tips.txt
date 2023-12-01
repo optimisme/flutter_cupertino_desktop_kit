@@ -25,4 +25,5 @@ flutter run -d macos --enable-impeller
 flutter pub global activate dartdoc
 flutter pub global run dartdoc:dartdoc --output gh-pages/doc/
 
-
+Recorda fer servir el mail anònim per pub.dev
+dart pub publish --dry-run
