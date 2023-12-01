@@ -33,10 +33,12 @@ class CDKPickerSliderChromaState extends State<CDKPickerSliderChroma> {
     RenderBox renderBox = context.findRenderObject() as RenderBox;
     Offset localPosition = renderBox.globalToLocal(globalPosition);
 
-
-
-    double saturation = ((localPosition.dx - _thumbHalf) / (renderBox.size.width - _thumbSize)).clamp(0.0, 1.0);
-    double brightness = 1 - ((localPosition.dy - _thumbHalf) / (renderBox.size.height - _thumbSize)).clamp(0.0, 1.0);
+    double saturation =
+        ((localPosition.dx - _thumbHalf) / (renderBox.size.width - _thumbSize))
+            .clamp(0.0, 1.0);
+    double brightness = 1 -
+        ((localPosition.dy - _thumbHalf) / (renderBox.size.height - _thumbSize))
+            .clamp(0.0, 1.0);
 
     if (widget.onChanged != null) {
       widget.onChanged!(saturation, brightness);
@@ -57,19 +59,19 @@ class CDKPickerSliderChromaState extends State<CDKPickerSliderChroma> {
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
       return GestureDetector(
-      onPanUpdate: _onPanUpdate,
-      onTapDown: _onTapDown,
-      child: CustomPaint(
-        painter: CDKPickerSliderGradient2DPainter(
-          saturation: widget.staturation,
-          brightness: widget.brightness,
-          hueColor: widget.hueColor,
-          thumbSize: _thumbSize,
-          thumbHalf: _thumbHalf,
+        onPanUpdate: _onPanUpdate,
+        onTapDown: _onTapDown,
+        child: CustomPaint(
+          painter: CDKPickerSliderGradient2DPainter(
+            saturation: widget.staturation,
+            brightness: widget.brightness,
+            hueColor: widget.hueColor,
+            thumbSize: _thumbSize,
+            thumbHalf: _thumbHalf,
+          ),
+          size: Size(constraints.maxWidth, constraints.maxHeight),
         ),
-        size: Size(constraints.maxWidth, constraints.maxHeight),
-      ),
-    );    
+      );
     });
   }
 }
@@ -98,7 +100,8 @@ class CDKPickerSliderGradient2DPainter extends CustomPainter {
     // Calculate the center position of the thumb on the slider
 
     final double thumbX = thumbHalf + (saturation * (size.width - thumbSize));
-    final double thumbY = thumbHalf + ((1 - brightness) * (size.height - thumbSize));
+    final double thumbY =
+        thumbHalf + ((1 - brightness) * (size.height - thumbSize));
     final Offset thumbCenter = Offset(thumbX, thumbY);
     double limitLeft = thumbCenter.dx - thumbHalf;
     double limitTop = thumbCenter.dy - thumbHalf;
@@ -107,11 +110,11 @@ class CDKPickerSliderGradient2DPainter extends CustomPainter {
     RRect thumbRRect = RRect.fromRectAndRadius(
       Rect.fromLTWH(limitLeft, limitTop, thumbSize, thumbSize),
       const Radius.circular(4), // Arrodoniment de 4 pixels
-    );   
+    );
 
     Color thumbColor = HSVColor.fromAHSV(
       1.0, // Alpha
-      HSVColor.fromColor(hueColor).hue, 
+      HSVColor.fromColor(hueColor).hue,
       saturation,
       brightness,
     ).toColor();
@@ -138,7 +141,7 @@ class CDKPickerSliderGradient2DPainter extends CustomPainter {
     RRect roundedRect = RRect.fromRectAndRadius(
       Rect.fromLTWH(0, 0, size.width, size.height),
       const Radius.circular(4), // Arrodoniment de 4 pixels
-    );   
+    );
     HSVColor hsvColor = HSVColor.fromColor(hueColor);
 
     // Gradient for brightness (black to transparent)
@@ -176,8 +179,8 @@ class CDKPickerSliderGradient2DPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant CDKPickerSliderGradient2DPainter oldDelegate) {
-    return oldDelegate.saturation != saturation || 
-      oldDelegate.brightness != brightness ||
-      oldDelegate.hueColor != hueColor;
+    return oldDelegate.saturation != saturation ||
+        oldDelegate.brightness != brightness ||
+        oldDelegate.hueColor != hueColor;
   }
 }
