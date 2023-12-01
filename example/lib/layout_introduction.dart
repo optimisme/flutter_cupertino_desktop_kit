@@ -43,7 +43,25 @@ class _LayoutIntroductionState extends State<LayoutIntroduction> {
                     MouseRegion(
                         cursor: SystemMouseCursors.click,
                         child: Text(
-                            'https://github.com/optimisme/flutter_cupertino_desktop_kit',
+                            'CDK GitHub source code',
+                            style: TextStyle(
+                              color: theme.accent,
+                            )))
+                  ]))),
+      Padding(
+          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
+          child: GestureDetector(
+              onTapUp: (details) {
+                launchUrl(Uri.parse(
+                    'https://optimisme.github.io/flutter_cupertino_desktop_kit/gh-pages/doc/'));
+              },
+              child: Row(
+                  mainAxisSize: MainAxisSize.min, // Això és clau
+                  children: [
+                    MouseRegion(
+                        cursor: SystemMouseCursors.click,
+                        child: Text(
+                            'CDK GitHub documentation',
                             style: TextStyle(
                               color: theme.accent,
                             )))

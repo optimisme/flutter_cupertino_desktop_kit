@@ -23,7 +23,6 @@ import 'package:flutter_cupertino_desktop_kit/cdk_widgets.dart';
 /// This class also observes changes in the app lifecycle state and platform brightness,
 /// updating the theme and colors as needed. It ensures that the appearance and colors
 /// remain consistent and responsive to system settings and user interactions.
-
 class CDKApp extends StatefulWidget {
   final String defaultAppearance;
   final String defaultColor;

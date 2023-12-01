@@ -61,6 +61,23 @@
 </h1></div>
 
     
+<section class="desc markdown">
+  <p><code>CDKApp</code> serves as the entry point for a customized Flutter application,
+managing the theme and color of the app.</p>
+<p>The initialization of appearance (<code>defaultAppearance</code>) and color (<code>defaultColor</code>)
+can be set at creation, but these values can dynamically change and are not
+preserved across redraws. This allows for greater flexibility and adaptability
+of the app's theme according to user preferences and system conditions.</p>
+<pre class="language-dart"><code class="language-dart">CDKApp(
+  defaultAppearance: "light",
+  defaultColor: "systemBlue",
+  child: YourMainWidget(),
+)
+</code></pre>
+<p>This class also observes changes in the app lifecycle state and platform brightness,
+updating the theme and colors as needed. It ensures that the appearance and colors
+remain consistent and responsive to system settings and user interactions.</p>
+</section>
 
 
     <section>
