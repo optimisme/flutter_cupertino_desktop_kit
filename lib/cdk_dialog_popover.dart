@@ -153,10 +153,10 @@ class CDKDialogPopoverState extends State<CDKDialogPopover>
     CDKTheme theme = CDKThemeNotifier.of(context)!.changeNotifier;
 
     Color backgroundColor = !widget.isTranslucent
-        ? theme.backgroundSecondary0
+        ? theme.background
         : theme.isLight
-            ? theme.backgroundSecondary0.withOpacity(0.25)
-            : theme.backgroundSecondary0.withOpacity(0.5);
+            ? theme.background.withOpacity(0.25)
+            : theme.background.withOpacity(0.5);
 
     Widget dialogContents = Container(
       key: childKey,
