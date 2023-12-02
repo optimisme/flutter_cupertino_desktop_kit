@@ -34,6 +34,7 @@ import 'package:flutter_cupertino_desktop_kit/cdk.dart';
 Then
 ```bash
 flutter pub get
+flutter pub upgrade
 ```
 
 ### Use it
