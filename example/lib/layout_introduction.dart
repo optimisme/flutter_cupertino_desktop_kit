@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter_cupertino_desktop_kit/cdk_widgets.dart';
+import 'package:flutter_cupertino_desktop_kit/cdk.dart';
 
 class LayoutIntroduction extends StatefulWidget {
   const LayoutIntroduction({super.key});
@@ -42,8 +42,7 @@ class _LayoutIntroductionState extends State<LayoutIntroduction> {
                   children: [
                     MouseRegion(
                         cursor: SystemMouseCursors.click,
-                        child: Text(
-                            'CDK GitHub source code',
+                        child: Text('CDK GitHub source code',
                             style: TextStyle(
                               color: theme.accent,
                             )))
@@ -60,8 +59,7 @@ class _LayoutIntroductionState extends State<LayoutIntroduction> {
                   children: [
                     MouseRegion(
                         cursor: SystemMouseCursors.click,
-                        child: Text(
-                            'CDK GitHub documentation',
+                        child: Text('CDK GitHub documentation',
                             style: TextStyle(
                               color: theme.accent,
                             )))

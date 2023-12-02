@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_cupertino_desktop_kit/cdk_widgets.dart';
+import 'package:flutter_cupertino_desktop_kit/cdk.dart';
 
 class LayoutButtons extends StatefulWidget {
   const LayoutButtons({super.key});

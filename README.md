@@ -10,23 +10,11 @@ The CDK prefix strives to be distinctive within the Flutter ecosystem, while rem
 
 The project itself is just a set of libraries that define and manage widgets. However, it includes an example of how to use them. The example can be seen on this website:
 
-[CDK toolkit Example](https://optimisme.github.io/flutter_cupertino_desktop_kit/gh-pages/example/)
+[CDK toolkit web Example](https://optimisme.github.io/flutter_cupertino_desktop_kit/gh-pages/example/)
 
 [CDK library documentation](https://optimisme.github.io/flutter_cupertino_desktop_kit/gh-pages/doc/)
 
-To run the example in a local application:
-
-cd example
-flutter create .
-flutter run
-
-Create the project if necessary
-flutter create . --template=package
-rm lib/flutter_cupertino_desktop_kit.dart
-rm -r test
-cd example
-flutter create . --platform macos # Or the platform of your choice
-flutter run -d macos --enable-impeller
+![CDK toolkit example](demo_image.png)
 
 ### Add the library as a dependency at pubspec.yaml
 
@@ -40,7 +28,12 @@ dependencies:
 ### Import the library
 
 ```dart
-import 'package:flutter_cupertino_desktop_kit/cdk_widgets.dart';
+import 'package:flutter_cupertino_desktop_kit/cdk.dart';
+```
+
+Then
+```bash
+flutter pub get
 ```
 
 ### Use it
@@ -51,3 +44,17 @@ return const CDKApp(
         "systemBlue", 
     child: LayoutDesktop(title: "App Desktop Title"));
 ```
+
+## Run the example as a local app:
+
+cd example
+flutter create .
+flutter run
+
+Create the project if necessary
+flutter create . --template=package
+rm lib/flutter_cupertino_desktop_kit.dart
+rm -r test
+cd example
+flutter create . --platform macos # Or the platform of your choice
+flutter run -d macos --enable-impeller
