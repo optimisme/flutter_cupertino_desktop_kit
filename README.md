@@ -47,14 +47,18 @@ return const CDKApp(
 
 ## Run the example as a local app:
 
+```bash
 cd example
 flutter create .
 flutter run
+```
 
 Create the project if necessary
+```bash
 flutter create . --template=package
 rm lib/flutter_cupertino_desktop_kit.dart
 rm -r test
 cd example
 flutter create . --platform macos # Or the platform of your choice
 flutter run -d macos --enable-impeller
+```
