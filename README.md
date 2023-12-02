@@ -1,6 +1,6 @@
 # Flutter Cupertino Desktop Kit (CDK)
 
-This project, defines Flutter widgets for Desktop, providing a macOS-style aesthetic, built upon the foundation of Cupertino widgets.
+This project, defines Flutter widgets for Desktop, providing a mOS-style aesthetic, built upon the foundation of Cupertino widgets.
 
 The goal is to be able to develop applications for all desktop systems, including the web, filling in the gaps in the Cupertino theme.
 
