@@ -13,7 +13,7 @@ enum CDKButtonStyle { action, normal, destructive }
 /// The [CDKButton] allows for various styles, sizes, and states, making it versatile
 /// for different UI needs.
 ///
-/// ![CDKButton Example](gh-pages/doc-images/CDKButton_0.png)
+/// ![CDKButton Example](/flutter_cupertino_desktop_kit/gh-pages/doc-images/CDKButton_0.png)
 ///
 /// ```dart
 /// CDKButton(
