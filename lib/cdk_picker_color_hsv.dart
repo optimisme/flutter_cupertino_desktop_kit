@@ -47,7 +47,10 @@ class CDKPickerColorHSVState extends State<CDKPickerColorHSV> {
     1.0
   ];
 
-  final List<Color> _gradientAlphaColors = [CDKTheme.transparent, CDKTheme.black];
+  final List<Color> _gradientAlphaColors = [
+    CDKTheme.transparent,
+    CDKTheme.black
+  ];
   final List<double> _gradientAlphaStops = const [0.0, 1.0];
 
   @override

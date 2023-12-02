@@ -136,7 +136,7 @@ Widget build(BuildContext context) {
       onChanged?.call(newState);
     },
     child: AnimatedContainer(
-      duration: Duration(milliseconds: 200),
+      duration: const Duration(milliseconds: 200),
       height: backHeight,
       width: backWidth,
       decoration: BoxDecoration(
@@ -153,7 +153,7 @@ Widget build(BuildContext context) {
       child: Stack(
         children: [
           AnimatedPositioned(
-            duration: Duration(milliseconds: 200),
+            duration: const Duration(milliseconds: 200),
             curve: Curves.easeIn,
             top: circleTop,
             left: value ? circleMovement : 0.0,
@@ -205,7 +205,7 @@ Widget build(BuildContext context) {
 <footer>
   <span class="no-break">
     flutter_cupertino_desktop_kit
-      0.0.1
+      0.0.3
   </span>
 
   

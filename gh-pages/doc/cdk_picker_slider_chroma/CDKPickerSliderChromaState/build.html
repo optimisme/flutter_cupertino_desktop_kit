@@ -187,19 +187,19 @@ prints green, as expected.</p>
 Widget build(BuildContext context) {
   return LayoutBuilder(builder: (context, constraints) {
     return GestureDetector(
-    onPanUpdate: _onPanUpdate,
-    onTapDown: _onTapDown,
-    child: CustomPaint(
-      painter: CDKPickerSliderGradient2DPainter(
-        saturation: widget.staturation,
-        brightness: widget.brightness,
-        hueColor: widget.hueColor,
-        thumbSize: _thumbSize,
-        thumbHalf: _thumbHalf,
+      onPanUpdate: _onPanUpdate,
+      onTapDown: _onTapDown,
+      child: CustomPaint(
+        painter: CDKPickerSliderGradient2DPainter(
+          saturation: widget.staturation,
+          brightness: widget.brightness,
+          hueColor: widget.hueColor,
+          thumbSize: _thumbSize,
+          thumbHalf: _thumbHalf,
+        ),
+        size: Size(constraints.maxWidth, constraints.maxHeight),
       ),
-      size: Size(constraints.maxWidth, constraints.maxHeight),
-    ),
-  );
+    );
   });
 }</code></pre>
 </section>
@@ -235,7 +235,7 @@ Widget build(BuildContext context) {
 <footer>
   <span class="no-break">
     flutter_cupertino_desktop_kit
-      0.0.1
+      0.0.3
   </span>
 
   

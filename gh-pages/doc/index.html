@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="generator" content="made with love by dartdoc 8.0.0">
+  <meta name="generator" content="made with love by dartdoc 8.0.1">
   <meta name="description" content="flutter_cupertino_desktop_kit API docs, for the Dart programming language.">
   <title>flutter_cupertino_desktop_kit - Dart API docs</title>
 
@@ -58,9 +58,29 @@
 <p>The CDK prefix strives to be distinctive within the Flutter ecosystem, while remaining concise and suggestive of Flutter Desktop and macOS AppKit. In doing so, it captures the essence of the project.</p>
 <h2 id="getting-started">Getting Started</h2>
 <p>The project itself is just a set of libraries that define and manage widgets. However, it includes an example of how to use them. The example can be seen on this website:</p>
-<p><a href="https://optimisme.github.io/flutter_cupertino_desktop_kit/gh-pages/example/">CDK toolkit Example</a></p>
+<p><a href="https://optimisme.github.io/flutter_cupertino_desktop_kit/gh-pages/example/">CDK toolkit web Example</a></p>
 <p><a href="https://optimisme.github.io/flutter_cupertino_desktop_kit/gh-pages/doc/">CDK library documentation</a></p>
-<p>To run the example in a local application:</p>
+<p><img src="demo_image.png" alt="CDK toolkit example"></p>
+<h3 id="add-the-library-as-a-dependency-at-pubspecyaml">Add the library as a dependency at pubspec.yaml</h3>
+<pre class="language-yaml"><code class="language-yaml">dependencies:
+  flutter:
+    sdk: flutter
+  flutter_cupertino_desktop_kit: latest
+</code></pre>
+<h3 id="import-the-library">Import the library</h3>
+<pre class="language-dart"><code class="language-dart">import 'package:flutter_cupertino_desktop_kit/cdk.dart';
+</code></pre>
+<p>Then</p>
+<pre class="language-bash"><code class="language-bash">flutter pub get
+</code></pre>
+<h3 id="use-it">Use it</h3>
+<pre class="language-dart"><code class="language-dart">return const CDKApp(
+    defaultAppearance: "system", // system, light, dark
+    defaultColor:
+        "systemBlue", 
+    child: LayoutDesktop(title: "App Desktop Title"));
+</code></pre>
+<h2 id="run-the-example-as-a-local-app">Run the example as a local app:</h2>
 <p>cd example
 flutter create .
 flutter run</p>
@@ -77,6 +97,13 @@ flutter run -d macos --enable-impeller</p>
       <section class="summary">
           <h2>Libraries</h2>
         <dl>
+          <dt id="cdk">
+  <span class="name"><a href="cdk/cdk-library.html">cdk</a></span> 
+
+</dt>
+<dd>
+</dd>
+
           <dt id="cdk_app">
   <span class="name"><a href="cdk_app/cdk_app-library.html">cdk_app</a></span> 
 
@@ -364,13 +391,6 @@ flutter run -d macos --enable-impeller</p>
 <dd>
 </dd>
 
-          <dt id="cdk_widgets">
-  <span class="name"><a href="cdk_widgets/cdk_widgets-library.html">cdk_widgets</a></span> 
-
-</dt>
-<dd>
-</dd>
-
         </dl>
       </section>
 
@@ -392,6 +412,7 @@ flutter run -d macos --enable-impeller</p>
     <h5 class="hidden-xs"><span class="package-name">flutter_cupertino_desktop_kit</span> <span class="package-kind">package</span></h5>
     <ol>
       <li class="section-title">Libraries</li>
+      <li><a href="cdk/cdk-library.html">cdk</a></li>
       <li><a href="cdk_app/cdk_app-library.html">cdk_app</a></li>
       <li><a href="cdk_app_sidebars/cdk_app_sidebars-library.html">cdk_app_sidebars</a></li>
       <li><a href="cdk_button/cdk_button-library.html">cdk_button</a></li>
@@ -433,7 +454,6 @@ flutter run -d macos --enable-impeller</p>
       <li><a href="cdk_theme_notifier/cdk_theme_notifier-library.html">cdk_theme_notifier</a></li>
       <li><a href="cdk_util_disclosure/cdk_util_disclosure-library.html">cdk_util_disclosure</a></li>
       <li><a href="cdk_util_shader_grid/cdk_util_shader_grid-library.html">cdk_util_shader_grid</a></li>
-      <li><a href="cdk_widgets/cdk_widgets-library.html">cdk_widgets</a></li>
 </ol>
 
   </div>
@@ -446,7 +466,7 @@ flutter run -d macos --enable-impeller</p>
 <footer>
   <span class="no-break">
     flutter_cupertino_desktop_kit
-      0.0.1
+      0.0.3
   </span>
 
   

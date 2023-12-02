@@ -22,7 +22,7 @@ The project itself is just a set of libraries that define and manage widgets. Ho
 dependencies:
   flutter:
     sdk: flutter
-  flutter_cupertino_desktop_kit: ^0.0.2
+  flutter_cupertino_desktop_kit: latest
 ```
 
 ### Import the library

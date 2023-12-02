@@ -126,7 +126,8 @@ void paint(Canvas canvas, Size size) {
   &#47;&#47; Calculate the center position of the thumb on the slider
 
   final double thumbX = thumbHalf + (saturation * (size.width - thumbSize));
-  final double thumbY = thumbHalf + ((1 - brightness) * (size.height - thumbSize));
+  final double thumbY =
+      thumbHalf + ((1 - brightness) * (size.height - thumbSize));
   final Offset thumbCenter = Offset(thumbX, thumbY);
   double limitLeft = thumbCenter.dx - thumbHalf;
   double limitTop = thumbCenter.dy - thumbHalf;
@@ -194,7 +195,7 @@ void paint(Canvas canvas, Size size) {
 <footer>
   <span class="no-break">
     flutter_cupertino_desktop_kit
-      0.0.1
+      0.0.3
   </span>
 
   
