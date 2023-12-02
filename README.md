@@ -14,7 +14,7 @@ The project itself is just a set of libraries that define and manage widgets. Ho
 
 [CDK library documentation](https://optimisme.github.io/flutter_cupertino_desktop_kit/gh-pages/doc/)
 
-![CDK toolkit example](demo_image.png)
+![CDK toolkit example](https://optimisme.github.io/flutter_cupertino_desktop_kit/demo_image.png)
 
 ### Add the library as a dependency at pubspec.yaml
 
