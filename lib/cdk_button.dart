@@ -13,7 +13,7 @@ enum CDKButtonStyle { action, normal, destructive }
 /// The [CDKButton] allows for various styles, sizes, and states, making it versatile
 /// for different UI needs.
 ///
-/// ![CDKButton Example](doc-images/CDKButton_0.png)
+/// ![CDKButton Example](gh-pages/doc-images/CDKButton_0.png)
 ///
 /// ```dart
 /// CDKButton(
