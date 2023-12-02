@@ -13,6 +13,7 @@ class _LayoutButtonsState extends State<LayoutButtons> {
   int _selectedRadio = 1;
   int _indexButtonSelect0 = 1;
   int _indexButtonSelect1 = 1;
+  late Widget _preloadedColorPicker;
   final GlobalKey<CDKDialogPopoverState> _anchorColorButton = GlobalKey();
   final ValueNotifier<Color> _valueColorNotifier =
       ValueNotifier(const Color(0x800080FF));
@@ -34,26 +35,32 @@ class _LayoutButtonsState extends State<LayoutButtons> {
         // ignore: avoid_print
         print("hide slider $key");
       },
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: ValueListenableBuilder<Color>(
-            valueListenable: _valueColorNotifier,
-            builder: (context, value, child) {
-              return CDKPickerColor(
-                color: _valueColorNotifier.value,
-                onChanged: (color) {
-                  setState(() {
-                    _valueColorNotifier.value = color;
-                  });
-                },
-              );
-            }),
+      child: _preloadedColorPicker,
+    );
+  }
+
+  Widget _buildPreloadedColorPicker() {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ValueListenableBuilder<Color>(
+        valueListenable: _valueColorNotifier,
+        builder: (context, value, child) {
+          return CDKPickerColor(
+            color: value,
+            onChanged: (color) {
+              setState(() {
+                _valueColorNotifier.value = color;
+              });
+            },
+          );
+        },
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    _preloadedColorPicker = _buildPreloadedColorPicker();
     return ListView(children: [
       const SizedBox(height: 8),
       const Padding(padding: EdgeInsets.all(8), child: Text('CDKButton:')),
