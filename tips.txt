@@ -1,5 +1,6 @@
-Exemple de path:
+Path:
 export PATH="$PATH:${HOME}/Documents/Projects/flutter/flutter/bin/"
+
 
 Exemple d'iniciar el projecte:
 flutter create . --template=package
@@ -10,23 +11,27 @@ flutter create . --platform macos
 flutter create . --platform web
 rm -r test
 
-Example publicar a github pages:
+Publicar a github pages:
 cd example
 flutter config --enable-web
 flutter build web --web-renderer canvaskit --base-href "/flutter_cupertino_desktop_kit/gh-pages/example/"
 cp -r ./build/web/* ../gh-pages/example/
 
-python3 -m http.server 9000
 
-flutter run -d macos --enable-impeller
-
-
-
+Publicar documentació:
 flutter pub global run dartdoc:dartdoc --output gh-pages/doc/
 
-Recorda fer servir el mail anònim per pub.dev
+
+Publicar a pub.dev:
+(recorda fer servir el mail anònim)
 cd lib
 dart format .
 cd ..
 dart pub publish --dry-run
 dart pub publish
+
+
+Altres utils:
+
+flutter run -d macos --enable-impeller
+python3 -m http.server 9000
