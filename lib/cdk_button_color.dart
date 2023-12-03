@@ -84,7 +84,7 @@ class CDKButtonColorState extends State<CDKButtonColor> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(6.0),
                     child: CustomPaint(
-                      painter: CDKUtilShaderGrid(8),
+                      painter: CDKUtilShaderGrid(7),
                       child: Row(
                         children: [
                           Expanded(

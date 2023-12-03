@@ -106,7 +106,7 @@ class CDKPickerColorState extends State<CDKPickerColor> {
                     min: 0,
                     max: 1,
                     decimals: 2,
-                    increment: 0.1,
+                    increment: 0.05,
                     units: "A",
                     onValueChanged: (value) {
                       _rgbAlpha = value;
@@ -138,7 +138,7 @@ class CDKPickerColorState extends State<CDKPickerColor> {
                     borderRadius: BorderRadius.circular(4.0),
                   ),
                   child: CustomPaint(
-                    painter: CDKUtilShaderGrid(8),
+                    painter: CDKUtilShaderGrid(7),
                     child: Row(
                       children: [
                         Expanded(

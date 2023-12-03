@@ -3,6 +3,7 @@ import 'cdk_picker_slider_chroma.dart';
 import 'cdk_picker_slider_gradient.dart';
 import 'cdk_theme.dart';
 import 'cdk_theme_notifier.dart';
+import 'cdk_util_shader_grid.dart';
 
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
@@ -96,11 +97,7 @@ class CDKPickerColorHSVState extends State<CDKPickerColorHSV> {
     Color hueSliderToColor = CDKPickerSliderGradient.getColorAtValue(
         _gradientHueColors, _gradientHueStops, _hue);
 
-    if (theme.isLight) {
-      _gradientAlphaColors[1] = CDKTheme.black;
-    } else {
-      _gradientAlphaColors[1] = CDKTheme.white;
-    }
+    _gradientAlphaColors[1] = Color(widget.value.value | 0xFF000000);
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -138,12 +135,23 @@ class CDKPickerColorHSVState extends State<CDKPickerColorHSV> {
             )),
         const SizedBox(height: 8),
         SizedBox(
-            width: double.infinity,
-            height: 16,
-            child: CDKPickerSliderGradient(
+          width: double.infinity,
+          height: 16,
+          child: Stack(children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(
+                  4.0), // Defineix el radi de les vores arrodonides a 4 pixels
+              child: CustomPaint(
+                painter: CDKUtilShaderGrid(5),
+                child: Container(
+                  height: 14,
+                ),
+              ),
+            ),
+            CDKPickerSliderGradient(
               colors: _gradientAlphaColors,
               stops: _gradientAlphaStops,
-              thumbColorBackground: theme.background,
+              thumbColorBackground: widget.value,
               value: _alpha,
               onChanged: (value, color) {
                 setState(() {
@@ -151,7 +159,9 @@ class CDKPickerColorHSVState extends State<CDKPickerColorHSV> {
                   _callback();
                 });
               },
-            )),
+            )
+          ]),
+        ),
       ],
     );
   }

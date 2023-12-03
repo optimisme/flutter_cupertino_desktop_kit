@@ -1,3 +1,8 @@
+## 0.0.6
+
+* Updated Alpha selector
+* Updated Up/Down color selector on dark theme
+
 ## 0.0.5
 
 * Updated README.md image size

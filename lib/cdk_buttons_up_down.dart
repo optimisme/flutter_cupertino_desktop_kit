@@ -51,6 +51,22 @@ class CDKButtonsUpDownState extends State<CDKButtonsUpDown> {
             ? theme.backgroundSecondary1
             : CDKTheme.grey;
 
+    Color iconUp = widget.enabledUp
+        ? theme.isLight
+            ? CDKTheme.black
+            : CDKTheme.grey70
+        : theme.isLight
+            ? CDKTheme.grey70
+            : CDKTheme.grey;
+
+    Color iconDown = widget.enabledDown
+        ? theme.isLight
+            ? CDKTheme.black
+            : CDKTheme.grey70
+        : theme.isLight
+            ? CDKTheme.grey70
+            : CDKTheme.grey;
+
     // Estil per al botó amunt
     var decorationUp = BoxDecoration(
       color: backgroundUp,
@@ -98,9 +114,7 @@ class CDKButtonsUpDownState extends State<CDKButtonsUpDown> {
             decoration: decorationUp,
             child: Padding(
               padding: const EdgeInsets.fromLTRB(2, 1, 2, 0),
-              child: Icon(CupertinoIcons.chevron_up,
-                  size: 9,
-                  color: widget.enabledUp ? CDKTheme.black : CDKTheme.grey70),
+              child: Icon(CupertinoIcons.chevron_up, size: 9, color: iconUp),
             ),
           )),
         ),
@@ -120,9 +134,8 @@ class CDKButtonsUpDownState extends State<CDKButtonsUpDown> {
             decoration: decorationDown,
             child: Padding(
               padding: const EdgeInsets.fromLTRB(2, 1, 2, 0),
-              child: Icon(CupertinoIcons.chevron_down,
-                  size: 9,
-                  color: widget.enabledDown ? CDKTheme.black : CDKTheme.grey70),
+              child:
+                  Icon(CupertinoIcons.chevron_down, size: 9, color: iconDown),
             ),
           )),
         ),

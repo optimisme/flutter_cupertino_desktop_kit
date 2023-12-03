@@ -181,7 +181,7 @@ class CDKPickerSliderGradientPainter extends CustomPainter {
 
     // Paint the background of the thumb
     Paint thumbSquarePaintBackground = Paint()
-      ..color = thumbColorBackground
+      ..color = CDKTheme.white
       ..style = PaintingStyle.fill;
     canvas.drawPath(thumbSquarePath, thumbSquarePaintBackground);
 

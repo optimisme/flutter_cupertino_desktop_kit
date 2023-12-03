@@ -24,7 +24,9 @@ flutter pub global run dartdoc:dartdoc --output gh-pages/doc/
 
 Publicar a pub.dev:
 (recorda fer servir el mail anònim)
-cd lib
+cd example/lib
+dart format .
+cd ../../lib
 dart format .
 cd ..
 dart pub publish --dry-run
