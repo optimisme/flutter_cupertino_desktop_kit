@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'cdk_picker_slider_chroma.dart';
 import 'cdk_picker_slider_gradient.dart';
 import 'cdk_theme.dart';
-import 'cdk_theme_notifier.dart';
 import 'cdk_util_shader_grid.dart';
 
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
@@ -92,8 +91,6 @@ class CDKPickerColorHSVState extends State<CDKPickerColorHSV> {
 
   @override
   Widget build(BuildContext context) {
-    CDKTheme theme = CDKThemeNotifier.of(context)!.changeNotifier;
-
     Color hueSliderToColor = CDKPickerSliderGradient.getColorAtValue(
         _gradientHueColors, _gradientHueStops, _hue);
 
