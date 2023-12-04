@@ -75,7 +75,9 @@ class CDKPickerButtonsSegmentedState extends State<CDKPickerButtonsSegmented> {
   /// Calculates the width for the animated selector.
   double _getPositionWidth(int index) {
     if (index == (_rects.length - 1)) {
-      return _width - _getPositionLeft(index) - 3;
+      double tmp = 3;
+      if (widget.isAccent) tmp = 2;
+      return _width - _getPositionLeft(index) - tmp;
     } else {
       double positionLeft = _getPositionLeft(index);
       double nextLeft = _getPositionLeft(index + 1);
@@ -120,7 +122,7 @@ class CDKPickerButtonsSegmentedState extends State<CDKPickerButtonsSegmented> {
           ? const BoxDecoration()
           : BoxDecoration(
               color: theme.backgroundSecondary1,
-              borderRadius: BorderRadius.circular(4.0),
+              borderRadius: BorderRadius.circular(6.0),
               border: Border.all(
                 color: CDKTheme.grey300,
                 width: 0.5,
@@ -145,7 +147,7 @@ class CDKPickerButtonsSegmentedState extends State<CDKPickerButtonsSegmented> {
                       : theme.isAppFocused
                           ? theme.backgroundSecondary0
                           : CDKTheme.grey300,
-                  borderRadius: BorderRadius.circular(4.0),
+                  borderRadius: BorderRadius.circular(6.0),
                   boxShadow: widget.isAccent
                       ? []
                       : [

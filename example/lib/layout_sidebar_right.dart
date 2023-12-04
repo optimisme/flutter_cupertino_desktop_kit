@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_cupertino_desktop_kit/cdk.dart';
 
 class LayoutSidebarRight extends StatefulWidget {
   const LayoutSidebarRight({super.key});
@@ -10,10 +11,11 @@ class LayoutSidebarRight extends StatefulWidget {
 class LayoutButtonsState extends State<LayoutSidebarRight> {
   @override
   Widget build(BuildContext context) {
-    return ListView(children: const [
-      Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [Text("Sidebar Right")])
-    ]);
+    CDKTheme theme = CDKThemeNotifier.of(context)!.changeNotifier;
+    Color backgroundColor =
+        theme.isLight ? const Color(0xFFFAFAFA) : const Color(0xFF555555);
+    return Container(
+        color: backgroundColor,
+        child: ListView(children: const [Text("Sidebar right")]));
   }
 }

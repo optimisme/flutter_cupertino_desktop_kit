@@ -21,14 +21,14 @@ class LayoutState extends State<Layout> {
   bool isSidebarLeftVisible = true;
   GlobalKey<CDKAppSidebarsState> keyAppStructure = GlobalKey();
   String _section = "Introduction";
-  List<String> options = [
-    "Introduction",
-    "Buttons",
-    "Progress",
-    "Fields",
-    "Pickers",
-    "Dialogs",
-    "Utils",
+  List<List<dynamic>> options = [
+    ["Introduction", const LayoutIntroduction()],
+    ["Buttons", const LayoutButtons()],
+    ["Progress", const LayoutProgress()],
+    ["Fields", const LayoutFields()],
+    ["Pickers", const LayoutPickers()],
+    ["Dialogs", const LayoutDialogs()],
+    ["Utils", const LayoutUtils()],
   ];
 
   void toggleLeftSidebar() {
@@ -55,32 +55,8 @@ class LayoutState extends State<Layout> {
   Widget build(BuildContext context) {
     CDKTheme theme = CDKThemeNotifier.of(context)!.changeNotifier;
 
-    Widget centralWidget;
-    switch (_section) {
-      case "Introduction":
-        centralWidget = const LayoutIntroduction();
-        break;
-      case "Buttons":
-        centralWidget = const LayoutButtons();
-        break;
-      case "Progress":
-        centralWidget = const LayoutProgress();
-        break;
-      case "Fields":
-        centralWidget = const LayoutFields();
-        break;
-      case "Pickers":
-        centralWidget = const LayoutPickers();
-        break;
-      case "Dialogs":
-        centralWidget = const LayoutDialogs();
-        break;
-      case "Utils":
-        centralWidget = const LayoutUtils();
-        break;
-      default:
-        centralWidget = Container(); // Un contenidor buit com a cas per defecte
-    }
+    Widget centralWidget =
+        options.firstWhere((element) => element[0] == _section)[1];
 
     return CupertinoPageScaffold(
         navigationBar: CupertinoNavigationBar(
@@ -96,10 +72,11 @@ class LayoutState extends State<Layout> {
                     }),
                 Text(_section),
                 CDKButtonIcon(
-                    icon: CupertinoIcons.sidebar_left,
-                    onPressed: () {
-                      toggleRightSidebar();
-                    }),
+                  icon: CupertinoIcons.sidebar_right,
+                  onPressed: () {
+                    toggleRightSidebar();
+                  },
+                ),
               ]),
         ),
         child: CDKAppSidebars(
@@ -107,8 +84,9 @@ class LayoutState extends State<Layout> {
           sidebarLeftIsResizable: true,
           sidebarLeftDefaultsVisible: true,
           sidebarRightDefaultsVisible: false,
-          sidebarLeft:
-              LayoutSidebarLeft(options: options, onSelect: _changeSection),
+          sidebarLeft: LayoutSidebarLeft(
+              options: options.map((pair) => pair[0] as String).toList(),
+              onSelect: _changeSection),
           sidebarRight: const LayoutSidebarRight(),
           central: centralWidget,
         ));

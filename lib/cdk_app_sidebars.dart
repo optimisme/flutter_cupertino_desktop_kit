@@ -34,54 +34,35 @@ class CDKAppSidebars extends StatefulWidget {
 }
 
 class CDKAppSidebarsState extends State<CDKAppSidebars> {
-  MouseCursor _cursor =
-      SystemMouseCursors.basic; // The current cursor for the mouse.
-  int _animationMillis = 200; // The duration of the sidebar animation.
-  double _sidebarLeftWidth = 0.0; // The width of the left sidebar.
-  bool _sidebarLeftDragging =
-      false; // Whether the left sidebar is currently being dragged.
-  double _sidebarLeftOriginX =
-      0.0; // The original position of the left sidebar during dragging.
-  double _sidebarLeftDragX =
-      0.0; // The current position of the mouse during dragging.
-  bool _sidebarLeftIsVisible = false; // Whether the left sidebar is visible.
-  double _sidebarRightWidth = 0.0; // The width of the right sidebar.
-  bool _sidebarRightIsVisible = false; // Whether the right sidebar is visible.
-  bool get isSidebarLeftVisible =>
-      _sidebarLeftIsVisible; // Determines whether the left sidebar is visible.
-  bool get isSidebarRightVisible =>
-      _sidebarRightIsVisible; // Determines whether the right sidebar is visible.
+  MouseCursor _cursor = SystemMouseCursors.basic;
+  int _animationMillis = 200;
+  double _sidebarLeftWidth = 0.0;
+  bool _sidebarLeftDragging = false;
+  double _sidebarLeftOriginX = 0.0;
+  double _sidebarLeftDragX = 0.0;
+  bool _sidebarLeftIsVisible = false;
+  bool _sidebarRightIsVisible = false;
+  bool get isSidebarLeftVisible => _sidebarLeftIsVisible;
+  bool get isSidebarRightVisible => _sidebarRightIsVisible;
 
-  /// Sets the visibility of the left sidebar.
-  ///
-  /// @param isVisible The new visibility state of the left sidebar.
   set isSidebarLeftVisible(bool isVisible) {
     setState(() {
       _sidebarLeftIsVisible = isVisible;
     });
   }
 
-  /// Sets the visibility of the right sidebar.
-  ///
-  /// @param isVisible The new visibility state of the right sidebar.
   set isSidebarRightVisible(bool isVisible) {
     setState(() {
       _sidebarRightIsVisible = isVisible;
     });
   }
 
-  /// Controls the visibility of the left sidebar.
-  ///
-  /// @param isVisible The new visibility state of the left sidebar.
   void setSidebarLeftVisibility(bool isVisible) {
     setState(() {
       _sidebarLeftIsVisible = isVisible;
     });
   }
 
-  /// Controls the visibility of the right sidebar.
-  ///
-  /// @param isVisible The new visibility state of the right sidebar.
   void setSidebarRightVisibility(bool isVisible) {
     setState(() {
       _sidebarRightIsVisible = isVisible;
@@ -154,7 +135,6 @@ class CDKAppSidebarsState extends State<CDKAppSidebars> {
     super.initState();
     _sidebarLeftWidth = widget.sidebarLeftMaxWidth;
     _sidebarLeftIsVisible = widget.sidebarLeftDefaultsVisible;
-    _sidebarRightWidth = widget.sidebarRightWidth;
     _sidebarRightIsVisible = widget.sidebarRightDefaultsVisible;
   }
 
@@ -192,12 +172,19 @@ class CDKAppSidebarsState extends State<CDKAppSidebars> {
                       ? widget.sidebarLeft!
                       : Container(),
                 )),
-            // Right Sidebar
+            // Right Sidebar limit
             Positioned(
                 right: 0,
                 top: 0,
                 bottom: 0,
                 width: widget.sidebarRightWidth,
+                child: Container(color: CDKTheme.grey80)),
+            // Right Sidebar1
+            Positioned(
+                right: 0,
+                top: 0,
+                bottom: 0,
+                width: widget.sidebarRightWidth - 1,
                 child: Container(
                   color: theme.backgroundSecondary1,
                   child: widget.sidebarRight != null
@@ -218,7 +205,7 @@ class CDKAppSidebarsState extends State<CDKAppSidebars> {
             AnimatedPositioned(
               duration: Duration(milliseconds: _animationMillis),
               left: _sidebarLeftIsVisible ? _sidebarLeftWidth : 0,
-              right: _sidebarRightIsVisible ? _sidebarRightWidth : 0,
+              right: _sidebarRightIsVisible ? widget.sidebarRightWidth : 0,
               top: 0,
               bottom: 0,
               child: Container(
@@ -228,8 +215,8 @@ class CDKAppSidebarsState extends State<CDKAppSidebars> {
                       BoxShadow(
                         color: CDKTheme.grey500.withOpacity(0.3),
                         spreadRadius: 0,
-                        blurRadius: 2,
-                        offset: const Offset(0, 2),
+                        blurRadius: 0.75,
+                        offset: const Offset(-1, 1),
                       ),
                     ],
                   ),
