@@ -1,4 +1,4 @@
-## 0.0.61
+## 0.0.7
 
  * Updated sidebars
  * Updated picker buttons segmented

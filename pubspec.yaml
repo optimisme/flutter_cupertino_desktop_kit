@@ -1,6 +1,6 @@
 name: flutter_cupertino_desktop_kit
 description: This project, defines Flutter widgets for Desktop, providing a macOS-style aesthetic, built upon the foundation of Cupertino widgets.
-version: 0.0.61
+version: 0.0.7
 homepage: https://github.com/optimisme/flutter_cupertino_desktop_kit
 environment:
   sdk: '>=3.1.5 <4.0.0'
