@@ -29,7 +29,7 @@
   <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">flutter_cupertino_desktop_kit</a></li>
-    <li><a href="../../cdk_progress_circular/cdk_progress_circular-library.html">cdk_progress_circular.dart</a></li>
+    <li><a href="../../cdk_progress_circular/cdk_progress_circular-library.html">cdk_progress_circular</a></li>
     <li><a href="../../cdk_progress_circular/CDKProgressCircularState-class.html">CDKProgressCircularState</a></li>
     <li class="self-crumb">dispose method</li>
   </ol>
@@ -98,18 +98,6 @@ replacing the object.</li>
 </ul>
 <p>Implementations of this method should end with a call to the inherited
 method, as in <code>super.dispose()</code>.</p>
-<h2 id="application-shutdown">Application shutdown</h2>
-<p>This method is <em>not</em> invoked when the application shuts down, because
-there is no way to predict when that will happen. For example, a user's
-battery could catch fire, or the user could drop the device into a
-swimming pool, or the operating system could unilaterally terminate the
-application process due to memory pressure.</p>
-<p>Applications are responsible for ensuring that they are well-behaved
-even in the face of a rapid unscheduled termination.</p>
-<p>To artificially cause the entire widget tree to be disposed, consider
-calling <a href="https://api.flutter.dev/flutter/widgets/runApp.html">runApp</a> with a widget such as <a href="https://api.flutter.dev/flutter/widgets/SizedBox/SizedBox.shrink.html">SizedBox.shrink</a>.</p>
-<p>To listen for platform shutdown messages (and other lifecycle changes),
-consider the <a href="https://api.flutter.dev/flutter/widgets/AppLifecycleListener-class.html">AppLifecycleListener</a> API.</p>
 <p>See also:</p>
 <ul>
 <li><a href="https://api.flutter.dev/flutter/widgets/State/deactivate.html">deactivate</a>, which is called prior to <a href="../../cdk_progress_circular/CDKProgressCircularState/dispose.html">dispose</a>.</li>
@@ -148,7 +136,6 @@ void dispose() {
 
 
     <h5>CDKProgressCircularState class</h5>
-    <div id="dartdoc-sidebar-left-content"></div>
   </div><!--/.sidebar-offcanvas-->
 
   <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
@@ -159,7 +146,7 @@ void dispose() {
 <footer>
   <span class="no-break">
     flutter_cupertino_desktop_kit
-      0.0.5
+      0.0.6
   </span>
 
   
