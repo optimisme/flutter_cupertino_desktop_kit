@@ -30,9 +30,7 @@ import 'cdk_theme.dart';
 ///
 /// The dialog adjusts its position and size based on the anchor widget and
 /// screen dimensions. It also handles animations and shadow effects for a polished look.
-class CDKDialogDraggable extends StatefulWidget {
-  // ... (parameters and implementation details)
-}
+
 
 class CDKDialogDraggable extends StatefulWidget {
   // Constructor parameters for the CDKDialogDraggable widget
