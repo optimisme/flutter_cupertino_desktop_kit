@@ -4,15 +4,15 @@ import 'cdk_theme.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
-/// The CDKDialogOuterShadowPainter class is a Flutter custom painter responsible for
+/// The [CDKDialogOuterShadowPainter] class is a Flutter custom painter responsible for
 /// drawing the outer shadow, background, and contour lines of a dialog.
 ///
 ///
 ///
 ///
-/// Example usage:
+/// Example usage:  
 /// 
-
+/// ```dart
 /// showDialog(
 ///   context: context,
 ///   builder: (BuildContext context) {
@@ -44,10 +44,12 @@ import 'cdk_theme.dart';
 ///     );
 ///   },
 /// );
+/// ```
+/// 
 /// Parameters:
-/// - [colorBackground]: The background color of the dialog.
-/// - [pathContour]: The contour path of the dialog.
-/// - [isLightTheme]: Indicates whether the theme is light or dark.
+/// * `colorBackground`: The background color of the dialog.
+/// * `pathContour`: The contour path of the dialog.
+/// * `isLightTheme`: Indicates whether the theme is light or dark.
 
 class CDKDialogOuterShadowPainter extends CustomPainter {
   final Color colorBackground;

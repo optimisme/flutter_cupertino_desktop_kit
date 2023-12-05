@@ -207,6 +207,22 @@ Widget build(BuildContext context) {
           ? theme.backgroundSecondary1
           : CDKTheme.grey;
 
+  Color iconUp = widget.enabledUp
+      ? theme.isLight
+          ? CDKTheme.black
+          : CDKTheme.grey70
+      : theme.isLight
+          ? CDKTheme.grey70
+          : CDKTheme.grey;
+
+  Color iconDown = widget.enabledDown
+      ? theme.isLight
+          ? CDKTheme.black
+          : CDKTheme.grey70
+      : theme.isLight
+          ? CDKTheme.grey70
+          : CDKTheme.grey;
+
   &#47;&#47; Estil per al botó amunt
   var decorationUp = BoxDecoration(
     color: backgroundUp,
@@ -254,9 +270,7 @@ Widget build(BuildContext context) {
           decoration: decorationUp,
           child: Padding(
             padding: const EdgeInsets.fromLTRB(2, 1, 2, 0),
-            child: Icon(CupertinoIcons.chevron_up,
-                size: 9,
-                color: widget.enabledUp ? CDKTheme.black : CDKTheme.grey70),
+            child: Icon(CupertinoIcons.chevron_up, size: 9, color: iconUp),
           ),
         )),
       ),
@@ -276,9 +290,8 @@ Widget build(BuildContext context) {
           decoration: decorationDown,
           child: Padding(
             padding: const EdgeInsets.fromLTRB(2, 1, 2, 0),
-            child: Icon(CupertinoIcons.chevron_down,
-                size: 9,
-                color: widget.enabledDown ? CDKTheme.black : CDKTheme.grey70),
+            child:
+                Icon(CupertinoIcons.chevron_down, size: 9, color: iconDown),
           ),
         )),
       ),
@@ -318,7 +331,7 @@ Widget build(BuildContext context) {
 <footer>
   <span class="no-break">
     flutter_cupertino_desktop_kit
-      0.0.5
+      0.0.6
   </span>
 
   

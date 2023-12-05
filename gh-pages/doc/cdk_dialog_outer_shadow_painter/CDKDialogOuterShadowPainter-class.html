@@ -61,6 +61,49 @@
 </h1></div>
 
     
+<section class="desc markdown">
+  <p>The <a href="../cdk_dialog_outer_shadow_painter/CDKDialogOuterShadowPainter-class.html">CDKDialogOuterShadowPainter</a> class is a Flutter custom painter responsible for
+drawing the outer shadow, background, and contour lines of a dialog.</p>
+<p>Example usage:</p>
+<pre class="language-dart"><code class="language-dart">showDialog(
+  context: context,
+  builder: (BuildContext context) {
+    return Dialog(
+      backgroundColor: Colors.transparent,
+      insetPadding: EdgeInsets.all(16),
+      child: CustomPaint(
+        painter: CDKDialogOuterShadowPainter(
+          colorBackground: Colors.white,
+          pathContour: CDKDialogOuterShadowPainter.createContourPath(
+            Rect.fromPoints(
+              Offset(0, 0),
+              Offset(200, 200),
+            ),
+          ),
+          isLightTheme: true,
+        ),
+        child: Container(
+          width: 200,
+          height: 200,
+          child: Center(
+            child: Text(
+              'Hello, Dialog!',
+              style: TextStyle(fontSize: 20),
+            ),
+          ),
+        ),
+      ),
+    );
+  },
+);
+</code></pre>
+<p>Parameters:</p>
+<ul>
+<li><code>colorBackground</code>: The background color of the dialog.</li>
+<li><code>pathContour</code>: The contour path of the dialog.</li>
+<li><code>isLightTheme</code>: Indicates whether the theme is light or dark.</li>
+</ul>
+</section>
 
 
     <section>
@@ -385,7 +428,7 @@ implemented in terms of the former).
 <footer>
   <span class="no-break">
     flutter_cupertino_desktop_kit
-      0.0.5
+      0.0.6
   </span>
 
   
