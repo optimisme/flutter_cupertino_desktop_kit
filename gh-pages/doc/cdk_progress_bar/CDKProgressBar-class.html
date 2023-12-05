@@ -61,6 +61,26 @@
 </h1></div>
 
     
+<section class="desc markdown">
+  <p>A customizable progress bar for Flutter applications, featuring determinate and indeterminate modes, smooth animations, and theming options.</p>
+<p>The <a href="../cdk_progress_bar/CDKProgressBar-class.html">CDKProgressBar</a> allows developers to integrate a flexible and customizable progress bar widget into their Flutter applications,
+supporting both determinate and indeterminate modes, animated transitions, and theming options for enhanced visual appeal.</p>
+<img src="/flutter_cupertino_desktop_kit/gh-pages/doc-images/CDKProgressBar_0.png" alt="CDKProgressBar Example" style="max-width: 500px; width: 100%;">
+<pre class="language-dart"><code class="language-dart">CDKProgressBar(
+  value: 0.6, // Set the progress value between 0.0 and 1.0
+ ),
+CDKProgressBar(
+  isIndeterminate: true, // Use indeterminate mode
+  isRunning: true, // Start the indeterminate animation
+),
+</code></pre>
+<p>Parameters:</p>
+<ul>
+<li><code>value</code>: The progress value of the bar, ranging from 0.0 to 1.0.</li>
+<li><code>isIndeterminate</code>: A flag indicating whether the progress bar is in indeterminate mode. Defaults to false.</li>
+<li><code>isRunning</code>: A flag determining whether the indeterminate animation is running. Defaults to false.</li>
+</ul>
+</section>
 
 
     <section>
@@ -371,7 +391,7 @@ tools and by <a href="https://api.flutter.dev/flutter/foundation/DiagnosticsNode
 <footer>
   <span class="no-break">
     flutter_cupertino_desktop_kit
-      0.0.5
+      0.0.6
   </span>
 
   

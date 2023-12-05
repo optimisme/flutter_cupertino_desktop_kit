@@ -217,12 +217,19 @@ Widget build(BuildContext context) {
                     ? widget.sidebarLeft!
                     : Container(),
               )),
-          &#47;&#47; Right Sidebar
+          &#47;&#47; Right Sidebar limit
           Positioned(
               right: 0,
               top: 0,
               bottom: 0,
               width: widget.sidebarRightWidth,
+              child: Container(color: CDKTheme.grey80)),
+          &#47;&#47; Right Sidebar1
+          Positioned(
+              right: 0,
+              top: 0,
+              bottom: 0,
+              width: widget.sidebarRightWidth - 1,
               child: Container(
                 color: theme.backgroundSecondary1,
                 child: widget.sidebarRight != null
@@ -243,7 +250,7 @@ Widget build(BuildContext context) {
           AnimatedPositioned(
             duration: Duration(milliseconds: _animationMillis),
             left: _sidebarLeftIsVisible ? _sidebarLeftWidth : 0,
-            right: _sidebarRightIsVisible ? _sidebarRightWidth : 0,
+            right: _sidebarRightIsVisible ? widget.sidebarRightWidth : 0,
             top: 0,
             bottom: 0,
             child: Container(
@@ -253,8 +260,8 @@ Widget build(BuildContext context) {
                     BoxShadow(
                       color: CDKTheme.grey500.withOpacity(0.3),
                       spreadRadius: 0,
-                      blurRadius: 2,
-                      offset: const Offset(0, 2),
+                      blurRadius: 0.75,
+                      offset: const Offset(-1, 1),
                     ),
                   ],
                 ),
@@ -296,7 +303,7 @@ Widget build(BuildContext context) {
 <footer>
   <span class="no-break">
     flutter_cupertino_desktop_kit
-      0.0.5
+      0.0.6
   </span>
 
   

@@ -61,6 +61,48 @@
 </h1></div>
 
     
+<section class="desc markdown">
+  <p>A customizable button widget for Flutter applications.</p>
+<p>The <a href="../cdk_buttons_up_down/CDKButtonsUpDown-class.html">CDKButtonsUpDown</a> widget represents a pair of up and down buttons
+that can be used for various UI interactions. The buttons
+can be enabled or disabled independently, and callback functions can be
+provided to handle the press events for the up and down buttons.</p>
+<img src="/flutter_cupertino_desktop_kit/gh-pages/doc-images/CDKButton_0.png" alt="CDKButtonUpDown_0" style="max-width: 500px; width: 100%;">
+<pre class="language-dart"><code class="language-dart">CDKButtonsUpDown(
+  enabledUp: true,
+  enabledDown: true,
+  onUpPressed: () {
+    // Handle up button press
+    print('Up button pressed');
+  },
+  onDownPressed: () {
+    // Handle down button press
+    print('Down button pressed');
+  },
+)
+</code></pre>
+<p>/// Parameters:</p>
+<ul>
+<li>
+<p><code>enabledUp</code>: A flag indicating whether the up button is enabled or disabled.
+If set to <code>false</code>, the up button will be non-interactive. Defaults to <code>true</code>.</p>
+</li>
+<li>
+<p><code>enabledDown</code>: A flag indicating whether the down button is enabled or disabled.
+If set to <code>false</code>, the down button will be non-interactive. Defaults to <code>true</code>.</p>
+</li>
+<li>
+<p><code>onUpPressed</code>: A callback function that is invoked when the up button is pressed.
+If set to <code>null</code> or not provided, the up button will be disabled. This function
+typically contains the logic to be executed when the up button is pressed.</p>
+</li>
+<li>
+<p><code>onDownPressed</code>: A callback function that is invoked when the down button is pressed.
+If set to <code>null</code> or not provided, the down button will be disabled. This function
+typically contains the logic to be executed when the down button is pressed.</p>
+</li>
+</ul>
+</section>
 
 
     <section>
@@ -382,7 +424,7 @@ tools and by <a href="https://api.flutter.dev/flutter/foundation/DiagnosticsNode
 <footer>
   <span class="no-break">
     flutter_cupertino_desktop_kit
-      0.0.5
+      0.0.6
   </span>
 
   

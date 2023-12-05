@@ -6,6 +6,27 @@ import 'cdk_theme.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
+/// A customizable progress bar for Flutter applications, featuring determinate and indeterminate modes, smooth animations, and theming options.
+/// 
+/// The [CDKProgressBar] allows developers to integrate a flexible and customizable progress bar widget into their Flutter applications, 
+/// supporting both determinate and indeterminate modes, animated transitions, and theming options for enhanced visual appeal.
+/// 
+/// <img src="/flutter_cupertino_desktop_kit/gh-pages/doc-images/CDKProgressBar_0.png" alt="CDKProgressBar Example" style="max-width: 500px; width: 100%;">
+/// 
+/// ```dart
+/// CDKProgressBar(
+///   value: 0.6, // Set the progress value between 0.0 and 1.0
+///  ),
+/// CDKProgressBar(
+///   isIndeterminate: true, // Use indeterminate mode
+///   isRunning: true, // Start the indeterminate animation
+/// ),
+/// ```
+/// 
+/// Parameters:
+/// * `value`: The progress value of the bar, ranging from 0.0 to 1.0.
+/// * `isIndeterminate`: A flag indicating whether the progress bar is in indeterminate mode. Defaults to false.
+/// * `isRunning`: A flag determining whether the indeterminate animation is running. Defaults to false.
 class CDKProgressBar extends StatefulWidget {
   final double value;
   final bool isIndeterminate;

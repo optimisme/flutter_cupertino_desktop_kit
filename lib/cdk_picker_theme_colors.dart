@@ -5,6 +5,26 @@ import 'cdk_theme.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
+/// A Flutter Widget designed to provide a color picker interface within a Flutter application. 
+/// 
+/// The [CDKPickerThemeColors] Flutter widget allows users to visually select accent colors.
+/// 
+/// <img src="/flutter_cupertino_desktop_kit/gh-pages/doc-images/CDKPickerThemeColors_0.png" alt="CDKPickerThemeColors Example" style="max-width: 500px; width: 100%;">
+/// 
+/// ```dart
+/// CDKPickerThemeColors(
+///  colors: {
+///    'Red': Colors.red,
+///    'Blue': Colors.blue,
+///    'Green': Colors.green,
+///   },
+/// )
+/// ```
+/// 
+/// Parameters
+/// * `colors`: A map of color names and their corresponding colors for the color picker.
+/// * `onColorChanged`: An optional callback function triggered when the selected color changes.
+/// * `key`: An optional parameter for uniquely identifying the widget.
 class CDKPickerThemeColors extends StatefulWidget {
   final Map<String, Color> colors;
   final Function(String)? onColorChanged;

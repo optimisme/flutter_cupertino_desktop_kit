@@ -26,7 +26,7 @@ Publicar a pub.dev:
 (recorda fer servir el mail anònim)
 cd example/lib
 dart format .
-cd ../lib
+cd ../../lib
 dart format .
 cd ..
 dart pub publish --dry-run

@@ -174,17 +174,17 @@ class CDKAppSidebarsState extends State<CDKAppSidebars> {
                 )),
             // Right Sidebar limit
             Positioned(
-                right: widget.sidebarRightWidth - 1,
+                right: 0,
                 top: 0,
                 bottom: 0,
-                width: 1,
-                child: Container(color: CDKTheme.grey60)),
+                width: widget.sidebarRightWidth,
+                child: Container(color: CDKTheme.grey80)),
             // Right Sidebar1
             Positioned(
                 right: 0,
                 top: 0,
                 bottom: 0,
-                width: widget.sidebarRightWidth - 0.5,
+                width: widget.sidebarRightWidth - 1,
                 child: Container(
                   color: theme.backgroundSecondary1,
                   child: widget.sidebarRight != null

@@ -5,6 +5,45 @@ import 'cdk_theme.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
+/// A customizable button widget for Flutter applications.
+///
+/// The [CDKButtonsUpDown] widget represents a pair of up and down buttons
+/// that can be used for various UI interactions. The buttons
+/// can be enabled or disabled independently, and callback functions can be
+/// provided to handle the press events for the up and down buttons.
+/// 
+/// <img src="/flutter_cupertino_desktop_kit/gh-pages/doc-images/CDKButton_0.png" alt="CDKButtonUpDown_0" style="max-width: 500px; width: 100%;">
+/// 
+/// ```dart
+/// CDKButtonsUpDown(
+///   enabledUp: true,
+///   enabledDown: true,
+///   onUpPressed: () {
+///     // Handle up button press
+///     print('Up button pressed');
+///   },
+///   onDownPressed: () {
+///     // Handle down button press
+///     print('Down button pressed');
+///   },
+/// )
+/// ```
+/// 
+/// /// Parameters:
+/// * `enabledUp`: A flag indicating whether the up button is enabled or disabled.
+///   If set to `false`, the up button will be non-interactive. Defaults to `true`.
+///
+/// * `enabledDown`: A flag indicating whether the down button is enabled or disabled.
+///   If set to `false`, the down button will be non-interactive. Defaults to `true`.
+///
+/// * `onUpPressed`: A callback function that is invoked when the up button is pressed.
+///   If set to `null` or not provided, the up button will be disabled. This function
+///   typically contains the logic to be executed when the up button is pressed.
+///
+/// * `onDownPressed`: A callback function that is invoked when the down button is pressed.
+///   If set to `null` or not provided, the down button will be disabled. This function
+///   typically contains the logic to be executed when the down button is pressed.
+
 class CDKButtonsUpDown extends StatefulWidget {
   final bool enabledUp;
   final bool enabledDown;

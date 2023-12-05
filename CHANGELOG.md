@@ -1,8 +1,3 @@
-## 0.0.7
-
- * Updated sidebars
- * Updated picker buttons segmented
-
 ## 0.0.6
 
 * Updated Alpha selector
