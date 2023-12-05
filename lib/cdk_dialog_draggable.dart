@@ -9,6 +9,31 @@ import 'cdk_theme.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
+// `CDKDialogDraggable` is a Flutter widget designed to be a draggable dialog
+/// anchored to a specified key. It provides options for animation, translucency,
+/// and callback when hidden. The dialog's appearance is dynamically determined
+/// based on the child widget and anchor key.
+///
+/// Example Usage:
+///
+/// ```dart
+/// CDKDialogDraggable(
+///   anchorKey: GlobalKey(),
+///   isAnimated: true,
+///   isTranslucent: false,
+///   onHide: () {
+///     // Your callback logic here
+///   },
+///   child: YourDialogContentWidget(),
+/// )
+/// ```
+///
+/// The dialog adjusts its position and size based on the anchor widget and
+/// screen dimensions. It also handles animations and shadow effects for a polished look.
+class CDKDialogDraggable extends StatefulWidget {
+  // ... (parameters and implementation details)
+}
+
 class CDKDialogDraggable extends StatefulWidget {
   // Constructor parameters for the CDKDialogDraggable widget
   final GlobalKey anchorKey;
