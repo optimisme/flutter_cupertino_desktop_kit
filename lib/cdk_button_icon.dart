@@ -5,6 +5,47 @@ import 'cdk_theme.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
+/// Documented by: D. Sanchez.
+/// `CDKButtonIcon` is a custom Flutter widget representing a button with an icon.
+///
+/// This button responds to tap and hover events, changing its appearance accordingly.
+/// The button can be customized with an icon, size, shape, and an optional
+/// callback function (`onPressed`) to be executed when the button is tapped.
+///
+/// <img src="/flutter_cupertino_desktop_kit/gh-pages/doc-images/CDKButtonIcon_0.png" alt="CDKButtonHelp Example" style="max-width: 500px; width: 100%;">
+///
+/// ## Example
+/// ```dart
+/// // Example usage within a widget tree
+/// class MyWidget extends StatelessWidget {
+///   @override
+///   Widget build(BuildContext context) {
+///     return CDKButtonIcon(
+///       onPressed: () {
+///         // Handle button tap
+///         // ...
+///       },
+///       icon: CupertinoIcons.bell_fill,
+///       size: 24.0,
+///       isCircle: false,
+///       isSelected: false,
+///     );
+///   }
+/// }
+/// ```
+///
+/// /// The `CDKButtonIcon` widget responds to the following parameters:
+///
+/// - `onPressed`: A callback function to be executed when the button is tapped.
+/// - `icon`: The icon to be displayed on the button. Defaults to `CupertinoIcons.bell_fill`.
+/// - `size`: The size of the button. Defaults to 24.0.
+/// - `isCircle`: A boolean indicating whether the button should have a circular shape. Defaults to `false`.
+/// - `isSelected`: A boolean indicating whether the button is selected. Defaults to `false`.
+///
+/// The button's appearance is influenced by the current theme provided by `CDKThemeNotifier`.
+/// It adapts its color, shape, and icon size based on the press state, hover state, and theme settings.
+///
+
 class CDKButtonIcon extends StatefulWidget {
   final VoidCallback? onPressed;
   final IconData icon;

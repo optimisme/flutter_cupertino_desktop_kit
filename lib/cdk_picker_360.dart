@@ -6,6 +6,44 @@ import 'cdk_theme.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
+/// Documented by: G. Biagi.
+/// `CDKPicker360` is a custom Flutter widget representing a circular picker with a 360-degree range.
+///
+/// This picker allows users to select an angle within a circular region. It responds to drag
+/// gestures, changing its appearance and invoking a callback function (`onChanged`) with the
+/// selected angle.
+///
+/// <img src="/flutter_cupertino_desktop_kit/gh-pages/doc-images/CDKPicker360_0.png" alt="CDKButtonHelp Example" style="max-width: 500px; width: 100%;">
+///
+/// ## Example
+/// ```dart
+/// // Example usage within a widget tree
+/// class MyWidget extends StatelessWidget {
+///   @override
+///   Widget build(BuildContext context) {
+///     return CDKPicker360(
+///       value: 180.0,
+///       enabled: true,
+///       size: 16.0,
+///       onChanged: (double angle) {
+///         // Handle angle change
+///         // ...
+///       },
+///     );
+///   }
+/// }
+/// ```
+///
+/// The `CDKPicker360` widget responds to the following parameters:
+///
+/// - `value`: The initial angle value of the picker.
+/// - `size`: The size of the picker. Defaults to 16.0.
+/// - `enabled`: A boolean indicating whether the picker is enabled. Defaults to `true`.
+/// - `onChanged`: A callback function that will be invoked when the selected angle changes.
+///
+/// The picker's appearance is influenced by the current theme provided by `CDKThemeNotifier`.
+/// It adapts its color, shadow, and style based on the theme settings.
+
 class CDKPicker360 extends StatefulWidget {
   final double value;
   final double size;

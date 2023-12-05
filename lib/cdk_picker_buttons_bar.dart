@@ -5,6 +5,48 @@ import 'cdk_theme.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
+/// Documented by: G. Biagi.
+/// `CDKPickerButtonsBar` is a custom Flutter widget representing a horizontal bar of selectable buttons.
+///
+/// This bar allows users to select one or multiple options. It responds to tap events, updating the
+/// selection states and invoking a callback function (`onChanged`) with the updated states.
+///
+/// <img src="/flutter_cupertino_desktop_kit/gh-pages/doc-images/CDKPickerButtonsBar_0.png" alt="CDKButtonHelp Example" style="max-width: 500px; width: 100%;">
+///
+/// ## Example
+/// ```dart
+/// // Example usage within a widget tree
+/// class MyWidget extends StatelessWidget {
+///   @override
+///   Widget build(BuildContext context) {
+///     return CDKPickerButtonsBar(
+///       selectedStates: [true, false, true],
+///       options: [
+///         Text('Option 1'),
+///         Text('Option 2'),
+///         Icon(Icons.star),
+///       ],
+///       onChanged: (List<bool> selectedStates) {
+///         // Handle selection changes
+///         // ...
+///       },
+///       allowsMultipleSelection: true,
+///     );
+///   }
+/// }
+/// ```
+///
+/// The `CDKPickerButtonsBar` widget responds to the following parameters:
+///
+/// - `selectedStates`: A list of boolean values indicating the initial selection state of each button.
+/// - `options`: A list of widgets representing the content of each button.
+/// - `onChanged`: A callback function that will be invoked when the selection states change.
+/// - `allowsMultipleSelection`: A boolean indicating whether multiple options can be selected. Defaults to `false`.
+///
+/// The button bar's appearance is influenced by the current theme provided by `CDKThemeNotifier`.
+/// It adapts its color, gradient, and style based on the selection states and theme settings.
+///
+
 class CDKPickerButtonsBar extends StatefulWidget {
   /// List of button options.
   final List<bool> selectedStates;
