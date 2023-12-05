@@ -8,6 +8,27 @@ import 'cdk_theme.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
+// `CDKDialogModal` is a Flutter widget representing a modal dialog.
+/// It allows customization of animation, translucency, and provides a callback
+/// when hidden. The appearance of the dialog is responsive to screen dimensions
+/// and is centered by default.
+///
+/// Example Usage:
+///
+/// ```dart
+/// CDKDialogModal(
+///   isAnimated: true,
+///   isTranslucent: false,
+///   onHide: () {
+///     // Your callback logic here
+///   },
+///   child: YourDialogContentWidget(),
+/// )
+/// ```
+///
+/// The dialog automatically adjusts its size and position based on screen dimensions.
+/// It supports animations and shadow effects, providing a clean and responsive UI.
+
 class CDKDialogModal extends StatefulWidget {
   // Constructor parameters for the CDKDialogModal widget
   final bool isAnimated;
