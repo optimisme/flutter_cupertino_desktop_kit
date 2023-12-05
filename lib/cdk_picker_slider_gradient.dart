@@ -5,6 +5,39 @@ import 'cdk_theme.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
+/// A customizable gradient slider widget for Flutter applications.
+///
+/// The [CDKPickerSliderGradient] widget allows users to interactively select a value
+/// within a gradient color range. It can be used for various purposes, such as
+/// selecting colors from a gradient or adjusting properties with a continuous range.
+/// 
+///<img src="/flutter_cupertino_desktop_kit/gh-pages/doc-images/CDKPickerSliderGradient_0.png" alt="CDKPickerSliderGradient Example" style="max-width: 500px; width: 100%;">
+/// 
+/// Example usage:
+///
+/// ```dart
+/// CDKPickerSliderGradient(
+///   colors: [Colors.red, Colors.blue],
+///   stops: [0.0, 1.0],
+///   thumbColorBackground: CDKTheme.transparent,
+///   value: 0.5,
+///   enabled: true,
+///   onChanged: (value, selectedColor) {
+///     // Handle gradient slider value and selected color
+///   },
+/// )
+/// ```
+///
+/// Parameters:
+/// * `colors`: A list of gradient colors.
+/// * `stops`: A list of stops corresponding to the gradient colors.
+/// * `thumbColorBackground`: The background color of the slider thumb.
+/// * `value`: The initial value of the slider within the range [0.0, 1.0].
+/// * `enabled`: A boolean flag to determine if the slider is enabled.
+/// * `onChanged`: A callback function that is called when the slider value changes.
+///   It provides the current value and the corresponding color at that value.
+
+
 class CDKPickerSliderGradient extends StatefulWidget {
   final List<Color> colors;
   final List<double> stops;

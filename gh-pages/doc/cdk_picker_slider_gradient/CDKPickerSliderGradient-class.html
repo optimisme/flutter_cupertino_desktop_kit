@@ -29,7 +29,7 @@
   <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../index.html">flutter_cupertino_desktop_kit</a></li>
-    <li><a href="../cdk_picker_slider_gradient/cdk_picker_slider_gradient-library.html">cdk_picker_slider_gradient.dart</a></li>
+    <li><a href="../cdk_picker_slider_gradient/cdk_picker_slider_gradient-library.html">cdk_picker_slider_gradient</a></li>
     <li class="self-crumb">CDKPickerSliderGradient class</li>
   </ol>
   <div class="self-name">CDKPickerSliderGradient</div>
@@ -61,6 +61,35 @@
 </h1></div>
 
     
+<section class="desc markdown">
+  <p>A customizable gradient slider widget for Flutter applications.</p>
+<p>The <a href="../cdk_picker_slider_gradient/CDKPickerSliderGradient-class.html">CDKPickerSliderGradient</a> widget allows users to interactively select a value
+within a gradient color range. It can be used for various purposes, such as
+selecting colors from a gradient or adjusting properties with a continuous range.</p>
+<img src="/flutter_cupertino_desktop_kit/gh-pages/doc-images/CDKPickerSliderGradient_0.png" alt="CDKPickerSliderGradient Example" style="max-width: 500px; width: 100%;">
+<p>Example usage:</p>
+<pre class="language-dart"><code class="language-dart">CDKPickerSliderGradient(
+  colors: [Colors.red, Colors.blue],
+  stops: [0.0, 1.0],
+  thumbColorBackground: CDKTheme.transparent,
+  value: 0.5,
+  enabled: true,
+  onChanged: (value, selectedColor) {
+    // Handle gradient slider value and selected color
+  },
+)
+</code></pre>
+<p>Parameters:</p>
+<ul>
+<li><code>colors</code>: A list of gradient colors.</li>
+<li><code>stops</code>: A list of stops corresponding to the gradient colors.</li>
+<li><code>thumbColorBackground</code>: The background color of the slider thumb.</li>
+<li><code>value</code>: The initial value of the slider within the range <code>0.0, 1.0</code>.</li>
+<li><code>enabled</code>: A boolean flag to determine if the slider is enabled.</li>
+<li><code>onChanged</code>: A callback function that is called when the slider value changes.
+It provides the current value and the corresponding color at that value.</li>
+</ul>
+</section>
 
 
     <section>
@@ -422,7 +451,7 @@ tools and by <a href="https://api.flutter.dev/flutter/foundation/DiagnosticsNode
 <footer>
   <span class="no-break">
     flutter_cupertino_desktop_kit
-      0.0.5
+      0.0.6
   </span>
 
   

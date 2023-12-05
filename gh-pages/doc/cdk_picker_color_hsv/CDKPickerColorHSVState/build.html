@@ -29,7 +29,7 @@
   <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">flutter_cupertino_desktop_kit</a></li>
-    <li><a href="../../cdk_picker_color_hsv/cdk_picker_color_hsv-library.html">cdk_picker_color_hsv.dart</a></li>
+    <li><a href="../../cdk_picker_color_hsv/cdk_picker_color_hsv-library.html">cdk_picker_color_hsv</a></li>
     <li><a href="../../cdk_picker_color_hsv/CDKPickerColorHSVState-class.html">CDKPickerColorHSVState</a></li>
     <li class="self-crumb">build method</li>
   </ol>
@@ -185,16 +185,10 @@ prints green, as expected.</p>
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">@override
 Widget build(BuildContext context) {
-  CDKTheme theme = CDKThemeNotifier.of(context)!.changeNotifier;
-
   Color hueSliderToColor = CDKPickerSliderGradient.getColorAtValue(
       _gradientHueColors, _gradientHueStops, _hue);
 
-  if (theme.isLight) {
-    _gradientAlphaColors[1] = CDKTheme.black;
-  } else {
-    _gradientAlphaColors[1] = CDKTheme.white;
-  }
+  _gradientAlphaColors[1] = Color(widget.value.value | 0xFF000000);
 
   return Column(
     mainAxisAlignment: MainAxisAlignment.start,
@@ -232,12 +226,23 @@ Widget build(BuildContext context) {
           )),
       const SizedBox(height: 8),
       SizedBox(
-          width: double.infinity,
-          height: 16,
-          child: CDKPickerSliderGradient(
+        width: double.infinity,
+        height: 16,
+        child: Stack(children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(
+                4.0), &#47;&#47; Defineix el radi de les vores arrodonides a 4 pixels
+            child: CustomPaint(
+              painter: CDKUtilShaderGrid(5),
+              child: Container(
+                height: 14,
+              ),
+            ),
+          ),
+          CDKPickerSliderGradient(
             colors: _gradientAlphaColors,
             stops: _gradientAlphaStops,
-            thumbColorBackground: theme.background,
+            thumbColorBackground: widget.value,
             value: _alpha,
             onChanged: (value, color) {
               setState(() {
@@ -245,7 +250,9 @@ Widget build(BuildContext context) {
                 _callback();
               });
             },
-          )),
+          )
+        ]),
+      ),
     ],
   );
 }</code></pre>
@@ -282,7 +289,7 @@ Widget build(BuildContext context) {
 <footer>
   <span class="no-break">
     flutter_cupertino_desktop_kit
-      0.0.5
+      0.0.6
   </span>
 
   

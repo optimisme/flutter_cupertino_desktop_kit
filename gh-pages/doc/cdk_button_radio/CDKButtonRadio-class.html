@@ -29,7 +29,7 @@
   <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../index.html">flutter_cupertino_desktop_kit</a></li>
-    <li><a href="../cdk_button_radio/cdk_button_radio-library.html">cdk_button_radio.dart</a></li>
+    <li><a href="../cdk_button_radio/cdk_button_radio-library.html">cdk_button_radio</a></li>
     <li class="self-crumb">CDKButtonRadio class</li>
   </ol>
   <div class="self-name">CDKButtonRadio</div>
@@ -61,6 +61,30 @@
 </h1></div>
 
     
+<section class="desc markdown">
+  <p>A customizable radio button widget for Flutter applications.</p>
+<p>The <a href="../cdk_button_radio/CDKButtonRadio-class.html">CDKButtonRadio</a> widget allows you to create radio buttons with
+various styles and sizes. It can be used to build radio button groups
+where users can select a single option from a list.</p>
+<img src="/flutter_cupertino_desktop_kit/gh-pages/doc-images/CDKButtonRadio_0.png" alt="CDKButtonRadio Example" style="max-width: 500px; width: 100%;">
+<p>Example usage:</p>
+<pre class="language-dart"><code class="language-dart">CDKButtonRadio(
+  isSelected: true,
+  onSelected: (isSelected) {
+    // Handle radio button selection
+  },
+  child: Text('Option 1'),
+  size: 16.0,
+)
+</code></pre>
+<p>Parameters:</p>
+<ul>
+<li><code>isSelected</code>: A boolean flag to determine if the radio button is selected.</li>
+<li><code>onSelected</code>: A callback function that is called when the radio button is selected.</li>
+<li><code>size</code>: The size of the radio button. Defaults to <code>16.0</code>.</li>
+<li><code>child</code>: The content of the radio button, typically a <code>Text</code> widget.</li>
+</ul>
+</section>
 
 
     <section>
@@ -382,7 +406,7 @@ tools and by <a href="https://api.flutter.dev/flutter/foundation/DiagnosticsNode
 <footer>
   <span class="no-break">
     flutter_cupertino_desktop_kit
-      0.0.5
+      0.0.6
   </span>
 
   

@@ -5,6 +5,34 @@ import 'cdk_theme.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
+/// A customizable slider widget for adjusting color saturation and brightness in Flutter applications.
+///
+/// The [CDKPickerSliderChroma] widget allows users to interactively adjust color saturation
+/// and brightness. It can be used in color picker or color adjustment features within your
+/// application.
+///
+/// Example usage:
+///
+/// ```dart
+/// CDKPickerSliderChroma(
+///   saturation: 0.5,
+///   brightness: 0.7,
+///   enabled: true,
+///   hueColor: Colors.blue,
+///   onChanged: (saturation, brightness) {
+///     // Handle color adjustments
+///   },
+/// )
+/// ```
+///
+/// Parameters:
+/// * `saturation`: The initial saturation value for the color.
+/// * `brightness`: The initial brightness value for the color.
+/// * `enabled`: A boolean flag to determine if the slider is enabled.
+/// * `hueColor`: The hue color used as a reference for the color adjustment.
+/// * `onChanged`: A callback function that is called when the slider values change.
+
+
 class CDKPickerSliderChroma extends StatefulWidget {
   final double staturation;
   final double brightness;

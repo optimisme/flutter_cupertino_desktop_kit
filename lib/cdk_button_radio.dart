@@ -5,6 +5,33 @@ import 'cdk_theme.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
+/// A customizable radio button widget for Flutter applications.
+///
+/// The [CDKButtonRadio] widget allows you to create radio buttons with
+/// various styles and sizes. It can be used to build radio button groups
+/// where users can select a single option from a list.
+/// 
+///<img src="/flutter_cupertino_desktop_kit/gh-pages/doc-images/CDKButtonRadio_0.png" alt="CDKButtonRadio Example" style="max-width: 500px; width: 100%;">
+///
+/// Example usage:
+///
+/// ```dart
+/// CDKButtonRadio(
+///   isSelected: true,
+///   onSelected: (isSelected) {
+///     // Handle radio button selection
+///   },
+///   child: Text('Option 1'),
+///   size: 16.0,
+/// )
+/// ```
+///
+/// Parameters:
+/// * `isSelected`: A boolean flag to determine if the radio button is selected.
+/// * `onSelected`: A callback function that is called when the radio button is selected.
+/// * `size`: The size of the radio button. Defaults to `16.0`.
+/// * `child`: The content of the radio button, typically a `Text` widget.
+
 class CDKButtonRadio extends StatelessWidget {
   final bool isSelected;
   final ValueChanged<bool>? onSelected;

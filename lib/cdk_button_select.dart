@@ -8,6 +8,37 @@ import 'cdk_dialog_popover.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
+/// A customizable select button widget for Flutter applications.
+///
+/// The [CDKButtonSelect] widget allows you to create a select button with
+/// various customization options, such as selecting an initial index, choosing
+/// between flat or raised design, and specifying translucent appearance.
+/// Users can select an option from a list of choices.
+///
+///<img src="/flutter_cupertino_desktop_kit/gh-pages/doc-images/CDKButtonSelect_0.png" alt="CDKButtonSelect Example" style="max-width: 500px; width: 100%;">
+///
+/// Example usage:
+///
+/// ```dart
+/// CDKButtonSelect(
+///   selectedIndex: 0,
+///   options: ['Option 1', 'Option 2', 'Option 3'],
+///   isFlat: false,
+///   isTranslucent: true,
+///   onSelected: (selectedIndex) {
+///     // Handle the selected index
+///   },
+/// )
+/// ```
+///
+/// Parameters:
+/// * `selectedIndex`: The index of the initially selected option.
+/// * `isFlat`: A boolean flag to determine if the button has a flat design.
+/// * `isTranslucent`: A boolean flag to specify if the button should have a translucent appearance.
+/// * `options`: A list of strings representing the available options.
+/// * `onSelected`: A callback function that is called when an option is selected.
+
+
 class CDKButtonSelect extends StatefulWidget {
   final int selectedIndex;
   final bool isFlat;

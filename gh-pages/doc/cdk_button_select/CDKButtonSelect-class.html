@@ -29,7 +29,7 @@
   <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../index.html">flutter_cupertino_desktop_kit</a></li>
-    <li><a href="../cdk_button_select/cdk_button_select-library.html">cdk_button_select.dart</a></li>
+    <li><a href="../cdk_button_select/cdk_button_select-library.html">cdk_button_select</a></li>
     <li class="self-crumb">CDKButtonSelect class</li>
   </ol>
   <div class="self-name">CDKButtonSelect</div>
@@ -61,6 +61,33 @@
 </h1></div>
 
     
+<section class="desc markdown">
+  <p>A customizable select button widget for Flutter applications.</p>
+<p>The <a href="../cdk_button_select/CDKButtonSelect-class.html">CDKButtonSelect</a> widget allows you to create a select button with
+various customization options, such as selecting an initial index, choosing
+between flat or raised design, and specifying translucent appearance.
+Users can select an option from a list of choices.</p>
+<img src="/flutter_cupertino_desktop_kit/gh-pages/doc-images/CDKButtonSelect_0.png" alt="CDKButtonSelect Example" style="max-width: 500px; width: 100%;">
+<p>Example usage:</p>
+<pre class="language-dart"><code class="language-dart">CDKButtonSelect(
+  selectedIndex: 0,
+  options: ['Option 1', 'Option 2', 'Option 3'],
+  isFlat: false,
+  isTranslucent: true,
+  onSelected: (selectedIndex) {
+    // Handle the selected index
+  },
+)
+</code></pre>
+<p>Parameters:</p>
+<ul>
+<li><code>selectedIndex</code>: The index of the initially selected option.</li>
+<li><code>isFlat</code>: A boolean flag to determine if the button has a flat design.</li>
+<li><code>isTranslucent</code>: A boolean flag to specify if the button should have a translucent appearance.</li>
+<li><code>options</code>: A list of strings representing the available options.</li>
+<li><code>onSelected</code>: A callback function that is called when an option is selected.</li>
+</ul>
+</section>
 
 
     <section>
@@ -393,7 +420,7 @@ tools and by <a href="https://api.flutter.dev/flutter/foundation/DiagnosticsNode
 <footer>
   <span class="no-break">
     flutter_cupertino_desktop_kit
-      0.0.5
+      0.0.6
   </span>
 
   

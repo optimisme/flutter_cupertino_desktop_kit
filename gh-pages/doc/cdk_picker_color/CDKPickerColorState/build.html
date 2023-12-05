@@ -29,7 +29,7 @@
   <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">flutter_cupertino_desktop_kit</a></li>
-    <li><a href="../../cdk_picker_color/cdk_picker_color-library.html">cdk_picker_color.dart</a></li>
+    <li><a href="../../cdk_picker_color/cdk_picker_color-library.html">cdk_picker_color</a></li>
     <li><a href="../../cdk_picker_color/CDKPickerColorState-class.html">CDKPickerColorState</a></li>
     <li class="self-crumb">build method</li>
   </ol>
@@ -255,7 +255,7 @@ Widget build(BuildContext context) {
                   min: 0,
                   max: 1,
                   decimals: 2,
-                  increment: 0.1,
+                  increment: 0.05,
                   units: &quot;A&quot;,
                   onValueChanged: (value) {
                     _rgbAlpha = value;
@@ -287,7 +287,7 @@ Widget build(BuildContext context) {
                   borderRadius: BorderRadius.circular(4.0),
                 ),
                 child: CustomPaint(
-                  painter: CDKUtilShaderGrid(8),
+                  painter: CDKUtilShaderGrid(7),
                   child: Row(
                     children: [
                       Expanded(
@@ -340,7 +340,7 @@ Widget build(BuildContext context) {
 <footer>
   <span class="no-break">
     flutter_cupertino_desktop_kit
-      0.0.5
+      0.0.6
   </span>
 
   
