@@ -6,6 +6,7 @@ import 'cdk_theme.dart';
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
 /// Documented by: D. Sanchez.
+///
 /// `CDKButtonHelp` is a custom Flutter widget representing a help button with a question mark icon.
 ///
 /// It responds to tap events and changes its appearance accordingly.

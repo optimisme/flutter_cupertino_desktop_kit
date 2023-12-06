@@ -6,6 +6,7 @@ import 'cdk_theme.dart';
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
 /// Documented by: D. Sanchez.
+///
 /// `CDKButtonIcon` is a custom Flutter widget representing a button with an icon.
 ///
 /// This button responds to tap and hover events, changing its appearance accordingly.

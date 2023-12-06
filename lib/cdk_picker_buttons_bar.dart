@@ -6,6 +6,7 @@ import 'cdk_theme.dart';
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
 /// Documented by: G. Biagi.
+///
 /// `CDKPickerButtonsBar` is a custom Flutter widget representing a horizontal bar of selectable buttons.
 ///
 /// This bar allows users to select one or multiple options. It responds to tap events, updating the

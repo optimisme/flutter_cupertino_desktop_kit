@@ -7,6 +7,7 @@ import 'cdk_theme.dart';
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
 /// Documented by: G. Biagi.
+///
 /// `CDKPicker360` is a custom Flutter widget representing a circular picker with a 360-degree range.
 ///
 /// This picker allows users to select an angle within a circular region. It responds to drag
