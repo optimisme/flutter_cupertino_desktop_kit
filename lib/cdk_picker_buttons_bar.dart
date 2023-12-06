@@ -12,7 +12,7 @@ import 'cdk_theme.dart';
 /// This bar allows users to select one or multiple options. It responds to tap events, updating the
 /// selection states and invoking a callback function (`onChanged`) with the updated states.
 ///
-/// <img src="/flutter_cupertino_desktop_kit/gh-pages/doc-images/CDKPickerButtonsBar_0.png" alt="CDKButtonHelp Example" style="max-width: 500px; width: 100%;">
+/// <img src="/flutter_cupertino_desktop_kit/gh-pages/doc-images/CDKPickerButtonsBar_0.png" alt="CDKPickerButtonsBar Example" style="max-width: 500px; width: 100%;">
 ///
 /// ## Example
 /// ```dart

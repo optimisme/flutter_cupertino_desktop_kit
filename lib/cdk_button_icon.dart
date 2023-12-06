@@ -13,7 +13,7 @@ import 'cdk_theme.dart';
 /// The button can be customized with an icon, size, shape, and an optional
 /// callback function (`onPressed`) to be executed when the button is tapped.
 ///
-/// <img src="/flutter_cupertino_desktop_kit/gh-pages/doc-images/CDKButtonIcon_0.png" alt="CDKButtonHelp Example" style="max-width: 500px; width: 100%;">
+/// <img src="/flutter_cupertino_desktop_kit/gh-pages/doc-images/CDKButtonIcon_0.png" alt="CDKButtonIcon Example" style="max-width: 500px; width: 100%;">
 ///
 /// ## Example
 /// ```dart

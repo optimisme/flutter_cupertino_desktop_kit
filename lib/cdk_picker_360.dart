@@ -14,7 +14,7 @@ import 'cdk_theme.dart';
 /// gestures, changing its appearance and invoking a callback function (`onChanged`) with the
 /// selected angle.
 ///
-/// <img src="/flutter_cupertino_desktop_kit/gh-pages/doc-images/CDKPicker360_0.png" alt="CDKButtonHelp Example" style="max-width: 500px; width: 100%;">
+/// <img src="/flutter_cupertino_desktop_kit/gh-pages/doc-images/CDKPicker360_0.png" alt="CDKPicker360 Example" style="max-width: 500px; width: 100%;">
 ///
 /// ## Example
 /// ```dart
