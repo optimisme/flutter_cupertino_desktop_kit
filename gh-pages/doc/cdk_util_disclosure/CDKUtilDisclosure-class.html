@@ -61,6 +61,33 @@
 </h1></div>
 
     
+<section class="desc markdown">
+  <p>Documented by: Patricio Rojas</p>
+<p>A widget that implements a disclosure panel with an expandable/collapsible child.</p>
+<p>The <a href="../cdk_util_disclosure/CDKUtilDisclosure-class.html">CDKUtilDisclosure</a> widget consists of a title and a child widget that can be
+expanded or collapsed based on user interaction. It utilizes a disclosure button
+provided by <a href="../cdk_button_disclosure/CDKButtonDisclosure-class.html">CDKButtonDisclosure</a> to toggle the visibility of the child content.</p>
+<img src="/flutter_cupertino_desktop_kit/gh-pages/doc-images/CDKUtilDisclosure_0.png" alt="CDKUtilDisclosure Example 1" style="max-width: 500px; width: 100%;">
+<img src="/flutter_cupertino_desktop_kit/gh-pages/doc-images/CDKUtilDisclosure_1.png" alt="CDKUtilDisclosure Example 2" style="max-width: 500px; width: 100%;">
+<p>Example:</p>
+<pre class="language-dart"><code class="language-dart">CDKUtilDisclosure(
+  title: Text('Disclosure Title'),
+  child: Container(
+    // Child content goes here
+  ),
+  onChanged: (isExpanded) {
+    // Handle disclosure state change
+  },
+)
+</code></pre>
+<p>Parameters:</p>
+<ul>
+<li><code>title</code>: The widget to be displayed as the title of the disclosure panel.</li>
+<li><code>child</code>: The widget that will be expanded or collapsed based on user interaction.</li>
+<li><code>onChanged</code>: A callback function that is called when the disclosure state changes.
+It provides a boolean value indicating whether the content is expanded or collapsed.</li>
+</ul>
+</section>
 
 
     <section>
@@ -371,7 +398,7 @@ tools and by <a href="https://api.flutter.dev/flutter/foundation/DiagnosticsNode
 <footer>
   <span class="no-break">
     flutter_cupertino_desktop_kit
-      0.0.5
+      0.0.7
   </span>
 
   
