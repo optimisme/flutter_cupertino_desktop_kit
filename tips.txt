@@ -29,6 +29,8 @@ dart format .
 cd ../lib
 dart format .
 cd ..
+(Editar changelog per sumar versió)
+(Editar pubspec.yaml per sumar versió)
 dart pub publish --dry-run
 dart pub publish
 
