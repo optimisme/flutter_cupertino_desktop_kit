@@ -68,8 +68,10 @@ class CDKUtilShaderGrid extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) async {
-    if (!_initialized && !_isInitializing) {
-      await initShaders();
+    if (!_initialized) {
+      if (!_isInitializing) {
+        await initShaders();
+      }
       return;
     }
 
