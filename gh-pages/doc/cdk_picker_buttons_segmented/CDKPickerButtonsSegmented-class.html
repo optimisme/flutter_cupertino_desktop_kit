@@ -61,6 +61,37 @@
 </h1></div>
 
     
+<section class="desc markdown">
+  <p>Documented by: Patricio Rojas</p>
+<p>A segmented picker widget for Flutter applications.</p>
+<p>The <a href="../cdk_picker_buttons_segmented/CDKPickerButtonsSegmented-class.html">CDKPickerButtonsSegmented</a> widget provides a horizontal row of buttons
+where one button can be selected at a time. It supports customization of
+options, selection callbacks, and accent styling.</p>
+<img src="/flutter_cupertino_desktop_kit/gh-pages/doc-images/CDKPickerButtonsSegmented_0.png" alt="CDKPickerButtonsSegmented Example 1" style="max-width: 500px; width: 100%;">
+<img src="/flutter_cupertino_desktop_kit/gh-pages/doc-images/CDKPickerButtonsSegmented_1.png" alt="CDKPickerButtonsSegmented Example 2" style="max-width: 500px; width: 100%;">
+<p>Example:</p>
+<pre class="language-dart"><code class="language-dart">CDKPickerButtonsSegmented(
+  options: [
+    Text('Option 1'),
+    Text('Option 2'),
+    Icon(Icons.star),
+  ],
+  selectedIndex: 0,
+  onSelected: (index) {
+    // Handle selection change
+  },
+  isAccent: true,
+)
+</code></pre>
+<p>Parameters:</p>
+<ul>
+<li><code>options</code>: A list of widgets representing the selectable options in the picker.</li>
+<li><code>selectedIndex</code>: The index of the initially selected option.</li>
+<li><code>onSelected</code>: A callback function that is called when an option is selected.</li>
+<li><code>isAccent</code>: A flag to determine if the picker should have an accent styling.
+Defaults to <code>false</code>.</li>
+</ul>
+</section>
 
 
     <section>
@@ -382,7 +413,7 @@ tools and by <a href="https://api.flutter.dev/flutter/foundation/DiagnosticsNode
 <footer>
   <span class="no-break">
     flutter_cupertino_desktop_kit
-      0.0.5
+      0.0.7
   </span>
 
   
