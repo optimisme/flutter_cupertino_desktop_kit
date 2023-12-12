@@ -1,3 +1,7 @@
+## 0.0.91
+
+ * Fixed close popover with drag
+
 ## 0.0.9
 
  * Fixed shader initialization error

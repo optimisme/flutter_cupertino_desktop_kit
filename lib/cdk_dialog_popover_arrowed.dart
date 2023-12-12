@@ -205,6 +205,9 @@ class CDKDialogPopoverArrowedState extends State<CDKDialogPopoverArrowed>
         : Stack(
             children: [
               GestureDetector(
+                onPanDown: (details) {
+                  hide();
+                },
                 onTap: () {
                   hide();
                 },

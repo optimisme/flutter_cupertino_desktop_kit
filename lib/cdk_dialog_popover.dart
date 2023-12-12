@@ -200,6 +200,9 @@ class CDKDialogPopoverState extends State<CDKDialogPopover>
         : Stack(
             children: [
               GestureDetector(
+                onPanDown: (details) {
+                  hide();
+                },
                 onTap: () {
                   hide();
                 },
