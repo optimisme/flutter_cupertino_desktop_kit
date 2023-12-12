@@ -5,6 +5,29 @@ import 'cdk_theme.dart';
 
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
+/// The [CDKPicker360] class is a Flutter stateful widget representing a circular picker
+/// for selecting values within a 360-degree range.
+///
+/// <img src="/flutter_cupertino_desktop_kit/gh-pages/doc-images/CDKPicker_360_0.png" alt="CDKButton Example" style="max-width: 500px; width: 100%;">
+///
+/// Example usage:
+/// ```dart
+/// CDKPicker360(
+///   value: 180.0,
+///   size: 24.0,
+///   enabled: true,
+///   onChanged: (double value) {
+///     // Handle the value change event.
+///   },
+/// )
+/// ```
+
+///
+/// Parameters:
+/// * `value`: The initial value of the picker within the 360-degree range.
+/// * `size`: The size of the picker. Defaults to `16`.
+/// * `enabled`: Indicates whether the picker is enabled for user interaction. Defaults to `true`.
+/// * `onChanged`: Callback function called when the value in the picker changes. Must not be null.
 
 class CDKPicker360 extends StatefulWidget {
   final double value;
