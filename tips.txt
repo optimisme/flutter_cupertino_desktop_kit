@@ -26,9 +26,11 @@ Publicar a pub.dev:
 (recorda fer servir el mail anònim)
 cd example/lib
 dart format .
-cd ../../lib
+cd ../lib
 dart format .
 cd ..
+(Editar changelog per sumar versió)
+(Editar pubspec.yaml per sumar versió)
 dart pub publish --dry-run
 dart pub publish
 
