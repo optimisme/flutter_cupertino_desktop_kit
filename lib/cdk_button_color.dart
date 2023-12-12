@@ -4,30 +4,6 @@ import 'cdk.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
-/// Documented by: Alex Chica
-/// A customizable button widget for Flutter applications with color gradient and icon support.
-///
-/// The [CDKButtonColor] widget allows for easy integration of buttons with color gradients and icons,
-/// providing a visually appealing and interactive user interface.
-///
-/// <img src="/flutter_cupertino_desktop_kit/gh-pages/doc-images/CDKButtonColor_0.png" alt="CDKButtonColor Example 1" style="max-width: 500px; width: 100%;">
-/// <img src="/flutter_cupertino_desktop_kit/gh-pages/doc-images/CDKButtonColor_1.png" alt="CDKButtonColor Example 2" style="max-width: 500px; width: 100%;">
-///
-/// ```dart
-/// CDKButtonColor(
-///   onPressed: () {
-///     // Handle button press
-///   },
-///   color: Colors.blue,
-///   enabled: true,
-/// )
-/// ```
-///
-/// Parameters:
-/// * `onPressed`: A callback function that is called when the button is pressed. If null, the button will be disabled.
-/// * `color`: The primary color of the button. It defines the background color and the color of the icon.
-/// * `enabled`: A flag to enable or disable the button. Defaults to `true`.
-
 class CDKButtonColor extends StatefulWidget {
   final VoidCallback? onPressed;
   final Color color;

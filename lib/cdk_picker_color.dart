@@ -4,24 +4,6 @@ import 'cdk.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
-/// Documented by: Alex Chica
-/// A color picker widget for Flutter applications.
-///
-/// The [CDKPickerColor] widget allows users to select a color from a predefined set or a custom color.
-/// It includes a callback function to handle changes in the selected color.
-///
-/// ```dart
-/// CDKPickerColor(
-///   color: Colors.blue,
-///   onChanged: (selectedColor) {
-///     // Handle the selected color
-///   },
-/// )
-/// ```
-///
-/// Parameters:
-/// * `color`: The initial selected color for the picker.
-/// * `onChanged`: A callback function that is called when the selected color changes.
 class CDKPickerColor extends StatefulWidget {
   final Color color;
   final Function(Color)? onChanged;

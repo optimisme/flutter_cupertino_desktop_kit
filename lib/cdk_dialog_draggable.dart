@@ -9,31 +9,7 @@ import 'cdk_theme.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
-// `CDKDialogDraggable` is a Flutter widget designed to be a draggable dialog
-/// anchored to a specified key. It provides options for animation, translucency,
-/// and callback when hidden. The dialog's appearance is dynamically determined
-/// based on the child widget and anchor key.
-///
-/// Example Usage:
-///
-/// ```dart
-/// CDKDialogDraggable(
-///   anchorKey: GlobalKey(),
-///   isAnimated: true,
-///   isTranslucent: false,
-///   onHide: () {
-///     // Your callback logic here
-///   },
-///   child: YourDialogContentWidget(),
-/// )
-/// ```
-///
-/// The dialog adjusts its position and size based on the anchor widget and
-/// screen dimensions. It also handles animations and shadow effects for a polished look.
-
-
 class CDKDialogDraggable extends StatefulWidget {
-  // Constructor parameters for the CDKDialogDraggable widget
   final GlobalKey anchorKey;
   final bool isAnimated;
   final bool isTranslucent;
@@ -53,10 +29,8 @@ class CDKDialogDraggable extends StatefulWidget {
   CDKDialogDraggableState createState() => CDKDialogDraggableState();
 }
 
-// State class for CDKDialogDraggable
 class CDKDialogDraggableState extends State<CDKDialogDraggable>
     with SingleTickerProviderStateMixin {
-  // Instance variables
   OverlayEntry? overlayEntry;
   final int _animationMillis = 200;
   AnimationController? animationController;
@@ -67,33 +41,30 @@ class CDKDialogDraggableState extends State<CDKDialogDraggable>
   GlobalKey childKey = GlobalKey();
   Size? screenSize;
   double screenPadding = 10.0;
-  Offset position = const Offset(-10000000, -10000000); // Out of view until size is determined
+  Offset position = const Offset(
+      -10000000, -10000000); // Out of view until size is determined
   Path pathContour = Path();
   Path pathClip = Path();
 
   @override
   void initState() {
     super.initState();
-    // Initialization logic when the widget is inserted into the tree
     if (widget.isAnimated) {
-      // Setup animation controller if animation is enabled
       animationController = AnimationController(
         duration: Duration(milliseconds: _animationMillis),
         vsync: this,
       );
 
-      // Apply bounce effect to the animation
+      // Efecte de rebot
       scaleAnimation = CurvedAnimation(
         parent: animationController!,
         curve: Curves.easeOutBack,
       );
     }
 
-    // Execute code after the first frame is rendered
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted && childKey.currentContext != null) {
         setState(() {
-          // Determine size and position of the dialog based on anchor widget and screen dimensions
           final RenderBox childRenderBox =
               childKey.currentContext!.findRenderObject() as RenderBox;
           final childSize = childRenderBox.size;
@@ -122,7 +93,6 @@ class CDKDialogDraggableState extends State<CDKDialogDraggable>
             width = maxWidth;
           }
 
-          // Create paths for contour and clip
           final rectContour = Rect.fromLTWH(8, 8, width!, height!);
           pathContour =
               CDKDialogOuterShadowPainter.createContourPath(rectContour);
@@ -141,12 +111,10 @@ class CDKDialogDraggableState extends State<CDKDialogDraggable>
 
   @override
   void dispose() {
-    // Dispose of animation controller when the state is disposed
     animationController?.dispose();
     super.dispose();
   }
 
-  // Method to hide the dialog
   void hide() {
     overlayEntry?.remove();
     overlayEntry = null;
@@ -155,10 +123,8 @@ class CDKDialogDraggableState extends State<CDKDialogDraggable>
 
   @override
   Widget build(BuildContext context) {
-    // Obtain theme information
     CDKTheme theme = CDKThemeNotifier.of(context)!.changeNotifier;
 
-    // Adjust position to fit within screen bounds if size is determined
     if (isSizeDetermined) {
       var leftPosition = position.dx;
       var topPosition = position.dy;
@@ -181,14 +147,12 @@ class CDKDialogDraggableState extends State<CDKDialogDraggable>
       position = Offset(leftPosition, topPosition);
     }
 
-    // Determine background color based on transparency
     Color backgroundColor = !widget.isTranslucent
         ? theme.background
         : theme.isLight
             ? theme.background.withOpacity(0.25)
             : theme.background.withOpacity(0.5);
 
-    // Create dialog contents widget
     Widget dialogContents = Container(
       key: childKey,
       decoration: BoxDecoration(
@@ -197,12 +161,10 @@ class CDKDialogDraggableState extends State<CDKDialogDraggable>
       child: widget.child,
     );
 
-    // Construct the final widget tree with decorations
     Widget dialogWithDecorations = !isSizeDetermined
         ? Container()
         : Stack(
             children: [
-              // Paint outer shadow
               CustomPaint(
                 painter: CDKDialogOuterShadowPainter(
                     pathContour: pathContour,
@@ -210,7 +172,6 @@ class CDKDialogDraggableState extends State<CDKDialogDraggable>
                     isLightTheme: theme.isLight),
                 child: Container(),
               ),
-              // Position the dialog contents with clipping and blur for translucent dialogs
               Positioned(
                   top: 8,
                   left: 8,
@@ -218,18 +179,17 @@ class CDKDialogDraggableState extends State<CDKDialogDraggable>
                       ? dialogContents
                       : ClipPath(
                           clipper: CDKPopoverClipper(
-                              pathClip), // Apply the clip here
+                              pathClip), // Aplica el clip aquí
                           child: BackdropFilter(
                             filter: ImageFilter.blur(
                                 sigmaX: 7.5,
-                                sigmaY: 7.5), // Apply blur effect
+                                sigmaY: 7.5), // Efecte de difuminat
                             child: dialogContents,
                           ),
                         ))
             ],
           );
 
-    // Return the final widget tree
     return !isSizeDetermined
         ? Positioned(left: position.dx, top: position.dy, child: dialogContents)
         : Stack(children: [
@@ -240,12 +200,10 @@ class CDKDialogDraggableState extends State<CDKDialogDraggable>
                 width: width! + 16,
                 child: GestureDetector(
                     onTapDown: (details) {
-                      // Move the draggable dialog to the top
                       CDKDialogsManager.moveDraggableToTop(
                           context, widget.anchorKey);
                     },
                     onPanUpdate: (details) {
-                      // Update position during drag
                       setState(() {
                         position += details.delta;
                       });
