@@ -61,6 +61,30 @@
 </h1></div>
 
     
+<section class="desc markdown">
+  <p>Documented by: Alex Chica
+A picker for checklists in Flutter applications, allowing users to select from a list of options.</p>
+<p>The <a href="../cdk_picker_check_list/CDKPickerCheckList-class.html">CDKPickerCheckList</a> widget provides a picker for checklists with customizable options,
+size, and initial selected index. It supports a callback function to handle the selected option.</p>
+<img src="/flutter_cupertino_desktop_kit/gh-pages/doc-images/CDKButtonColor_0.png" alt="CDKButtonColor Example 1" style="max-width: 500px; width: 100%;">
+<img src="/flutter_cupertino_desktop_kit/gh-pages/doc-images/CDKButtonColor_0.png" alt="CDKButtonColor Example 1" style="max-width: 500px; width: 100%;">
+<pre class="language-dart"><code class="language-dart">CDKPickerCheckList(
+  options: ['Option 1', 'Option 2', 'Option 3'],
+  size: 12.0,
+  selectedIndex: 0,
+  onSelected: (index) {
+    // Handle the selected option
+  },
+)
+</code></pre>
+<p>Parameters:</p>
+<ul>
+<li><code>options</code>: The list of options to be displayed in the picker.</li>
+<li><code>size</code>: The size of the picker. Defaults to <code>12.0</code>.</li>
+<li><code>selectedIndex</code>: The index of the initially selected option.</li>
+<li><code>onSelected</code>: A callback function that is called when an option is selected.</li>
+</ul>
+</section>
 
 
     <section>
