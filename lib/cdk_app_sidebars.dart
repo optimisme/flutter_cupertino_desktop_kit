@@ -184,7 +184,7 @@ class CDKAppSidebarsState extends State<CDKAppSidebars> {
                 right: 0,
                 top: 0,
                 bottom: 0,
-                width: widget.sidebarRightWidth - 0.5,
+                width: widget.sidebarRightWidth - 0.75,
                 child: Container(
                   color: theme.backgroundSecondary1,
                   child: widget.sidebarRight != null

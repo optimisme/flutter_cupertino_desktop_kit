@@ -68,6 +68,14 @@ class CDKButtonIconState extends State<CDKButtonIcon> {
                     ? theme.backgroundSecondary1
                     : CDKTheme.transparent;
 
+    final Color textColor = theme.isLight
+        ? widget.isSelected && theme.isAppFocused
+            ? theme.accent
+            : theme.colorText
+        : widget.isSelected && theme.isAppFocused
+            ? CDKTheme.white
+            : theme.colorText;
+
     return MouseRegion(
       onEnter: _onMouseEnter,
       onExit: _onMouseExit,
@@ -87,9 +95,7 @@ class CDKButtonIconState extends State<CDKButtonIcon> {
                     alignment: Alignment.center,
                     child: Icon(
                       widget.icon,
-                      color: widget.isSelected && theme.isAppFocused
-                          ? theme.accent
-                          : theme.colorText,
+                      color: textColor,
                       size: widget.size * 0.5, // Icona més petita que el botó
                     )),
               )
@@ -103,7 +109,7 @@ class CDKButtonIconState extends State<CDKButtonIcon> {
                     alignment: Alignment.center,
                     child: Icon(
                       widget.icon,
-                      color: theme.colorText,
+                      color: textColor,
                       size: widget.size * 0.75,
                     )),
               ),

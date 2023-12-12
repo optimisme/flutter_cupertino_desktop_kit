@@ -61,6 +61,33 @@
 </h1></div>
 
     
+<section class="desc markdown">
+  <p>The <code>CDKPickerButtonsBar</code> class is a Flutter stateful widget representing a horizontal
+bar of buttons that can be selected or deselected. It is commonly used as a picker
+for selecting options among multiple choices.</p>
+<img src="/flutter_cupertino_desktop_kit/gh-pages/doc-images/CDKPickerButtonsBar_0.png" alt="CDKButton Example" style="max-width: 500px; width: 100%;">
+<p>Example usage:</p>
+<pre class="language-dart"><code class="language-dart">CDKPickerButtonsBar(
+  selectedStates: [true, false, true],
+  options: [
+    Text('Option 1'),
+    Text('Option 2'),
+    Text('Option 3'),
+  ],
+  onChanged: (List&lt;bool&gt; selectedStates) {
+    // Handle the selection change event.
+  },
+  allowsMultipleSelection: true,
+)
+</code></pre>
+<p>Parameters:</p>
+<ul>
+<li><code>selectedStates</code>: List representing the initial selection states of each button.</li>
+<li><code>options</code>: List of widgets representing the options available for selection.</li>
+<li><code>onChanged</code>: Callback function called when the selection states change.</li>
+<li><code>allowsMultipleSelection</code>: Flag indicating whether multiple selection is allowed. Defaults to <code>false</code>.</li>
+</ul>
+</section>
 
 
     <section>

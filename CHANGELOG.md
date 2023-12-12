@@ -1,3 +1,13 @@
+## 0.0.9
+
+ * Fixed shader initialization error
+
+## 0.0.8
+
+ * Fixed CDKButtonIcon text color
+ * Fixed CDKSidebars separation color
+ * Added CDKTheme backgroundSecondary2
+
 ## 0.0.7
 
  * Updated sidebars

@@ -8,6 +8,30 @@ import 'cdk_theme.dart';
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
+/// The [CDKDialogPopoverArrowed] is a Flutter widget representing a popover dialog
+/// with an arrow pointing to an anchor specified by the key [anchorKey].
+/// It can contain a [child] as the dialog's content.
+///
+/// <img src="/flutter_cupertino_desktop_kit/gh-pages/doc-images/CDKDialogpopoverarrowed_0.png" alt="CDKButton Example" style="max-width: 500px; width: 100%;">
+///
+/// Example usage:
+/// ```dart
+/// CDKDialogPopoverArrowed(
+///   anchorKey: myAnchorKey,
+///   isAnimated: true,
+///   isTranslucent: false,
+///   onHide: () {
+///     // Handle the hide dialog event.
+///   },
+///   child: MyDialogContent(),
+/// )
+/// ```
+/// Parameters:
+/// * `anchorKey`: Key to identify the anchor of the dialog.
+/// * `isAnimated`: Indicates whether the dialog should have animation when showing or hiding. Defaults to `false`.
+/// * `isTranslucent`: Indicates whether the dialog should be translucent. Defaults to `true`.
+/// * `onHide`: Callback function called when the dialog is hidden.
+/// * `child`: Widget serving as the dialog's content. Must not be null.
 class CDKDialogPopoverArrowed extends StatefulWidget {
   final GlobalKey anchorKey;
   final bool isAnimated;

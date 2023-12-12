@@ -61,6 +61,31 @@
 </h1></div>
 
     
+<section class="desc markdown">
+  <p>The <a href="../cdk_dialog_popover_arrowed/CDKDialogPopoverArrowed-class.html">CDKDialogPopoverArrowed</a> is a Flutter widget representing a popover dialog
+with an arrow pointing to an anchor specified by the key <a href="../cdk_dialog_popover_arrowed/CDKDialogPopoverArrowed/anchorKey.html">anchorKey</a>.
+It can contain a <a href="../cdk_dialog_popover_arrowed/CDKDialogPopoverArrowed/child.html">child</a> as the dialog's content.</p>
+<img src="/flutter_cupertino_desktop_kit/gh-pages/doc-images/CDKDialogpopoverarrowed_0.png" alt="CDKButton Example" style="max-width: 500px; width: 100%;">
+<p>Example usage:</p>
+<pre class="language-dart"><code class="language-dart">CDKDialogPopoverArrowed(
+  anchorKey: myAnchorKey,
+  isAnimated: true,
+  isTranslucent: false,
+  onHide: () {
+    // Handle the hide dialog event.
+  },
+  child: MyDialogContent(),
+)
+</code></pre>
+<p>Parameters:</p>
+<ul>
+<li><code>anchorKey</code>: Key to identify the anchor of the dialog.</li>
+<li><code>isAnimated</code>: Indicates whether the dialog should have animation when showing or hiding. Defaults to <code>false</code>.</li>
+<li><code>isTranslucent</code>: Indicates whether the dialog should be translucent. Defaults to <code>true</code>.</li>
+<li><code>onHide</code>: Callback function called when the dialog is hidden.</li>
+<li><code>child</code>: Widget serving as the dialog's content. Must not be null.</li>
+</ul>
+</section>
 
 
     <section>

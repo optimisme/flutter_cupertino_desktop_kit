@@ -69,6 +69,7 @@ class CDKTheme extends ChangeNotifier {
   Color background = CupertinoColors.white;
   Color backgroundSecondary0 = CupertinoColors.white;
   Color backgroundSecondary1 = CupertinoColors.systemGrey5;
+  Color backgroundSecondary2 = const Color.fromRGBO(245, 245, 245, 1);
   Color colorText = CupertinoColors.black;
   Color colorTextSecondary = CupertinoColors.white;
 
@@ -146,6 +147,7 @@ class CDKTheme extends ChangeNotifier {
       background = CupertinoColors.white;
       backgroundSecondary0 = CupertinoColors.white;
       backgroundSecondary1 = CupertinoColors.systemGrey5;
+      backgroundSecondary2 = const Color.fromRGBO(245, 245, 245, 1);
       colorText = CupertinoColors.black;
       colorTextSecondary = CupertinoColors.white;
     } else {
@@ -153,6 +155,7 @@ class CDKTheme extends ChangeNotifier {
       background = const Color.fromARGB(255, 32, 32, 32);
       backgroundSecondary0 = const Color.fromRGBO(95, 95, 95, 1);
       backgroundSecondary1 = const Color.fromRGBO(55, 55, 55, 1);
+      backgroundSecondary2 = const Color.fromRGBO(36, 36, 36, 1);
       colorText = CupertinoColors.white;
       colorTextSecondary = CupertinoColors.black;
     }
