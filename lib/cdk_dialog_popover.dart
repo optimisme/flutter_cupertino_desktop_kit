@@ -203,9 +203,6 @@ class CDKDialogPopoverState extends State<CDKDialogPopover>
                 onPanDown: (details) {
                   hide();
                 },
-                onTap: () {
-                  hide();
-                },
                 behavior: HitTestBehavior.translucent,
                 child: Container(
                   color: CDKTheme.transparent,
