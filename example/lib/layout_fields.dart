@@ -9,7 +9,8 @@ class LayoutFields extends StatefulWidget {
 }
 
 class _LayoutFieldsState extends State<LayoutFields> {
-  late TextEditingController _textController;
+  late TextEditingController _textController0;
+  late TextEditingController _textController1;
   late TextEditingController _passController;
   double _valueNumeric = 5.5;
   double _valueNumericIncrement = -1.0;
@@ -21,7 +22,8 @@ class _LayoutFieldsState extends State<LayoutFields> {
   @override
   void initState() {
     super.initState();
-    _textController = TextEditingController(text: 'Initial text');
+    _textController0 = TextEditingController(text: 'Initial text');
+    _textController1 = TextEditingController(text: 'Initial multi line text');
     _passController = TextEditingController(text: '1234');
   }
 
@@ -36,7 +38,25 @@ class _LayoutFieldsState extends State<LayoutFields> {
             child: SizedBox(
                 width: 100,
                 child: CDKFieldText(
-                  controller: _textController,
+                  controller: _textController0,
+                  isRounded: false,
+                  onChanged: (value) {
+                    // ignore: avoid_print
+                    print("Value changed: $value");
+                  },
+                  onSubmitted: (value) {
+                    // ignore: avoid_print
+                    print("Value submitted: $value");
+                  },
+                  focusNode: FocusNode(),
+                ))),
+        Padding(
+            padding: const EdgeInsets.all(8),
+            child: SizedBox(
+                width: 100,
+                child: CDKFieldText(
+                  maxLines: 3,
+                  controller: _textController1,
                   isRounded: false,
                   onChanged: (value) {
                     // ignore: avoid_print

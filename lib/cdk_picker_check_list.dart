@@ -12,12 +12,12 @@ class CDKPickerCheckList extends StatefulWidget {
   final Function(int)? onSelected;
 
   const CDKPickerCheckList({
-    Key? key,
+    super.key,
     required this.options,
     this.size = 12.0,
     required this.selectedIndex,
     required this.onSelected,
-  }) : super(key: key);
+  });
 
   @override
   CDKPickerCheckListState createState() => CDKPickerCheckListState();

@@ -15,12 +15,12 @@ class CDKDialogModal extends StatefulWidget {
   final Widget child;
 
   const CDKDialogModal({
-    Key? key,
+    super.key,
     this.isAnimated = false,
     this.isTranslucent = false,
     this.onHide,
     required this.child,
-  }) : super(key: key);
+  });
 
   @override
   CDKDialogModalState createState() => CDKDialogModalState();

@@ -13,13 +13,13 @@ class CDKButtonSidebar extends StatelessWidget {
   final Widget child;
 
   const CDKButtonSidebar({
-    Key? key,
+    super.key,
     this.onPressed,
     this.isSelected = false,
     this.isAccent = true,
     required this.onSelected,
     required this.child,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

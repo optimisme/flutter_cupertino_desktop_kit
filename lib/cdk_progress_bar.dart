@@ -12,11 +12,11 @@ class CDKProgressBar extends StatefulWidget {
   final bool isRunning;
 
   const CDKProgressBar({
-    Key? key,
+    super.key,
     this.value = 0.0,
     this.isIndeterminate = false,
     this.isRunning = false,
-  }) : super(key: key);
+  });
 
   @override
   CDKProgressBarState createState() => CDKProgressBarState();

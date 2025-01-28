@@ -12,12 +12,12 @@ class CDKPickerButtonsSegmented extends StatefulWidget {
   final bool isAccent;
 
   const CDKPickerButtonsSegmented({
-    Key? key,
+    super.key,
     required this.options,
     required this.selectedIndex,
     required this.onSelected,
     this.isAccent = false,
-  }) : super(key: key);
+  });
 
   @override
   CDKPickerButtonsSegmentedState createState() =>

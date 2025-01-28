@@ -17,7 +17,7 @@ class CDKFieldNumericSlider extends StatefulWidget {
   final Function(double)? onValueChanged;
   final Function(double)? onTextChanged;
   const CDKFieldNumericSlider({
-    Key? key,
+    super.key,
     this.value = 0.0,
     this.textSize = 12,
     this.min = 0,
@@ -28,7 +28,7 @@ class CDKFieldNumericSlider extends StatefulWidget {
     this.enabled = true,
     this.onValueChanged,
     this.onTextChanged,
-  }) : super(key: key);
+  });
 
   @override
   CDKFieldNumericSliderState createState() => CDKFieldNumericSliderState();

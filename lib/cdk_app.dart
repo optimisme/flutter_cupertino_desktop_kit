@@ -28,11 +28,10 @@ class CDKApp extends StatefulWidget {
   final String defaultColor;
   final Widget child;
   const CDKApp(
-      {Key? key,
+      {super.key,
       this.defaultAppearance = "system",
       this.defaultColor = "systemBlue",
-      required this.child})
-      : super(key: key);
+      required this.child});
 
   @override
   CDKAppState createState() => CDKAppState();

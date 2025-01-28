@@ -11,12 +11,12 @@ class CDKField360 extends StatefulWidget {
   final bool enabled;
   final Function(double)? onChanged;
   const CDKField360({
-    Key? key,
+    super.key,
     this.value = 0.0,
     this.textSize = 12,
     this.enabled = true,
     this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   CDKField360State createState() => CDKField360State();

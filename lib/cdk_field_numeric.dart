@@ -20,7 +20,7 @@ class CDKFieldNumeric extends StatefulWidget {
   final Function(double)? onTextChanged;
 
   const CDKFieldNumeric({
-    Key? key,
+    super.key,
     this.textSize = 12,
     this.value = 0.0,
     this.min = -double.infinity,
@@ -31,7 +31,7 @@ class CDKFieldNumeric extends StatefulWidget {
     this.units = "",
     this.onValueChanged,
     this.onTextChanged,
-  }) : super(key: key);
+  });
 
   @override
   CDKFieldNumericState createState() => CDKFieldNumericState();

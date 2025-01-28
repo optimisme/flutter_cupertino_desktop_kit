@@ -14,14 +14,14 @@ class CDKPickerSliderGradient extends StatefulWidget {
   final Function(double, Color)? onChanged;
 
   const CDKPickerSliderGradient({
-    Key? key,
+    super.key,
     required this.colors,
     required this.stops,
     this.thumbColorBackground = CDKTheme.transparent,
     required this.value,
     this.enabled = true,
     required this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   CDKPickerSliderGradientState createState() => CDKPickerSliderGradientState();

@@ -12,10 +12,10 @@ class CDKPickerColorHSV extends StatefulWidget {
   final Function(Color)? onChanged;
 
   const CDKPickerColorHSV({
-    Key? key,
+    super.key,
     required this.value,
     this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   CDKPickerColorHSVState createState() => CDKPickerColorHSVState();

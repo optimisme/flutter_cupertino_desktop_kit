@@ -12,12 +12,12 @@ class CDKButtonRadio extends StatelessWidget {
   final Widget child;
 
   const CDKButtonRadio({
-    Key? key,
+    super.key,
     this.isSelected = false,
     this.onSelected,
     this.size = 16.0,
     required this.child,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

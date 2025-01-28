@@ -16,13 +16,13 @@ class CDKButtonSelect extends StatefulWidget {
   final Function(int)? onSelected;
 
   const CDKButtonSelect({
-    Key? key,
+    super.key,
     required this.selectedIndex,
     required this.options,
     this.isFlat = false,
     this.isTranslucent = false,
     this.onSelected,
-  }) : super(key: key);
+  });
 
   @override
   CDKButtonSelectState createState() => CDKButtonSelectState();

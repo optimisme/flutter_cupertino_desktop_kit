@@ -13,11 +13,11 @@ class CDKProgressCircular extends StatefulWidget {
   final bool isRunning;
 
   const CDKProgressCircular({
-    Key? key,
+    super.key,
     this.value = 0.0,
     this.isIndeterminate = false,
     this.isRunning = false,
-  }) : super(key: key);
+  });
 
   @override
   CDKProgressCircularState createState() => CDKProgressCircularState();

@@ -1,4 +1,4 @@
-library flutter_cupertino_desktop;
+library flutter_cupertino_desktop_kit;
 
 /// A Calculator.
 class Calculator {

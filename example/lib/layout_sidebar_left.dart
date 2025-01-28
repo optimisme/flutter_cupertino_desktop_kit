@@ -6,8 +6,7 @@ class LayoutSidebarLeft extends StatefulWidget {
   final Function(int, String) onSelect;
 
   const LayoutSidebarLeft(
-      {Key? key, this.options = const [], required this.onSelect})
-      : super(key: key);
+      {super.key, this.options = const [], required this.onSelect});
 
   @override
   State<LayoutSidebarLeft> createState() => LayoutButtonsState();

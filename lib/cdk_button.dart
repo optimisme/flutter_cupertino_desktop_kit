@@ -43,13 +43,13 @@ class CDKButton extends StatefulWidget {
   final bool enabled;
 
   const CDKButton({
-    Key? key,
+    super.key,
     this.onPressed,
     required this.child,
     this.style = CDKButtonStyle.normal,
     this.isLarge = false,
     this.enabled = true,
-  }) : super(key: key);
+  });
 
   @override
   CDKButtonState createState() => CDKButtonState();

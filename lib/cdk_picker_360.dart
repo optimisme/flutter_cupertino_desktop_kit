@@ -13,12 +13,11 @@ class CDKPicker360 extends StatefulWidget {
   final Function(double)? onChanged;
 
   const CDKPicker360(
-      {Key? key,
+      {super.key,
       required this.value,
       this.enabled = true,
       this.size = 16,
-      required this.onChanged})
-      : super(key: key);
+      required this.onChanged});
 
   @override
   CDKPicker360State createState() => CDKPicker360State();

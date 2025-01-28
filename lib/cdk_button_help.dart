@@ -11,10 +11,10 @@ class CDKButtonHelp extends StatefulWidget {
   final VoidCallback? onPressed;
 
   const CDKButtonHelp({
-    Key? key,
+    super.key,
     this.onPressed,
     this.size = 24.0,
-  }) : super(key: key);
+  });
 
   @override
   CDKButtonHelpState createState() => CDKButtonHelpState();

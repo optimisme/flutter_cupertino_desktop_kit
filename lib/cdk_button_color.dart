@@ -10,11 +10,11 @@ class CDKButtonColor extends StatefulWidget {
   final bool enabled;
 
   const CDKButtonColor({
-    Key? key,
+    super.key,
     this.onPressed,
     required this.color,
     this.enabled = true,
-  }) : super(key: key);
+  });
 
   @override
   CDKButtonColorState createState() => CDKButtonColorState();

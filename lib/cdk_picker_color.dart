@@ -9,10 +9,10 @@ class CDKPickerColor extends StatefulWidget {
   final Function(Color)? onChanged;
 
   const CDKPickerColor({
-    Key? key,
+    super.key,
     required this.color,
     this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   CDKPickerColorState createState() => CDKPickerColorState();

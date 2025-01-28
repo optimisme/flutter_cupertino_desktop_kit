@@ -9,10 +9,10 @@ class CDKThemeNotifier extends InheritedWidget {
   final CDKTheme changeNotifier;
 
   const CDKThemeNotifier({
-    Key? key,
-    required Widget child,
+    super.key,
+    required super.child,
     required this.changeNotifier,
-  }) : super(key: key, child: child);
+  });
 
   @override
   bool updateShouldNotify(covariant InheritedWidget oldWidget) {

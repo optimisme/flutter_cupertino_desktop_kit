@@ -13,13 +13,13 @@ class CDKButtonIcon extends StatefulWidget {
   final bool isSelected;
 
   const CDKButtonIcon({
-    Key? key,
+    super.key,
     this.onPressed,
     this.icon = CupertinoIcons.bell_fill,
     this.size = 24.0,
     this.isCircle = false,
     this.isSelected = false,
-  }) : super(key: key);
+  });
 
   @override
   CDKButtonIconState createState() => CDKButtonIconState();

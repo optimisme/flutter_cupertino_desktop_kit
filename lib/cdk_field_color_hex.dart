@@ -12,13 +12,13 @@ class CDKFieldColorHex extends StatefulWidget {
   final Function(int)? onTextChanged;
 
   const CDKFieldColorHex({
-    Key? key,
+    super.key,
     this.textSize = 12,
     this.value = 0,
     this.enabled = true,
     this.onValueChanged,
     this.onTextChanged,
-  }) : super(key: key);
+  });
 
   @override
   CDKFieldColorHexState createState() => CDKFieldColorHexState();

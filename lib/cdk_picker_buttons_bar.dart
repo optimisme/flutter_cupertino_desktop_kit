@@ -17,12 +17,12 @@ class CDKPickerButtonsBar extends StatefulWidget {
   final bool allowsMultipleSelection;
 
   const CDKPickerButtonsBar({
-    Key? key,
+    super.key,
     required this.selectedStates,
     required this.options,
     this.onChanged,
     this.allowsMultipleSelection = false,
-  }) : super(key: key);
+  });
 
   @override
   CDKPickerButtonsBarState createState() => CDKPickerButtonsBarState();

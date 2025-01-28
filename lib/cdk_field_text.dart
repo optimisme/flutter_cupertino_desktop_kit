@@ -21,9 +21,10 @@ class CDKFieldText extends StatefulWidget {
   final bool enabled;
   final Function? onFocusChanged;
   final TextAlign textAlign;
+  final int? maxLines;
 
   const CDKFieldText({
-    Key? key,
+    super.key,
     this.isRounded = false,
     this.obscureText = false,
     this.placeholder = '',
@@ -38,7 +39,8 @@ class CDKFieldText extends StatefulWidget {
     this.enabled = true,
     this.onFocusChanged,
     this.textAlign = TextAlign.left,
-  }) : super(key: key);
+    this.maxLines = 1, // Per defecte és una sola línia
+  });
 
   @override
   CDKFieldTextState createState() => CDKFieldTextState();
@@ -121,6 +123,7 @@ class CDKFieldTextState extends State<CDKFieldText> {
           : Icon(widget.prefixIcon, color: CDKTheme.grey),
       keyboardType: widget.keyboardType,
       inputFormatters: widget.inputFormatters,
+      maxLines: widget.maxLines,
     );
   }
 }

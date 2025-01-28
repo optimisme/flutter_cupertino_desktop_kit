@@ -20,14 +20,14 @@ class CDKDialogPopover extends StatefulWidget {
   final Widget child;
 
   const CDKDialogPopover({
-    Key? key,
+    super.key,
     required this.anchorKey,
     this.type = CDKDialogPopoverType.center,
     this.isAnimated = false,
     this.isTranslucent = false,
     this.onHide,
     required this.child,
-  }) : super(key: key);
+  });
 
   @override
   CDKDialogPopoverState createState() => CDKDialogPopoverState();

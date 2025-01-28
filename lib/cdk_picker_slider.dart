@@ -12,12 +12,12 @@ class CDKPickerSlider extends StatefulWidget {
   final Function(double)? onChanged;
 
   const CDKPickerSlider({
-    Key? key,
+    super.key,
     required this.value,
     this.enabled = true,
     this.size = 16,
     required this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   CDKPickerSliderState createState() => CDKPickerSliderState();

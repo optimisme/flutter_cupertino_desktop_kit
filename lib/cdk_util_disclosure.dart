@@ -10,11 +10,11 @@ class CDKUtilDisclosure extends StatefulWidget {
   final ValueChanged<bool>? onChanged;
 
   const CDKUtilDisclosure({
-    Key? key,
+    super.key,
     required this.title,
     required this.child,
     this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   CDKUtilDisclosureState createState() => CDKUtilDisclosureState();

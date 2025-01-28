@@ -17,13 +17,13 @@ class CDKDialogDraggable extends StatefulWidget {
   final Widget child;
 
   const CDKDialogDraggable({
-    Key? key,
+    super.key,
     required this.anchorKey,
     this.isAnimated = false,
     this.isTranslucent = false,
     this.onHide,
     required this.child,
-  }) : super(key: key);
+  });
 
   @override
   CDKDialogDraggableState createState() => CDKDialogDraggableState();

@@ -17,7 +17,7 @@ class CDKAppSidebars extends StatefulWidget {
   final Widget? sidebarRight;
 
   const CDKAppSidebars({
-    Key? key,
+    super.key,
     required this.central,
     this.sidebarLeftIsResizable = true,
     this.sidebarLeftDefaultsVisible = false,
@@ -27,7 +27,7 @@ class CDKAppSidebars extends StatefulWidget {
     this.sidebarRightDefaultsVisible = false,
     this.sidebarRightWidth = 200.0,
     this.sidebarRight,
-  }) : super(key: key);
+  });
 
   @override
   CDKAppSidebarsState createState() => CDKAppSidebarsState();

@@ -11,11 +11,11 @@ class CDKButtonDisclosure extends StatefulWidget {
   final double size;
 
   const CDKButtonDisclosure({
-    Key? key,
+    super.key,
     required this.value,
     this.onChanged,
     this.size = 16.0,
-  }) : super(key: key);
+  });
 
   @override
   CDKButtonDisclosureState createState() => CDKButtonDisclosureState();

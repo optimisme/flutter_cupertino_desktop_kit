@@ -13,13 +13,13 @@ class CDKPickerSliderChroma extends StatefulWidget {
   final Function(double, double)? onChanged;
 
   const CDKPickerSliderChroma({
-    Key? key,
+    super.key,
     required this.staturation,
     required this.brightness,
     this.enabled = true,
     required this.hueColor,
     this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   CDKPickerSliderChromaState createState() => CDKPickerSliderChromaState();

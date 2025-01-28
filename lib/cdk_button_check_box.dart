@@ -11,11 +11,11 @@ class CDKButtonCheckBox extends StatelessWidget {
   final ValueChanged<bool>? onChanged;
 
   const CDKButtonCheckBox({
-    Key? key,
+    super.key,
     required this.value,
     this.onChanged,
     this.size = 16.0,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

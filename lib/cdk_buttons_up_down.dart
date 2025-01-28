@@ -12,12 +12,12 @@ class CDKButtonsUpDown extends StatefulWidget {
   final VoidCallback? onDownPressed;
 
   const CDKButtonsUpDown({
-    Key? key,
+    super.key,
     this.enabledUp = true,
     this.enabledDown = true,
     this.onUpPressed,
     this.onDownPressed,
-  }) : super(key: key);
+  });
 
   @override
   CDKButtonsUpDownState createState() => CDKButtonsUpDownState();
