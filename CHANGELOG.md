@@ -1,3 +1,7 @@
+## 0.0.11
+
+ * Added multiline text field
+
 ## 0.0.10
 
  * Fixed close popover with drag

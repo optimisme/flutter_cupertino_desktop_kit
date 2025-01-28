@@ -11,20 +11,16 @@
   
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
   
   <link rel="stylesheet" href="../static-assets/github.css?v1">
   <link rel="stylesheet" href="../static-assets/styles.css?v1">
   <link rel="icon" href="../static-assets/favicon.png?v1">
-
   
 </head>
 
-
 <body data-base-href="../" data-using-base-href="false" class="light-theme">
-
 <div id="overlay-under-drawer"></div>
-
 <header id="title">
   <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
@@ -36,26 +32,25 @@
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
-  <div class="toggle" id="theme-button">
+  <div class="toggle" id="theme-button" title="Toggle brightness">
     <label for="theme">
       <input type="checkbox" id="theme" value="light-theme">
       <span id="dark-theme-button" class="material-symbols-outlined">
-        brightness_4
+        dark_mode
       </span>
       <span id="light-theme-button" class="material-symbols-outlined">
-        brightness_5
+        light_mode
       </span>
     </label>
   </div>
 </header>
 <main>
-
-  <div
-      id="dartdoc-main-content"
-      class="main-content"
-      data-above-sidebar="cdk_button_check_box&#47;cdk_button_check_box-library-sidebar.html"
-      data-below-sidebar="cdk_button_check_box&#47;CDKButtonCheckBoxPainter-class-sidebar.html">
-      <div>
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="cdk_button_check_box&#47;cdk_button_check_box-library-sidebar.html"
+    data-below-sidebar="cdk_button_check_box&#47;CDKButtonCheckBoxPainter-class-sidebar.html">
+    <div>
 <h1><span class="kind-class">CDKButtonCheckBoxPainter</span> class 
  
 </h1></div>
@@ -80,7 +75,7 @@
         
 
 
-
+        
         
 
 
@@ -90,24 +85,25 @@
     
   <section class="summary offset-anchor" id="constructors">
     <h2>Constructors</h2>
-
     <dl class="constructor-summary-list">
         <dt id="CDKButtonCheckBoxPainter" class="callable">
-          <span class="name"><a href="../cdk_button_check_box/CDKButtonCheckBoxPainter/CDKButtonCheckBoxPainter.html">CDKButtonCheckBoxPainter</a></span><span class="signature">(<span class="parameter" id="-param-colorAccent">{<span>required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-ui/Color-class.html">Color</a></span> <span class="parameter-name">colorAccent</span>, </span><span class="parameter" id="-param-colorAccent200"><span>required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-ui/Color-class.html">Color</a></span> <span class="parameter-name">colorAccent200</span>, </span><span class="parameter" id="-param-colorBackgroundSecondary0"><span>required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-ui/Color-class.html">Color</a></span> <span class="parameter-name">colorBackgroundSecondary0</span>, </span><span class="parameter" id="-param-isSelected"><span>required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">isSelected</span>, </span><span class="parameter" id="-param-hasAppFocus"><span>required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">hasAppFocus</span>, </span><span class="parameter" id="-param-size"><span>required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/double-class.html">double</a></span> <span class="parameter-name">size</span>, </span><span class="parameter" id="-param-isLightTheme"><span>required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">isLightTheme</span>}</span>)</span>
+          <span class="name"><a href="../cdk_button_check_box/CDKButtonCheckBoxPainter/CDKButtonCheckBoxPainter.html">CDKButtonCheckBoxPainter</a></span><span class="signature">({<span class="parameter" id="-param-colorAccent"><span>required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/painting/Color-class.html">Color</a></span> <span class="parameter-name">colorAccent</span>, </span><span class="parameter" id="-param-colorAccent200"><span>required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/painting/Color-class.html">Color</a></span> <span class="parameter-name">colorAccent200</span>, </span><span class="parameter" id="-param-colorBackgroundSecondary0"><span>required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/painting/Color-class.html">Color</a></span> <span class="parameter-name">colorBackgroundSecondary0</span>, </span><span class="parameter" id="-param-isSelected"><span>required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">isSelected</span>, </span><span class="parameter" id="-param-hasAppFocus"><span>required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">hasAppFocus</span>, </span><span class="parameter" id="-param-size"><span>required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/double-class.html">double</a></span> <span class="parameter-name">size</span>, </span><span class="parameter" id="-param-isLightTheme"><span>required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">isLightTheme</span></span>})</span>
         </dt>
         <dd>
           
         </dd>
     </dl>
   </section>
-
-    <section class="summary offset-anchor" id="instance-properties">
-      <h2>Properties</h2>
-
-      <dl class="properties">
+    
+  <section
+      class="summary offset-anchor"
+      id="instance-properties">
+    <h2>Properties</h2>
+    <dl class="properties">
         <dt id="colorAccent" class="property">
   <span class="name"><a href="../cdk_button_check_box/CDKButtonCheckBoxPainter/colorAccent.html">colorAccent</a></span>
-  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-ui/Color-class.html">Color</a></span> 
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/painting/Color-class.html">Color</a></span>
+  
 
 </dt>
 <dd>
@@ -118,7 +114,8 @@
 
         <dt id="colorAccent200" class="property">
   <span class="name"><a href="../cdk_button_check_box/CDKButtonCheckBoxPainter/colorAccent200.html">colorAccent200</a></span>
-  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-ui/Color-class.html">Color</a></span> 
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/painting/Color-class.html">Color</a></span>
+  
 
 </dt>
 <dd>
@@ -129,7 +126,8 @@
 
         <dt id="colorBackgroundSecondary0" class="property">
   <span class="name"><a href="../cdk_button_check_box/CDKButtonCheckBoxPainter/colorBackgroundSecondary0.html">colorBackgroundSecondary0</a></span>
-  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-ui/Color-class.html">Color</a></span> 
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/painting/Color-class.html">Color</a></span>
+  
 
 </dt>
 <dd>
@@ -140,7 +138,8 @@
 
         <dt id="hasAppFocus" class="property">
   <span class="name"><a href="../cdk_button_check_box/CDKButtonCheckBoxPainter/hasAppFocus.html">hasAppFocus</a></span>
-  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> 
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span>
+  
 
 </dt>
 <dd>
@@ -151,7 +150,8 @@
 
         <dt id="hashCode" class="property inherited">
   <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Object/hashCode.html">hashCode</a></span>
-  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a></span> 
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a></span>
+  
 
 </dt>
 <dd class="inherited">
@@ -162,7 +162,8 @@
 
         <dt id="isLightTheme" class="property">
   <span class="name"><a href="../cdk_button_check_box/CDKButtonCheckBoxPainter/isLightTheme.html">isLightTheme</a></span>
-  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> 
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span>
+  
 
 </dt>
 <dd>
@@ -173,7 +174,8 @@
 
         <dt id="isSelected" class="property">
   <span class="name"><a href="../cdk_button_check_box/CDKButtonCheckBoxPainter/isSelected.html">isSelected</a></span>
-  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> 
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span>
+  
 
 </dt>
 <dd>
@@ -184,7 +186,8 @@
 
         <dt id="runtimeType" class="property inherited">
   <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Object/runtimeType.html">runtimeType</a></span>
-  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/Type-class.html">Type</a></span> 
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/Type-class.html">Type</a></span>
+  
 
 </dt>
 <dd class="inherited">
@@ -195,7 +198,8 @@
 
         <dt id="semanticsBuilder" class="property inherited">
   <span class="name"><a href="https://api.flutter.dev/flutter/rendering/CustomPainter/semanticsBuilder.html">semanticsBuilder</a></span>
-  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/rendering/SemanticsBuilderCallback.html">SemanticsBuilderCallback</a>?</span> 
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/rendering/SemanticsBuilderCallback.html">SemanticsBuilderCallback</a>?</span>
+  
 
 </dt>
 <dd class="inherited">
@@ -207,7 +211,8 @@ by this painter.
 
         <dt id="size" class="property">
   <span class="name"><a href="../cdk_button_check_box/CDKButtonCheckBoxPainter/size.html">size</a></span>
-  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/double-class.html">double</a></span> 
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/double-class.html">double</a></span>
+  
 
 </dt>
 <dd>
@@ -216,9 +221,8 @@ by this painter.
 
 </dd>
 
-      </dl>
-    </section>
-
+    </dl>
+  </section>
     
   <section
       class="summary offset-anchor"
@@ -239,7 +243,7 @@ by this painter.
 </dd>
 
         <dt id="drawShadow" class="callable">
-  <span class="name"><a href="../cdk_button_check_box/CDKButtonCheckBoxPainter/drawShadow.html">drawShadow</a></span><span class="signature">(<wbr><span class="parameter" id="drawShadow-param-canvas"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-ui/Canvas-class.html">Canvas</a></span> <span class="parameter-name">canvas</span>, </span><span class="parameter" id="drawShadow-param-size"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-ui/Size-class.html">Size</a></span> <span class="parameter-name">size</span>, </span><span class="parameter" id="drawShadow-param-rect"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-ui/Rect-class.html">Rect</a></span> <span class="parameter-name">rect</span></span>)
+  <span class="name"><a href="../cdk_button_check_box/CDKButtonCheckBoxPainter/drawShadow.html">drawShadow</a></span><span class="signature">(<wbr><span class="parameter" id="drawShadow-param-canvas"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/painting/Canvas-class.html">Canvas</a></span> <span class="parameter-name">canvas</span>, </span><span class="parameter" id="drawShadow-param-size"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-ui/Size-class.html">Size</a></span> <span class="parameter-name">size</span>, </span><span class="parameter" id="drawShadow-param-rect"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-ui/Rect-class.html">Rect</a></span> <span class="parameter-name">rect</span></span>)
     <span class="returntype parameter">&#8594; void</span>
   </span>
   
@@ -279,14 +283,14 @@ this custom paint delegate.
 </dd>
 
         <dt id="paint" class="callable">
-  <span class="name"><a href="../cdk_button_check_box/CDKButtonCheckBoxPainter/paint.html">paint</a></span><span class="signature">(<wbr><span class="parameter" id="paint-param-canvas"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-ui/Canvas-class.html">Canvas</a></span> <span class="parameter-name">canvas</span>, </span><span class="parameter" id="paint-param-size"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-ui/Size-class.html">Size</a></span> <span class="parameter-name">size</span></span>)
+  <span class="name"><a href="../cdk_button_check_box/CDKButtonCheckBoxPainter/paint.html">paint</a></span><span class="signature">(<wbr><span class="parameter" id="paint-param-canvas"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/painting/Canvas-class.html">Canvas</a></span> <span class="parameter-name">canvas</span>, </span><span class="parameter" id="paint-param-size"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-ui/Size-class.html">Size</a></span> <span class="parameter-name">size</span></span>)
     <span class="returntype parameter">&#8594; void</span>
   </span>
   
 
 </dt>
 <dd>
-  Called whenever the object needs to paint. The given <a href="https://api.flutter.dev/flutter/dart-ui/Canvas-class.html">Canvas</a> has its
+  Called whenever the object needs to paint. The given <a href="https://api.flutter.dev/flutter/painting/Canvas-class.html">Canvas</a> has its
 coordinate space configured such that the origin is at the top left of the
 box. The area of the box is the size of the <code>size</code> argument.
   <div class="features"><span class="feature">override</span></div>
@@ -381,9 +385,7 @@ implemented in terms of the former).
     
     
 
-
   </div> <!-- /.main-content -->
-
   <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
     <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
 <header id="header-search-sidebar" class="hidden-l">
@@ -391,40 +393,30 @@ implemented in terms of the former).
     <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
 </header>
-
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../index.html">flutter_cupertino_desktop_kit</a></li>
     <li><a href="../cdk_button_check_box/cdk_button_check_box-library.html">cdk_button_check_box</a></li>
     <li class="self-crumb">CDKButtonCheckBoxPainter class</li>
 </ol>
 
-
     <h5>cdk_button_check_box library</h5>
     <div id="dartdoc-sidebar-left-content"></div>
   </div>
-
   <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
   </div><!--/.sidebar-offcanvas-->
-
 </main>
-
 <footer>
   <span class="no-break">
     flutter_cupertino_desktop_kit
-      0.0.7
+      0.0.11
   </span>
-
   
 </footer>
-
 
 
 <script src="../static-assets/highlight.pack.js?v1"></script>
 <script src="../static-assets/docs.dart.js"></script>
 
-
-
 </body>
-
 </html>
 

@@ -11,20 +11,16 @@
   
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
   
   <link rel="stylesheet" href="../../static-assets/github.css?v1">
   <link rel="stylesheet" href="../../static-assets/styles.css?v1">
   <link rel="icon" href="../../static-assets/favicon.png?v1">
-
   
 </head>
 
-
 <body data-base-href="../../" data-using-base-href="false" class="light-theme">
-
 <div id="overlay-under-drawer"></div>
-
 <header id="title">
   <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
@@ -37,26 +33,25 @@
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
-  <div class="toggle" id="theme-button">
+  <div class="toggle" id="theme-button" title="Toggle brightness">
     <label for="theme">
       <input type="checkbox" id="theme" value="light-theme">
       <span id="dark-theme-button" class="material-symbols-outlined">
-        brightness_4
+        dark_mode
       </span>
       <span id="light-theme-button" class="material-symbols-outlined">
-        brightness_5
+        light_mode
       </span>
     </label>
   </div>
 </header>
 <main>
-
-  <div
-      id="dartdoc-main-content"
-      class="main-content"
-      data-above-sidebar="cdk_field_text&#47;CDKFieldTextState-class-sidebar.html"
-      data-below-sidebar="">
-      <div>
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="cdk_field_text&#47;CDKFieldTextState-class-sidebar.html"
+    data-below-sidebar="">
+    <div>
 <h1><span class="kind-method">dispose</span> method 
 </h1></div>
 
@@ -67,7 +62,6 @@
         <li>@<a href="https://api.flutter.dev/flutter/dart-core/override-constant.html">override</a></li>
     </ol>
   </div>
-
 <span class="returntype">void</span>
 <span class="name ">dispose</span>(<wbr>)
 
@@ -85,7 +79,7 @@ there is no way to remount a <a href="https://api.flutter.dev/flutter/widgets/St
 <p>Subclasses should override this method to release any resources retained
 by this object (e.g., stop any active animations).</p>
 <p>If a <a href="https://api.flutter.dev/flutter/widgets/State-class.html">State</a>'s <a href="../../cdk_field_text/CDKFieldTextState/build.html">build</a> method depends on an object that can itself
-change state, for example a <a href="https://api.flutter.dev/flutter/foundation/ChangeNotifier-class.html">ChangeNotifier</a> or <a href="https://api.flutter.dev/flutter/dart-async/Stream-class.html">Stream</a>, or some
+change state, for example a <a href="https://api.flutter.dev/flutter/foundation/ChangeNotifier-class.html">ChangeNotifier</a> or <a href="https://api.flutter.dev/flutter/dart-core/Stream-class.html">Stream</a>, or some
 other object to which one can subscribe to receive notifications, then
 be sure to subscribe and unsubscribe properly in <a href="../../cdk_field_text/CDKFieldTextState/initState.html">initState</a>,
 <a href="https://api.flutter.dev/flutter/widgets/State/didUpdateWidget.html">didUpdateWidget</a>, and <a href="../../cdk_field_text/CDKFieldTextState/dispose.html">dispose</a>:</p>
@@ -98,6 +92,30 @@ replacing the object.</li>
 </ul>
 <p>Implementations of this method should end with a call to the inherited
 method, as in <code>super.dispose()</code>.</p>
+<h2 id="caveats">Caveats</h2>
+<p>This method is <em>not</em> invoked at times where a developer might otherwise
+expect it, such as application shutdown or dismissal via platform
+native methods.</p>
+<h3 id="application-shutdown">Application shutdown</h3>
+<p>There is no way to predict when application shutdown will happen. For
+example, a user's battery could catch fire, or the user could drop the
+device into a swimming pool, or the operating system could unilaterally
+terminate the application process due to memory pressure.</p>
+<p>Applications are responsible for ensuring that they are well-behaved
+even in the face of a rapid unscheduled termination.</p>
+<p>To artificially cause the entire widget tree to be disposed, consider
+calling <a href="https://api.flutter.dev/flutter/widgets/runApp.html">runApp</a> with a widget such as <a href="https://api.flutter.dev/flutter/widgets/SizedBox/SizedBox.shrink.html">SizedBox.shrink</a>.</p>
+<p>To listen for platform shutdown messages (and other lifecycle changes),
+consider the <a href="https://api.flutter.dev/flutter/widgets/AppLifecycleListener-class.html">AppLifecycleListener</a> API.</p>
+<h2 id="dismissing-flutter-ui-via-platform-native-methods">Dismissing Flutter UI via platform native methods</h2>
+<p>An application may have both Flutter and non-Flutter UI in it. If the
+application calls non-Flutter methods to remove Flutter based UI such as
+platform native API to manipulate the platform native navigation stack,
+the framework does not know if the developer intends to eagerly free
+resources or not. The widget tree remains mounted and ready to render
+as soon as it is displayed again.</p>
+<p>See the method used to bootstrap the app (e.g. <a href="https://api.flutter.dev/flutter/widgets/runApp.html">runApp</a> or <a href="https://api.flutter.dev/flutter/widgets/runWidget.html">runWidget</a>)
+for suggestions on how to release resources more eagerly.</p>
 <p>See also:</p>
 <ul>
 <li><a href="https://api.flutter.dev/flutter/widgets/State/deactivate.html">deactivate</a>, which is called prior to <a href="../../cdk_field_text/CDKFieldTextState/dispose.html">dispose</a>.</li>
@@ -118,7 +136,6 @@ void dispose() {
 
 
   </div> <!-- /.main-content -->
-
   <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
     <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
 <header id="header-search-sidebar" class="hidden-l">
@@ -126,7 +143,6 @@ void dispose() {
     <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
 </header>
-
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../../index.html">flutter_cupertino_desktop_kit</a></li>
     <li><a href="../../cdk_field_text/cdk_field_text-library.html">cdk_field_text</a></li>
@@ -134,33 +150,24 @@ void dispose() {
     <li class="self-crumb">dispose method</li>
 </ol>
 
-
     <h5>CDKFieldTextState class</h5>
     <div id="dartdoc-sidebar-left-content"></div>
   </div><!--/.sidebar-offcanvas-->
-
   <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
-  </div><!--/.sidebar-offcanvas-->
-
+</div><!--/.sidebar-offcanvas-->
 </main>
-
 <footer>
   <span class="no-break">
     flutter_cupertino_desktop_kit
-      0.0.7
+      0.0.11
   </span>
-
   
 </footer>
-
 
 
 <script src="../../static-assets/highlight.pack.js?v1"></script>
 <script src="../../static-assets/docs.dart.js"></script>
 
-
-
 </body>
-
 </html>
 
