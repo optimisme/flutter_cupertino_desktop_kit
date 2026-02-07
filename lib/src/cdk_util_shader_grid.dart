@@ -16,7 +16,7 @@ class CDKUtilShaderGrid extends CustomPainter {
 
   CDKUtilShaderGrid(this.size, {this.borderRadius = 0.0});
 
-  static initShaders() async {
+  static Future<void> initShaders() async {
     if (_isInitializing) {
       return;
     }
@@ -35,7 +35,7 @@ class CDKUtilShaderGrid extends CustomPainter {
 
       _sizes.add(size);
 
-      ui.Image? gridImage = await recorder.endRecording().toImage(s, s);
+      final ui.Image gridImage = await recorder.endRecording().toImage(s, s);
       _shaders.add(ui.ImageShader(
         gridImage,
         TileMode.repeated,
@@ -67,17 +67,28 @@ class CDKUtilShaderGrid extends CustomPainter {
   }
 
   @override
-  void paint(Canvas canvas, Size size) async {
+  void paint(Canvas canvas, Size size) {
+    final rect = Rect.fromLTWH(0, 0, size.width, size.height);
+    final clipRRect = RRect.fromRectAndRadius(
+      rect,
+      Radius.circular(borderRadius),
+    );
+    canvas.save();
+    canvas.clipRRect(clipRRect);
+
     if (!_initialized) {
       if (!_isInitializing) {
-        await initShaders();
+        initShaders();
       }
+      final fallbackPaint = Paint()..color = CDKTheme.grey100;
+      canvas.drawRect(rect, fallbackPaint);
+      canvas.restore();
       return;
     }
 
-    final paint = Paint();
-    paint.shader = _shaders[this.size % 5];
-    canvas.drawRect(Rect.fromLTWH(0, 0, size.width, size.height), paint);
+    final paint = Paint()..shader = _shaders[this.size % 5];
+    canvas.drawRect(rect, paint);
+    canvas.restore();
   }
 
   @override

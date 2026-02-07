@@ -1,16 +1,17 @@
+import 'dart:ui' as ui;
+
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart' as material;
 
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
 /// A class representing the theme configuration for a Flutter application.
 ///
-/// The `CDKTheme` class provides a mechanism to define and update the visual
-/// appearance of an application, including colors that change based on the
-/// theme (light or dark) and application focus state. These dynamic colors are
-/// accessed via a notifier: `CDKTheme theme = CDKThemeNotifier.of(context)!.changeNotifier;`.
+/// The `CDKTheme` class manages runtime theme state (appearance, accent, focus)
+/// and derives immutable token sets published through `ThemeExtension`.
 ///
-/// Static colors are predefined and constant, while dynamic colors change
+/// Static colors are predefined and constant, while runtime colors are derived
 /// according to the application's theme and focus state.
 ///
 /// ```dart
@@ -25,6 +26,289 @@ enum CDKThemeAppearance {
   system,
   light,
   dark,
+}
+
+@immutable
+class CDKThemeColorTokens extends material.ThemeExtension<CDKThemeColorTokens> {
+  const CDKThemeColorTokens({
+    required this.background,
+    required this.backgroundSecondary0,
+    required this.backgroundSecondary1,
+    required this.backgroundSecondary2,
+    required this.colorText,
+    required this.colorTextSecondary,
+    required this.accent50,
+    required this.accent100,
+    required this.accent200,
+    required this.accent300,
+    required this.accent,
+    required this.accent500,
+    required this.accent600,
+  });
+
+  final Color background;
+  final Color backgroundSecondary0;
+  final Color backgroundSecondary1;
+  final Color backgroundSecondary2;
+  final Color colorText;
+  final Color colorTextSecondary;
+  final Color accent50;
+  final Color accent100;
+  final Color accent200;
+  final Color accent300;
+  final Color accent;
+  final Color accent500;
+  final Color accent600;
+
+  @override
+  CDKThemeColorTokens copyWith({
+    Color? background,
+    Color? backgroundSecondary0,
+    Color? backgroundSecondary1,
+    Color? backgroundSecondary2,
+    Color? colorText,
+    Color? colorTextSecondary,
+    Color? accent50,
+    Color? accent100,
+    Color? accent200,
+    Color? accent300,
+    Color? accent,
+    Color? accent500,
+    Color? accent600,
+  }) {
+    return CDKThemeColorTokens(
+      background: background ?? this.background,
+      backgroundSecondary0: backgroundSecondary0 ?? this.backgroundSecondary0,
+      backgroundSecondary1: backgroundSecondary1 ?? this.backgroundSecondary1,
+      backgroundSecondary2: backgroundSecondary2 ?? this.backgroundSecondary2,
+      colorText: colorText ?? this.colorText,
+      colorTextSecondary: colorTextSecondary ?? this.colorTextSecondary,
+      accent50: accent50 ?? this.accent50,
+      accent100: accent100 ?? this.accent100,
+      accent200: accent200 ?? this.accent200,
+      accent300: accent300 ?? this.accent300,
+      accent: accent ?? this.accent,
+      accent500: accent500 ?? this.accent500,
+      accent600: accent600 ?? this.accent600,
+    );
+  }
+
+  @override
+  CDKThemeColorTokens lerp(
+      covariant material.ThemeExtension<CDKThemeColorTokens>? other, double t) {
+    if (other is! CDKThemeColorTokens) {
+      return this;
+    }
+
+    return CDKThemeColorTokens(
+      background: Color.lerp(background, other.background, t) ?? background,
+      backgroundSecondary0:
+          Color.lerp(backgroundSecondary0, other.backgroundSecondary0, t) ??
+              backgroundSecondary0,
+      backgroundSecondary1:
+          Color.lerp(backgroundSecondary1, other.backgroundSecondary1, t) ??
+              backgroundSecondary1,
+      backgroundSecondary2:
+          Color.lerp(backgroundSecondary2, other.backgroundSecondary2, t) ??
+              backgroundSecondary2,
+      colorText: Color.lerp(colorText, other.colorText, t) ?? colorText,
+      colorTextSecondary:
+          Color.lerp(colorTextSecondary, other.colorTextSecondary, t) ??
+              colorTextSecondary,
+      accent50: Color.lerp(accent50, other.accent50, t) ?? accent50,
+      accent100: Color.lerp(accent100, other.accent100, t) ?? accent100,
+      accent200: Color.lerp(accent200, other.accent200, t) ?? accent200,
+      accent300: Color.lerp(accent300, other.accent300, t) ?? accent300,
+      accent: Color.lerp(accent, other.accent, t) ?? accent,
+      accent500: Color.lerp(accent500, other.accent500, t) ?? accent500,
+      accent600: Color.lerp(accent600, other.accent600, t) ?? accent600,
+    );
+  }
+}
+
+@immutable
+class CDKThemeRadiusTokens
+    extends material.ThemeExtension<CDKThemeRadiusTokens> {
+  const CDKThemeRadiusTokens({
+    this.small = 4.0,
+    this.medium = 6.0,
+    this.large = 8.0,
+    this.rounded = 25.0,
+  });
+
+  final double small;
+  final double medium;
+  final double large;
+  final double rounded;
+
+  @override
+  CDKThemeRadiusTokens copyWith({
+    double? small,
+    double? medium,
+    double? large,
+    double? rounded,
+  }) {
+    return CDKThemeRadiusTokens(
+      small: small ?? this.small,
+      medium: medium ?? this.medium,
+      large: large ?? this.large,
+      rounded: rounded ?? this.rounded,
+    );
+  }
+
+  @override
+  CDKThemeRadiusTokens lerp(
+      covariant material.ThemeExtension<CDKThemeRadiusTokens>? other,
+      double t) {
+    if (other is! CDKThemeRadiusTokens) {
+      return this;
+    }
+    return CDKThemeRadiusTokens(
+      small: ui.lerpDouble(small, other.small, t) ?? small,
+      medium: ui.lerpDouble(medium, other.medium, t) ?? medium,
+      large: ui.lerpDouble(large, other.large, t) ?? large,
+      rounded: ui.lerpDouble(rounded, other.rounded, t) ?? rounded,
+    );
+  }
+}
+
+@immutable
+class CDKThemeSpacingTokens
+    extends material.ThemeExtension<CDKThemeSpacingTokens> {
+  const CDKThemeSpacingTokens({
+    this.xs = 2.0,
+    this.sm = 4.0,
+    this.md = 8.0,
+    this.lg = 10.0,
+  });
+
+  final double xs;
+  final double sm;
+  final double md;
+  final double lg;
+
+  @override
+  CDKThemeSpacingTokens copyWith({
+    double? xs,
+    double? sm,
+    double? md,
+    double? lg,
+  }) {
+    return CDKThemeSpacingTokens(
+      xs: xs ?? this.xs,
+      sm: sm ?? this.sm,
+      md: md ?? this.md,
+      lg: lg ?? this.lg,
+    );
+  }
+
+  @override
+  CDKThemeSpacingTokens lerp(
+      covariant material.ThemeExtension<CDKThemeSpacingTokens>? other,
+      double t) {
+    if (other is! CDKThemeSpacingTokens) {
+      return this;
+    }
+    return CDKThemeSpacingTokens(
+      xs: ui.lerpDouble(xs, other.xs, t) ?? xs,
+      sm: ui.lerpDouble(sm, other.sm, t) ?? sm,
+      md: ui.lerpDouble(md, other.md, t) ?? md,
+      lg: ui.lerpDouble(lg, other.lg, t) ?? lg,
+    );
+  }
+}
+
+@immutable
+class CDKThemeElevationTokens
+    extends material.ThemeExtension<CDKThemeElevationTokens> {
+  const CDKThemeElevationTokens({
+    this.softShadowBlur = 1.0,
+    this.softShadowYOffset = 1.0,
+    this.focusRingSpread = 1.0,
+    this.focusRingBlur = 0.5,
+  });
+
+  final double softShadowBlur;
+  final double softShadowYOffset;
+  final double focusRingSpread;
+  final double focusRingBlur;
+
+  @override
+  CDKThemeElevationTokens copyWith({
+    double? softShadowBlur,
+    double? softShadowYOffset,
+    double? focusRingSpread,
+    double? focusRingBlur,
+  }) {
+    return CDKThemeElevationTokens(
+      softShadowBlur: softShadowBlur ?? this.softShadowBlur,
+      softShadowYOffset: softShadowYOffset ?? this.softShadowYOffset,
+      focusRingSpread: focusRingSpread ?? this.focusRingSpread,
+      focusRingBlur: focusRingBlur ?? this.focusRingBlur,
+    );
+  }
+
+  @override
+  CDKThemeElevationTokens lerp(
+      covariant material.ThemeExtension<CDKThemeElevationTokens>? other,
+      double t) {
+    if (other is! CDKThemeElevationTokens) {
+      return this;
+    }
+    return CDKThemeElevationTokens(
+      softShadowBlur: ui.lerpDouble(softShadowBlur, other.softShadowBlur, t) ??
+          softShadowBlur,
+      softShadowYOffset:
+          ui.lerpDouble(softShadowYOffset, other.softShadowYOffset, t) ??
+              softShadowYOffset,
+      focusRingSpread:
+          ui.lerpDouble(focusRingSpread, other.focusRingSpread, t) ??
+              focusRingSpread,
+      focusRingBlur:
+          ui.lerpDouble(focusRingBlur, other.focusRingBlur, t) ?? focusRingBlur,
+    );
+  }
+}
+
+@immutable
+class CDKThemeRuntimeTokens
+    extends material.ThemeExtension<CDKThemeRuntimeTokens> {
+  const CDKThemeRuntimeTokens({
+    required this.isLight,
+    required this.isAppFocused,
+    required this.appearanceConfig,
+    required this.accentName,
+  });
+
+  final bool isLight;
+  final bool isAppFocused;
+  final CDKThemeAppearance appearanceConfig;
+  final String accentName;
+
+  @override
+  CDKThemeRuntimeTokens copyWith({
+    bool? isLight,
+    bool? isAppFocused,
+    CDKThemeAppearance? appearanceConfig,
+    String? accentName,
+  }) {
+    return CDKThemeRuntimeTokens(
+      isLight: isLight ?? this.isLight,
+      isAppFocused: isAppFocused ?? this.isAppFocused,
+      appearanceConfig: appearanceConfig ?? this.appearanceConfig,
+      accentName: accentName ?? this.accentName,
+    );
+  }
+
+  @override
+  CDKThemeRuntimeTokens lerp(
+      covariant material.ThemeExtension<CDKThemeRuntimeTokens>? other,
+      double t) {
+    if (other is! CDKThemeRuntimeTokens) {
+      return this;
+    }
+    return t < 0.5 ? this : other;
+  }
 }
 
 class CDKTheme extends ChangeNotifier {
@@ -88,6 +372,34 @@ class CDKTheme extends ChangeNotifier {
   Color accent = CupertinoColors.systemBlue;
   Color accent500 = const Color.fromRGBO(5, 110, 224, 1.0);
   Color accent600 = const Color.fromRGBO(5, 98, 199, 1.0);
+
+  static const CDKThemeRadiusTokens radiusTokens = CDKThemeRadiusTokens();
+  static const CDKThemeSpacingTokens spacingTokens = CDKThemeSpacingTokens();
+  static const CDKThemeElevationTokens elevationTokens =
+      CDKThemeElevationTokens();
+
+  CDKThemeColorTokens get colorTokens => CDKThemeColorTokens(
+        background: background,
+        backgroundSecondary0: backgroundSecondary0,
+        backgroundSecondary1: backgroundSecondary1,
+        backgroundSecondary2: backgroundSecondary2,
+        colorText: colorText,
+        colorTextSecondary: colorTextSecondary,
+        accent50: accent50,
+        accent100: accent100,
+        accent200: accent200,
+        accent300: accent300,
+        accent: accent,
+        accent500: accent500,
+        accent600: accent600,
+      );
+
+  CDKThemeRuntimeTokens get runtimeTokens => CDKThemeRuntimeTokens(
+        isLight: isLight,
+        isAppFocused: isAppFocused,
+        appearanceConfig: appearanceConfig,
+        accentName: colorConfig,
+      );
 
   CupertinoThemeData getThemeData(
       CDKThemeAppearance initialAppearance, String initialColor) {

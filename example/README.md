@@ -1,16 +1,24 @@
-# example
+# CDK Example App
 
-A new Flutter project.
+This example demonstrates `flutter_cupertino_desktop_kit` widget families and desktop interaction behaviors.
 
-## Getting Started
+## Feature Map
 
-This project is a starting point for a Flutter application.
+- App shell and sidebars: `CDKApp`, `CDKAppSidebars`
+- Buttons: action/normal/destructive/icon/toggle/select/radio/checkbox
+- Dialogs: popover, arrowed popover, modal, draggable
+- Fields: text, numeric, color hex, slider-backed numeric
+- Pickers: segmented/bar/checklist/color/hsv/theme colors/sliders
+- Progress indicators: bar and circular (determinate + indeterminate)
 
-A few resources to get you started if this is your first Flutter project:
+## Run Scenarios
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+1. `flutter pub get`
+2. `flutter run -d macos` (or `linux`, `windows`, `chrome`)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Recommended Manual Checks
+
+1. Open dialogs and verify `Escape` closes the top-most dismissible dialog.
+2. Verify outside-click behavior differs for popovers vs modals.
+3. Tab through interactive controls and confirm traversal order is stable.
+4. Toggle system appearance and accent from app controls and verify token-driven styling updates.

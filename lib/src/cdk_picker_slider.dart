@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'cdk_theme_notifier.dart';
 import 'cdk_theme.dart';
 
@@ -10,6 +11,7 @@ class CDKPickerSlider extends StatefulWidget {
   final double size;
   final bool enabled;
   final ValueChanged<double>? onChanged;
+  final String? semanticLabel;
 
   const CDKPickerSlider({
     super.key,
@@ -17,6 +19,7 @@ class CDKPickerSlider extends StatefulWidget {
     this.enabled = true,
     this.size = 16,
     required this.onChanged,
+    this.semanticLabel,
   });
 
   @override
@@ -24,6 +27,22 @@ class CDKPickerSlider extends StatefulWidget {
 }
 
 class _CDKPickerSliderState extends State<CDKPickerSlider> {
+  static const Map<ShortcutActivator, Intent> _shortcuts =
+      <ShortcutActivator, Intent>{
+    SingleActivator(LogicalKeyboardKey.arrowRight): DirectionalFocusIntent(
+      TraversalDirection.right,
+    ),
+    SingleActivator(LogicalKeyboardKey.arrowLeft): DirectionalFocusIntent(
+      TraversalDirection.left,
+    ),
+    SingleActivator(LogicalKeyboardKey.arrowUp): DirectionalFocusIntent(
+      TraversalDirection.up,
+    ),
+    SingleActivator(LogicalKeyboardKey.arrowDown): DirectionalFocusIntent(
+      TraversalDirection.down,
+    ),
+  };
+
   @override
   void initState() {
     super.initState();
@@ -60,24 +79,64 @@ class _CDKPickerSliderState extends State<CDKPickerSlider> {
     _getValue(details.globalPosition);
   }
 
+  void _stepBy(double delta) {
+    if (!widget.enabled || widget.onChanged == null) {
+      return;
+    }
+    final next = (widget.value + delta).clamp(0.0, 1.0);
+    widget.onChanged?.call(next);
+  }
+
   @override
   Widget build(BuildContext context) {
-    CDKTheme theme = CDKThemeNotifier.of(context)!.changeNotifier;
+    final colors = CDKThemeNotifier.colorTokensOf(context);
+    final runtime = CDKThemeNotifier.runtimeTokensOf(context);
+    final isEnabled = widget.enabled && widget.onChanged != null;
 
-    return GestureDetector(
-      onTapDown: (details) {
-        _onTapDown(details);
-      },
-      onPanUpdate: !widget.enabled ? null : _onPanUpdate,
-      child: CustomPaint(
-        painter: CDKPickerSliderPainter(
-          colorAccent: theme.accent,
-          colorBar: theme.backgroundSecondary1,
-          colorCircle: theme.backgroundSecondary0,
-          value: widget.value,
-          hasAppFocus: theme.isAppFocused, // Border color
+    return Semantics(
+      slider: true,
+      enabled: isEnabled,
+      label: widget.semanticLabel ?? 'Slider',
+      value: '${(widget.value * 100).round()}%',
+      onIncrease: isEnabled ? () => _stepBy(0.05) : null,
+      onDecrease: isEnabled ? () => _stepBy(-0.05) : null,
+      child: FocusableActionDetector(
+        enabled: isEnabled,
+        mouseCursor:
+            isEnabled ? SystemMouseCursors.click : SystemMouseCursors.basic,
+        shortcuts: _shortcuts,
+        actions: <Type, Action<Intent>>{
+          DirectionalFocusIntent: CallbackAction<DirectionalFocusIntent>(
+            onInvoke: (intent) {
+              switch (intent.direction) {
+                case TraversalDirection.left:
+                case TraversalDirection.down:
+                  _stepBy(-0.05);
+                  break;
+                case TraversalDirection.right:
+                case TraversalDirection.up:
+                  _stepBy(0.05);
+                  break;
+              }
+              return null;
+            },
+          ),
+        },
+        child: GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTapDown: !isEnabled ? null : _onTapDown,
+          onPanUpdate: !isEnabled ? null : _onPanUpdate,
+          child: CustomPaint(
+            painter: CDKPickerSliderPainter(
+              colorAccent: colors.accent,
+              colorBar: colors.backgroundSecondary1,
+              colorCircle: colors.backgroundSecondary0,
+              value: widget.value,
+              hasAppFocus: runtime.isAppFocused, // Border color
+            ),
+            size: Size(widget.size, widget.size),
+          ),
         ),
-        size: Size(widget.size, widget.size),
       ),
     );
   }

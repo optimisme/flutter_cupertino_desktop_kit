@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
-import 'cdk_theme_notifier.dart';
+
 import 'cdk_theme.dart';
+import 'cdk_theme_notifier.dart';
+import 'cdk_widget_state.dart';
 
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
@@ -10,32 +12,6 @@ import 'cdk_theme.dart';
 enum CDKButtonStyle { action, normal, destructive }
 
 /// A customizable button widget for Flutter applications.
-///
-/// The [CDKButton] allows for various styles, sizes, and states, making it versatile
-/// for different UI needs.
-///
-/// <img src="/flutter_cupertino_desktop_kit/gh-pages/doc-images/CDKButton_0.png" alt="CDKButton Example" style="max-width: 500px; width: 100%;">
-///
-/// ```dart
-/// CDKButton(
-///   onPressed: () {
-///     // Handle button press
-///   },
-///   child: Text('Click Me'),
-///   style: CDKButtonStyle.action,
-///   isLarge: true,
-/// )
-/// ```
-///
-/// Parameters:
-/// * `onPressed`: A callback function that is called when the button is pressed.
-///   If null, the button will be disabled.
-/// * `child`: The content of the button. Typically a `Text` or `Icon` widget.
-/// * `style`: The style of the button, with options like `action`, `normal`,
-///   and `destructive`. Defaults to `normal`.
-/// * `isLarge`: A flag to determine if the button should be displayed in a large
-///   size. Defaults to `false`.
-/// * `enabled`: A flag to enable or disable the button. Defaults to `true`.
 class CDKButton extends StatefulWidget {
   final VoidCallback? onPressed;
   final Widget child;
@@ -57,12 +33,11 @@ class CDKButton extends StatefulWidget {
 }
 
 class _CDKButtonState extends State<CDKButton> {
-  // Default font size.
   static const double _fontSize = 12.0;
 
-  // Flag to track if the button is currently pressed.
   bool _isPressed = false;
   bool _isFocused = false;
+  bool _isHovered = false;
 
   static const Map<ShortcutActivator, Intent> _shortcuts =
       <ShortcutActivator, Intent>{
@@ -80,142 +55,34 @@ class _CDKButtonState extends State<CDKButton> {
 
   @override
   Widget build(BuildContext context) {
-    CDKTheme theme = CDKThemeNotifier.of(context)!.changeNotifier;
+    final colors = CDKThemeNotifier.colorTokensOf(context);
+    final runtime = CDKThemeNotifier.runtimeTokensOf(context);
+    final radii = CDKThemeNotifier.radiusTokensOf(context);
+    final elevations = CDKThemeNotifier.elevationTokensOf(context);
 
-    // Define styles and themes based on the button's state and style.
-    BoxDecoration decoration;
-    Color color;
-    TextStyle textStyle;
-    IconThemeData iconTheme;
-    final List<BoxShadow> shadows = [
-      BoxShadow(
-        color: CDKTheme.black.withValues(alpha: 0.1),
-        spreadRadius: 0,
-        blurRadius: 1,
-        offset: const Offset(0, 1),
-      )
-    ];
-    if (_isFocused && _isEnabled) {
-      shadows.add(
-        BoxShadow(
-          color: theme.accent200.withValues(alpha: 0.75),
-          spreadRadius: 1,
-          blurRadius: 0.5,
-          offset: const Offset(0, 0),
-        ),
-      );
-    }
+    final states = cdkWidgetStates(
+      enabled: _isEnabled,
+      pressed: _isPressed,
+      focused: _isFocused,
+      hovered: _isHovered,
+    );
 
-    // Styling logic depending on the button's state and style.
-    if (!_isEnabled) {
-      switch (widget.style) {
-        case CDKButtonStyle.action:
-          decoration = BoxDecoration(
-              color: theme.isAppFocused ? theme.accent200 : CDKTheme.grey200,
-              borderRadius: BorderRadius.circular(6.0),
-              boxShadow: shadows);
-          color = theme.isAppFocused ? theme.accent600 : CDKTheme.grey;
-          textStyle = TextStyle(
-            fontSize: _fontSize,
-            color: color,
-          );
-          iconTheme = IconThemeData(color: color, size: _fontSize + 2);
-          break;
+    final decoration = _resolveDecoration(
+      states: states,
+      colors: colors,
+      runtime: runtime,
+      radii: radii,
+      elevations: elevations,
+    );
+    final foregroundColor = _resolveForegroundColor(
+        states: states, colors: colors, runtime: runtime);
 
-        case CDKButtonStyle.normal:
-        case CDKButtonStyle.destructive:
-          decoration = BoxDecoration(
-              color: theme.backgroundSecondary0,
-              borderRadius: BorderRadius.circular(6.0),
-              boxShadow: shadows);
-          color = CDKTheme.grey;
-          textStyle = TextStyle(
-            fontSize: _fontSize,
-            color: color,
-          );
-          iconTheme = IconThemeData(color: color, size: _fontSize + 2);
-          break;
-      }
-    } else {
-      switch (widget.style) {
-        case CDKButtonStyle.action:
-          if (theme.isAppFocused) {
-            decoration = BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: _isPressed
-                      ? [theme.accent100, theme.accent]
-                      : [theme.accent300, theme.accent500],
-                ),
-                borderRadius: BorderRadius.circular(6.0),
-                boxShadow: shadows);
-            color = _isPressed ? theme.accent50 : CDKTheme.white;
-            textStyle = TextStyle(
-              fontSize: _fontSize,
-              color: color,
-            );
-            iconTheme = IconThemeData(color: color, size: _fontSize + 2);
-          } else {
-            decoration = BoxDecoration(
-                color:
-                    _isPressed ? CDKTheme.grey200 : theme.backgroundSecondary0,
-                border: Border.all(color: theme.backgroundSecondary1),
-                borderRadius: BorderRadius.circular(6.0),
-                boxShadow: shadows);
-            color = CDKTheme.black;
-            textStyle = TextStyle(
-              fontSize: _fontSize,
-              color: color,
-            );
-            iconTheme = IconThemeData(color: color, size: _fontSize + 2);
-          }
-          break;
-
-        case CDKButtonStyle.destructive:
-          decoration = BoxDecoration(
-              color: theme.isLight
-                  ? _isPressed
-                      ? CDKTheme.grey50
-                      : CDKTheme.white
-                  : _isPressed
-                      ? CDKTheme.grey500
-                      : theme.backgroundSecondary0,
-              border: theme.isLight
-                  ? Border.all(color: CDKTheme.grey70)
-                  : Border.all(color: CDKTheme.grey600),
-              borderRadius: BorderRadius.circular(6.0),
-              boxShadow: shadows);
-          color = CDKTheme.red;
-          textStyle = TextStyle(
-            fontSize: _fontSize,
-            color: color,
-          );
-          iconTheme = IconThemeData(color: color, size: _fontSize + 2);
-          break;
-
-        default:
-          decoration = BoxDecoration(
-              color: theme.isLight
-                  ? _isPressed
-                      ? CDKTheme.grey50
-                      : CDKTheme.white
-                  : _isPressed
-                      ? CDKTheme.grey500
-                      : theme.backgroundSecondary0,
-              border: theme.isLight
-                  ? Border.all(color: CDKTheme.grey70)
-                  : Border.all(color: CDKTheme.grey600),
-              borderRadius: BorderRadius.circular(6.0),
-              boxShadow: shadows);
-          color = theme.colorText;
-          textStyle = TextStyle(
-            fontSize: _fontSize,
-            color: color,
-          );
-          iconTheme = IconThemeData(color: color, size: _fontSize + 2);
-      }
-    }
+    final textStyle = TextStyle(
+      fontSize: _fontSize,
+      color: foregroundColor,
+    );
+    final iconTheme =
+        IconThemeData(color: foregroundColor, size: _fontSize + 2);
 
     final Widget buttonContents = IntrinsicWidth(
       child: DecoratedBox(
@@ -255,6 +122,11 @@ class _CDKButtonState extends State<CDKButton> {
             },
           ),
         },
+        onShowHoverHighlight: (isHovered) {
+          if (_isHovered != isHovered) {
+            setState(() => _isHovered = isHovered);
+          }
+        },
         onShowFocusHighlight: (isFocused) {
           if (_isFocused != isFocused) {
             setState(() => _isFocused = isFocused);
@@ -274,5 +146,132 @@ class _CDKButtonState extends State<CDKButton> {
         ),
       ),
     );
+  }
+
+  BoxDecoration _resolveDecoration({
+    required Set<WidgetState> states,
+    required CDKThemeColorTokens colors,
+    required CDKThemeRuntimeTokens runtime,
+    required CDKThemeRadiusTokens radii,
+    required CDKThemeElevationTokens elevations,
+  }) {
+    final isDisabled = states.contains(WidgetState.disabled);
+    final isPressed = states.contains(WidgetState.pressed);
+    final isFocused = states.contains(WidgetState.focused);
+
+    final baseShadows = <BoxShadow>[
+      BoxShadow(
+        color: CDKTheme.black.withValues(alpha: 0.1),
+        spreadRadius: 0,
+        blurRadius: elevations.softShadowBlur,
+        offset: Offset(0, elevations.softShadowYOffset),
+      )
+    ];
+    if (isFocused && !isDisabled) {
+      baseShadows.add(
+        BoxShadow(
+          color: colors.accent200.withValues(alpha: 0.75),
+          spreadRadius: elevations.focusRingSpread,
+          blurRadius: elevations.focusRingBlur,
+          offset: const Offset(0, 0),
+        ),
+      );
+    }
+
+    final radius = BorderRadius.circular(radii.medium);
+
+    if (isDisabled) {
+      switch (widget.style) {
+        case CDKButtonStyle.action:
+          return BoxDecoration(
+            color: runtime.isAppFocused ? colors.accent200 : CDKTheme.grey200,
+            borderRadius: radius,
+            boxShadow: baseShadows,
+          );
+        case CDKButtonStyle.normal:
+        case CDKButtonStyle.destructive:
+          return BoxDecoration(
+            color: colors.backgroundSecondary0,
+            borderRadius: radius,
+            boxShadow: baseShadows,
+          );
+      }
+    }
+
+    switch (widget.style) {
+      case CDKButtonStyle.action:
+        if (runtime.isAppFocused) {
+          return BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: isPressed
+                  ? [colors.accent100, colors.accent]
+                  : [colors.accent300, colors.accent500],
+            ),
+            borderRadius: radius,
+            boxShadow: baseShadows,
+          );
+        }
+        return BoxDecoration(
+          color: isPressed ? CDKTheme.grey200 : colors.backgroundSecondary0,
+          border: Border.all(color: colors.backgroundSecondary1),
+          borderRadius: radius,
+          boxShadow: baseShadows,
+        );
+      case CDKButtonStyle.destructive:
+        return BoxDecoration(
+          color: runtime.isLight
+              ? (isPressed ? CDKTheme.grey50 : CDKTheme.white)
+              : (isPressed ? CDKTheme.grey500 : colors.backgroundSecondary0),
+          border: runtime.isLight
+              ? Border.all(color: CDKTheme.grey70)
+              : Border.all(color: CDKTheme.grey600),
+          borderRadius: radius,
+          boxShadow: baseShadows,
+        );
+      case CDKButtonStyle.normal:
+        return BoxDecoration(
+          color: runtime.isLight
+              ? (isPressed ? CDKTheme.grey50 : CDKTheme.white)
+              : (isPressed ? CDKTheme.grey500 : colors.backgroundSecondary0),
+          border: runtime.isLight
+              ? Border.all(color: CDKTheme.grey70)
+              : Border.all(color: CDKTheme.grey600),
+          borderRadius: radius,
+          boxShadow: baseShadows,
+        );
+    }
+  }
+
+  Color _resolveForegroundColor({
+    required Set<WidgetState> states,
+    required CDKThemeColorTokens colors,
+    required CDKThemeRuntimeTokens runtime,
+  }) {
+    final isDisabled = states.contains(WidgetState.disabled);
+    final isPressed = states.contains(WidgetState.pressed);
+
+    if (isDisabled) {
+      switch (widget.style) {
+        case CDKButtonStyle.action:
+          return runtime.isAppFocused ? colors.accent600 : CDKTheme.grey;
+        case CDKButtonStyle.normal:
+        case CDKButtonStyle.destructive:
+          return CDKTheme.grey;
+      }
+    }
+
+    switch (widget.style) {
+      case CDKButtonStyle.action:
+        if (runtime.isAppFocused) {
+          return isPressed ? colors.accent50 : CDKTheme.white;
+        }
+        return CDKTheme.black;
+      case CDKButtonStyle.destructive:
+        return CDKTheme.red;
+      case CDKButtonStyle.normal:
+        return colors.colorText;
+    }
   }
 }

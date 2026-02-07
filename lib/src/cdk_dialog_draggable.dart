@@ -237,12 +237,14 @@ class _CDKDialogDraggableState extends State<CDKDialogDraggable>
                         position += details.delta;
                       });
                     },
-                    child: widget.isAnimated && scaleAnimation != null
-                        ? ScaleTransition(
-                            scale: scaleAnimation!,
-                            child: dialogWithDecorations,
-                          )
-                        : dialogWithDecorations)),
+                    child: RepaintBoundary(
+                      child: widget.isAnimated && scaleAnimation != null
+                          ? ScaleTransition(
+                              scale: scaleAnimation!,
+                              child: dialogWithDecorations,
+                            )
+                          : dialogWithDecorations,
+                    ))),
           ]);
   }
 }

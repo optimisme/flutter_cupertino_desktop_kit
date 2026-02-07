@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart' as material;
 import 'cdk_theme.dart';
 import 'cdk_theme_notifier.dart';
 import 'cdk_util_shader_grid.dart';
@@ -77,12 +78,36 @@ class _CDKAppState extends State<CDKApp> with WidgetsBindingObserver {
     return AnimatedBuilder(
       animation: _themeManager,
       builder: (context, _) {
+        final List<material.ThemeExtension<dynamic>> extensions = [
+          _themeManager.colorTokens,
+          _themeManager.runtimeTokens,
+          CDKTheme.radiusTokens,
+          CDKTheme.spacingTokens,
+          CDKTheme.elevationTokens,
+        ];
+
         return CDKThemeNotifier(
             changeNotifier: _themeManager,
             child: CupertinoApp(
               debugShowCheckedModeBanner: false,
               theme: _themeManager.getThemeData(
                   widget.defaultAppearance, widget.defaultColor),
+              builder: (context, child) {
+                final baseTheme = material.Theme.of(context);
+                final baseExtensions =
+                    baseTheme.extensions.values.toList(growable: true);
+                baseExtensions.addAll(extensions);
+
+                return material.Theme(
+                  data: baseTheme.copyWith(
+                    extensions: baseExtensions,
+                  ),
+                  child: FocusTraversalGroup(
+                    policy: ReadingOrderTraversalPolicy(),
+                    child: child ?? const SizedBox.shrink(),
+                  ),
+                );
+              },
               home: widget.child,
             ));
       },

@@ -1,4 +1,7 @@
+import 'dart:ui' show SemanticsFlag;
+
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart' as material;
 import 'package:flutter/services.dart';
 import 'package:flutter_cupertino_desktop_kit/flutter_cupertino_desktop_kit.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -60,6 +63,18 @@ Widget _toggleAnchorHost({
             );
           },
         ),
+      ),
+    ),
+  );
+}
+
+Widget _themeHost({required Widget child}) {
+  final theme = CDKTheme()..setAccentColour('systemBlue');
+  return CDKThemeNotifier(
+    changeNotifier: theme,
+    child: CupertinoApp(
+      home: CupertinoPageScaffold(
+        child: Center(child: child),
       ),
     ),
   );
@@ -319,5 +334,136 @@ void main() {
     await tester.pump();
 
     expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('CDKApp publishes ThemeExtension tokens',
+      (WidgetTester tester) async {
+    const marker = Key('theme-marker');
+    await tester.pumpWidget(
+      const CDKApp(
+        child: SizedBox(key: marker),
+      ),
+    );
+    await tester.pump();
+
+    final context = tester.element(find.byKey(marker));
+    final colors = material.Theme.of(context).extension<CDKThemeColorTokens>();
+    final runtime =
+        material.Theme.of(context).extension<CDKThemeRuntimeTokens>();
+    final radii = material.Theme.of(context).extension<CDKThemeRadiusTokens>();
+
+    expect(colors, isNotNull);
+    expect(runtime, isNotNull);
+    expect(radii, isNotNull);
+  });
+
+  testWidgets('Switch exposes semantics and supports keyboard activation',
+      (WidgetTester tester) async {
+    bool value = false;
+    final semanticsHandle = tester.ensureSemantics();
+
+    await tester.pumpWidget(
+      _themeHost(
+        child: CDKButtonSwitch(
+          value: value,
+          semanticLabel: 'Theme switch',
+          onChanged: (newValue) {
+            value = newValue;
+          },
+        ),
+      ),
+    );
+    await tester.pump();
+
+    expect(find.bySemanticsLabel('Theme switch'), findsOneWidget);
+    final switchNode = tester.getSemantics(find.byType(CDKButtonSwitch));
+    expect(switchNode.hasFlag(SemanticsFlag.isButton), isTrue);
+    expect(switchNode.hasFlag(SemanticsFlag.hasEnabledState), isTrue);
+
+    await tester.tap(find.byType(CDKButtonSwitch));
+    await tester.pump();
+    expect(value, isTrue);
+
+    await tester.tap(find.byType(CDKButtonSwitch));
+    await tester.pump();
+    await tester.sendKeyDownEvent(LogicalKeyboardKey.space);
+    await tester.sendKeyUpEvent(LogicalKeyboardKey.space);
+    await tester.pump();
+    expect(value, isTrue);
+
+    semanticsHandle.dispose();
+  });
+
+  testWidgets(
+      'Numeric field responds to keyboard increment/decrement shortcuts',
+      (WidgetTester tester) async {
+    double currentValue = 2.0;
+
+    await tester.pumpWidget(
+      _themeHost(
+        child: SizedBox(
+          width: 220,
+          child: CDKFieldNumeric(
+            value: currentValue,
+            increment: 1.0,
+            min: 0.0,
+            max: 10.0,
+            onValueChanged: (value) {
+              currentValue = value;
+            },
+          ),
+        ),
+      ),
+    );
+    await tester.pump();
+
+    await tester.tap(find.byType(CDKFieldText));
+    await tester.pump();
+
+    await tester.sendKeyDownEvent(LogicalKeyboardKey.arrowUp);
+    await tester.sendKeyUpEvent(LogicalKeyboardKey.arrowUp);
+    await tester.pump();
+    expect(currentValue, 3.0);
+
+    await tester.sendKeyDownEvent(LogicalKeyboardKey.arrowDown);
+    await tester.sendKeyUpEvent(LogicalKeyboardKey.arrowDown);
+    await tester.pump();
+    expect(currentValue, 2.0);
+  });
+
+  testWidgets('Checklist exposes semantic items and supports keyboard activate',
+      (WidgetTester tester) async {
+    int selected = 0;
+    final semanticsHandle = tester.ensureSemantics();
+
+    await tester.pumpWidget(
+      _themeHost(
+        child: CDKPickerCheckList(
+          options: const ['One', 'Two', 'Three'],
+          selectedIndex: selected,
+          onSelected: (index) {
+            selected = index;
+          },
+          semanticLabel: 'Options',
+        ),
+      ),
+    );
+    await tester.pump();
+
+    expect(find.bySemanticsLabel('Options'), findsOneWidget);
+    expect(find.bySemanticsLabel('Two'), findsWidgets);
+
+    await tester.tap(find.text('Two'));
+    await tester.pump();
+    expect(selected, 1);
+
+    await tester.tap(find.text('Three'));
+    await tester.pump();
+    await tester.sendKeyDownEvent(LogicalKeyboardKey.enter);
+    await tester.sendKeyUpEvent(LogicalKeyboardKey.enter);
+    await tester.pump();
+    expect(selected, 2);
+
+    semanticsHandle.dispose();
   });
 }

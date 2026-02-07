@@ -407,6 +407,10 @@ class _CDKDialogHostState extends State<_CDKDialogHost> {
   final FocusScopeNode _focusScopeNode = FocusScopeNode(
     debugLabel: 'CDKDialogHost',
   );
+  static const Map<ShortcutActivator, Intent> _shortcuts =
+      <ShortcutActivator, Intent>{
+    SingleActivator(LogicalKeyboardKey.escape): DismissIntent(),
+  };
 
   @override
   void initState() {
@@ -425,19 +429,11 @@ class _CDKDialogHostState extends State<_CDKDialogHost> {
     super.dispose();
   }
 
-  KeyEventResult _handleKeyEvent(FocusNode node, KeyEvent event) {
-    if (event is! KeyDownEvent) {
-      return KeyEventResult.ignored;
+  Object? _handleDismissIntent(DismissIntent intent) {
+    if (widget.dismissOnEscape && widget.isTopMost(widget.dialogId)) {
+      widget.onRequestClose();
     }
-
-    if (event.logicalKey != LogicalKeyboardKey.escape ||
-        !widget.dismissOnEscape ||
-        !widget.isTopMost(widget.dialogId)) {
-      return KeyEventResult.ignored;
-    }
-
-    widget.onRequestClose();
-    return KeyEventResult.handled;
+    return null;
   }
 
   void _handleOutsidePointerDown() {
@@ -465,14 +461,26 @@ class _CDKDialogHostState extends State<_CDKDialogHost> {
       child: FocusScope(
         node: _focusScopeNode,
         autofocus: true,
-        child: Focus(
-          autofocus: true,
-          onKeyEvent: _handleKeyEvent,
-          child: Stack(
-            children: [
-              if (outsideLayer != null) outsideLayer,
-              widget.child,
-            ],
+        child: FocusTraversalGroup(
+          policy: ReadingOrderTraversalPolicy(),
+          child: Shortcuts(
+            shortcuts: _shortcuts,
+            child: Actions(
+              actions: <Type, Action<Intent>>{
+                DismissIntent: CallbackAction<DismissIntent>(
+                  onInvoke: _handleDismissIntent,
+                ),
+              },
+              child: Focus(
+                autofocus: true,
+                child: Stack(
+                  children: [
+                    if (outsideLayer != null) outsideLayer,
+                    widget.child,
+                  ],
+                ),
+              ),
+            ),
           ),
         ),
       ),

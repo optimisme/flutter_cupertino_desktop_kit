@@ -45,7 +45,15 @@ export 'src/cdk_picker_theme_colors.dart' show CDKPickerThemeColors;
 export 'src/cdk_progress_bar.dart' show CDKProgressBar;
 export 'src/cdk_progress_circular.dart' show CDKProgressCircular;
 
-export 'src/cdk_theme.dart' show CDKTheme, CDKThemeAppearance;
+export 'src/cdk_theme.dart'
+    show
+        CDKTheme,
+        CDKThemeAppearance,
+        CDKThemeColorTokens,
+        CDKThemeRuntimeTokens,
+        CDKThemeRadiusTokens,
+        CDKThemeSpacingTokens,
+        CDKThemeElevationTokens;
 export 'src/cdk_theme_notifier.dart' show CDKThemeNotifier;
 
 export 'src/cdk_util_disclosure.dart' show CDKUtilDisclosure;

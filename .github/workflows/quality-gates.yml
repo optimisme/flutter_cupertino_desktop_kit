@@ -19,20 +19,61 @@ jobs:
       - name: Root pub get
         run: flutter pub get
 
+      - name: Root format check
+        run: dart format --output=none --set-exit-if-changed lib test
+
       - name: Root analyze
         run: flutter analyze lib test
 
-      - name: Root tests
-        run: flutter test
+      - name: Root tests with coverage
+        run: flutter test --coverage
+
+      - name: Root coverage threshold
+        run: |
+          total_lines=$(awk -F: '/^LF:/{sum+=$2} END {print sum+0}' coverage/lcov.info)
+          hit_lines=$(awk -F: '/^LH:/{sum+=$2} END {print sum+0}' coverage/lcov.info)
+          if [ "$total_lines" -eq 0 ]; then
+            echo "No coverage lines found"
+            exit 1
+          fi
+          coverage_pct=$((100 * hit_lines / total_lines))
+          echo "Root coverage: ${coverage_pct}%"
+          if [ "$coverage_pct" -lt 20 ]; then
+            echo "Root coverage threshold (20%) not met"
+            exit 1
+          fi
+
+      - name: API docs smoke check
+        run: dart doc --output /tmp/cdk-docs
 
       - name: Example pub get
         working-directory: example
         run: flutter pub get
 
+      - name: Example format check
+        working-directory: example
+        run: dart format --output=none --set-exit-if-changed lib test
+
       - name: Example analyze
         working-directory: example
         run: flutter analyze lib test
 
-      - name: Example tests
+      - name: Example tests with coverage
         working-directory: example
-        run: flutter test
+        run: flutter test --coverage
+
+      - name: Example coverage threshold
+        working-directory: example
+        run: |
+          total_lines=$(awk -F: '/^LF:/{sum+=$2} END {print sum+0}' coverage/lcov.info)
+          hit_lines=$(awk -F: '/^LH:/{sum+=$2} END {print sum+0}' coverage/lcov.info)
+          if [ "$total_lines" -eq 0 ]; then
+            echo "No example coverage lines found"
+            exit 1
+          fi
+          coverage_pct=$((100 * hit_lines / total_lines))
+          echo "Example coverage: ${coverage_pct}%"
+          if [ "$coverage_pct" -lt 10 ]; then
+            echo "Example coverage threshold (10%) not met"
+            exit 1
+          fi

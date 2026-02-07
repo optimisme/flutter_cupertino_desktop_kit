@@ -37,11 +37,22 @@ class CDKFieldNumeric extends StatefulWidget {
   State<CDKFieldNumeric> createState() => _CDKFieldNumericState();
 }
 
+class _CDKIncrementIntent extends Intent {
+  const _CDKIncrementIntent();
+}
+
+class _CDKDecrementIntent extends Intent {
+  const _CDKDecrementIntent();
+}
+
 class _CDKFieldNumericState extends State<CDKFieldNumeric> {
   late TextEditingController _controller;
-  final FocusNode _keyboardFocusNode =
-      FocusNode(skipTraversal: true, canRequestFocus: false);
   double _previousValue = double.infinity;
+  static const Map<ShortcutActivator, Intent> _shortcuts =
+      <ShortcutActivator, Intent>{
+    SingleActivator(LogicalKeyboardKey.arrowUp): _CDKIncrementIntent(),
+    SingleActivator(LogicalKeyboardKey.arrowDown): _CDKDecrementIntent(),
+  };
 
   @override
   void initState() {
@@ -54,7 +65,6 @@ class _CDKFieldNumericState extends State<CDKFieldNumeric> {
   void dispose() {
     _controller.removeListener(_onTextChanged);
     _controller.dispose();
-    _keyboardFocusNode.dispose();
     super.dispose();
   }
 
@@ -163,23 +173,36 @@ class _CDKFieldNumericState extends State<CDKFieldNumeric> {
       ],
     );
 
-    return widget.increment == double.infinity
-        ? child
-        : Focus(
-            focusNode: _keyboardFocusNode,
-            onKeyEvent: (_, KeyEvent event) {
-              if (event is KeyDownEvent) {
-                if (event.logicalKey == LogicalKeyboardKey.arrowUp) {
+    if (widget.increment == double.infinity) {
+      return child;
+    }
+
+    return FocusTraversalGroup(
+      policy: ReadingOrderTraversalPolicy(),
+      child: Shortcuts(
+        shortcuts: _shortcuts,
+        child: Actions(
+          actions: <Type, Action<Intent>>{
+            _CDKIncrementIntent: CallbackAction<_CDKIncrementIntent>(
+              onInvoke: (_) {
+                if (widget.enabled) {
                   _incrementValue();
-                  return KeyEventResult.handled;
-                } else if (event.logicalKey == LogicalKeyboardKey.arrowDown) {
-                  _decrementValue();
-                  return KeyEventResult.handled;
                 }
-              }
-              return KeyEventResult.ignored;
-            },
-            child: child,
-          );
+                return null;
+              },
+            ),
+            _CDKDecrementIntent: CallbackAction<_CDKDecrementIntent>(
+              onInvoke: (_) {
+                if (widget.enabled) {
+                  _decrementValue();
+                }
+                return null;
+              },
+            ),
+          },
+          child: child,
+        ),
+      ),
+    );
   }
 }

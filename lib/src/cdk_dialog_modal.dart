@@ -168,12 +168,14 @@ class _CDKDialogModalState extends State<CDKDialogModal>
                   top: position.dy - 8,
                   height: height! + 16,
                   width: width! + 16,
-                  child: widget.isAnimated && scaleAnimation != null
-                      ? ScaleTransition(
-                          scale: scaleAnimation!,
-                          child: dialogWithDecorations,
-                        )
-                      : dialogWithDecorations)
+                  child: RepaintBoundary(
+                    child: widget.isAnimated && scaleAnimation != null
+                        ? ScaleTransition(
+                            scale: scaleAnimation!,
+                            child: dialogWithDecorations,
+                          )
+                        : dialogWithDecorations,
+                  ))
             ],
           );
   }

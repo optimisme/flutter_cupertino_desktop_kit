@@ -22,6 +22,50 @@ The project itself is just a set of libraries that define and manage widgets. Ho
 - Implementation files live in `lib/src/`.
 - Release checks: `docs/api_review_checklist.md`.
 - Dialog behavior contract: `docs/dialog_invariants.md`.
+- Theme extension reference: `docs/theming_extensions.md`.
+
+## Scope and Non-goals
+
+- Scope: desktop-first Cupertino-style widgets for Flutter (`macOS`, `Windows`, `Linux`, `Web`).
+- Scope: consistent desktop interactions (focus, keyboard shortcuts, overlays, traversal).
+- Non-goal: full Material replacement.
+- Non-goal: mobile-first adaptive behavior parity for every widget.
+
+## Theming
+
+- Runtime theme state is managed by `CDKTheme` (appearance + accent + app focus).
+- Immutable component tokens are exposed through `ThemeExtension`:
+  `CDKThemeColorTokens`, `CDKThemeRuntimeTokens`, `CDKThemeRadiusTokens`,
+  `CDKThemeSpacingTokens`, `CDKThemeElevationTokens`.
+- Legacy `CDKThemeNotifier` access remains available as a compatibility shim.
+
+Read tokens in widgets:
+
+```dart
+final colors = Theme.of(context).extension<CDKThemeColorTokens>()!;
+final runtime = Theme.of(context).extension<CDKThemeRuntimeTokens>()!;
+```
+
+## Keyboard and Dialog Invariants
+
+- `Escape` closes only the top-most dismissible dialog.
+- Outside-click closes only dialogs configured with outside-dismiss.
+- Dialog hosts use focus traversal groups for predictable desktop tab-order.
+- Dialog focus is restored to the previous focus node on close.
+
+## API Quickstart
+
+- Buttons:
+  `CDKButton`, `CDKButtonSwitch`, `CDKButtonIcon`, `CDKButtonRadio`,
+  `CDKButtonCheckBox`.
+- Dialogs:
+  `CDKDialogsManager.showPopover`, `showPopoverArrowed`, `showModal`,
+  `showDraggable`, with `CDKDialogController` for lifecycle.
+- Fields:
+  `CDKFieldText`, `CDKFieldNumeric`, `CDKFieldNumericSlider`, `CDKFieldColorHex`.
+- Pickers:
+  `CDKPickerSlider`, `CDKPickerButtonsSegmented`, `CDKPickerCheckList`,
+  `CDKPickerColor`, `CDKPickerThemeColors`.
 
 ### Add the library as a dependency at pubspec.yaml
 

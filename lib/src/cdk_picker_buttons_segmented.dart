@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
-import 'cdk_theme_notifier.dart';
+import 'package:flutter/services.dart';
+
 import 'cdk_theme.dart';
+import 'cdk_theme_notifier.dart';
 
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
@@ -26,69 +28,136 @@ class CDKPickerButtonsSegmented extends StatefulWidget {
 
 class _CDKPickerButtonsSegmentedState extends State<CDKPickerButtonsSegmented> {
   final int _animationMillis = 200;
-  final List<GlobalKey> _keys = []; // Global keys for each option.
-  final List<Rect> _rects = []; // Rectangles for the position of each option.
-  double _width = 0.0; // Width of the entire widget.
+  final List<GlobalKey> _keys = <GlobalKey>[];
+  final List<Rect> _rects = <Rect>[];
+  bool _positionsScheduled = false;
+  double _width = 0.0;
+
+  static const Map<ShortcutActivator, Intent> _shortcuts =
+      <ShortcutActivator, Intent>{
+    SingleActivator(LogicalKeyboardKey.enter): ActivateIntent(),
+    SingleActivator(LogicalKeyboardKey.space): ActivateIntent(),
+  };
 
   @override
   void initState() {
     super.initState();
+    _validateSelectedIndex();
+    _syncOptionKeys();
+    _schedulePositionCalculation();
+  }
+
+  @override
+  void didUpdateWidget(covariant CDKPickerButtonsSegmented oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    _validateSelectedIndex();
+
+    if (oldWidget.options.length != widget.options.length) {
+      _syncOptionKeys();
+      _rects.clear();
+    }
+
+    _schedulePositionCalculation();
+  }
+
+  void _validateSelectedIndex() {
     if (widget.selectedIndex < 0 ||
         widget.selectedIndex >= widget.options.length) {
       throw Exception(
-          "_CDKPickerButtonsSegmentedState initState: selectedIndex must be between 0 and options.length");
+          '_CDKPickerButtonsSegmentedState: selectedIndex must be between 0 and options.length');
     }
-    _keys.addAll(List.generate(widget.options.length, (index) => GlobalKey()));
   }
 
-  /// Calculates the positions of each option for the animation.
-  void _calculatePositions() {
-    _rects.clear();
-    RenderBox? rowBox = context.findRenderObject() as RenderBox?;
+  void _syncOptionKeys() {
+    if (_keys.length == widget.options.length) {
+      return;
+    }
 
-    if (rowBox != null) {
-      _width = rowBox.size.width;
-      for (var key in _keys) {
-        final RenderBox box =
-            key.currentContext?.findRenderObject() as RenderBox;
-        final position = box.localToGlobal(Offset.zero, ancestor: rowBox);
-        final size = box.size;
-        _rects.add(
-            Rect.fromLTWH(position.dx, position.dy, size.width, size.height));
+    _keys
+      ..clear()
+      ..addAll(
+          List<GlobalKey>.generate(widget.options.length, (_) => GlobalKey()));
+  }
+
+  void _schedulePositionCalculation() {
+    if (_positionsScheduled) {
+      return;
+    }
+
+    _positionsScheduled = true;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _positionsScheduled = false;
+      if (mounted) {
+        _calculatePositions();
       }
-    }
-
-    setState(() {});
+    });
   }
 
-  /// Calculates the left position for the animation.
+  void _calculatePositions() {
+    final rowBox = context.findRenderObject();
+    if (rowBox is! RenderBox || !rowBox.attached) {
+      return;
+    }
+
+    final nextRects = <Rect>[];
+    for (final key in _keys) {
+      final optionContext = key.currentContext;
+      if (optionContext == null || !optionContext.mounted) {
+        _schedulePositionCalculation();
+        return;
+      }
+      final optionRenderObject = optionContext.findRenderObject();
+      if (optionRenderObject is! RenderBox || !optionRenderObject.attached) {
+        _schedulePositionCalculation();
+        return;
+      }
+
+      final position =
+          optionRenderObject.localToGlobal(Offset.zero, ancestor: rowBox);
+      final size = optionRenderObject.size;
+      nextRects.add(
+          Rect.fromLTWH(position.dx, position.dy, size.width, size.height));
+    }
+
+    if (!mounted) {
+      return;
+    }
+
+    setState(() {
+      _width = rowBox.size.width;
+      _rects
+        ..clear()
+        ..addAll(nextRects);
+    });
+  }
+
   double _getPositionLeft(int index) {
     if (index == 0) {
       return 2;
-    } else {
-      int previous = index - 1;
-      double previousEnd = _rects[previous].left + _rects[previous].width;
-      return (_rects[index].left - previousEnd) / 2 + previousEnd;
     }
+
+    final previous = index - 1;
+    final previousEnd = _rects[previous].left + _rects[previous].width;
+    return (_rects[index].left - previousEnd) / 2 + previousEnd;
   }
 
-  /// Calculates the width for the animated selector.
   double _getPositionWidth(int index) {
     if (index == (_rects.length - 1)) {
-      double tmp = 3;
-      if (widget.isAccent) tmp = 2;
-      return _width - _getPositionLeft(index) - tmp;
-    } else {
-      double positionLeft = _getPositionLeft(index);
-      double nextLeft = _getPositionLeft(index + 1);
-      return nextLeft - positionLeft;
+      var padding = 3.0;
+      if (widget.isAccent) {
+        padding = 2.0;
+      }
+      return _width - _getPositionLeft(index) - padding;
     }
+
+    final positionLeft = _getPositionLeft(index);
+    final nextLeft = _getPositionLeft(index + 1);
+    return nextLeft - positionLeft;
   }
 
-  /// Adjusts the widget style based on the state and theme.
-  Widget fixWidgetStyle(Widget widget, Color color) {
+  Widget _fixWidgetStyle(Widget widget, Color color) {
     if (widget is Text) {
-      double size = 12.0;
+      const size = 12.0;
       return Text(
         widget.data!,
         style: widget.style?.copyWith(color: color, fontSize: size) ??
@@ -96,98 +165,125 @@ class _CDKPickerButtonsSegmentedState extends State<CDKPickerButtonsSegmented> {
       );
     }
     if (widget is Icon) {
-      return Icon(
-        widget.icon,
-        color: color,
-        size: 14.0,
-      );
+      return Icon(widget.icon, color: color, size: 14.0);
     }
     return widget;
   }
 
   @override
   Widget build(BuildContext context) {
-    CDKTheme theme = CDKThemeNotifier.of(context)!.changeNotifier;
+    final colors = CDKThemeNotifier.colorTokensOf(context);
+    final runtime = CDKThemeNotifier.runtimeTokensOf(context);
 
-    // Schedule a post-frame callback to calculate positions
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (mounted) {
-        _calculatePositions();
-      }
-    });
+    return RepaintBoundary(
+      child: Semantics(
+        container: true,
+        label: 'Segmented control',
+        child: FocusTraversalGroup(
+          policy: ReadingOrderTraversalPolicy(),
+          child: Container(
+            height: 24,
+            decoration: widget.isAccent
+                ? const BoxDecoration()
+                : BoxDecoration(
+                    color: colors.backgroundSecondary1,
+                    borderRadius: BorderRadius.circular(6.0),
+                    border: Border.all(color: CDKTheme.grey300, width: 0.5),
+                  ),
+            child: Stack(
+              children: [
+                if (_rects.isNotEmpty)
+                  AnimatedPositioned(
+                    duration: Duration(milliseconds: _animationMillis),
+                    curve: Curves.easeInOut,
+                    left: _getPositionLeft(widget.selectedIndex),
+                    top: 2,
+                    width: _getPositionWidth(widget.selectedIndex),
+                    height: _rects[widget.selectedIndex].height - 3,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: widget.isAccent
+                            ? runtime.isAppFocused
+                                ? colors.accent
+                                : CDKTheme.grey300
+                            : runtime.isAppFocused
+                                ? colors.backgroundSecondary0
+                                : CDKTheme.grey300,
+                        borderRadius: BorderRadius.circular(6.0),
+                        boxShadow: widget.isAccent
+                            ? const []
+                            : [
+                                BoxShadow(
+                                  color: CDKTheme.black.withValues(alpha: 0.15),
+                                  spreadRadius: 0,
+                                  blurRadius: 1,
+                                  offset: const Offset(0, 1),
+                                )
+                              ],
+                      ),
+                    ),
+                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: List.generate(widget.options.length, (index) {
+                    final isSelected = index == widget.selectedIndex;
+                    final isEnabled = widget.onSelected != null;
+                    final textColor =
+                        widget.isAccent && isSelected && runtime.isAppFocused
+                            ? CDKTheme.white
+                            : colors.colorText;
 
-    return Container(
-      height: 24,
-      decoration: widget.isAccent
-          ? const BoxDecoration()
-          : BoxDecoration(
-              color: theme.backgroundSecondary1,
-              borderRadius: BorderRadius.circular(6.0),
-              border: Border.all(
-                color: CDKTheme.grey300,
-                width: 0.5,
-              ),
-            ),
-      child: Stack(
-        children: [
-          if (_rects.isNotEmpty)
-            AnimatedPositioned(
-              duration: Duration(milliseconds: _animationMillis),
-              curve: Curves.easeInOut,
-              left: _getPositionLeft(widget.selectedIndex),
-              top: 2,
-              width: _getPositionWidth(widget.selectedIndex),
-              height: _rects[widget.selectedIndex].height - 3,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: widget.isAccent
-                      ? theme.isAppFocused
-                          ? theme.accent
-                          : CDKTheme.grey300
-                      : theme.isAppFocused
-                          ? theme.backgroundSecondary0
-                          : CDKTheme.grey300,
-                  borderRadius: BorderRadius.circular(6.0),
-                  boxShadow: widget.isAccent
-                      ? []
-                      : [
-                          BoxShadow(
-                            color: CDKTheme.black.withValues(alpha: 0.15),
-                            spreadRadius: 0,
-                            blurRadius: 1,
-                            offset: const Offset(0, 1),
-                          )
-                        ],
-                ),
-              ),
-            ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: List.generate(widget.options.length, (index) {
-              return GestureDetector(
-                  key: _keys[index],
-                  onTap: () => widget.onSelected?.call(index),
-                  child: Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                    child: TweenAnimationBuilder(
-                        duration: const Duration(milliseconds: 200),
-                        tween: ColorTween(
-                          begin: theme.colorText,
-                          end: widget.isAccent &&
-                                  index == widget.selectedIndex &&
-                                  theme.isAppFocused
-                              ? CDKTheme.white
-                              : theme.colorText,
+                    return Semantics(
+                      button: true,
+                      selected: isSelected,
+                      enabled: isEnabled,
+                      onTap: isEnabled
+                          ? () => widget.onSelected?.call(index)
+                          : null,
+                      child: FocusableActionDetector(
+                        enabled: isEnabled,
+                        mouseCursor: isEnabled
+                            ? SystemMouseCursors.click
+                            : SystemMouseCursors.basic,
+                        shortcuts: _shortcuts,
+                        actions: <Type, Action<Intent>>{
+                          ActivateIntent: CallbackAction<ActivateIntent>(
+                            onInvoke: (intent) {
+                              widget.onSelected?.call(index);
+                              return null;
+                            },
+                          ),
+                        },
+                        child: GestureDetector(
+                          key: _keys[index],
+                          behavior: HitTestBehavior.opaque,
+                          onTap: isEnabled
+                              ? () => widget.onSelected?.call(index)
+                              : null,
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 8, vertical: 4),
+                            child: TweenAnimationBuilder<Color?>(
+                              duration: const Duration(milliseconds: 200),
+                              tween: ColorTween(
+                                  begin: colors.colorText, end: textColor),
+                              builder: (context, color, child) {
+                                return _fixWidgetStyle(
+                                  widget.options[index],
+                                  color ?? colors.colorText,
+                                );
+                              },
+                            ),
+                          ),
                         ),
-                        builder: (BuildContext context, Color? color,
-                            Widget? child) {
-                          return fixWidgetStyle(widget.options[index], color!);
-                        }),
-                  ));
-            }),
+                      ),
+                    );
+                  }),
+                ),
+              ],
+            ),
           ),
-        ],
+        ),
       ),
     );
   }
