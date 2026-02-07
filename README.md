@@ -20,9 +20,9 @@ The project itself is just a set of libraries that define and manage widgets. Ho
 
 - Public exports are curated from `lib/flutter_cupertino_desktop_kit.dart`.
 - Implementation files live in `lib/src/`.
-- Release checks: `docs/api_review_checklist.md`.
-- Dialog behavior contract: `docs/dialog_invariants.md`.
-- Theme extension reference: `docs/theming_extensions.md`.
+- Release checks: `doc/api_review_checklist.md`.
+- Dialog behavior contract: `doc/dialog_invariants.md`.
+- Theme extension reference: `doc/theming_extensions.md`.
 
 ## Scope and Non-goals
 

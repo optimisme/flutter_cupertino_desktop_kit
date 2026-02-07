@@ -20,6 +20,7 @@ cp -r ./build/web/* ../gh-pages/example/
 
 
 Publicar documentació:
+cd ..
 flutter pub global activate dartdoc
 flutter pub global run dartdoc:dartdoc --output gh-pages/doc/
 

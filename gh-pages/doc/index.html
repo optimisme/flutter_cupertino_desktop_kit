@@ -30,17 +30,14 @@
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
-  <div class="toggle" id="theme-button" title="Toggle brightness">
-    <label for="theme">
-      <input type="checkbox" id="theme" value="light-theme">
-      <span id="dark-theme-button" class="material-symbols-outlined">
-        dark_mode
-      </span>
-      <span id="light-theme-button" class="material-symbols-outlined">
-        light_mode
-      </span>
-    </label>
-  </div>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
 </header>
 <main>
   <div id="dartdoc-main-content" class="main-content">
@@ -55,6 +52,54 @@
 <p><a href="https://optimisme.github.io/flutter_cupertino_desktop_kit/gh-pages/example/">CDK toolkit web Example</a></p>
 <p><a href="https://optimisme.github.io/flutter_cupertino_desktop_kit/gh-pages/doc/">CDK library documentation</a></p>
 <img src="https://optimisme.github.io/flutter_cupertino_desktop_kit/demo_image.png" alt="CDK Example" style="max-width: 500px; width: 100%;">
+<h2 id="api-stability">API Stability</h2>
+<ul>
+<li>Public exports are curated from <code>lib/flutter_cupertino_desktop_kit.dart</code>.</li>
+<li>Implementation files live in <code>lib/src/</code>.</li>
+<li>Release checks: <code>docs/api_review_checklist.md</code>.</li>
+<li>Dialog behavior contract: <code>docs/dialog_invariants.md</code>.</li>
+<li>Theme extension reference: <code>docs/theming_extensions.md</code>.</li>
+</ul>
+<h2 id="scope-and-non-goals">Scope and Non-goals</h2>
+<ul>
+<li>Scope: desktop-first Cupertino-style widgets for Flutter (<code>macOS</code>, <code>Windows</code>, <code>Linux</code>, <code>Web</code>).</li>
+<li>Scope: consistent desktop interactions (focus, keyboard shortcuts, overlays, traversal).</li>
+<li>Non-goal: full Material replacement.</li>
+<li>Non-goal: mobile-first adaptive behavior parity for every widget.</li>
+</ul>
+<h2 id="theming">Theming</h2>
+<ul>
+<li>Runtime theme state is managed by <code>CDKTheme</code> (appearance + accent + app focus).</li>
+<li>Immutable component tokens are exposed through <code>ThemeExtension</code>:
+<code>CDKThemeColorTokens</code>, <code>CDKThemeRuntimeTokens</code>, <code>CDKThemeRadiusTokens</code>,
+<code>CDKThemeSpacingTokens</code>, <code>CDKThemeElevationTokens</code>.</li>
+<li>Legacy <code>CDKThemeNotifier</code> access remains available as a compatibility shim.</li>
+</ul>
+<p>Read tokens in widgets:</p>
+<pre class="language-dart"><code class="language-dart">final colors = Theme.of(context).extension&lt;CDKThemeColorTokens&gt;()!;
+final runtime = Theme.of(context).extension&lt;CDKThemeRuntimeTokens&gt;()!;
+</code></pre>
+<h2 id="keyboard-and-dialog-invariants">Keyboard and Dialog Invariants</h2>
+<ul>
+<li><code>Escape</code> closes only the top-most dismissible dialog.</li>
+<li>Outside-click closes only dialogs configured with outside-dismiss.</li>
+<li>Dialog hosts use focus traversal groups for predictable desktop tab-order.</li>
+<li>Dialog focus is restored to the previous focus node on close.</li>
+</ul>
+<h2 id="api-quickstart">API Quickstart</h2>
+<ul>
+<li>Buttons:
+<code>CDKButton</code>, <code>CDKButtonSwitch</code>, <code>CDKButtonIcon</code>, <code>CDKButtonRadio</code>,
+<code>CDKButtonCheckBox</code>.</li>
+<li>Dialogs:
+<code>CDKDialogsManager.showPopover</code>, <code>showPopoverArrowed</code>, <code>showModal</code>,
+<code>showDraggable</code>, with <code>CDKDialogController</code> for lifecycle.</li>
+<li>Fields:
+<code>CDKFieldText</code>, <code>CDKFieldNumeric</code>, <code>CDKFieldNumericSlider</code>, <code>CDKFieldColorHex</code>.</li>
+<li>Pickers:
+<code>CDKPickerSlider</code>, <code>CDKPickerButtonsSegmented</code>, <code>CDKPickerCheckList</code>,
+<code>CDKPickerColor</code>, <code>CDKPickerThemeColors</code>.</li>
+</ul>
 <h3 id="add-the-library-as-a-dependency-at-pubspecyaml">Add the library as a dependency at pubspec.yaml</h3>
 <pre class="language-yaml"><code class="language-yaml">dependencies:
   flutter:
@@ -62,7 +107,7 @@
   flutter_cupertino_desktop_kit: "&gt;= 0.0.1 &lt; 999.0.0"
 </code></pre>
 <h3 id="import-the-library">Import the library</h3>
-<pre class="language-dart"><code class="language-dart">import 'package:flutter_cupertino_desktop_kit/cdk.dart';
+<pre class="language-dart"><code class="language-dart">import 'package:flutter_cupertino_desktop_kit/flutter_cupertino_desktop_kit.dart';
 </code></pre>
 <p>Then</p>
 <pre class="language-bash"><code class="language-bash">flutter pub get
@@ -70,7 +115,7 @@ flutter pub upgrade
 </code></pre>
 <h3 id="use-it">Use it</h3>
 <pre class="language-dart"><code class="language-dart">return const CDKApp(
-    defaultAppearance: "system", // system, light, dark
+    defaultAppearance: CDKThemeAppearance.system,
     defaultColor:
         "systemBlue", 
     child: LayoutDesktop(title: "App Desktop Title"));
@@ -95,304 +140,17 @@ flutter run -d macos --enable-impeller
           <h2>Libraries</h2>
         <dl>
           <dt id="cdk">
-  <span class="name"><a href="cdk/cdk-library.html">cdk</a></span> 
+  <span class="name"><a class="deprecated" href="cdk/">cdk</a></span> 
 
 </dt>
-<dd>
-</dd>
-
-          <dt id="cdk_app">
-  <span class="name"><a href="cdk_app/cdk_app-library.html">cdk_app</a></span> 
-
-</dt>
-<dd>
-</dd>
-
-          <dt id="cdk_app_sidebars">
-  <span class="name"><a href="cdk_app_sidebars/cdk_app_sidebars-library.html">cdk_app_sidebars</a></span> 
-
-</dt>
-<dd>
-</dd>
-
-          <dt id="cdk_button">
-  <span class="name"><a href="cdk_button/cdk_button-library.html">cdk_button</a></span> 
-
-</dt>
-<dd>
-</dd>
-
-          <dt id="cdk_button_check_box">
-  <span class="name"><a href="cdk_button_check_box/cdk_button_check_box-library.html">cdk_button_check_box</a></span> 
-
-</dt>
-<dd>
-</dd>
-
-          <dt id="cdk_button_color">
-  <span class="name"><a href="cdk_button_color/cdk_button_color-library.html">cdk_button_color</a></span> 
-
-</dt>
-<dd>
-</dd>
-
-          <dt id="cdk_button_disclosure">
-  <span class="name"><a href="cdk_button_disclosure/cdk_button_disclosure-library.html">cdk_button_disclosure</a></span> 
-
-</dt>
-<dd>
-</dd>
-
-          <dt id="cdk_button_help">
-  <span class="name"><a href="cdk_button_help/cdk_button_help-library.html">cdk_button_help</a></span> 
-
-</dt>
-<dd>
-</dd>
-
-          <dt id="cdk_button_icon">
-  <span class="name"><a href="cdk_button_icon/cdk_button_icon-library.html">cdk_button_icon</a></span> 
-
-</dt>
-<dd>
-</dd>
-
-          <dt id="cdk_button_radio">
-  <span class="name"><a href="cdk_button_radio/cdk_button_radio-library.html">cdk_button_radio</a></span> 
-
-</dt>
-<dd>
-</dd>
-
-          <dt id="cdk_button_select">
-  <span class="name"><a href="cdk_button_select/cdk_button_select-library.html">cdk_button_select</a></span> 
-
-</dt>
-<dd>
-</dd>
-
-          <dt id="cdk_button_sidebar">
-  <span class="name"><a href="cdk_button_sidebar/cdk_button_sidebar-library.html">cdk_button_sidebar</a></span> 
-
-</dt>
-<dd>
-</dd>
-
-          <dt id="cdk_button_switch">
-  <span class="name"><a href="cdk_button_switch/cdk_button_switch-library.html">cdk_button_switch</a></span> 
-
-</dt>
-<dd>
-</dd>
-
-          <dt id="cdk_buttons_up_down">
-  <span class="name"><a href="cdk_buttons_up_down/cdk_buttons_up_down-library.html">cdk_buttons_up_down</a></span> 
-
-</dt>
-<dd>
-</dd>
-
-          <dt id="cdk_dialog_draggable">
-  <span class="name"><a href="cdk_dialog_draggable/cdk_dialog_draggable-library.html">cdk_dialog_draggable</a></span> 
-
-</dt>
-<dd>
-</dd>
-
-          <dt id="cdk_dialog_modal">
-  <span class="name"><a href="cdk_dialog_modal/cdk_dialog_modal-library.html">cdk_dialog_modal</a></span> 
-
-</dt>
-<dd>
-</dd>
-
-          <dt id="cdk_dialog_outer_shadow_painter">
-  <span class="name"><a href="cdk_dialog_outer_shadow_painter/cdk_dialog_outer_shadow_painter-library.html">cdk_dialog_outer_shadow_painter</a></span> 
-
-</dt>
-<dd>
-</dd>
-
-          <dt id="cdk_dialog_popover">
-  <span class="name"><a href="cdk_dialog_popover/cdk_dialog_popover-library.html">cdk_dialog_popover</a></span> 
-
-</dt>
-<dd>
-</dd>
-
-          <dt id="cdk_dialog_popover_arrowed">
-  <span class="name"><a href="cdk_dialog_popover_arrowed/cdk_dialog_popover_arrowed-library.html">cdk_dialog_popover_arrowed</a></span> 
-
-</dt>
-<dd>
-</dd>
-
-          <dt id="cdk_dialog_popover_clipper">
-  <span class="name"><a href="cdk_dialog_popover_clipper/cdk_dialog_popover_clipper-library.html">cdk_dialog_popover_clipper</a></span> 
-
-</dt>
-<dd>
-</dd>
-
-          <dt id="cdk_dialogs_manager">
-  <span class="name"><a href="cdk_dialogs_manager/cdk_dialogs_manager-library.html">cdk_dialogs_manager</a></span> 
-
-</dt>
-<dd>
-</dd>
-
-          <dt id="cdk_field_360">
-  <span class="name"><a href="cdk_field_360/cdk_field_360-library.html">cdk_field_360</a></span> 
-
-</dt>
-<dd>
-</dd>
-
-          <dt id="cdk_field_color_hex">
-  <span class="name"><a href="cdk_field_color_hex/cdk_field_color_hex-library.html">cdk_field_color_hex</a></span> 
-
-</dt>
-<dd>
-</dd>
-
-          <dt id="cdk_field_numeric">
-  <span class="name"><a href="cdk_field_numeric/cdk_field_numeric-library.html">cdk_field_numeric</a></span> 
-
-</dt>
-<dd>
-</dd>
-
-          <dt id="cdk_field_numeric_slider">
-  <span class="name"><a href="cdk_field_numeric_slider/cdk_field_numeric_slider-library.html">cdk_field_numeric_slider</a></span> 
-
-</dt>
-<dd>
-</dd>
-
-          <dt id="cdk_field_text">
-  <span class="name"><a href="cdk_field_text/cdk_field_text-library.html">cdk_field_text</a></span> 
-
-</dt>
-<dd>
-</dd>
-
-          <dt id="cdk_picker_360">
-  <span class="name"><a href="cdk_picker_360/cdk_picker_360-library.html">cdk_picker_360</a></span> 
-
-</dt>
-<dd>
-</dd>
-
-          <dt id="cdk_picker_buttons_bar">
-  <span class="name"><a href="cdk_picker_buttons_bar/cdk_picker_buttons_bar-library.html">cdk_picker_buttons_bar</a></span> 
-
-</dt>
-<dd>
-</dd>
-
-          <dt id="cdk_picker_buttons_segmented">
-  <span class="name"><a href="cdk_picker_buttons_segmented/cdk_picker_buttons_segmented-library.html">cdk_picker_buttons_segmented</a></span> 
-
-</dt>
-<dd>
-</dd>
-
-          <dt id="cdk_picker_check_list">
-  <span class="name"><a href="cdk_picker_check_list/cdk_picker_check_list-library.html">cdk_picker_check_list</a></span> 
-
-</dt>
-<dd>
-</dd>
-
-          <dt id="cdk_picker_color">
-  <span class="name"><a href="cdk_picker_color/cdk_picker_color-library.html">cdk_picker_color</a></span> 
-
-</dt>
-<dd>
-</dd>
-
-          <dt id="cdk_picker_color_hsv">
-  <span class="name"><a href="cdk_picker_color_hsv/cdk_picker_color_hsv-library.html">cdk_picker_color_hsv</a></span> 
-
-</dt>
-<dd>
-</dd>
-
-          <dt id="cdk_picker_slider">
-  <span class="name"><a href="cdk_picker_slider/cdk_picker_slider-library.html">cdk_picker_slider</a></span> 
-
-</dt>
-<dd>
-</dd>
-
-          <dt id="cdk_picker_slider_chroma">
-  <span class="name"><a href="cdk_picker_slider_chroma/cdk_picker_slider_chroma-library.html">cdk_picker_slider_chroma</a></span> 
-
-</dt>
-<dd>
-</dd>
-
-          <dt id="cdk_picker_slider_gradient">
-  <span class="name"><a href="cdk_picker_slider_gradient/cdk_picker_slider_gradient-library.html">cdk_picker_slider_gradient</a></span> 
-
-</dt>
-<dd>
-</dd>
-
-          <dt id="cdk_picker_theme_colors">
-  <span class="name"><a href="cdk_picker_theme_colors/cdk_picker_theme_colors-library.html">cdk_picker_theme_colors</a></span> 
-
-</dt>
-<dd>
-</dd>
-
-          <dt id="cdk_progress_bar">
-  <span class="name"><a href="cdk_progress_bar/cdk_progress_bar-library.html">cdk_progress_bar</a></span> 
-
-</dt>
-<dd>
-</dd>
-
-          <dt id="cdk_progress_circular">
-  <span class="name"><a href="cdk_progress_circular/cdk_progress_circular-library.html">cdk_progress_circular</a></span> 
-
-</dt>
-<dd>
-</dd>
-
-          <dt id="cdk_theme">
-  <span class="name"><a href="cdk_theme/cdk_theme-library.html">cdk_theme</a></span> 
-
-</dt>
-<dd>
-</dd>
-
-          <dt id="cdk_theme_notifier">
-  <span class="name"><a href="cdk_theme_notifier/cdk_theme_notifier-library.html">cdk_theme_notifier</a></span> 
-
-</dt>
-<dd>
-</dd>
-
-          <dt id="cdk_util_disclosure">
-  <span class="name"><a href="cdk_util_disclosure/cdk_util_disclosure-library.html">cdk_util_disclosure</a></span> 
-
-</dt>
-<dd>
-</dd>
-
-          <dt id="cdk_util_shader_grid">
-  <span class="name"><a href="cdk_util_shader_grid/cdk_util_shader_grid-library.html">cdk_util_shader_grid</a></span> 
-
-</dt>
-<dd>
+<dd>Legacy entrypoint for Cupertino Desktop Kit (CDK).
 </dd>
 
           <dt id="flutter_cupertino_desktop_kit">
-  <span class="name"><a href="flutter_cupertino_desktop_kit/flutter_cupertino_desktop_kit-library.html">flutter_cupertino_desktop_kit</a></span> 
+  <span class="name"><a href="flutter_cupertino_desktop_kit/">flutter_cupertino_desktop_kit</a></span> 
 
 </dt>
-<dd>
+<dd>Public package entrypoint for Cupertino Desktop Kit (CDK).
 </dd>
 
         </dl>
@@ -412,49 +170,8 @@ flutter run -d macos --enable-impeller
     <h5 class="hidden-xs"><span class="package-name">flutter_cupertino_desktop_kit</span> <span class="package-kind">package</span></h5>
     <ol>
       <li class="section-title">Libraries</li>
-      <li><a href="cdk/cdk-library.html">cdk</a></li>
-      <li><a href="cdk_app/cdk_app-library.html">cdk_app</a></li>
-      <li><a href="cdk_app_sidebars/cdk_app_sidebars-library.html">cdk_app_sidebars</a></li>
-      <li><a href="cdk_button/cdk_button-library.html">cdk_button</a></li>
-      <li><a href="cdk_button_check_box/cdk_button_check_box-library.html">cdk_button_check_box</a></li>
-      <li><a href="cdk_button_color/cdk_button_color-library.html">cdk_button_color</a></li>
-      <li><a href="cdk_button_disclosure/cdk_button_disclosure-library.html">cdk_button_disclosure</a></li>
-      <li><a href="cdk_button_help/cdk_button_help-library.html">cdk_button_help</a></li>
-      <li><a href="cdk_button_icon/cdk_button_icon-library.html">cdk_button_icon</a></li>
-      <li><a href="cdk_button_radio/cdk_button_radio-library.html">cdk_button_radio</a></li>
-      <li><a href="cdk_button_select/cdk_button_select-library.html">cdk_button_select</a></li>
-      <li><a href="cdk_button_sidebar/cdk_button_sidebar-library.html">cdk_button_sidebar</a></li>
-      <li><a href="cdk_button_switch/cdk_button_switch-library.html">cdk_button_switch</a></li>
-      <li><a href="cdk_buttons_up_down/cdk_buttons_up_down-library.html">cdk_buttons_up_down</a></li>
-      <li><a href="cdk_dialog_draggable/cdk_dialog_draggable-library.html">cdk_dialog_draggable</a></li>
-      <li><a href="cdk_dialog_modal/cdk_dialog_modal-library.html">cdk_dialog_modal</a></li>
-      <li><a href="cdk_dialog_outer_shadow_painter/cdk_dialog_outer_shadow_painter-library.html">cdk_dialog_outer_shadow_painter</a></li>
-      <li><a href="cdk_dialog_popover/cdk_dialog_popover-library.html">cdk_dialog_popover</a></li>
-      <li><a href="cdk_dialog_popover_arrowed/cdk_dialog_popover_arrowed-library.html">cdk_dialog_popover_arrowed</a></li>
-      <li><a href="cdk_dialog_popover_clipper/cdk_dialog_popover_clipper-library.html">cdk_dialog_popover_clipper</a></li>
-      <li><a href="cdk_dialogs_manager/cdk_dialogs_manager-library.html">cdk_dialogs_manager</a></li>
-      <li><a href="cdk_field_360/cdk_field_360-library.html">cdk_field_360</a></li>
-      <li><a href="cdk_field_color_hex/cdk_field_color_hex-library.html">cdk_field_color_hex</a></li>
-      <li><a href="cdk_field_numeric/cdk_field_numeric-library.html">cdk_field_numeric</a></li>
-      <li><a href="cdk_field_numeric_slider/cdk_field_numeric_slider-library.html">cdk_field_numeric_slider</a></li>
-      <li><a href="cdk_field_text/cdk_field_text-library.html">cdk_field_text</a></li>
-      <li><a href="cdk_picker_360/cdk_picker_360-library.html">cdk_picker_360</a></li>
-      <li><a href="cdk_picker_buttons_bar/cdk_picker_buttons_bar-library.html">cdk_picker_buttons_bar</a></li>
-      <li><a href="cdk_picker_buttons_segmented/cdk_picker_buttons_segmented-library.html">cdk_picker_buttons_segmented</a></li>
-      <li><a href="cdk_picker_check_list/cdk_picker_check_list-library.html">cdk_picker_check_list</a></li>
-      <li><a href="cdk_picker_color/cdk_picker_color-library.html">cdk_picker_color</a></li>
-      <li><a href="cdk_picker_color_hsv/cdk_picker_color_hsv-library.html">cdk_picker_color_hsv</a></li>
-      <li><a href="cdk_picker_slider/cdk_picker_slider-library.html">cdk_picker_slider</a></li>
-      <li><a href="cdk_picker_slider_chroma/cdk_picker_slider_chroma-library.html">cdk_picker_slider_chroma</a></li>
-      <li><a href="cdk_picker_slider_gradient/cdk_picker_slider_gradient-library.html">cdk_picker_slider_gradient</a></li>
-      <li><a href="cdk_picker_theme_colors/cdk_picker_theme_colors-library.html">cdk_picker_theme_colors</a></li>
-      <li><a href="cdk_progress_bar/cdk_progress_bar-library.html">cdk_progress_bar</a></li>
-      <li><a href="cdk_progress_circular/cdk_progress_circular-library.html">cdk_progress_circular</a></li>
-      <li><a href="cdk_theme/cdk_theme-library.html">cdk_theme</a></li>
-      <li><a href="cdk_theme_notifier/cdk_theme_notifier-library.html">cdk_theme_notifier</a></li>
-      <li><a href="cdk_util_disclosure/cdk_util_disclosure-library.html">cdk_util_disclosure</a></li>
-      <li><a href="cdk_util_shader_grid/cdk_util_shader_grid-library.html">cdk_util_shader_grid</a></li>
-      <li><a href="flutter_cupertino_desktop_kit/flutter_cupertino_desktop_kit-library.html">flutter_cupertino_desktop_kit</a></li>
+      <li><a class="deprecated" href="cdk/">cdk</a></li>
+      <li><a href="flutter_cupertino_desktop_kit/">flutter_cupertino_desktop_kit</a></li>
 </ol>
 
   </div>

@@ -31,17 +31,14 @@
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
-  <div class="toggle" id="theme-button" title="Toggle brightness">
-    <label for="theme">
-      <input type="checkbox" id="theme" value="light-theme">
-      <span id="dark-theme-button" class="material-symbols-outlined">
-        dark_mode
-      </span>
-      <span id="light-theme-button" class="material-symbols-outlined">
-        light_mode
-      </span>
-    </label>
-  </div>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
 </header>
 <main>
 <div id="dartdoc-main-content" class="main-content">
@@ -61,49 +58,8 @@
   <h5 class="hidden-xs"><span class="package-name">flutter_cupertino_desktop_kit</span> <span class="package-kind">package</span></h5>
   <ol>
       <li class="section-title">Libraries</li>
-      <li><a href="cdk/cdk-library.html">cdk</a></li>
-      <li><a href="cdk_app/cdk_app-library.html">cdk_app</a></li>
-      <li><a href="cdk_app_sidebars/cdk_app_sidebars-library.html">cdk_app_sidebars</a></li>
-      <li><a href="cdk_button/cdk_button-library.html">cdk_button</a></li>
-      <li><a href="cdk_button_check_box/cdk_button_check_box-library.html">cdk_button_check_box</a></li>
-      <li><a href="cdk_button_color/cdk_button_color-library.html">cdk_button_color</a></li>
-      <li><a href="cdk_button_disclosure/cdk_button_disclosure-library.html">cdk_button_disclosure</a></li>
-      <li><a href="cdk_button_help/cdk_button_help-library.html">cdk_button_help</a></li>
-      <li><a href="cdk_button_icon/cdk_button_icon-library.html">cdk_button_icon</a></li>
-      <li><a href="cdk_button_radio/cdk_button_radio-library.html">cdk_button_radio</a></li>
-      <li><a href="cdk_button_select/cdk_button_select-library.html">cdk_button_select</a></li>
-      <li><a href="cdk_button_sidebar/cdk_button_sidebar-library.html">cdk_button_sidebar</a></li>
-      <li><a href="cdk_button_switch/cdk_button_switch-library.html">cdk_button_switch</a></li>
-      <li><a href="cdk_buttons_up_down/cdk_buttons_up_down-library.html">cdk_buttons_up_down</a></li>
-      <li><a href="cdk_dialog_draggable/cdk_dialog_draggable-library.html">cdk_dialog_draggable</a></li>
-      <li><a href="cdk_dialog_modal/cdk_dialog_modal-library.html">cdk_dialog_modal</a></li>
-      <li><a href="cdk_dialog_outer_shadow_painter/cdk_dialog_outer_shadow_painter-library.html">cdk_dialog_outer_shadow_painter</a></li>
-      <li><a href="cdk_dialog_popover/cdk_dialog_popover-library.html">cdk_dialog_popover</a></li>
-      <li><a href="cdk_dialog_popover_arrowed/cdk_dialog_popover_arrowed-library.html">cdk_dialog_popover_arrowed</a></li>
-      <li><a href="cdk_dialog_popover_clipper/cdk_dialog_popover_clipper-library.html">cdk_dialog_popover_clipper</a></li>
-      <li><a href="cdk_dialogs_manager/cdk_dialogs_manager-library.html">cdk_dialogs_manager</a></li>
-      <li><a href="cdk_field_360/cdk_field_360-library.html">cdk_field_360</a></li>
-      <li><a href="cdk_field_color_hex/cdk_field_color_hex-library.html">cdk_field_color_hex</a></li>
-      <li><a href="cdk_field_numeric/cdk_field_numeric-library.html">cdk_field_numeric</a></li>
-      <li><a href="cdk_field_numeric_slider/cdk_field_numeric_slider-library.html">cdk_field_numeric_slider</a></li>
-      <li><a href="cdk_field_text/cdk_field_text-library.html">cdk_field_text</a></li>
-      <li><a href="cdk_picker_360/cdk_picker_360-library.html">cdk_picker_360</a></li>
-      <li><a href="cdk_picker_buttons_bar/cdk_picker_buttons_bar-library.html">cdk_picker_buttons_bar</a></li>
-      <li><a href="cdk_picker_buttons_segmented/cdk_picker_buttons_segmented-library.html">cdk_picker_buttons_segmented</a></li>
-      <li><a href="cdk_picker_check_list/cdk_picker_check_list-library.html">cdk_picker_check_list</a></li>
-      <li><a href="cdk_picker_color/cdk_picker_color-library.html">cdk_picker_color</a></li>
-      <li><a href="cdk_picker_color_hsv/cdk_picker_color_hsv-library.html">cdk_picker_color_hsv</a></li>
-      <li><a href="cdk_picker_slider/cdk_picker_slider-library.html">cdk_picker_slider</a></li>
-      <li><a href="cdk_picker_slider_chroma/cdk_picker_slider_chroma-library.html">cdk_picker_slider_chroma</a></li>
-      <li><a href="cdk_picker_slider_gradient/cdk_picker_slider_gradient-library.html">cdk_picker_slider_gradient</a></li>
-      <li><a href="cdk_picker_theme_colors/cdk_picker_theme_colors-library.html">cdk_picker_theme_colors</a></li>
-      <li><a href="cdk_progress_bar/cdk_progress_bar-library.html">cdk_progress_bar</a></li>
-      <li><a href="cdk_progress_circular/cdk_progress_circular-library.html">cdk_progress_circular</a></li>
-      <li><a href="cdk_theme/cdk_theme-library.html">cdk_theme</a></li>
-      <li><a href="cdk_theme_notifier/cdk_theme_notifier-library.html">cdk_theme_notifier</a></li>
-      <li><a href="cdk_util_disclosure/cdk_util_disclosure-library.html">cdk_util_disclosure</a></li>
-      <li><a href="cdk_util_shader_grid/cdk_util_shader_grid-library.html">cdk_util_shader_grid</a></li>
-      <li><a href="flutter_cupertino_desktop_kit/flutter_cupertino_desktop_kit-library.html">flutter_cupertino_desktop_kit</a></li>
+      <li><a class="deprecated" href="cdk/">cdk</a></li>
+      <li><a href="flutter_cupertino_desktop_kit/">flutter_cupertino_desktop_kit</a></li>
 </ol>
 
 </div>

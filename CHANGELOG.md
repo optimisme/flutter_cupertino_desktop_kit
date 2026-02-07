@@ -1,3 +1,7 @@
+## 0.0.12
+
+* AI agent recommended fixes
+
 ## 0.0.11
 
 * Added multiline text field.

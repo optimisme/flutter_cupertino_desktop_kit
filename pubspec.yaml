@@ -1,6 +1,6 @@
 name: flutter_cupertino_desktop_kit
 description: This project, defines Flutter widgets for Desktop, providing a macOS-style aesthetic, built upon the foundation of Cupertino widgets.
-version: 0.0.11
+version: 0.0.12
 homepage: https://github.com/optimisme/flutter_cupertino_desktop_kit
 environment:
   sdk: '>=3.1.5 <4.0.0'
@@ -20,13 +20,12 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-
-platforms:
-  android:
-  ios:
-  macos:
-  linux:
-  windows:
+  platforms:
+    android:
+    ios:
+    macos:
+    linux:
+    windows:
   # To add assets to your package, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
