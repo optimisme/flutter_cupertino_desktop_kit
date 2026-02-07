@@ -11,6 +11,7 @@ Run this checklist before each release.
 ## Breaking-Change Audit
 
 - Compare exported symbols with the previous release.
+- Run a public API diff before release (compare the previous tag's exports with `lib/flutter_cupertino_desktop_kit.dart`).
 - Classify each removal or rename as a breaking change.
 - Add migration notes for every breaking change in `CHANGELOG.md`.
 

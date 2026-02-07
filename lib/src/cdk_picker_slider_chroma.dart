@@ -6,7 +6,7 @@ import 'cdk_theme.dart';
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
 
 class CDKPickerSliderChroma extends StatefulWidget {
-  final double staturation;
+  final double saturation;
   final double brightness;
   final bool enabled;
   final Color hueColor;
@@ -14,12 +14,20 @@ class CDKPickerSliderChroma extends StatefulWidget {
 
   const CDKPickerSliderChroma({
     super.key,
-    required this.staturation,
+    double? saturation,
+    @Deprecated('Use saturation instead of staturation.') double? staturation,
     required this.brightness,
     this.enabled = true,
     required this.hueColor,
     this.onChanged,
-  });
+  })  : assert(
+          saturation != null || staturation != null,
+          'Either saturation or staturation must be provided.',
+        ),
+        saturation = saturation ?? staturation ?? 0.0;
+
+  @Deprecated('Use saturation instead of staturation.')
+  double get staturation => saturation;
 
   @override
   State<CDKPickerSliderChroma> createState() => _CDKPickerSliderChromaState();
@@ -61,7 +69,7 @@ class _CDKPickerSliderChromaState extends State<CDKPickerSliderChroma> {
         onTapDown: _onTapDown,
         child: CustomPaint(
           painter: CDKPickerSliderGradient2DPainter(
-            saturation: widget.staturation,
+            saturation: widget.saturation,
             brightness: widget.brightness,
             hueColor: widget.hueColor,
             thumbSize: _thumbSize,

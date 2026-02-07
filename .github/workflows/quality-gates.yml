@@ -19,6 +19,11 @@ jobs:
       - name: Root pub get
         run: flutter pub get
 
+      - name: Root dependency audit
+        run: |
+          dart pub deps --style=compact
+          dart pub outdated --no-dev-dependencies
+
       - name: Root format check
         run: dart format --output=none --set-exit-if-changed lib test
 
@@ -49,6 +54,12 @@ jobs:
       - name: Example pub get
         working-directory: example
         run: flutter pub get
+
+      - name: Example dependency audit
+        working-directory: example
+        run: |
+          dart pub deps --style=compact
+          dart pub outdated --no-dev-dependencies
 
       - name: Example format check
         working-directory: example

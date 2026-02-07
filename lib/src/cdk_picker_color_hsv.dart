@@ -102,7 +102,7 @@ class _CDKPickerColorHSVState extends State<CDKPickerColorHSV> {
             width: double.infinity,
             height: 150,
             child: CDKPickerSliderChroma(
-              staturation: _saturation,
+              saturation: _saturation,
               brightness: _brightness,
               hueColor: hueSliderToColor,
               onChanged: (saturation, brightness) {
