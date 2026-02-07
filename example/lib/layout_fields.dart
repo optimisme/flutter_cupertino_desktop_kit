@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_cupertino_desktop_kit/cdk.dart';
+import 'package:flutter_cupertino_desktop_kit/flutter_cupertino_desktop_kit.dart';
 
 class LayoutFields extends StatefulWidget {
   const LayoutFields({super.key});

@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_cupertino_desktop_kit/cdk.dart';
+import 'package:flutter_cupertino_desktop_kit/flutter_cupertino_desktop_kit.dart';
 import 'layout_sidebar_left.dart';
 import 'layout_sidebar_right.dart';
 import 'layout_buttons.dart';
@@ -19,7 +19,8 @@ class Layout extends StatefulWidget {
 
 class LayoutState extends State<Layout> {
   bool isSidebarLeftVisible = true;
-  GlobalKey<CDKAppSidebarsState> keyAppStructure = GlobalKey();
+  final CDKAppSidebarsController sidebarsController =
+      CDKAppSidebarsController();
   String _section = "Introduction";
   List<List<dynamic>> options = [
     ["Introduction", const LayoutIntroduction()],
@@ -32,17 +33,13 @@ class LayoutState extends State<Layout> {
   ];
 
   void toggleLeftSidebar() {
-    final CDKAppSidebarsState? state = keyAppStructure.currentState;
-    if (state != null) {
-      state.setSidebarLeftVisibility(!state.isSidebarLeftVisible);
-    }
+    sidebarsController
+        .setSidebarLeftVisibility(!sidebarsController.isSidebarLeftVisible);
   }
 
   void toggleRightSidebar() {
-    final CDKAppSidebarsState? state = keyAppStructure.currentState;
-    if (state != null) {
-      state.setSidebarRightVisibility(!state.isSidebarRightVisible);
-    }
+    sidebarsController
+        .setSidebarRightVisibility(!sidebarsController.isSidebarRightVisible);
   }
 
   void _changeSection(int index, String name) {
@@ -60,7 +57,7 @@ class LayoutState extends State<Layout> {
 
     return CupertinoPageScaffold(
         navigationBar: CupertinoNavigationBar(
-          backgroundColor: theme.backgroundSecondary0.withOpacity(0.5),
+          backgroundColor: theme.backgroundSecondary0.withValues(alpha: 0.5),
           middle: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -80,7 +77,7 @@ class LayoutState extends State<Layout> {
               ]),
         ),
         child: CDKAppSidebars(
-          key: keyAppStructure,
+          controller: sidebarsController,
           sidebarLeftIsResizable: true,
           sidebarLeftDefaultsVisible: true,
           sidebarRightDefaultsVisible: false,

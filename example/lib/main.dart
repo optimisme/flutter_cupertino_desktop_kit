@@ -1,6 +1,6 @@
 import 'dart:io' show Platform;
 import 'package:flutter/material.dart';
-import 'package:flutter_cupertino_desktop_kit/cdk.dart';
+import 'package:flutter_cupertino_desktop_kit/flutter_cupertino_desktop_kit.dart';
 import 'package:window_manager/window_manager.dart';
 import 'layout.dart';
 
@@ -18,7 +18,7 @@ void main() async {
   }
 
   runApp(const CDKApp(
-    defaultAppearance: "system", // system, light, dark
+    defaultAppearance: CDKThemeAppearance.system,
     defaultColor:
         "systemBlue", // systemBlue, systemPurple, systemPink, systemRed, systemOrange, systemYellow, systemGreen, systemGray
     child: Layout(),

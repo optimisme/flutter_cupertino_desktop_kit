@@ -1,0 +1,323 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_cupertino_desktop_kit/flutter_cupertino_desktop_kit.dart';
+import 'package:flutter_test/flutter_test.dart';
+
+Widget _testHost({required List<GlobalKey> anchors}) {
+  final theme = CDKTheme()..setAccentColour('systemBlue');
+
+  return CDKThemeNotifier(
+    changeNotifier: theme,
+    child: CupertinoApp(
+      home: CupertinoPageScaffold(
+        child: Stack(
+          children: [
+            const Positioned.fill(child: SizedBox.expand()),
+            for (var i = 0; i < anchors.length; i++)
+              Positioned(
+                left: 16 + (i * 48).toDouble(),
+                top: 16,
+                child: SizedBox(
+                  key: anchors[i],
+                  width: 24,
+                  height: 24,
+                ),
+              ),
+          ],
+        ),
+      ),
+    ),
+  );
+}
+
+Widget _toggleAnchorHost({
+  required GlobalKey anchor,
+  required ValueNotifier<bool> isAnchorVisible,
+}) {
+  final theme = CDKTheme()..setAccentColour('systemBlue');
+
+  return CDKThemeNotifier(
+    changeNotifier: theme,
+    child: CupertinoApp(
+      home: CupertinoPageScaffold(
+        child: ValueListenableBuilder<bool>(
+          valueListenable: isAnchorVisible,
+          builder: (context, visible, child) {
+            return Stack(
+              children: [
+                const Positioned.fill(child: SizedBox.expand()),
+                if (visible)
+                  Positioned(
+                    left: 16,
+                    top: 16,
+                    child: SizedBox(
+                      key: anchor,
+                      width: 24,
+                      height: 24,
+                    ),
+                  ),
+              ],
+            );
+          },
+        ),
+      ),
+    ),
+  );
+}
+
+void main() {
+  test('Public entry point exports widgets', () {
+    const widget = CDKButtonSwitch(value: true);
+    expect(widget, isA<CDKButtonSwitch>());
+  });
+
+  testWidgets('Dialogs manager replaces active modal safely',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(_testHost(anchors: [GlobalKey()]));
+    await tester.pump();
+
+    final context = tester.element(find.byType(CupertinoPageScaffold));
+    final secondModalController = CDKDialogController();
+
+    CDKDialogsManager.showModal(
+      context: context,
+      child: const SizedBox(width: 120, height: 80),
+    );
+    await tester.pump();
+
+    CDKDialogsManager.showModal(
+      context: context,
+      controller: secondModalController,
+      child: const SizedBox(width: 140, height: 90),
+    );
+    await tester.pump();
+
+    expect(tester.takeException(), isNull);
+
+    secondModalController.close();
+    await tester.pump();
+  });
+
+  testWidgets('Showing popover twice on same anchor does not crash',
+      (WidgetTester tester) async {
+    final anchorKey = GlobalKey();
+    await tester.pumpWidget(_testHost(anchors: [anchorKey]));
+    await tester.pump();
+
+    final context = tester.element(find.byType(CupertinoPageScaffold));
+    final popoverController = CDKDialogController();
+
+    CDKDialogsManager.showPopover(
+      context: context,
+      anchorKey: anchorKey,
+      controller: popoverController,
+      child: const SizedBox(width: 100, height: 60),
+    );
+    await tester.pump();
+
+    CDKDialogsManager.showPopover(
+      key: GlobalKey(),
+      context: context,
+      anchorKey: anchorKey,
+      child: const SizedBox(width: 100, height: 60),
+    );
+    await tester.pump();
+
+    expect(tester.takeException(), isNull);
+
+    popoverController.close();
+    await tester.pump();
+  });
+
+  testWidgets('Arrowed popovers close without invalid state casts',
+      (WidgetTester tester) async {
+    final anchorA = GlobalKey();
+    final anchorB = GlobalKey();
+    await tester.pumpWidget(_testHost(anchors: [anchorA, anchorB]));
+    await tester.pump();
+
+    final context = tester.element(find.byType(CupertinoPageScaffold));
+    final firstArrowedController = CDKDialogController();
+    final secondArrowedController = CDKDialogController();
+
+    CDKDialogsManager.showPopoverArrowed(
+      context: context,
+      anchorKey: anchorA,
+      controller: firstArrowedController,
+      child: const SizedBox(width: 110, height: 70),
+    );
+    await tester.pump();
+
+    CDKDialogsManager.showPopoverArrowed(
+      context: context,
+      anchorKey: anchorB,
+      controller: secondArrowedController,
+      child: const SizedBox(width: 120, height: 80),
+    );
+    await tester.pump();
+
+    firstArrowedController.close();
+    await tester.pump();
+
+    expect(tester.takeException(), isNull);
+
+    secondArrowedController.close();
+    await tester.pump();
+  });
+
+  testWidgets('Escape closes only the top-most dismissible dialog',
+      (WidgetTester tester) async {
+    final anchorA = GlobalKey();
+    final anchorB = GlobalKey();
+    await tester.pumpWidget(_testHost(anchors: [anchorA, anchorB]));
+    await tester.pump();
+
+    final context = tester.element(find.byType(CupertinoPageScaffold));
+    final closeOrder = <String>[];
+
+    CDKDialogsManager.showPopover(
+      context: context,
+      anchorKey: anchorA,
+      onHide: () => closeOrder.add('A'),
+      child: const SizedBox(width: 110, height: 70),
+    );
+    await tester.pump();
+
+    CDKDialogsManager.showPopover(
+      context: context,
+      anchorKey: anchorB,
+      onHide: () => closeOrder.add('B'),
+      child: const SizedBox(width: 120, height: 80),
+    );
+    await tester.pump();
+
+    await tester.sendKeyDownEvent(LogicalKeyboardKey.escape);
+    await tester.sendKeyUpEvent(LogicalKeyboardKey.escape);
+    await tester.pump();
+    expect(closeOrder, ['B']);
+
+    await tester.sendKeyDownEvent(LogicalKeyboardKey.escape);
+    await tester.sendKeyUpEvent(LogicalKeyboardKey.escape);
+    await tester.pump();
+    expect(closeOrder, ['B', 'A']);
+  });
+
+  testWidgets('Outside click policy matches dialog type defaults',
+      (WidgetTester tester) async {
+    final anchorKey = GlobalKey();
+    await tester.pumpWidget(_testHost(anchors: [anchorKey]));
+    await tester.pump();
+
+    final context = tester.element(find.byType(CupertinoPageScaffold));
+    final modalController = CDKDialogController();
+    var popoverClosed = false;
+    var modalClosed = false;
+    var dismissibleModalClosed = false;
+
+    CDKDialogsManager.showPopover(
+      context: context,
+      anchorKey: anchorKey,
+      onHide: () => popoverClosed = true,
+      child: const SizedBox(width: 100, height: 60),
+    );
+    await tester.pump();
+
+    await tester.tapAt(const Offset(300, 300));
+    await tester.pump();
+    expect(popoverClosed, isTrue);
+
+    CDKDialogsManager.showModal(
+      context: context,
+      controller: modalController,
+      onHide: () => modalClosed = true,
+      child: const SizedBox(width: 120, height: 80),
+    );
+    await tester.pump();
+
+    await tester.tapAt(const Offset(300, 300));
+    await tester.pump();
+    expect(modalClosed, isFalse);
+
+    modalController.close();
+    await tester.pump();
+
+    CDKDialogsManager.showModal(
+      context: context,
+      dismissOnOutsideTap: true,
+      onHide: () => dismissibleModalClosed = true,
+      child: const SizedBox(width: 120, height: 80),
+    );
+    await tester.pump();
+
+    await tester.tapAt(const Offset(300, 300));
+    await tester.pump();
+    expect(dismissibleModalClosed, isTrue);
+  });
+
+  testWidgets('Re-opening an anchor brings that popover to the front',
+      (WidgetTester tester) async {
+    final anchorA = GlobalKey();
+    final anchorB = GlobalKey();
+    await tester.pumpWidget(_testHost(anchors: [anchorA, anchorB]));
+    await tester.pump();
+
+    final context = tester.element(find.byType(CupertinoPageScaffold));
+    final closeOrder = <String>[];
+
+    CDKDialogsManager.showPopover(
+      context: context,
+      anchorKey: anchorA,
+      onHide: () => closeOrder.add('A'),
+      child: const SizedBox(width: 100, height: 60),
+    );
+    await tester.pump();
+
+    CDKDialogsManager.showPopover(
+      context: context,
+      anchorKey: anchorB,
+      onHide: () => closeOrder.add('B'),
+      child: const SizedBox(width: 100, height: 60),
+    );
+    await tester.pump();
+
+    CDKDialogsManager.showPopover(
+      context: context,
+      anchorKey: anchorA,
+      child: const SizedBox(width: 100, height: 60),
+    );
+    await tester.pump();
+
+    await tester.tapAt(const Offset(300, 300));
+    await tester.pump();
+    expect(closeOrder, ['A']);
+
+    await tester.tapAt(const Offset(300, 300));
+    await tester.pump();
+    expect(closeOrder, ['A', 'B']);
+  });
+
+  testWidgets('Anchor disposal during post-frame positioning is safe',
+      (WidgetTester tester) async {
+    final anchorKey = GlobalKey();
+    final isAnchorVisible = ValueNotifier<bool>(true);
+
+    await tester.pumpWidget(
+      _toggleAnchorHost(anchor: anchorKey, isAnchorVisible: isAnchorVisible),
+    );
+    await tester.pump();
+
+    final context = tester.element(find.byType(CupertinoPageScaffold));
+
+    CDKDialogsManager.showPopover(
+      context: context,
+      anchorKey: anchorKey,
+      child: const SizedBox(width: 120, height: 80),
+    );
+
+    isAnchorVisible.value = false;
+    await tester.pump();
+    await tester.pump();
+
+    expect(tester.takeException(), isNull);
+  });
+}

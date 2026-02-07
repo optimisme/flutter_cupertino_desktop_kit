@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_cupertino_desktop_kit/cdk.dart';
+import 'package:flutter_cupertino_desktop_kit/flutter_cupertino_desktop_kit.dart';
 
 class LayoutButtons extends StatefulWidget {
   const LayoutButtons({super.key});
@@ -14,26 +14,24 @@ class _LayoutButtonsState extends State<LayoutButtons> {
   int _indexButtonSelect0 = 1;
   int _indexButtonSelect1 = 1;
   late Widget _preloadedColorPicker;
-  final GlobalKey<CDKDialogPopoverState> _anchorColorButton = GlobalKey();
+  final GlobalKey _anchorColorButton = GlobalKey();
   final ValueNotifier<Color> _valueColorNotifier =
       ValueNotifier(const Color(0x800080FF));
 
   _showPopoverColor(BuildContext context, GlobalKey anchorKey) {
-    final GlobalKey<CDKDialogPopoverArrowedState> key = GlobalKey();
     if (anchorKey.currentContext == null) {
       // ignore: avoid_print
       print("Error: anchorKey not assigned to a widget");
       return;
     }
     CDKDialogsManager.showPopoverArrowed(
-      key: key,
       context: context,
       anchorKey: anchorKey,
       isAnimated: true,
       isTranslucent: false,
       onHide: () {
         // ignore: avoid_print
-        print("hide slider $key");
+        print("hide slider");
       },
       child: _preloadedColorPicker,
     );

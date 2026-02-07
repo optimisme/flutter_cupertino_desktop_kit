@@ -16,6 +16,13 @@ The project itself is just a set of libraries that define and manage widgets. Ho
 
 <img src="https://optimisme.github.io/flutter_cupertino_desktop_kit/demo_image.png" alt="CDK Example" style="max-width: 500px; width: 100%;">
 
+## API Stability
+
+- Public exports are curated from `lib/flutter_cupertino_desktop_kit.dart`.
+- Implementation files live in `lib/src/`.
+- Release checks: `docs/api_review_checklist.md`.
+- Dialog behavior contract: `docs/dialog_invariants.md`.
+
 ### Add the library as a dependency at pubspec.yaml
 
 ```yaml
@@ -28,7 +35,7 @@ dependencies:
 ### Import the library
 
 ```dart
-import 'package:flutter_cupertino_desktop_kit/cdk.dart';
+import 'package:flutter_cupertino_desktop_kit/flutter_cupertino_desktop_kit.dart';
 ```
 
 Then
@@ -40,7 +47,7 @@ flutter pub upgrade
 ### Use it
 ```dart
 return const CDKApp(
-    defaultAppearance: "system", // system, light, dark
+    defaultAppearance: CDKThemeAppearance.system,
     defaultColor:
         "systemBlue", 
     child: LayoutDesktop(title: "App Desktop Title"));

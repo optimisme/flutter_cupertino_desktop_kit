@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_cupertino_desktop_kit/cdk.dart';
+import 'package:flutter_cupertino_desktop_kit/flutter_cupertino_desktop_kit.dart';
 
 class LayoutDialogs extends StatefulWidget {
   const LayoutDialogs({super.key});
@@ -10,39 +10,39 @@ class LayoutDialogs extends StatefulWidget {
 
 class _LayoutDialogsState extends State<LayoutDialogs> {
   // Used to tell the popover where to show up
-  final GlobalKey<CDKDialogPopoverState> _anchorPopoverSlider = GlobalKey();
-  final GlobalKey<CDKDialogPopoverState> _anchorPopover0 = GlobalKey();
-  final GlobalKey<CDKDialogPopoverState> _anchorPopover1 = GlobalKey();
-  final GlobalKey<CDKDialogPopoverState> _anchorPopover2 = GlobalKey();
-  final GlobalKey<CDKDialogPopoverState> _anchorPopover3 = GlobalKey();
-  final GlobalKey<CDKDialogPopoverState> _anchorDraggable0 = GlobalKey();
-  final GlobalKey<CDKDialogPopoverState> _anchorDraggable1 = GlobalKey();
-  final GlobalKey<CDKDialogPopoverState> _anchorDraggable2 = GlobalKey();
-  final GlobalKey<CDKDialogPopoverState> _anchorDraggable3 = GlobalKey();
-  final GlobalKey<CDKDialogPopoverState> _anchorArrowed0 = GlobalKey();
-  final GlobalKey<CDKDialogPopoverState> _anchorArrowed1 = GlobalKey();
-  final GlobalKey<CDKDialogPopoverState> _anchorArrowed2 = GlobalKey();
-  final GlobalKey<CDKDialogPopoverState> _anchorArrowed3 = GlobalKey();
+  final GlobalKey _anchorPopoverSlider = GlobalKey();
+  final GlobalKey _anchorPopover0 = GlobalKey();
+  final GlobalKey _anchorPopover1 = GlobalKey();
+  final GlobalKey _anchorPopover2 = GlobalKey();
+  final GlobalKey _anchorPopover3 = GlobalKey();
+  final GlobalKey _anchorDraggable0 = GlobalKey();
+  final GlobalKey _anchorDraggable1 = GlobalKey();
+  final GlobalKey _anchorDraggable2 = GlobalKey();
+  final GlobalKey _anchorDraggable3 = GlobalKey();
+  final GlobalKey _anchorArrowed0 = GlobalKey();
+  final GlobalKey _anchorArrowed1 = GlobalKey();
+  final GlobalKey _anchorArrowed2 = GlobalKey();
+  final GlobalKey _anchorArrowed3 = GlobalKey();
   final ValueNotifier<double> _sliderValueNotifier = ValueNotifier(0.5);
 
   _showPopover(BuildContext context, GlobalKey anchorKey, CDKTheme theme,
       bool centered, bool animated, bool translucent) {
-    final GlobalKey<CDKDialogPopoverState> key = GlobalKey();
+    final controller = CDKDialogController();
     if (anchorKey.currentContext == null) {
       // ignore: avoid_print
       print("Error: anchorKey not assigned to a widget");
       return;
     }
     CDKDialogsManager.showPopover(
-      key: key,
       context: context,
       anchorKey: anchorKey,
       type: centered ? CDKDialogPopoverType.center : CDKDialogPopoverType.down,
       isAnimated: animated,
       isTranslucent: translucent,
+      controller: controller,
       onHide: () {
         // ignore: avoid_print
-        print("hide popover $key");
+        print("hide popover");
       },
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -53,7 +53,7 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
             const SizedBox(height: 10),
             GestureDetector(
               onTap: () {
-                key.currentState?.hide();
+                controller.close();
               },
               child: Text('Close popover',
                   style: TextStyle(fontSize: 12, color: theme.accent)),
@@ -66,15 +66,15 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
 
   _showModal(
       BuildContext context, CDKTheme theme, bool animated, bool translucent) {
-    final GlobalKey<CDKDialogModalState> key = GlobalKey();
+    final controller = CDKDialogController();
     CDKDialogsManager.showModal(
-      key: key,
       context: context,
       isAnimated: animated,
       isTranslucent: translucent,
+      controller: controller,
       onHide: () {
         // ignore: avoid_print
-        print("hide modal $key");
+        print("hide modal");
       },
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -86,7 +86,7 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
             const SizedBox(height: 10),
             GestureDetector(
               onTap: () {
-                key.currentState?.hide();
+                controller.close();
               },
               child: Text('Close modal',
                   style: TextStyle(fontSize: 12, color: theme.accent)),
@@ -99,21 +99,21 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
 
   void _showDraggable(BuildContext context, GlobalKey anchorKey, CDKTheme theme,
       bool animated, bool translucent) {
-    final GlobalKey<CDKDialogDraggableState> key = GlobalKey();
+    final controller = CDKDialogController();
     if (anchorKey.currentContext == null) {
       // ignore: avoid_print
       print("Error: anchorKey not assigned to a widget");
       return;
     }
     CDKDialogsManager.showDraggable(
-      key: key,
       context: context,
       anchorKey: anchorKey,
       isAnimated: animated,
       isTranslucent: translucent,
+      controller: controller,
       onHide: () {
         // ignore: avoid_print
-        print("hide draggable $key");
+        print("hide draggable");
       },
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -126,7 +126,7 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
             GestureDetector(
               onPanUpdate: (details) {}, // prevent dragging
               onTap: () {
-                key.currentState?.hide();
+                controller.close();
               },
               child: Text('Close draggable',
                   style: TextStyle(fontSize: 12, color: theme.accent)),
@@ -139,21 +139,21 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
 
   _showPopoverArrowed(BuildContext context, GlobalKey anchorKey, CDKTheme theme,
       bool animated, bool translucent) {
-    final GlobalKey<CDKDialogPopoverArrowedState> key = GlobalKey();
+    final controller = CDKDialogController();
     if (anchorKey.currentContext == null) {
       // ignore: avoid_print
       print("Error: anchorKey not assigned to a widget");
       return;
     }
     CDKDialogsManager.showPopoverArrowed(
-      key: key,
       context: context,
       anchorKey: anchorKey,
       isAnimated: animated,
       isTranslucent: translucent,
+      controller: controller,
       onHide: () {
         // ignore: avoid_print
-        print("hide arrowed $key");
+        print("hide arrowed");
       },
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -164,7 +164,7 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
             const SizedBox(height: 10),
             GestureDetector(
               onTap: () {
-                key.currentState?.hide();
+                controller.close();
               },
               child: Text('Close arrowed',
                   style: TextStyle(fontSize: 12, color: theme.accent)),
@@ -177,21 +177,21 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
 
   _showDialogArrowedSlider(
       BuildContext context, GlobalKey anchorKey, CDKTheme theme) {
-    final GlobalKey<CDKDialogPopoverArrowedState> key = GlobalKey();
+    final controller = CDKDialogController();
     if (anchorKey.currentContext == null) {
       // ignore: avoid_print
       print("Error: anchorKey not assigned to a widget");
       return;
     }
     CDKDialogsManager.showPopoverArrowed(
-      key: key,
       context: context,
       anchorKey: anchorKey,
       isAnimated: true,
       isTranslucent: false,
+      controller: controller,
       onHide: () {
         // ignore: avoid_print
-        print("hide slider $key");
+        print("hide slider");
       },
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -223,7 +223,7 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
                     const SizedBox(height: 8),
                     GestureDetector(
                       onTap: () {
-                        key.currentState?.hide();
+                        controller.close();
                       },
                       child: Text('Close slider',
                           style: TextStyle(fontSize: 12, color: theme.accent)),

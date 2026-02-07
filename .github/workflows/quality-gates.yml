@@ -1,0 +1,38 @@
+name: Quality Gates
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Root pub get
+        run: flutter pub get
+
+      - name: Root analyze
+        run: flutter analyze lib test
+
+      - name: Root tests
+        run: flutter test
+
+      - name: Example pub get
+        working-directory: example
+        run: flutter pub get
+
+      - name: Example analyze
+        working-directory: example
+        run: flutter analyze lib test
+
+      - name: Example tests
+        working-directory: example
+        run: flutter test

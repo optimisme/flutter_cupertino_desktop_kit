@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_cupertino_desktop_kit/cdk.dart';
+import 'package:flutter_cupertino_desktop_kit/flutter_cupertino_desktop_kit.dart';
 
 class LayoutSidebarLeft extends StatefulWidget {
   final List<String> options;
-  final Function(int, String) onSelect;
+  final void Function(int, String) onSelect;
 
   const LayoutSidebarLeft(
       {super.key, this.options = const [], required this.onSelect});
@@ -24,7 +24,7 @@ class LayoutButtonsState extends State<LayoutSidebarLeft> {
     Color colorText = theme.getSidebarColorText(false, isAccent);
     TextStyle textStyle = TextStyle(fontSize: 14, color: colorText);
 
-    String selectedRadio = theme.appearanceConfig;
+    final selectedRadio = theme.appearanceConfig;
     return ListView(children: [
       const SizedBox(height: 8),
       Column(
@@ -61,33 +61,31 @@ class LayoutButtonsState extends State<LayoutSidebarLeft> {
                 Text("Theme: ", style: textStyle),
                 const SizedBox(height: 8),
                 CDKButtonRadio(
-                  isSelected: selectedRadio == "system",
+                  isSelected: selectedRadio == CDKThemeAppearance.system,
                   onSelected: (bool? isSelected) {
                     setState(() {
-                      selectedRadio = "system";
-                      theme.setAppearanceConfig(context);
+                      theme.setAppearanceConfig(
+                          type: CDKThemeAppearance.system);
                     });
                   },
                   child: Text("System", style: textStyle),
                 ),
                 const SizedBox(height: 8),
                 CDKButtonRadio(
-                  isSelected: selectedRadio == "light",
+                  isSelected: selectedRadio == CDKThemeAppearance.light,
                   onSelected: (bool? isSelected) {
                     setState(() {
-                      selectedRadio = "light";
-                      theme.setAppearanceConfig(context, type: "light");
+                      theme.setAppearanceConfig(type: CDKThemeAppearance.light);
                     });
                   },
                   child: Text("Light", style: textStyle),
                 ),
                 const SizedBox(height: 8),
                 CDKButtonRadio(
-                  isSelected: selectedRadio == "dark",
+                  isSelected: selectedRadio == CDKThemeAppearance.dark,
                   onSelected: (bool? isSelected) {
                     setState(() {
-                      selectedRadio = "dark";
-                      theme.setAppearanceConfig(context, type: "dark");
+                      theme.setAppearanceConfig(type: CDKThemeAppearance.dark);
                     });
                   },
                   child: Text("Dark", style: textStyle),
