@@ -1,0 +1,16 @@
+# Generated artifacts
+/build/
+/coverage/
+/gh-pages/
+/example/build/
+/example/coverage/
+/example/gh-pages/
+
+# Tooling/cache files
+/.dart_tool/
+/example/.dart_tool/
+/.vscode/
+
+# Local-only project files
+/pubspec.lock
+/tips.txt

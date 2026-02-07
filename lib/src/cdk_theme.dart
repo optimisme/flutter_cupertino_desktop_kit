@@ -19,8 +19,6 @@ import 'package:flutter/material.dart' as material;
 /// Color backgroundColor = theme.isLight ? CDKTheme.white : CDKTheme.black;
 /// ```
 ///
-/// ![CDKTheme Example](URL_of_the_image)
-///
 /// This class also provides a set of predefined static colors for convenience.
 enum CDKThemeAppearance {
   system,

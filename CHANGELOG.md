@@ -1,35 +1,35 @@
 ## 0.0.11
 
- * Added multiline text field
+* Added multiline text field.
 
 ## 0.0.10
 
- * Fixed close popover with drag
+* Fixed popover close behavior while dragging.
 
 ## 0.0.9
 
- * Fixed shader initialization error
+* Fixed shader initialization error.
 
 ## 0.0.8
 
- * Fixed CDKButtonIcon text color
- * Fixed CDKSidebars separation color
- * Added CDKTheme backgroundSecondary2
+* Fixed `CDKButtonIcon` text color.
+* Fixed `CDKSidebars` separation color.
+* Added `CDKTheme.backgroundSecondary2`.
 
 ## 0.0.7
 
- * Updated sidebars
- * Updated picker buttons segmented
+* Updated sidebars.
+* Updated segmented picker buttons.
 
 ## 0.0.6
 
-* Updated Alpha selector
-* Updated Up/Down color selector on dark theme
+* Updated alpha selector.
+* Updated up/down color selector behavior on dark theme.
 
 ## 0.0.5
 
-* Updated README.md image size
+* Updated `README.md` image size.
 
 ## 0.0.1
 
-* TODO: Describe initial release.
+* Initial release of Cupertino Desktop Kit widgets and theme utilities.

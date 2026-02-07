@@ -1,3 +1,6 @@
+/// Public package entrypoint for Cupertino Desktop Kit (CDK).
+///
+/// Import this library to access the curated, semver-supported API surface.
 library flutter_cupertino_desktop_kit;
 
 // Curated public API surface. Implementation details live under lib/src.
