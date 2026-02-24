@@ -15,6 +15,9 @@ class CDKPopoverClipper extends CustomClipper<Path> {
 
   @override
   bool shouldReclip(CustomClipper<Path> oldClipper) {
-    return false;
+    if (oldClipper is! CDKPopoverClipper) {
+      return true;
+    }
+    return oldClipper.pathClip != pathClip;
   }
 }

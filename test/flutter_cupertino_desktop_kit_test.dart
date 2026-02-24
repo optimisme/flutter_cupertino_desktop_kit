@@ -1,4 +1,4 @@
-import 'dart:ui' show SemanticsFlag;
+import 'dart:ui' show Tristate;
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' as material;
@@ -45,6 +45,49 @@ Widget _testHost({
                   height: 24,
                 ),
               ),
+          ],
+        ),
+      ),
+    ),
+  );
+}
+
+Widget _positionedAnchorHost({
+  required GlobalKey anchor,
+  required Offset anchorOffset,
+  bool disableAnimations = false,
+}) {
+  final theme = CDKTheme()..setAccentColour('systemBlue');
+
+  return CDKThemeNotifier(
+    changeNotifier: theme,
+    child: CupertinoApp(
+      builder: (context, child) {
+        if (child == null || !disableAnimations) {
+          return child ?? const SizedBox.shrink();
+        }
+        final data = MediaQuery.maybeOf(context);
+        if (data == null) {
+          return child;
+        }
+        return MediaQuery(
+          data: data.copyWith(disableAnimations: true),
+          child: child,
+        );
+      },
+      home: CupertinoPageScaffold(
+        child: Stack(
+          children: [
+            const Positioned.fill(child: SizedBox.expand()),
+            Positioned(
+              left: anchorOffset.dx,
+              top: anchorOffset.dy,
+              child: SizedBox(
+                key: anchor,
+                width: 24,
+                height: 24,
+              ),
+            ),
           ],
         ),
       ),
@@ -170,6 +213,41 @@ void _expectPromptButtonsInsideDialogBounds(
   expect(confirmRect.bottom, lessThanOrEqualTo(dialogRect.bottom + epsilon));
 }
 
+Rect _findDialogRectContaining(WidgetTester tester, Finder widgetFinder) {
+  final center = tester.getCenter(widgetFinder);
+  final candidateRects = <Rect>[];
+
+  for (final element in find.byType(CustomPaint).evaluate()) {
+    final renderObject = element.renderObject;
+    if (renderObject is! RenderBox || !renderObject.hasSize) {
+      continue;
+    }
+    final rect = renderObject.localToGlobal(Offset.zero) & renderObject.size;
+    if (rect.contains(center)) {
+      candidateRects.add(rect);
+    }
+  }
+
+  expect(candidateRects, isNotEmpty);
+  candidateRects.sort(
+    (a, b) => (a.width * a.height).compareTo(b.width * b.height),
+  );
+  return candidateRects.first;
+}
+
+void _expectWidgetInsideRect(
+  WidgetTester tester,
+  Finder widgetFinder,
+  Rect containerRect,
+) {
+  final rect = tester.getRect(widgetFinder);
+  const epsilon = 0.01;
+  expect(rect.left, greaterThanOrEqualTo(containerRect.left - epsilon));
+  expect(rect.right, lessThanOrEqualTo(containerRect.right + epsilon));
+  expect(rect.top, greaterThanOrEqualTo(containerRect.top - epsilon));
+  expect(rect.bottom, lessThanOrEqualTo(containerRect.bottom + epsilon));
+}
+
 void main() {
   test('Public entry point exports widgets', () {
     const widget = CDKButtonSwitch(value: true);
@@ -268,6 +346,139 @@ void main() {
 
     secondArrowedController.close();
     await tester.pump();
+  });
+
+  testWidgets('Popover adapts and animates geometry when content resizes',
+      (WidgetTester tester) async {
+    final anchorKey = GlobalKey();
+    final expanded = ValueNotifier<bool>(false);
+
+    await tester.pumpWidget(_testHost(anchors: [anchorKey]));
+    await tester.pump();
+
+    final context = tester.element(find.byType(CupertinoPageScaffold));
+    CDKDialogsManager.showPopover(
+      context: context,
+      anchorKey: anchorKey,
+      child: ValueListenableBuilder<bool>(
+        valueListenable: expanded,
+        builder: (context, isExpanded, child) {
+          return SizedBox(
+            width: 180,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const SizedBox(key: Key('popover-header'), height: 40),
+                if (isExpanded)
+                  const SizedBox(key: Key('popover-extra'), height: 72),
+                const SizedBox(height: 20),
+              ],
+            ),
+          );
+        },
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    final initialRect = _findDialogRectContaining(
+      tester,
+      find.byKey(const Key('popover-header')),
+    );
+
+    expanded.value = true;
+    await tester.pump();
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 90));
+    final midRect = _findDialogRectContaining(
+      tester,
+      find.byKey(const Key('popover-header')),
+    );
+    await tester.pumpAndSettle();
+    final expandedRect = _findDialogRectContaining(
+      tester,
+      find.byKey(const Key('popover-header')),
+    );
+
+    expect(expandedRect.height, greaterThan(initialRect.height + 30));
+    expect(midRect.height, greaterThan(initialRect.height));
+    expect(midRect.height, lessThan(expandedRect.height));
+    _expectWidgetInsideRect(
+      tester,
+      find.byKey(const Key('popover-extra')),
+      expandedRect,
+    );
+  });
+
+  testWidgets('Arrowed popover keeps anchor alignment while resizing',
+      (WidgetTester tester) async {
+    final anchorKey = GlobalKey();
+    final expanded = ValueNotifier<bool>(false);
+
+    await tester.pumpWidget(
+      _positionedAnchorHost(
+        anchor: anchorKey,
+        anchorOffset: const Offset(760, 24),
+      ),
+    );
+    await tester.pump();
+
+    final context = tester.element(find.byType(CupertinoPageScaffold));
+    CDKDialogsManager.showPopoverArrowed(
+      context: context,
+      anchorKey: anchorKey,
+      child: ValueListenableBuilder<bool>(
+        valueListenable: expanded,
+        builder: (context, isExpanded, child) {
+          return SizedBox(
+            width: isExpanded ? 260 : 140,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const SizedBox(key: Key('arrowed-header'), height: 40),
+                if (isExpanded)
+                  const SizedBox(key: Key('arrowed-extra'), height: 72),
+                const SizedBox(height: 18),
+              ],
+            ),
+          );
+        },
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    final initialRect = _findDialogRectContaining(
+      tester,
+      find.byKey(const Key('arrowed-header')),
+    );
+
+    expanded.value = true;
+    await tester.pump();
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 90));
+    final midRect = _findDialogRectContaining(
+      tester,
+      find.byKey(const Key('arrowed-header')),
+    );
+    await tester.pumpAndSettle();
+    final expandedRect = _findDialogRectContaining(
+      tester,
+      find.byKey(const Key('arrowed-header')),
+    );
+
+    expect(expandedRect.width, greaterThan(initialRect.width + 30));
+    expect(midRect.width, greaterThan(initialRect.width));
+    expect(midRect.width, lessThan(expandedRect.width));
+    expect(expandedRect.left, lessThanOrEqualTo(initialRect.left));
+
+    final anchorRect = tester.getRect(find.byKey(anchorKey));
+    expect(anchorRect.center.dx, greaterThanOrEqualTo(expandedRect.left));
+    expect(anchorRect.center.dx, lessThanOrEqualTo(expandedRect.right));
+
+    _expectWidgetInsideRect(
+      tester,
+      find.byKey(const Key('arrowed-extra')),
+      expandedRect,
+    );
   });
 
   testWidgets('Escape closes only the top-most dismissible dialog',
@@ -536,8 +747,8 @@ void main() {
 
     expect(find.bySemanticsLabel('Theme switch'), findsOneWidget);
     final switchNode = tester.getSemantics(find.byType(CDKButtonSwitch));
-    expect(switchNode.hasFlag(SemanticsFlag.isButton), isTrue);
-    expect(switchNode.hasFlag(SemanticsFlag.hasEnabledState), isTrue);
+    expect(switchNode.flagsCollection.isButton, isTrue);
+    expect(switchNode.flagsCollection.isEnabled != Tristate.none, isTrue);
 
     await tester.tap(find.byType(CDKButtonSwitch));
     await tester.pump();

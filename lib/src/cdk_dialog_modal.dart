@@ -10,6 +10,7 @@ import 'cdk_theme.dart';
 
 class CDKDialogModal extends StatefulWidget {
   final bool isAnimated;
+  final bool animateContentResize;
   final bool isTranslucent;
   final VoidCallback? onHide;
   final Widget child;
@@ -17,6 +18,7 @@ class CDKDialogModal extends StatefulWidget {
   const CDKDialogModal({
     super.key,
     this.isAnimated = false,
+    this.animateContentResize = true,
     this.isTranslucent = false,
     this.onHide,
     required this.child,
@@ -43,7 +45,7 @@ class _CDKDialogModalState extends State<CDKDialogModal>
 
     if (widget.isAnimated) {
       _animationController = AnimationController(
-        duration: Duration(milliseconds: _animationMillis),
+        duration: const Duration(milliseconds: _animationMillis),
         vsync: this,
       );
 
@@ -106,15 +108,16 @@ class _CDKDialogModalState extends State<CDKDialogModal>
             ),
     );
 
-    final resizeAnimatedDialog = disableResizeAnimation
-        ? dialogSurface
-        : AnimatedSize(
-            duration: _resizeAnimationDuration,
-            curve: Curves.easeOut,
-            alignment: Alignment.center,
-            clipBehavior: Clip.hardEdge,
-            child: dialogSurface,
-          );
+    final resizeAnimatedDialog =
+        !widget.animateContentResize || disableResizeAnimation
+            ? dialogSurface
+            : AnimatedSize(
+                duration: _resizeAnimationDuration,
+                curve: Curves.easeOut,
+                alignment: Alignment.center,
+                clipBehavior: Clip.hardEdge,
+                child: dialogSurface,
+              );
 
     final dialogBody = widget.isAnimated && _scaleAnimation != null
         ? ScaleTransition(

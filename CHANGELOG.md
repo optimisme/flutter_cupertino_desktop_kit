@@ -1,3 +1,7 @@
+## 0.0.18
+
+* Animate dialog size changes (2)
+
 ## 0.0.17
 
 * Animate dialog size changes

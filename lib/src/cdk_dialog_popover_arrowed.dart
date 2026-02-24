@@ -1,9 +1,10 @@
+import 'dart:math' as math;
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
-import 'cdk_theme_notifier.dart';
+
+import 'cdk_dialog_adaptive_popover.dart';
 import 'cdk_dialog_outer_shadow_painter.dart';
 import 'cdk_dialog_popover_clipper.dart';
-import 'cdk_theme.dart';
 
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
@@ -11,6 +12,7 @@ import 'cdk_theme.dart';
 class CDKDialogPopoverArrowed extends StatefulWidget {
   final GlobalKey anchorKey;
   final bool isAnimated;
+  final bool animateContentResize;
   final bool isTranslucent;
   final VoidCallback? onHide;
   final Widget child;
@@ -19,6 +21,7 @@ class CDKDialogPopoverArrowed extends StatefulWidget {
     super.key,
     required this.anchorKey,
     this.isAnimated = false,
+    this.animateContentResize = true,
     this.isTranslucent = true,
     this.onHide,
     required this.child,
@@ -29,219 +32,129 @@ class CDKDialogPopoverArrowed extends StatefulWidget {
       _CDKDialogPopoverArrowedState();
 }
 
-class _CDKDialogPopoverArrowedState extends State<CDKDialogPopoverArrowed>
-    with SingleTickerProviderStateMixin {
-  final int _animationMillis = 200;
-  AnimationController? animationController;
-  Animation<double>? scaleAnimation;
-  double? width;
-  double? height;
-  bool isSizeDetermined = false;
-  GlobalKey childKey = GlobalKey();
-  Size? screenSize;
-  double screenPadding = 10.0;
-  Offset position = const Offset(
-      -10000000, -10000000); // Out of view until size is determined
-  Path pathContour = Path();
-  Path pathClip = Path();
+class _CDKDialogPopoverArrowedState extends State<CDKDialogPopoverArrowed> {
+  static const double _chromePadding = 8.0;
+  static const double _arrowInsetFromCorners = 16.0;
 
-  @override
-  void initState() {
-    super.initState();
+  CDKAdaptivePopoverGeometry _resolveGeometry({
+    required Size childSize,
+    required Rect anchorRect,
+    required Size screenSize,
+    required double screenPadding,
+  }) {
+    var width = childSize.width;
+    var height = childSize.height + 8;
 
-    if (widget.isAnimated) {
-      animationController = AnimationController(
-        duration: Duration(milliseconds: _animationMillis),
-        vsync: this,
-      );
-
-      // Efecte de rebot
-      scaleAnimation = CurvedAnimation(
-        parent: animationController!,
-        curve: Curves.easeOutBack,
-      );
+    final maxHeight = screenSize.height - (2 * screenPadding);
+    final maxWidth = screenSize.width - (2 * screenPadding);
+    if (height > maxHeight) {
+      height = maxHeight;
+    }
+    if (width > maxWidth) {
+      width = maxWidth;
     }
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (!mounted || childKey.currentContext == null) {
-        return;
-      }
+    var leftPosition = anchorRect.center.dx - (width / 2);
+    final maxLeft = screenSize.width - width - screenPadding;
+    leftPosition = leftPosition.clamp(screenPadding, maxLeft).toDouble();
 
-      final anchorRenderBox = _resolveAnchorRenderBox();
-      if (anchorRenderBox == null) {
-        _scheduleHideForMissingAnchor();
-        return;
-      }
-
-      if (mounted) {
-        setState(() {
-          final anchorPosition = anchorRenderBox.localToGlobal(Offset.zero);
-
-          final anchorSize = anchorRenderBox.size;
-          final RenderBox childRenderBox =
-              childKey.currentContext!.findRenderObject() as RenderBox;
-          final childSize = childRenderBox.size;
-
-          width = childSize.width;
-          height =
-              childSize.height + 8; // 8 To give space for the shadow if at top
-
-          screenSize = MediaQuery.of(context).size;
-
-          double maxHeight = screenSize!.height - 2 * screenPadding;
-          double maxWidth = screenSize!.width - 2 * screenPadding;
-          if (height! > maxHeight) {
-            height = maxHeight;
-          }
-
-          if (width! > maxWidth) {
-            width = maxWidth;
-          }
-
-          double leftPosition =
-              anchorPosition.dx + (anchorSize.width / 2) - width! / 2;
-          double topPosition = anchorPosition.dy + anchorSize.height + 4;
-          double arrowDiff = 0.0;
-          bool arrowAtBottom = true;
-
-          if (leftPosition + width! > screenSize!.width - screenPadding) {
-            var tmp = screenSize!.width - width! - screenPadding;
-            arrowDiff = leftPosition - tmp;
-            leftPosition = tmp;
-          }
-          if (leftPosition < screenPadding) {
-            var tmp = screenPadding;
-            arrowDiff = leftPosition - tmp;
-            leftPosition = screenPadding;
-          }
-
-          if (topPosition + height! > screenSize!.height - screenPadding) {
-            topPosition = topPosition - height! - anchorSize.height - 8;
-            arrowAtBottom = false;
-          }
-
-          if (topPosition < screenPadding) {
-            topPosition = screenPadding;
-          }
-
-          if (!arrowAtBottom) {
-            topPosition = topPosition + 8;
-          }
-
-          position = Offset(leftPosition, topPosition);
-          final rectContour = Rect.fromLTWH(8, 8, width!,
-              height! - 8); // -8 To give space for the shadow if at top
-          pathContour = CDKDialogOuterShadowPainter.createContourPathArrowed(
-              rectContour, arrowDiff, arrowAtBottom);
-          final rectClip = Rect.fromLTWH(0, 0, width!,
-              height! - 8); // -8 To give space for the shadow if at top
-          pathClip = CDKDialogOuterShadowPainter.createContourPathArrowed(
-              rectClip, arrowDiff, arrowAtBottom);
-
-          isSizeDetermined = true;
-        });
-
-        if (widget.isAnimated) {
-          animationController!.forward();
-        }
-      }
-    });
-  }
-
-  @override
-  void dispose() {
-    animationController?.dispose();
-    super.dispose();
-  }
-
-  void hide() {
-    widget.onHide?.call();
-  }
-
-  RenderBox? _resolveAnchorRenderBox() {
-    final anchorContext = widget.anchorKey.currentContext;
-    if (anchorContext == null || !anchorContext.mounted) {
-      return null;
+    final topIfBelow = anchorRect.bottom + 4;
+    final topIfAbove = anchorRect.top - height + 4;
+    var topPosition = topIfBelow;
+    if ((topPosition + height) > (screenSize.height - screenPadding)) {
+      topPosition = topIfAbove;
     }
+    final maxTop = screenSize.height - height - screenPadding;
+    topPosition = topPosition.clamp(screenPadding, maxTop).toDouble();
 
-    final renderObject = anchorContext.findRenderObject();
-    if (renderObject is! RenderBox || !renderObject.attached) {
-      return null;
-    }
-
-    return renderObject;
+    return CDKAdaptivePopoverGeometry(
+      left: leftPosition,
+      top: topPosition,
+      width: width,
+      height: height,
+    );
   }
 
-  void _scheduleHideForMissingAnchor() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (mounted) {
-        hide();
-      }
-    });
+  Widget _buildSurface({
+    required BuildContext context,
+    required Widget dialogContents,
+    required CDKAdaptivePopoverGeometry geometry,
+    required Rect anchorRect,
+    required Color backgroundColor,
+    required bool isLightTheme,
+    required bool isTranslucent,
+  }) {
+    final anchorCenterX = anchorRect.center.dx;
+    final dialogCenterX = geometry.left + (geometry.width / 2);
+    final maxArrowDiff =
+        math.max(0.0, (geometry.width / 2) - _arrowInsetFromCorners);
+    final arrowDiff = (anchorCenterX - dialogCenterX)
+        .clamp(-maxArrowDiff, maxArrowDiff)
+        .toDouble();
+    final arrowAtTop = anchorRect.center.dy <= (geometry.top + geometry.height);
+
+    final contourHeight = math.max(0.0, geometry.height - 8);
+    final rectContour = Rect.fromLTWH(
+      _chromePadding,
+      _chromePadding,
+      geometry.width,
+      contourHeight,
+    );
+    final pathContour = CDKDialogOuterShadowPainter.createContourPathArrowed(
+      rectContour,
+      arrowDiff,
+      arrowAtTop,
+    );
+    final rectClip = Rect.fromLTWH(
+      0,
+      0,
+      geometry.width,
+      contourHeight,
+    );
+    final pathClip = CDKDialogOuterShadowPainter.createContourPathArrowed(
+      rectClip,
+      arrowDiff,
+      arrowAtTop,
+    );
+
+    return Stack(
+      children: [
+        CustomPaint(
+          painter: CDKDialogOuterShadowPainter(
+            pathContour: pathContour,
+            colorBackground: backgroundColor,
+            isLightTheme: isLightTheme,
+          ),
+          child: Container(),
+        ),
+        Positioned(
+          top: _chromePadding,
+          left: _chromePadding,
+          child: !isTranslucent
+              ? dialogContents
+              : ClipPath(
+                  clipper: CDKPopoverClipper(pathClip),
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 7.5, sigmaY: 7.5),
+                    child: dialogContents,
+                  ),
+                ),
+        ),
+      ],
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    CDKTheme theme = CDKThemeNotifier.of(context)!.changeNotifier;
-
-    Color backgroundColor = !widget.isTranslucent
-        ? theme.background
-        : theme.isLight
-            ? theme.background.withValues(alpha: 0.25)
-            : theme.background.withValues(alpha: 0.5);
-
-    Widget dialogContents = Container(
-      key: childKey,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8.0),
-      ),
+    return CDKAdaptivePopoverContainer(
+      anchorKey: widget.anchorKey,
+      isAnimated: widget.isAnimated,
+      animateContentResize: widget.animateContentResize,
+      isTranslucent: widget.isTranslucent,
+      onHide: widget.onHide,
+      geometryResolver: _resolveGeometry,
+      surfaceBuilder: _buildSurface,
       child: widget.child,
     );
-
-    Widget dialogWithDecorations = !isSizeDetermined
-        ? Container()
-        : Stack(
-            children: [
-              CustomPaint(
-                painter: CDKDialogOuterShadowPainter(
-                    pathContour: pathContour,
-                    colorBackground: backgroundColor,
-                    isLightTheme: theme.isLight),
-                child: Container(),
-              ),
-              Positioned(
-                  top: 8,
-                  left: 8,
-                  child: !widget.isTranslucent
-                      ? dialogContents
-                      : ClipPath(
-                          clipper: CDKPopoverClipper(
-                              pathClip), // Aplica el clip aquí
-                          child: BackdropFilter(
-                            filter: ImageFilter.blur(
-                                sigmaX: 7.5,
-                                sigmaY: 7.5), // Efecte de difuminat
-                            child: dialogContents,
-                          ),
-                        ))
-            ],
-          );
-
-    return !isSizeDetermined
-        ? Positioned(left: position.dx, top: position.dy, child: dialogContents)
-        : Positioned(
-            left: position.dx - 8,
-            top: position.dy - 8,
-            height: height! + 16,
-            width: width! + 16,
-            child: RepaintBoundary(
-              child: widget.isAnimated && scaleAnimation != null
-                  ? ScaleTransition(
-                      scale: scaleAnimation!,
-                      child: dialogWithDecorations,
-                    )
-                  : dialogWithDecorations,
-            ),
-          );
   }
 }
