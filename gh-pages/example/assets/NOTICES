@@ -5898,6 +5898,17 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 --------------------------------------------------------------------------------
+example
+
+BSD 3-Clause License
+
+Copyright (c) 2026, Albert Palacios
+All rights reserved.
+
+This example app is distributed under the same license as the parent package.
+See ../LICENSE for the full license text and terms.
+
+--------------------------------------------------------------------------------
 expat
 
 Copyright (c) 1997-2000 Thai Open Source Software Center Ltd

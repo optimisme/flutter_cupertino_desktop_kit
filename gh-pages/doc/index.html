@@ -24,7 +24,7 @@
 <header id="title">
   <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
-    <li><a href="https://github.com/optimisme/flutter_cupertino_desktop_kit">flutter_cupertino_desktop_kit package</a></li>
+    <li><a href="https://optimisme.github.io/flutter_cupertino_desktop_kit/">flutter_cupertino_desktop_kit package</a></li>
   </ol>
   <div class="self-name">flutter_cupertino_desktop_kit</div>
   <form class="search navbar-right" role="search">
@@ -56,9 +56,9 @@
 <ul>
 <li>Public exports are curated from <code>lib/flutter_cupertino_desktop_kit.dart</code>.</li>
 <li>Implementation files live in <code>lib/src/</code>.</li>
-<li>Release checks: <code>docs/api_review_checklist.md</code>.</li>
-<li>Dialog behavior contract: <code>docs/dialog_invariants.md</code>.</li>
-<li>Theme extension reference: <code>docs/theming_extensions.md</code>.</li>
+<li>Release checks: <code>doc/api_review_checklist.md</code>.</li>
+<li>Dialog behavior contract: <code>doc/dialog_invariants.md</code>.</li>
+<li>Theme extension reference: <code>doc/theming_extensions.md</code>.</li>
 </ul>
 <h2 id="scope-and-non-goals">Scope and Non-goals</h2>
 <ul>
@@ -72,12 +72,18 @@
 <li>Runtime theme state is managed by <code>CDKTheme</code> (appearance + accent + app focus).</li>
 <li>Immutable component tokens are exposed through <code>ThemeExtension</code>:
 <code>CDKThemeColorTokens</code>, <code>CDKThemeRuntimeTokens</code>, <code>CDKThemeRadiusTokens</code>,
-<code>CDKThemeSpacingTokens</code>, <code>CDKThemeElevationTokens</code>.</li>
+<code>CDKThemeSpacingTokens</code>, <code>CDKThemeElevationTokens</code>,
+<code>CDKThemeTypographyTokens</code>.</li>
 <li>Legacy <code>CDKThemeNotifier</code> access remains available as a compatibility shim.</li>
 </ul>
 <p>Read tokens in widgets:</p>
 <pre class="language-dart"><code class="language-dart">final colors = Theme.of(context).extension&lt;CDKThemeColorTokens&gt;()!;
 final runtime = Theme.of(context).extension&lt;CDKThemeRuntimeTokens&gt;()!;
+final typography = Theme.of(context).extension&lt;CDKThemeTypographyTokens&gt;()!;
+</code></pre>
+<p>Use semantic text roles instead of hardcoded font sizes:</p>
+<pre class="language-dart"><code class="language-dart">const CDKText('Section title', role: CDKTextRole.title);
+const CDKText('Body copy', role: CDKTextRole.body);
 </code></pre>
 <h2 id="keyboard-and-dialog-invariants">Keyboard and Dialog Invariants</h2>
 <ul>
@@ -85,6 +91,8 @@ final runtime = Theme.of(context).extension&lt;CDKThemeRuntimeTokens&gt;()!;
 <li>Outside-click closes only dialogs configured with outside-dismiss.</li>
 <li>Dialog hosts use focus traversal groups for predictable desktop tab-order.</li>
 <li>Dialog focus is restored to the previous focus node on close.</li>
+<li><code>CDKDialogConfirm</code>: <code>Enter</code> confirms and <code>Escape</code> cancels.</li>
+<li><code>CDKDialogPrompt</code>: text field auto-focuses, <code>Enter</code> submits when valid, <code>Escape</code> cancels.</li>
 </ul>
 <h2 id="api-quickstart">API Quickstart</h2>
 <ul>
@@ -93,13 +101,35 @@ final runtime = Theme.of(context).extension&lt;CDKThemeRuntimeTokens&gt;()!;
 <code>CDKButtonCheckBox</code>.</li>
 <li>Dialogs:
 <code>CDKDialogsManager.showPopover</code>, <code>showPopoverArrowed</code>, <code>showModal</code>,
-<code>showDraggable</code>, with <code>CDKDialogController</code> for lifecycle.</li>
+<code>showDraggable</code>, <code>showConfirm</code>, <code>showPrompt</code>, with <code>CDKDialogController</code> for lifecycle.</li>
 <li>Fields:
 <code>CDKFieldText</code>, <code>CDKFieldNumeric</code>, <code>CDKFieldNumericSlider</code>, <code>CDKFieldColorHex</code>.</li>
 <li>Pickers:
 <code>CDKPickerSlider</code>, <code>CDKPickerButtonsSegmented</code>, <code>CDKPickerCheckList</code>,
 <code>CDKPickerColor</code>, <code>CDKPickerThemeColors</code>.</li>
 </ul>
+<h3 id="confirm-and-prompt-helpers">Confirm and prompt helpers</h3>
+<pre class="language-dart"><code class="language-dart">final bool? confirmed = await CDKDialogsManager.showConfirm(
+  context: context,
+  title: 'Delete file?',
+  message: 'This action cannot be undone.',
+  confirmLabel: 'Delete',
+  isDestructive: true,
+);
+// true = confirmed, false/null = canceled
+
+final String? name = await CDKDialogsManager.showPrompt(
+  context: context,
+  title: 'Rename layer',
+  placeholder: 'Layer name',
+  initialValue: 'Layer 01',
+  validator: (value) =&gt;
+      value.trim().length &lt; 3 ? 'Use at least 3 characters.' : null,
+);
+// null = canceled, non-null = submitted text
+</code></pre>
+<p>Dialog manager methods use <code>showBackgroundShade: true</code> by default to draw a
+gray blocking backdrop behind the active dialog. Set it to <code>false</code> to disable.</p>
 <h3 id="add-the-library-as-a-dependency-at-pubspecyaml">Add the library as a dependency at pubspec.yaml</h3>
 <pre class="language-yaml"><code class="language-yaml">dependencies:
   flutter:
@@ -164,7 +194,7 @@ flutter run -d macos --enable-impeller
   </form>
 </header>
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
-    <li><a href="https://github.com/optimisme/flutter_cupertino_desktop_kit">flutter_cupertino_desktop_kit package</a></li>
+    <li><a href="https://optimisme.github.io/flutter_cupertino_desktop_kit/">flutter_cupertino_desktop_kit package</a></li>
 </ol>
 
     <h5 class="hidden-xs"><span class="package-name">flutter_cupertino_desktop_kit</span> <span class="package-kind">package</span></h5>
@@ -181,7 +211,7 @@ flutter run -d macos --enable-impeller
 <footer>
   <span class="no-break">
     flutter_cupertino_desktop_kit
-      0.0.11
+      0.0.13
   </span>
   
 </footer>

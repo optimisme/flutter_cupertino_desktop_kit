@@ -63,6 +63,7 @@
 <li><span class="parameter" id="showPopover-param-isTranslucent"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">isTranslucent</span> = <span class="default-value">false</span>, </span></li>
 <li><span class="parameter" id="showPopover-param-dismissOnEscape"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">dismissOnEscape</span> = <span class="default-value">true</span>, </span></li>
 <li><span class="parameter" id="showPopover-param-dismissOnOutsideTap"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">dismissOnOutsideTap</span> = <span class="default-value">true</span>, </span></li>
+<li><span class="parameter" id="showPopover-param-showBackgroundShade"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">showBackgroundShade</span> = <span class="default-value">true</span>, </span></li>
 <li><span class="parameter" id="showPopover-param-onHide"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-ui/VoidCallback.html">VoidCallback</a>?</span> <span class="parameter-name">onHide</span>, </span></li>
 <li><span class="parameter" id="showPopover-param-controller"><span class="type-annotation"><a href="../../flutter_cupertino_desktop_kit/CDKDialogController-class.html">CDKDialogController</a>?</span> <span class="parameter-name">controller</span>, </span></li>
 <li><span class="parameter" id="showPopover-param-child"><span>required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/widgets/Widget-class.html">Widget</a></span> <span class="parameter-name">child</span>, </span></li>
@@ -86,6 +87,7 @@
   bool isTranslucent = false,
   bool dismissOnEscape = true,
   bool dismissOnOutsideTap = true,
+  bool showBackgroundShade = true,
   VoidCallback? onHide,
   CDKDialogController? controller,
   required Widget child,
@@ -103,6 +105,7 @@
     dismissOnEscape: dismissOnEscape,
     dismissOnOutsideTap: dismissOnOutsideTap,
     captureOutsidePointers: true,
+    showBackgroundShade: showBackgroundShade,
     onHide: onHide,
     controller: controller,
     builder: (requestClose) =&gt; CDKDialogPopover(
@@ -143,7 +146,7 @@
 <footer>
   <span class="no-break">
     flutter_cupertino_desktop_kit
-      0.0.11
+      0.0.13
   </span>
   
 </footer>
