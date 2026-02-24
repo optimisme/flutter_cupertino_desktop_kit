@@ -80,6 +80,14 @@ Widget _themeHost({required Widget child}) {
   );
 }
 
+Finder _findDialogShade() {
+  return find.byWidgetPredicate(
+    (widget) =>
+        widget is ColoredBox &&
+        widget.color == const Color.fromRGBO(96, 96, 96, 0.28),
+  );
+}
+
 void main() {
   test('Public entry point exports widgets', () {
     const widget = CDKButtonSwitch(value: true);
@@ -267,6 +275,72 @@ void main() {
     await tester.tapAt(const Offset(300, 300));
     await tester.pump();
     expect(dismissibleModalClosed, isTrue);
+  });
+
+  testWidgets('Popover and modal default to no shade',
+      (WidgetTester tester) async {
+    final anchorKey = GlobalKey();
+    await tester.pumpWidget(_testHost(anchors: [anchorKey]));
+    await tester.pump();
+
+    final context = tester.element(find.byType(CupertinoPageScaffold));
+    final popoverController = CDKDialogController();
+    final modalController = CDKDialogController();
+
+    CDKDialogsManager.showPopover(
+      context: context,
+      anchorKey: anchorKey,
+      controller: popoverController,
+      child: const SizedBox(width: 100, height: 60),
+    );
+    await tester.pump();
+    expect(_findDialogShade(), findsNothing);
+
+    popoverController.close();
+    await tester.pump();
+
+    CDKDialogsManager.showModal(
+      context: context,
+      controller: modalController,
+      child: const SizedBox(width: 120, height: 80),
+    );
+    await tester.pump();
+    expect(_findDialogShade(), findsNothing);
+
+    modalController.close();
+    await tester.pump();
+  });
+
+  testWidgets('Confirm and prompt use shade by default',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(_testHost(anchors: [GlobalKey()]));
+    await tester.pump();
+
+    final context = tester.element(find.byType(CupertinoPageScaffold));
+
+    final confirmFuture = CDKDialogsManager.showConfirm(
+      context: context,
+      message: 'Confirm this action?',
+    );
+    await tester.pump();
+    expect(_findDialogShade(), findsOneWidget);
+    await tester.sendKeyDownEvent(LogicalKeyboardKey.escape);
+    await tester.sendKeyUpEvent(LogicalKeyboardKey.escape);
+    await tester.pump();
+    await confirmFuture;
+
+    final promptFuture = CDKDialogsManager.showPrompt(
+      context: context,
+      title: 'Rename',
+      confirmLabel: 'Save',
+      cancelLabel: 'Dismiss',
+    );
+    await tester.pump();
+    expect(_findDialogShade(), findsOneWidget);
+    await tester.sendKeyDownEvent(LogicalKeyboardKey.escape);
+    await tester.sendKeyUpEvent(LogicalKeyboardKey.escape);
+    await tester.pump();
+    await promptFuture;
   });
 
   testWidgets('Re-opening an anchor brings that popover to the front',

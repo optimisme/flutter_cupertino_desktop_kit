@@ -43,6 +43,7 @@ class _CDKButtonSelectState extends State<CDKButtonSelect> {
       type: CDKDialogPopoverType.center,
       isAnimated: false,
       isTranslucent: widget.isTranslucent,
+      showBackgroundShade: false,
       controller: _popoverController,
       child: Padding(
         padding: const EdgeInsets.all(5.0),

@@ -101,8 +101,10 @@ final String? name = await CDKDialogsManager.showPrompt(
 // null = canceled, non-null = submitted text
 ```
 
-Dialog manager methods use `showBackgroundShade: true` by default to draw a
-gray blocking backdrop behind the active dialog. Set it to `false` to disable.
+`showPopover` and `showPopoverArrowed` default to `showBackgroundShade: false`.
+`showModal` and `showDraggable` default to `showBackgroundShade: false`.
+`showConfirm` and `showPrompt` default to `showBackgroundShade: true` (gray
+blocking backdrop behind the active dialog). Override per call when needed.
 
 ### Add the library as a dependency at pubspec.yaml
 

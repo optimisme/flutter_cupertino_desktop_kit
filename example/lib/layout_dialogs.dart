@@ -40,6 +40,7 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
       type: centered ? CDKDialogPopoverType.center : CDKDialogPopoverType.down,
       isAnimated: animated,
       isTranslucent: translucent,
+      showBackgroundShade: false,
       controller: controller,
       onHide: () {
         // ignore: avoid_print

@@ -10,4 +10,6 @@ These invariants are guaranteed by `CDKDialogsManager` and covered by widget tes
 - If an anchor widget is removed before post-frame positioning, the dialog auto-closes without throwing.
 - `CDKDialogConfirm` maps `Enter` to confirm and `Escape` to cancel.
 - `CDKDialogPrompt` autofocuses the input, validates before submit, and maps `Escape` to cancel.
-- `showBackgroundShade` defaults to `true`, drawing a gray barrier behind the active dialog and blocking background interaction.
+- Popovers (`showPopover`, `showPopoverArrowed`) default to `showBackgroundShade: false`.
+- Modal and draggable dialogs default to `showBackgroundShade: false`.
+- Confirm and prompt helpers default to `showBackgroundShade: true`, drawing a gray barrier behind the active dialog and blocking background interaction.
