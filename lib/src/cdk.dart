@@ -35,6 +35,7 @@ export 'cdk_picker_slider.dart';
 export 'cdk_picker_theme_colors.dart';
 export 'cdk_progress_bar.dart';
 export 'cdk_progress_circular.dart';
+export 'cdk_text.dart';
 export 'cdk_theme_notifier.dart';
 export 'cdk_theme.dart';
 export 'cdk_util_disclosure.dart';

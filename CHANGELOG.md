@@ -1,3 +1,7 @@
+## 0.0.14
+
+* Added `CDKDialogConfirm` and `CDKDialogPrompt` components.
+
 ## 0.0.12
 
 * AI agent recommended fixes
@@ -5,6 +9,7 @@
 * Added `CDKDialogsManager.showConfirm()` and `CDKDialogsManager.showPrompt()` convenience helpers.
 * Updated example dialogs page with confirm/prompt demos and result handling.
 * Added `showBackgroundShade` dialog-manager option (enabled by default) for a gray blocking backdrop.
+* Added `CDKThemeTypographyTokens` and `CDKText` to standardize typography across light/dark modes.
 
 ## 0.0.11
 

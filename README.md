@@ -36,7 +36,8 @@ The project itself is just a set of libraries that define and manage widgets. Ho
 - Runtime theme state is managed by `CDKTheme` (appearance + accent + app focus).
 - Immutable component tokens are exposed through `ThemeExtension`:
   `CDKThemeColorTokens`, `CDKThemeRuntimeTokens`, `CDKThemeRadiusTokens`,
-  `CDKThemeSpacingTokens`, `CDKThemeElevationTokens`.
+  `CDKThemeSpacingTokens`, `CDKThemeElevationTokens`,
+  `CDKThemeTypographyTokens`.
 - Legacy `CDKThemeNotifier` access remains available as a compatibility shim.
 
 Read tokens in widgets:
@@ -44,6 +45,14 @@ Read tokens in widgets:
 ```dart
 final colors = Theme.of(context).extension<CDKThemeColorTokens>()!;
 final runtime = Theme.of(context).extension<CDKThemeRuntimeTokens>()!;
+final typography = Theme.of(context).extension<CDKThemeTypographyTokens>()!;
+```
+
+Use semantic text roles instead of hardcoded font sizes:
+
+```dart
+const CDKText('Section title', role: CDKTextRole.title);
+const CDKText('Body copy', role: CDKTextRole.body);
 ```
 
 ## Keyboard and Dialog Invariants

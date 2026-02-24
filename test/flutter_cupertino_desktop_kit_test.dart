@@ -351,10 +351,13 @@ void main() {
     final runtime =
         material.Theme.of(context).extension<CDKThemeRuntimeTokens>();
     final radii = material.Theme.of(context).extension<CDKThemeRadiusTokens>();
+    final typography =
+        material.Theme.of(context).extension<CDKThemeTypographyTokens>();
 
     expect(colors, isNotNull);
     expect(runtime, isNotNull);
     expect(radii, isNotNull);
+    expect(typography, isNotNull);
   });
 
   testWidgets('Switch exposes semantics and supports keyboard activation',

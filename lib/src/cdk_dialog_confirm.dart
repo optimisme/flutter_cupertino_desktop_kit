@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
 import 'cdk_button.dart';
+import 'cdk_text.dart';
 import 'cdk_theme_notifier.dart';
 
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
@@ -92,7 +93,6 @@ class _CDKDialogConfirmState extends State<CDKDialogConfirm> {
 
   @override
   Widget build(BuildContext context) {
-    final colors = CDKThemeNotifier.colorTokensOf(context);
     final spacing = CDKThemeNotifier.spacingTokensOf(context);
 
     return Shortcuts(
@@ -127,23 +127,15 @@ class _CDKDialogConfirmState extends State<CDKDialogConfirm> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   if (widget.title != null && widget.title!.isNotEmpty) ...[
-                    Text(
+                    CDKText(
                       widget.title!,
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                        color: colors.colorText,
-                      ),
+                      role: CDKTextRole.title,
                     ),
                     SizedBox(height: spacing.md),
                   ],
-                  Text(
+                  CDKText(
                     widget.message,
-                    style: TextStyle(
-                      fontSize: 12,
-                      height: 1.35,
-                      color: colors.colorText,
-                    ),
+                    role: CDKTextRole.body,
                   ),
                   SizedBox(height: spacing.lg + spacing.sm),
                   Row(

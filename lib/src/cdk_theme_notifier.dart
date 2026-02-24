@@ -69,6 +69,11 @@ class CDKThemeNotifier extends InheritedNotifier<CDKTheme> {
         CDKTheme.elevationTokens;
   }
 
+  static CDKThemeTypographyTokens typographyTokensOf(BuildContext context) {
+    return material.Theme.of(context).extension<CDKThemeTypographyTokens>() ??
+        CDKTheme.typographyTokens;
+  }
+
   static CDKThemeNotifier? of(BuildContext context) {
     return context.dependOnInheritedWidgetOfExactType<CDKThemeNotifier>();
   }

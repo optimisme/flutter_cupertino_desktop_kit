@@ -84,6 +84,7 @@ class _CDKAppState extends State<CDKApp> with WidgetsBindingObserver {
           CDKTheme.radiusTokens,
           CDKTheme.spacingTokens,
           CDKTheme.elevationTokens,
+          CDKTheme.typographyTokens,
         ];
 
         return CDKThemeNotifier(

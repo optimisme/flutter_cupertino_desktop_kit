@@ -50,6 +50,7 @@ export 'src/cdk_picker_theme_colors.dart' show CDKPickerThemeColors;
 
 export 'src/cdk_progress_bar.dart' show CDKProgressBar;
 export 'src/cdk_progress_circular.dart' show CDKProgressCircular;
+export 'src/cdk_text.dart' show CDKText, CDKTextRole;
 
 export 'src/cdk_theme.dart'
     show
@@ -59,7 +60,8 @@ export 'src/cdk_theme.dart'
         CDKThemeRuntimeTokens,
         CDKThemeRadiusTokens,
         CDKThemeSpacingTokens,
-        CDKThemeElevationTokens;
+        CDKThemeElevationTokens,
+        CDKThemeTypographyTokens;
 export 'src/cdk_theme_notifier.dart' show CDKThemeNotifier;
 
 export 'src/cdk_util_disclosure.dart' show CDKUtilDisclosure;

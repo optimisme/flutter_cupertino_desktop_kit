@@ -33,8 +33,6 @@ class CDKButton extends StatefulWidget {
 }
 
 class _CDKButtonState extends State<CDKButton> {
-  static const double _fontSize = 12.0;
-
   bool _isPressed = false;
   bool _isFocused = false;
   bool _isHovered = false;
@@ -59,6 +57,7 @@ class _CDKButtonState extends State<CDKButton> {
     final runtime = CDKThemeNotifier.runtimeTokensOf(context);
     final radii = CDKThemeNotifier.radiusTokensOf(context);
     final elevations = CDKThemeNotifier.elevationTokensOf(context);
+    final typography = CDKThemeNotifier.typographyTokensOf(context);
 
     final states = cdkWidgetStates(
       enabled: _isEnabled,
@@ -77,12 +76,9 @@ class _CDKButtonState extends State<CDKButton> {
     final foregroundColor = _resolveForegroundColor(
         states: states, colors: colors, runtime: runtime);
 
-    final textStyle = TextStyle(
-      fontSize: _fontSize,
-      color: foregroundColor,
-    );
-    final iconTheme =
-        IconThemeData(color: foregroundColor, size: _fontSize + 2);
+    final textStyle = typography.button.copyWith(color: foregroundColor);
+    final fontSize = textStyle.fontSize ?? 12.0;
+    final iconTheme = IconThemeData(color: foregroundColor, size: fontSize + 2);
 
     final Widget buttonContents = IntrinsicWidth(
       child: DecoratedBox(

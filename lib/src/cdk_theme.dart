@@ -269,6 +269,77 @@ class CDKThemeElevationTokens
 }
 
 @immutable
+class CDKThemeTypographyTokens
+    extends material.ThemeExtension<CDKThemeTypographyTokens> {
+  const CDKThemeTypographyTokens({
+    this.caption = const TextStyle(
+      fontSize: 11.0,
+      fontWeight: FontWeight.w400,
+      height: 1.2,
+    ),
+    this.body = const TextStyle(
+      fontSize: 12.0,
+      fontWeight: FontWeight.w400,
+      height: 1.35,
+    ),
+    this.bodyStrong = const TextStyle(
+      fontSize: 12.0,
+      fontWeight: FontWeight.w500,
+      height: 1.35,
+    ),
+    this.title = const TextStyle(
+      fontSize: 13.0,
+      fontWeight: FontWeight.w500,
+      height: 1.3,
+    ),
+    this.button = const TextStyle(
+      fontSize: 12.0,
+      fontWeight: FontWeight.w400,
+      height: 1.2,
+    ),
+  });
+
+  final TextStyle caption;
+  final TextStyle body;
+  final TextStyle bodyStrong;
+  final TextStyle title;
+  final TextStyle button;
+
+  @override
+  CDKThemeTypographyTokens copyWith({
+    TextStyle? caption,
+    TextStyle? body,
+    TextStyle? bodyStrong,
+    TextStyle? title,
+    TextStyle? button,
+  }) {
+    return CDKThemeTypographyTokens(
+      caption: caption ?? this.caption,
+      body: body ?? this.body,
+      bodyStrong: bodyStrong ?? this.bodyStrong,
+      title: title ?? this.title,
+      button: button ?? this.button,
+    );
+  }
+
+  @override
+  CDKThemeTypographyTokens lerp(
+      covariant material.ThemeExtension<CDKThemeTypographyTokens>? other,
+      double t) {
+    if (other is! CDKThemeTypographyTokens) {
+      return this;
+    }
+    return CDKThemeTypographyTokens(
+      caption: TextStyle.lerp(caption, other.caption, t) ?? caption,
+      body: TextStyle.lerp(body, other.body, t) ?? body,
+      bodyStrong: TextStyle.lerp(bodyStrong, other.bodyStrong, t) ?? bodyStrong,
+      title: TextStyle.lerp(title, other.title, t) ?? title,
+      button: TextStyle.lerp(button, other.button, t) ?? button,
+    );
+  }
+}
+
+@immutable
 class CDKThemeRuntimeTokens
     extends material.ThemeExtension<CDKThemeRuntimeTokens> {
   const CDKThemeRuntimeTokens({
@@ -375,6 +446,8 @@ class CDKTheme extends ChangeNotifier {
   static const CDKThemeSpacingTokens spacingTokens = CDKThemeSpacingTokens();
   static const CDKThemeElevationTokens elevationTokens =
       CDKThemeElevationTokens();
+  static const CDKThemeTypographyTokens typographyTokens =
+      CDKThemeTypographyTokens();
 
   CDKThemeColorTokens get colorTokens => CDKThemeColorTokens(
         background: background,
