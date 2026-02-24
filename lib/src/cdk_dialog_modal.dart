@@ -1,8 +1,8 @@
+import 'dart:math' as math;
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'cdk_theme_notifier.dart';
 import 'cdk_dialog_outer_shadow_painter.dart';
-import 'cdk_dialog_popover_clipper.dart';
 import 'cdk_theme.dart';
 
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
@@ -28,83 +28,40 @@ class CDKDialogModal extends StatefulWidget {
 
 class _CDKDialogModalState extends State<CDKDialogModal>
     with SingleTickerProviderStateMixin {
-  final int _animationMillis = 200;
-  AnimationController? animationController;
-  Animation<double>? scaleAnimation;
-  double? width;
-  double? height;
-  bool isSizeDetermined = false;
-  GlobalKey childKey = GlobalKey();
-  Offset position = const Offset(
-      -10000000, -10000000); // Out of view until size is determined
-  Path pathContour = Path();
-  Path pathClip = Path();
+  static const int _animationMillis = 200;
+  static const Duration _resizeAnimationDuration = Duration(milliseconds: 160);
+  static const double _screenPadding = 10.0;
+  static const double _chromePadding = 8.0;
+  static const double _dialogRadius = 8.0;
+
+  AnimationController? _animationController;
+  Animation<double>? _scaleAnimation;
 
   @override
   void initState() {
     super.initState();
 
     if (widget.isAnimated) {
-      animationController = AnimationController(
+      _animationController = AnimationController(
         duration: Duration(milliseconds: _animationMillis),
         vsync: this,
       );
 
-      // Efecte de rebot
-      scaleAnimation = CurvedAnimation(
-        parent: animationController!,
+      _scaleAnimation = CurvedAnimation(
+        parent: _animationController!,
         curve: Curves.easeOutBack,
       );
-    }
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (mounted && childKey.currentContext != null) {
-        final RenderBox childRenderBox =
-            childKey.currentContext!.findRenderObject() as RenderBox;
-        final childSize = childRenderBox.size;
-
-        setState(() {
-          width = childSize.width;
-          height = childSize.height;
-          isSizeDetermined = true;
-
-          final screenSize = MediaQuery.of(context).size;
-          const screenPadding = 10.0;
-
-          double maxHeight = screenSize.height - 2 * screenPadding;
-          double maxWidth = screenSize.width - 2 * screenPadding;
-
-          if (height! > maxHeight) {
-            height = maxHeight;
-          }
-
-          if (width! > maxWidth) {
-            width = maxWidth;
-          }
-
-          var left = (screenSize.width / 2) - (width! / 2);
-          var top = (screenSize.height / 2) - (height! / 2);
-          position = Offset(left, top);
-
-          final rectContour = Rect.fromLTWH(8, 8, width!, height!);
-          pathContour =
-              CDKDialogOuterShadowPainter.createContourPath(rectContour);
-          final rectClip = Rect.fromLTWH(0, 0, width!, height!);
-          pathClip = CDKDialogOuterShadowPainter.createContourPath(rectClip);
-
-          isSizeDetermined = true;
-        });
-
-        if (widget.isAnimated) {
-          animationController!.forward();
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) {
+          _animationController?.forward();
         }
-      }
-    });
+      });
+    }
   }
 
   @override
   void dispose() {
-    animationController?.dispose();
+    _animationController?.dispose();
     super.dispose();
   }
 
@@ -114,69 +71,173 @@ class _CDKDialogModalState extends State<CDKDialogModal>
 
   @override
   Widget build(BuildContext context) {
-    CDKTheme theme = CDKThemeNotifier.of(context)!.changeNotifier;
+    final theme = CDKThemeNotifier.of(context)!.changeNotifier;
+    final mediaQuery = MediaQuery.maybeOf(context);
+    final disableResizeAnimation = mediaQuery?.disableAnimations ?? false;
 
-    Color backgroundColor = !widget.isTranslucent
+    final backgroundColor = !widget.isTranslucent
         ? theme.background
         : theme.isLight
             ? theme.background.withValues(alpha: 0.25)
             : theme.background.withValues(alpha: 0.5);
 
-    Widget dialogContents = Container(
-      key: childKey,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8.0),
+    final dialogContents = DecoratedBox(
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(_dialogRadius)),
       ),
       child: widget.child,
     );
 
-    Widget dialogWithDecorations = !isSizeDetermined
-        ? Container()
-        : Stack(
-            children: [
-              CustomPaint(
-                painter: CDKDialogOuterShadowPainter(
-                    pathContour: pathContour,
-                    colorBackground: backgroundColor,
-                    isLightTheme: theme.isLight),
-                child: Container(),
+    final dialogSurface = _CDKDialogModalSurface(
+      chromePadding: _chromePadding,
+      radius: _dialogRadius,
+      colorBackground: backgroundColor,
+      isLightTheme: theme.isLight,
+      child: !widget.isTranslucent
+          ? dialogContents
+          : ClipRRect(
+              borderRadius: const BorderRadius.all(
+                Radius.circular(_dialogRadius),
               ),
-              Positioned(
-                  top: 8,
-                  left: 8,
-                  child: !widget.isTranslucent
-                      ? dialogContents
-                      : ClipPath(
-                          clipper: CDKPopoverClipper(
-                              pathClip), // Aplica el clip aquí
-                          child: BackdropFilter(
-                            filter: ImageFilter.blur(
-                                sigmaX: 7.5,
-                                sigmaY: 7.5), // Efecte de difuminat
-                            child: dialogContents,
-                          ),
-                        ))
-            ],
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 7.5, sigmaY: 7.5),
+                child: dialogContents,
+              ),
+            ),
+    );
+
+    final resizeAnimatedDialog = disableResizeAnimation
+        ? dialogSurface
+        : AnimatedSize(
+            duration: _resizeAnimationDuration,
+            curve: Curves.easeOut,
+            alignment: Alignment.center,
+            clipBehavior: Clip.hardEdge,
+            child: dialogSurface,
           );
 
-    return !isSizeDetermined
-        ? Positioned(left: position.dx, top: position.dy, child: dialogContents)
-        : Stack(
-            children: [
-              Positioned(
-                  left: position.dx - 8,
-                  top: position.dy - 8,
-                  height: height! + 16,
-                  width: width! + 16,
-                  child: RepaintBoundary(
-                    child: widget.isAnimated && scaleAnimation != null
-                        ? ScaleTransition(
-                            scale: scaleAnimation!,
-                            child: dialogWithDecorations,
-                          )
-                        : dialogWithDecorations,
-                  ))
-            ],
-          );
+    final dialogBody = widget.isAnimated && _scaleAnimation != null
+        ? ScaleTransition(
+            scale: _scaleAnimation!,
+            child: resizeAnimatedDialog,
+          )
+        : resizeAnimatedDialog;
+
+    return Positioned.fill(
+      child: Padding(
+        padding: const EdgeInsets.all(_screenPadding),
+        child: Align(
+          alignment: Alignment.center,
+          child: RepaintBoundary(
+            child: dialogBody,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _CDKDialogModalSurface extends StatelessWidget {
+  const _CDKDialogModalSurface({
+    required this.chromePadding,
+    required this.radius,
+    required this.colorBackground,
+    required this.isLightTheme,
+    required this.child,
+  });
+
+  final double chromePadding;
+  final double radius;
+  final Color colorBackground;
+  final bool isLightTheme;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomPaint(
+      painter: _CDKDialogModalSurfacePainter(
+        chromePadding: chromePadding,
+        radius: radius,
+        colorBackground: colorBackground,
+        isLightTheme: isLightTheme,
+      ),
+      child: Padding(
+        padding: EdgeInsets.all(chromePadding),
+        child: child,
+      ),
+    );
+  }
+}
+
+class _CDKDialogModalSurfacePainter extends CustomPainter {
+  const _CDKDialogModalSurfacePainter({
+    required this.chromePadding,
+    required this.radius,
+    required this.colorBackground,
+    required this.isLightTheme,
+  });
+
+  final double chromePadding;
+  final double radius;
+  final Color colorBackground;
+  final bool isLightTheme;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final contentWidth = math.max(0.0, size.width - (chromePadding * 2));
+    final contentHeight = math.max(0.0, size.height - (chromePadding * 2));
+    final contourRect = Rect.fromLTWH(
+      chromePadding,
+      chromePadding,
+      contentWidth,
+      contentHeight,
+    );
+    final pathContour = _createRoundedContourPath(contourRect);
+
+    _drawShadow(canvas, pathContour, size);
+
+    final paintBack = Paint()
+      ..color = colorBackground
+      ..style = PaintingStyle.fill;
+    canvas.drawPath(pathContour, paintBack);
+
+    final paintLine = Paint()
+      ..strokeWidth = 0.5
+      ..color = isLightTheme ? CDKTheme.grey200 : CDKTheme.grey500
+      ..style = PaintingStyle.stroke;
+    canvas.drawPath(pathContour, paintLine);
+  }
+
+  void _drawShadow(Canvas canvas, Path path, Size size) {
+    canvas.save();
+    final outerPath = Path()
+      ..addRect(Rect.fromLTRB(0, 0, size.width, size.height));
+    final clipPath = Path.combine(PathOperation.difference, outerPath, path);
+    canvas.clipPath(clipPath);
+
+    final shadowColor =
+        isLightTheme ? CDKTheme.black.withValues(alpha: 0.5) : CDKTheme.black;
+    final shadowPaint = Paint()
+      ..color = shadowColor
+      ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 4);
+    canvas.drawShadow(path, shadowPaint.color, 4.0, true);
+    canvas.restore();
+  }
+
+  Path _createRoundedContourPath(Rect rect) {
+    if (radius == 8.0) {
+      return CDKDialogOuterShadowPainter.createContourPath(rect);
+    }
+
+    final borderRadius = Radius.circular(radius);
+    return Path()..addRRect(RRect.fromRectAndRadius(rect, borderRadius));
+  }
+
+  @override
+  bool shouldRepaint(covariant _CDKDialogModalSurfacePainter oldDelegate) {
+    return chromePadding != oldDelegate.chromePadding ||
+        radius != oldDelegate.radius ||
+        colorBackground != oldDelegate.colorBackground ||
+        isLightTheme != oldDelegate.isLightTheme;
   }
 }

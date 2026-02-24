@@ -1,3 +1,7 @@
+## 0.0.17
+
+* Animate dialog size changes
+
 ## 0.0.16
 
 * Fixed web example

@@ -6,12 +6,31 @@ import 'package:flutter/services.dart';
 import 'package:flutter_cupertino_desktop_kit/flutter_cupertino_desktop_kit.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-Widget _testHost({required List<GlobalKey> anchors}) {
+Widget _testHost({
+  required List<GlobalKey> anchors,
+  bool disableAnimations = false,
+}) {
   final theme = CDKTheme()..setAccentColour('systemBlue');
 
   return CDKThemeNotifier(
     changeNotifier: theme,
     child: CupertinoApp(
+      builder: (context, child) {
+        if (child == null) {
+          return const SizedBox.shrink();
+        }
+        if (!disableAnimations) {
+          return child;
+        }
+        final data = MediaQuery.maybeOf(context);
+        if (data == null) {
+          return child;
+        }
+        return MediaQuery(
+          data: data.copyWith(disableAnimations: true),
+          child: child,
+        );
+      },
       home: CupertinoPageScaffold(
         child: Stack(
           children: [
@@ -86,6 +105,69 @@ Finder _findDialogShade() {
         widget is ColoredBox &&
         widget.color == const Color.fromRGBO(96, 96, 96, 0.28),
   );
+}
+
+Rect _findPromptDialogRect(
+  WidgetTester tester, {
+  required String title,
+  required String cancelLabel,
+  required String confirmLabel,
+}) {
+  final titleCenter = tester.getRect(find.text(title)).center;
+  final cancelCenter =
+      tester.getRect(find.widgetWithText(CDKButton, cancelLabel)).center;
+  final confirmCenter =
+      tester.getRect(find.widgetWithText(CDKButton, confirmLabel)).center;
+
+  List<Rect> findCandidateRects(Finder finder) {
+    final rects = <Rect>[];
+    for (final element in finder.evaluate()) {
+      final renderObject = element.renderObject;
+      if (renderObject is! RenderBox || !renderObject.hasSize) {
+        continue;
+      }
+      final rect = renderObject.localToGlobal(Offset.zero) & renderObject.size;
+      if (rect.contains(titleCenter) &&
+          rect.contains(cancelCenter) &&
+          rect.contains(confirmCenter)) {
+        rects.add(rect);
+      }
+    }
+    rects.sort((a, b) => (a.width * a.height).compareTo(b.width * b.height));
+    return rects;
+  }
+
+  final animatedSizeRects = findCandidateRects(find.byType(AnimatedSize));
+  if (animatedSizeRects.isNotEmpty) {
+    return animatedSizeRects.first;
+  }
+
+  final customPaintRects = findCandidateRects(find.byType(CustomPaint));
+  expect(customPaintRects, isNotEmpty);
+  return customPaintRects.first;
+}
+
+void _expectPromptButtonsInsideDialogBounds(
+  WidgetTester tester,
+  Rect dialogRect, {
+  String cancelLabel = 'Cancel',
+  String confirmLabel = 'Confirm',
+}) {
+  final cancelRect =
+      tester.getRect(find.widgetWithText(CDKButton, cancelLabel));
+  final confirmRect =
+      tester.getRect(find.widgetWithText(CDKButton, confirmLabel));
+  const epsilon = 0.01;
+
+  expect(cancelRect.left, greaterThanOrEqualTo(dialogRect.left - epsilon));
+  expect(cancelRect.right, lessThanOrEqualTo(dialogRect.right + epsilon));
+  expect(cancelRect.top, greaterThanOrEqualTo(dialogRect.top - epsilon));
+  expect(cancelRect.bottom, lessThanOrEqualTo(dialogRect.bottom + epsilon));
+
+  expect(confirmRect.left, greaterThanOrEqualTo(dialogRect.left - epsilon));
+  expect(confirmRect.right, lessThanOrEqualTo(dialogRect.right + epsilon));
+  expect(confirmRect.top, greaterThanOrEqualTo(dialogRect.top - epsilon));
+  expect(confirmRect.bottom, lessThanOrEqualTo(dialogRect.bottom + epsilon));
 }
 
 void main() {
@@ -644,6 +726,188 @@ void main() {
     await tester.sendKeyUpEvent(LogicalKeyboardKey.enter);
     await tester.pump();
     expect(await future, 'Layer 1');
+  });
+
+  testWidgets(
+      'Prompt modal keeps actions inside bounds while validation toggles',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(_testHost(anchors: [GlobalKey()]));
+    await tester.pump();
+
+    final context = tester.element(find.byType(CupertinoPageScaffold));
+    final future = CDKDialogsManager.showPrompt(
+      context: context,
+      title: 'Rename',
+      initialValue: 'Layer name',
+      validator: (value) {
+        if (value.trim().length < 3) {
+          return 'Must be at least 3 characters';
+        }
+        return null;
+      },
+    );
+    await tester.pump();
+
+    final initialRect = _findPromptDialogRect(
+      tester,
+      title: 'Rename',
+      cancelLabel: 'Cancel',
+      confirmLabel: 'Confirm',
+    );
+    _expectPromptButtonsInsideDialogBounds(tester, initialRect);
+    expect(find.text('Must be at least 3 characters'), findsNothing);
+
+    await tester.enterText(find.byType(CupertinoTextField), 'ab');
+    await tester.pump();
+
+    final expandedStartRect = _findPromptDialogRect(
+      tester,
+      title: 'Rename',
+      cancelLabel: 'Cancel',
+      confirmLabel: 'Confirm',
+    );
+    _expectPromptButtonsInsideDialogBounds(tester, expandedStartRect);
+    expect(find.text('Must be at least 3 characters'), findsOneWidget);
+
+    await tester.pump(const Duration(milliseconds: 80));
+    final expandedMidRect = _findPromptDialogRect(
+      tester,
+      title: 'Rename',
+      cancelLabel: 'Cancel',
+      confirmLabel: 'Confirm',
+    );
+    _expectPromptButtonsInsideDialogBounds(tester, expandedMidRect);
+
+    await tester.pumpAndSettle();
+    final expandedEndRect = _findPromptDialogRect(
+      tester,
+      title: 'Rename',
+      cancelLabel: 'Cancel',
+      confirmLabel: 'Confirm',
+    );
+    _expectPromptButtonsInsideDialogBounds(tester, expandedEndRect);
+    expect(expandedEndRect.height, greaterThan(initialRect.height));
+    expect(expandedMidRect.height, greaterThan(initialRect.height));
+    expect(expandedMidRect.height, lessThan(expandedEndRect.height));
+
+    await tester.enterText(find.byType(CupertinoTextField), 'Layer name');
+    await tester.pump();
+    expect(find.text('Must be at least 3 characters'), findsNothing);
+
+    final collapsedStartRect = _findPromptDialogRect(
+      tester,
+      title: 'Rename',
+      cancelLabel: 'Cancel',
+      confirmLabel: 'Confirm',
+    );
+    _expectPromptButtonsInsideDialogBounds(tester, collapsedStartRect);
+
+    await tester.pump(const Duration(milliseconds: 80));
+    final collapsedMidRect = _findPromptDialogRect(
+      tester,
+      title: 'Rename',
+      cancelLabel: 'Cancel',
+      confirmLabel: 'Confirm',
+    );
+    _expectPromptButtonsInsideDialogBounds(tester, collapsedMidRect);
+
+    await tester.pumpAndSettle();
+    final collapsedEndRect = _findPromptDialogRect(
+      tester,
+      title: 'Rename',
+      cancelLabel: 'Cancel',
+      confirmLabel: 'Confirm',
+    );
+    _expectPromptButtonsInsideDialogBounds(tester, collapsedEndRect);
+    expect(collapsedEndRect.height, lessThan(expandedEndRect.height));
+    expect(collapsedMidRect.height, greaterThan(collapsedEndRect.height));
+    expect(collapsedMidRect.height, lessThan(expandedEndRect.height));
+
+    await tester.sendKeyDownEvent(LogicalKeyboardKey.escape);
+    await tester.sendKeyUpEvent(LogicalKeyboardKey.escape);
+    await tester.pump();
+    expect(await future, isNull);
+  });
+
+  testWidgets('Prompt modal resize animation respects reduced motion',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(
+      _testHost(
+        anchors: [GlobalKey()],
+        disableAnimations: true,
+      ),
+    );
+    await tester.pump();
+
+    final context = tester.element(find.byType(CupertinoPageScaffold));
+    final future = CDKDialogsManager.showPrompt(
+      context: context,
+      title: 'Rename',
+      initialValue: 'Layer name',
+      validator: (value) {
+        if (value.trim().length < 3) {
+          return 'Must be at least 3 characters';
+        }
+        return null;
+      },
+    );
+    await tester.pump();
+
+    final initialRect = _findPromptDialogRect(
+      tester,
+      title: 'Rename',
+      cancelLabel: 'Cancel',
+      confirmLabel: 'Confirm',
+    );
+
+    await tester.enterText(find.byType(CupertinoTextField), 'ab');
+    await tester.pump();
+    final expandedRect = _findPromptDialogRect(
+      tester,
+      title: 'Rename',
+      cancelLabel: 'Cancel',
+      confirmLabel: 'Confirm',
+    );
+    expect(expandedRect.height, greaterThan(initialRect.height));
+
+    await tester.pump(const Duration(milliseconds: 80));
+    final expandedAfterDelayRect = _findPromptDialogRect(
+      tester,
+      title: 'Rename',
+      cancelLabel: 'Cancel',
+      confirmLabel: 'Confirm',
+    );
+    expect(
+      expandedAfterDelayRect.height,
+      closeTo(expandedRect.height, 0.001),
+    );
+
+    await tester.enterText(find.byType(CupertinoTextField), 'Layer name');
+    await tester.pump();
+    final collapsedRect = _findPromptDialogRect(
+      tester,
+      title: 'Rename',
+      cancelLabel: 'Cancel',
+      confirmLabel: 'Confirm',
+    );
+    expect(collapsedRect.height, lessThan(expandedRect.height));
+
+    await tester.pump(const Duration(milliseconds: 80));
+    final collapsedAfterDelayRect = _findPromptDialogRect(
+      tester,
+      title: 'Rename',
+      cancelLabel: 'Cancel',
+      confirmLabel: 'Confirm',
+    );
+    expect(
+      collapsedAfterDelayRect.height,
+      closeTo(collapsedRect.height, 0.001),
+    );
+
+    await tester.sendKeyDownEvent(LogicalKeyboardKey.escape);
+    await tester.sendKeyUpEvent(LogicalKeyboardKey.escape);
+    await tester.pump();
+    expect(await future, isNull);
   });
 
   testWidgets('showPrompt returns null when canceled with Escape',
