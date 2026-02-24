@@ -128,8 +128,10 @@ final String? name = await CDKDialogsManager.showPrompt(
 );
 // null = canceled, non-null = submitted text
 </code></pre>
-<p>Dialog manager methods use <code>showBackgroundShade: true</code> by default to draw a
-gray blocking backdrop behind the active dialog. Set it to <code>false</code> to disable.</p>
+<p><code>showPopover</code> and <code>showPopoverArrowed</code> default to <code>showBackgroundShade: false</code>.
+<code>showModal</code> and <code>showDraggable</code> default to <code>showBackgroundShade: false</code>.
+<code>showConfirm</code> and <code>showPrompt</code> default to <code>showBackgroundShade: true</code> (gray
+blocking backdrop behind the active dialog). Override per call when needed.</p>
 <h3 id="add-the-library-as-a-dependency-at-pubspecyaml">Add the library as a dependency at pubspec.yaml</h3>
 <pre class="language-yaml"><code class="language-yaml">dependencies:
   flutter:
@@ -211,7 +213,7 @@ flutter run -d macos --enable-impeller
 <footer>
   <span class="no-break">
     flutter_cupertino_desktop_kit
-      0.0.13
+      0.0.15
   </span>
   
 </footer>

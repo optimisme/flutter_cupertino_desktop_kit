@@ -1,3 +1,11 @@
+## 0.0.16
+
+* Fixed web example
+
+## 0.0.15
+
+* Fixed popover shading behaviour
+
 ## 0.0.14
 
 * Added `CDKDialogConfirm` and `CDKDialogPrompt` components.
