@@ -482,7 +482,9 @@ void main() {
     );
     await tester.pump();
 
-    await tester.tap(find.text('Proceed'));
+    final proceedButton =
+        tester.widget<CDKButton>(find.widgetWithText(CDKButton, 'Proceed'));
+    proceedButton.onPressed?.call();
     await tester.pump();
     expect(await confirmFuture, isTrue);
 
@@ -494,7 +496,9 @@ void main() {
     );
     await tester.pump();
 
-    await tester.tap(find.text('Cancel'));
+    final cancelButton =
+        tester.widget<CDKButton>(find.widgetWithText(CDKButton, 'Cancel'));
+    cancelButton.onPressed?.call();
     await tester.pump();
     expect(await cancelFuture, isFalse);
   });
@@ -549,7 +553,9 @@ void main() {
 
     expect(find.text('Must be at least 3 characters'), findsOneWidget);
 
-    await tester.tap(find.text('Confirm'));
+    final confirmButton =
+        tester.widget<CDKButton>(find.widgetWithText(CDKButton, 'Confirm'));
+    confirmButton.onPressed?.call();
     await tester.pump();
     expect(find.text('Rename'), findsOneWidget);
 

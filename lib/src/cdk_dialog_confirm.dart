@@ -46,6 +46,23 @@ class _CDKDialogConfirmState extends State<CDKDialogConfirm> {
   };
 
   bool _didRequestClose = false;
+  late final FocusNode _focusNode = FocusNode(debugLabel: 'CDKDialogConfirm');
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) {
+        _focusNode.requestFocus();
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    super.dispose();
+  }
 
   void _closeOnce(VoidCallback callback) {
     if (_didRequestClose) {
@@ -96,6 +113,7 @@ class _CDKDialogConfirmState extends State<CDKDialogConfirm> {
           ),
         },
         child: Focus(
+          focusNode: _focusNode,
           autofocus: true,
           child: ConstrainedBox(
             constraints: const BoxConstraints(

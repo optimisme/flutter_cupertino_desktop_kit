@@ -178,11 +178,15 @@ class CDKDialogsManager {
       context: context,
       isAnimated: isAnimated,
       isTranslucent: isTranslucent,
-      dismissOnEscape: false,
+      dismissOnEscape: true,
       dismissOnOutsideTap: dismissOnOutsideTap,
       showBackgroundShade: showBackgroundShade,
       controller: controller,
       onHide: () {
+        if (result == null) {
+          result = false;
+          onCancel?.call();
+        }
         if (!completer.isCompleted) {
           completer.complete(result);
         }
@@ -239,11 +243,14 @@ class CDKDialogsManager {
       context: context,
       isAnimated: isAnimated,
       isTranslucent: isTranslucent,
-      dismissOnEscape: false,
+      dismissOnEscape: true,
       dismissOnOutsideTap: dismissOnOutsideTap,
       showBackgroundShade: showBackgroundShade,
       controller: controller,
       onHide: () {
+        if (result == null) {
+          onCancel?.call();
+        }
         if (!completer.isCompleted) {
           completer.complete(result);
         }
