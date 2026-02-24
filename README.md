@@ -52,6 +52,8 @@ final runtime = Theme.of(context).extension<CDKThemeRuntimeTokens>()!;
 - Outside-click closes only dialogs configured with outside-dismiss.
 - Dialog hosts use focus traversal groups for predictable desktop tab-order.
 - Dialog focus is restored to the previous focus node on close.
+- `CDKDialogConfirm`: `Enter` confirms and `Escape` cancels.
+- `CDKDialogPrompt`: text field auto-focuses, `Enter` submits when valid, `Escape` cancels.
 
 ## API Quickstart
 
@@ -60,12 +62,38 @@ final runtime = Theme.of(context).extension<CDKThemeRuntimeTokens>()!;
   `CDKButtonCheckBox`.
 - Dialogs:
   `CDKDialogsManager.showPopover`, `showPopoverArrowed`, `showModal`,
-  `showDraggable`, with `CDKDialogController` for lifecycle.
+  `showDraggable`, `showConfirm`, `showPrompt`, with `CDKDialogController` for lifecycle.
 - Fields:
   `CDKFieldText`, `CDKFieldNumeric`, `CDKFieldNumericSlider`, `CDKFieldColorHex`.
 - Pickers:
   `CDKPickerSlider`, `CDKPickerButtonsSegmented`, `CDKPickerCheckList`,
   `CDKPickerColor`, `CDKPickerThemeColors`.
+
+### Confirm and prompt helpers
+
+```dart
+final bool? confirmed = await CDKDialogsManager.showConfirm(
+  context: context,
+  title: 'Delete file?',
+  message: 'This action cannot be undone.',
+  confirmLabel: 'Delete',
+  isDestructive: true,
+);
+// true = confirmed, false/null = canceled
+
+final String? name = await CDKDialogsManager.showPrompt(
+  context: context,
+  title: 'Rename layer',
+  placeholder: 'Layer name',
+  initialValue: 'Layer 01',
+  validator: (value) =>
+      value.trim().length < 3 ? 'Use at least 3 characters.' : null,
+);
+// null = canceled, non-null = submitted text
+```
+
+Dialog manager methods use `showBackgroundShade: true` by default to draw a
+gray blocking backdrop behind the active dialog. Set it to `false` to disable.
 
 ### Add the library as a dependency at pubspec.yaml
 

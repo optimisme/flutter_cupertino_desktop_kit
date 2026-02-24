@@ -20,11 +20,14 @@ export 'src/cdk_button_sidebar.dart' show CDKButtonSidebar;
 export 'src/cdk_button_switch.dart' show CDKButtonSwitch;
 export 'src/cdk_buttons_up_down.dart' show CDKButtonsUpDown;
 
+export 'src/cdk_dialog_confirm.dart' show CDKDialogConfirm;
 export 'src/cdk_dialog_draggable.dart' show CDKDialogDraggable;
 export 'src/cdk_dialog_modal.dart' show CDKDialogModal;
 export 'src/cdk_dialog_popover.dart'
     show CDKDialogPopover, CDKDialogPopoverType;
 export 'src/cdk_dialog_popover_arrowed.dart' show CDKDialogPopoverArrowed;
+export 'src/cdk_dialog_prompt.dart'
+    show CDKDialogPrompt, CDKPromptSubmit, CDKPromptValidator;
 export 'src/cdk_dialogs_manager.dart'
     show CDKDialogController, CDKDialogsManager;
 

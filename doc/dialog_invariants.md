@@ -8,3 +8,6 @@ These invariants are guaranteed by `CDKDialogsManager` and covered by widget tes
 - Modal dialogs (`showModal`) default to no outside-click dismissal.
 - Focus is moved to the active dialog host on open and restored to the previous focus node on close.
 - If an anchor widget is removed before post-frame positioning, the dialog auto-closes without throwing.
+- `CDKDialogConfirm` maps `Enter` to confirm and `Escape` to cancel.
+- `CDKDialogPrompt` autofocuses the input, validates before submit, and maps `Escape` to cancel.
+- `showBackgroundShade` defaults to `true`, drawing a gray barrier behind the active dialog and blocking background interaction.

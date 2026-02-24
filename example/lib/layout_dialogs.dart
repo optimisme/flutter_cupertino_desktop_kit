@@ -24,6 +24,7 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
   final GlobalKey _anchorArrowed2 = GlobalKey();
   final GlobalKey _anchorArrowed3 = GlobalKey();
   final ValueNotifier<double> _sliderValueNotifier = ValueNotifier(0.5);
+  String _dialogResult = 'Result: none';
 
   _showPopover(BuildContext context, GlobalKey anchorKey, CDKTheme theme,
       bool centered, bool animated, bool translucent) {
@@ -64,13 +65,14 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
     );
   }
 
-  _showModal(
-      BuildContext context, CDKTheme theme, bool animated, bool translucent) {
+  _showModal(BuildContext context, CDKTheme theme, bool animated,
+      bool translucent, bool shaded) {
     final controller = CDKDialogController();
     CDKDialogsManager.showModal(
       context: context,
       isAnimated: animated,
       isTranslucent: translucent,
+      showBackgroundShade: shaded,
       controller: controller,
       onHide: () {
         // ignore: avoid_print
@@ -234,6 +236,69 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
     );
   }
 
+  void _setDialogResult(String value) {
+    if (!mounted) {
+      return;
+    }
+    setState(() {
+      _dialogResult = value;
+    });
+  }
+
+  Future<void> _showConfirmDialog(BuildContext context,
+      {required bool destructive}) async {
+    final result = await CDKDialogsManager.showConfirm(
+      context: context,
+      title: destructive ? 'Delete File?' : 'Apply Changes?',
+      message: destructive
+          ? 'This action cannot be undone.'
+          : 'Do you want to apply changes to this document?',
+      confirmLabel: destructive ? 'Delete' : 'Apply',
+      isDestructive: destructive,
+      onConfirm: () {
+        // ignore: avoid_print
+        print('confirm accepted');
+      },
+      onCancel: () {
+        // ignore: avoid_print
+        print('confirm canceled');
+      },
+    );
+
+    _setDialogResult(
+        'Confirm result: $result (true=confirm, false/null=cancel)');
+  }
+
+  Future<void> _showPromptDialog(BuildContext context) async {
+    final result = await CDKDialogsManager.showPrompt(
+      context: context,
+      title: 'Rename Layer',
+      message: 'Type a name with at least 3 characters.',
+      placeholder: 'Layer name',
+      initialValue: 'Layer 01',
+      confirmLabel: 'Save',
+      validator: (value) {
+        if (value.trim().length < 3) {
+          return 'Name must contain at least 3 characters.';
+        }
+        return null;
+      },
+      onConfirm: (value) {
+        // ignore: avoid_print
+        print('prompt submitted: $value');
+      },
+      onCancel: () {
+        // ignore: avoid_print
+        print('prompt canceled');
+      },
+    );
+
+    final label = result == null
+        ? 'Prompt result: null (cancel)'
+        : 'Prompt result: "$result"';
+    _setDialogResult(label);
+  }
+
   @override
   Widget build(BuildContext context) {
     CDKTheme theme = CDKThemeNotifier.of(context)!.changeNotifier;
@@ -297,7 +362,7 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
               style: CDKButtonStyle.normal,
               isLarge: false,
               onPressed: () {
-                _showModal(context, theme, false, false);
+                _showModal(context, theme, false, false, false);
               },
               child: const Text('Modal'),
             )),
@@ -307,7 +372,7 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
               style: CDKButtonStyle.normal,
               isLarge: false,
               onPressed: () {
-                _showModal(context, theme, true, false);
+                _showModal(context, theme, true, false, false);
               },
               child: const Text('With animation'),
             )),
@@ -317,7 +382,7 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
               style: CDKButtonStyle.normal,
               isLarge: false,
               onPressed: () {
-                _showModal(context, theme, false, true);
+                _showModal(context, theme, false, true, false);
               },
               child: const Text('Translucent'),
             )),
@@ -327,9 +392,19 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
               style: CDKButtonStyle.normal,
               isLarge: false,
               onPressed: () {
-                _showModal(context, theme, true, true);
+                _showModal(context, theme, true, true, false);
               },
               child: const Text('Translucent with animation'),
+            )),
+        Padding(
+            padding: const EdgeInsets.all(8),
+            child: CDKButton(
+              style: CDKButtonStyle.normal,
+              isLarge: false,
+              onPressed: () {
+                _showModal(context, theme, false, false, true);
+              },
+              child: const Text('Modal with shade'),
             )),
       ]),
       const Padding(
@@ -452,6 +527,51 @@ class _LayoutDialogsState extends State<LayoutDialogs> {
           },
         )
       ]),
+      const Padding(
+          padding: EdgeInsets.all(8),
+          child: Text('CDKDialogConfirm + CDKDialogPrompt:')),
+      Wrap(
+        crossAxisAlignment: WrapCrossAlignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8),
+            child: CDKButton(
+              style: CDKButtonStyle.normal,
+              isLarge: false,
+              onPressed: () async {
+                await _showConfirmDialog(context, destructive: false);
+              },
+              child: const Text('Confirm'),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8),
+            child: CDKButton(
+              style: CDKButtonStyle.normal,
+              isLarge: false,
+              onPressed: () async {
+                await _showConfirmDialog(context, destructive: true);
+              },
+              child: const Text('Confirm destructive'),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8),
+            child: CDKButton(
+              style: CDKButtonStyle.normal,
+              isLarge: false,
+              onPressed: () async {
+                await _showPromptDialog(context);
+              },
+              child: const Text('Prompt with validation'),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8),
+            child: Text(_dialogResult, style: const TextStyle(fontSize: 12)),
+          ),
+        ],
+      ),
       const SizedBox(height: 50),
     ]);
   }

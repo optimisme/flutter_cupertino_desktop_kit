@@ -1,10 +1,14 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
 import 'cdk_dialog_draggable.dart';
+import 'cdk_dialog_confirm.dart';
 import 'cdk_dialog_modal.dart';
 import 'cdk_dialog_popover.dart';
 import 'cdk_dialog_popover_arrowed.dart';
+import 'cdk_dialog_prompt.dart';
 
 // Copyright © 2023 Albert Palacios. All Rights Reserved.
 // Licensed under the BSD 3-clause license, see LICENSE file for details.
@@ -81,6 +85,7 @@ class CDKDialogsManager {
     bool isTranslucent = false,
     bool dismissOnEscape = true,
     bool dismissOnOutsideTap = true,
+    bool showBackgroundShade = true,
     VoidCallback? onHide,
     CDKDialogController? controller,
     required Widget child,
@@ -98,6 +103,7 @@ class CDKDialogsManager {
       dismissOnEscape: dismissOnEscape,
       dismissOnOutsideTap: dismissOnOutsideTap,
       captureOutsidePointers: true,
+      showBackgroundShade: showBackgroundShade,
       onHide: onHide,
       controller: controller,
       builder: (requestClose) => CDKDialogPopover(
@@ -119,6 +125,7 @@ class CDKDialogsManager {
     bool isTranslucent = false,
     bool dismissOnEscape = true,
     bool dismissOnOutsideTap = false,
+    bool showBackgroundShade = true,
     VoidCallback? onHide,
     CDKDialogController? controller,
     required Widget child,
@@ -129,6 +136,7 @@ class CDKDialogsManager {
       dismissOnEscape: dismissOnEscape,
       dismissOnOutsideTap: dismissOnOutsideTap,
       captureOutsidePointers: true,
+      showBackgroundShade: showBackgroundShade,
       closeExistingOfKind: true,
       onHide: onHide,
       controller: controller,
@@ -142,6 +150,125 @@ class CDKDialogsManager {
     );
   }
 
+  static Future<bool?> showConfirm({
+    Key? key,
+    required BuildContext context,
+    String? title,
+    required String message,
+    String confirmLabel = 'Confirm',
+    String cancelLabel = 'Cancel',
+    bool isDestructive = false,
+    bool isAnimated = false,
+    bool isTranslucent = false,
+    bool dismissOnOutsideTap = false,
+    bool showBackgroundShade = true,
+    VoidCallback? onConfirm,
+    VoidCallback? onCancel,
+  }) {
+    if (Overlay.maybeOf(context) == null) {
+      return Future<bool?>.value(null);
+    }
+
+    final controller = CDKDialogController();
+    final completer = Completer<bool?>();
+    bool? result;
+
+    showModal(
+      key: key,
+      context: context,
+      isAnimated: isAnimated,
+      isTranslucent: isTranslucent,
+      dismissOnEscape: false,
+      dismissOnOutsideTap: dismissOnOutsideTap,
+      showBackgroundShade: showBackgroundShade,
+      controller: controller,
+      onHide: () {
+        if (!completer.isCompleted) {
+          completer.complete(result);
+        }
+      },
+      child: CDKDialogConfirm(
+        onRequestClose: controller.close,
+        title: title,
+        message: message,
+        confirmLabel: confirmLabel,
+        cancelLabel: cancelLabel,
+        isDestructive: isDestructive,
+        onConfirm: () {
+          result = true;
+          onConfirm?.call();
+        },
+        onCancel: () {
+          result = false;
+          onCancel?.call();
+        },
+      ),
+    );
+
+    return completer.future;
+  }
+
+  static Future<String?> showPrompt({
+    Key? key,
+    required BuildContext context,
+    String? title,
+    String? message,
+    String? placeholder,
+    String? initialValue,
+    String confirmLabel = 'Confirm',
+    String cancelLabel = 'Cancel',
+    CDKPromptValidator? validator,
+    bool isDestructiveConfirm = false,
+    bool isAnimated = false,
+    bool isTranslucent = false,
+    bool dismissOnOutsideTap = false,
+    bool showBackgroundShade = true,
+    ValueChanged<String>? onConfirm,
+    VoidCallback? onCancel,
+  }) {
+    if (Overlay.maybeOf(context) == null) {
+      return Future<String?>.value(null);
+    }
+
+    final controller = CDKDialogController();
+    final completer = Completer<String?>();
+    String? result;
+
+    showModal(
+      key: key,
+      context: context,
+      isAnimated: isAnimated,
+      isTranslucent: isTranslucent,
+      dismissOnEscape: false,
+      dismissOnOutsideTap: dismissOnOutsideTap,
+      showBackgroundShade: showBackgroundShade,
+      controller: controller,
+      onHide: () {
+        if (!completer.isCompleted) {
+          completer.complete(result);
+        }
+      },
+      child: CDKDialogPrompt(
+        onRequestClose: controller.close,
+        title: title,
+        message: message,
+        placeholder: placeholder,
+        initialValue: initialValue,
+        confirmLabel: confirmLabel,
+        cancelLabel: cancelLabel,
+        validator: validator,
+        isDestructiveConfirm: isDestructiveConfirm,
+        onConfirm: (value) {
+          result = value;
+          onConfirm?.call(value);
+        },
+        onCancel: onCancel,
+      ),
+    );
+
+    return completer.future;
+  }
+
   static void showDraggable({
     Key? key,
     required BuildContext context,
@@ -150,6 +277,7 @@ class CDKDialogsManager {
     bool isTranslucent = false,
     bool dismissOnEscape = true,
     bool dismissOnOutsideTap = false,
+    bool showBackgroundShade = true,
     VoidCallback? onHide,
     CDKDialogController? controller,
     required Widget child,
@@ -167,6 +295,7 @@ class CDKDialogsManager {
       dismissOnEscape: dismissOnEscape,
       dismissOnOutsideTap: dismissOnOutsideTap,
       captureOutsidePointers: false,
+      showBackgroundShade: showBackgroundShade,
       onHide: onHide,
       controller: controller,
       builder: (requestClose) => CDKDialogDraggable(
@@ -204,6 +333,7 @@ class CDKDialogsManager {
     bool isTranslucent = false,
     bool dismissOnEscape = true,
     bool dismissOnOutsideTap = true,
+    bool showBackgroundShade = true,
     VoidCallback? onHide,
     CDKDialogController? controller,
     required Widget child,
@@ -221,6 +351,7 @@ class CDKDialogsManager {
       dismissOnEscape: dismissOnEscape,
       dismissOnOutsideTap: dismissOnOutsideTap,
       captureOutsidePointers: true,
+      showBackgroundShade: showBackgroundShade,
       onHide: onHide,
       controller: controller,
       builder: (requestClose) => CDKDialogPopoverArrowed(
@@ -241,6 +372,7 @@ class CDKDialogsManager {
     required bool dismissOnEscape,
     required bool dismissOnOutsideTap,
     required bool captureOutsidePointers,
+    required bool showBackgroundShade,
     bool closeExistingOfKind = false,
     VoidCallback? onHide,
     CDKDialogController? controller,
@@ -289,6 +421,7 @@ class CDKDialogsManager {
         dismissOnEscape: dismissOnEscape,
         dismissOnOutsideTap: dismissOnOutsideTap,
         captureOutsidePointers: captureOutsidePointers,
+        showBackgroundShade: showBackgroundShade,
         isTopMost: _isTopMost,
         onRequestClose: () => closeDialog(cascade: false),
         child: builder(() => closeDialog(cascade: false)),
@@ -386,6 +519,7 @@ class _CDKDialogHost extends StatefulWidget {
     required this.dismissOnEscape,
     required this.dismissOnOutsideTap,
     required this.captureOutsidePointers,
+    required this.showBackgroundShade,
     required this.isTopMost,
     required this.onRequestClose,
     required this.child,
@@ -395,6 +529,7 @@ class _CDKDialogHost extends StatefulWidget {
   final bool dismissOnEscape;
   final bool dismissOnOutsideTap;
   final bool captureOutsidePointers;
+  final bool showBackgroundShade;
   final bool Function(String dialogId) isTopMost;
   final VoidCallback onRequestClose;
   final Widget child;
@@ -449,11 +584,18 @@ class _CDKDialogHostState extends State<_CDKDialogHost> {
   @override
   Widget build(BuildContext context) {
     Widget? outsideLayer;
-    if (widget.captureOutsidePointers) {
+    final shouldBuildBarrier =
+        widget.captureOutsidePointers || widget.showBackgroundShade;
+    if (shouldBuildBarrier) {
       outsideLayer = GestureDetector(
         behavior: HitTestBehavior.translucent,
         onTapDown: (_) => _handleOutsidePointerDown(),
-        child: const SizedBox.expand(),
+        child: ColoredBox(
+          color: widget.showBackgroundShade
+              ? const Color.fromRGBO(96, 96, 96, 0.28)
+              : const Color(0x00000000),
+          child: const SizedBox.expand(),
+        ),
       );
     }
 

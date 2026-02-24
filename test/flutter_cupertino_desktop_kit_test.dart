@@ -466,4 +466,179 @@ void main() {
 
     semanticsHandle.dispose();
   });
+
+  testWidgets('showConfirm returns expected values for button actions',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(_testHost(anchors: [GlobalKey()]));
+    await tester.pump();
+
+    final context = tester.element(find.byType(CupertinoPageScaffold));
+
+    final confirmFuture = CDKDialogsManager.showConfirm(
+      context: context,
+      title: 'Confirm action',
+      message: 'Proceed?',
+      confirmLabel: 'Proceed',
+    );
+    await tester.pump();
+
+    await tester.tap(find.text('Proceed'));
+    await tester.pump();
+    expect(await confirmFuture, isTrue);
+
+    final cancelFuture = CDKDialogsManager.showConfirm(
+      context: context,
+      title: 'Confirm action',
+      message: 'Proceed?',
+      confirmLabel: 'Proceed',
+    );
+    await tester.pump();
+
+    await tester.tap(find.text('Cancel'));
+    await tester.pump();
+    expect(await cancelFuture, isFalse);
+  });
+
+  testWidgets('showConfirm supports Enter and Escape keyboard shortcuts',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(_testHost(anchors: [GlobalKey()]));
+    await tester.pump();
+
+    final context = tester.element(find.byType(CupertinoPageScaffold));
+
+    final enterFuture = CDKDialogsManager.showConfirm(
+      context: context,
+      message: 'Press Enter',
+    );
+    await tester.pump();
+    await tester.sendKeyDownEvent(LogicalKeyboardKey.enter);
+    await tester.sendKeyUpEvent(LogicalKeyboardKey.enter);
+    await tester.pump();
+    expect(await enterFuture, isTrue);
+
+    final escapeFuture = CDKDialogsManager.showConfirm(
+      context: context,
+      message: 'Press Escape',
+    );
+    await tester.pump();
+    await tester.sendKeyDownEvent(LogicalKeyboardKey.escape);
+    await tester.sendKeyUpEvent(LogicalKeyboardKey.escape);
+    await tester.pump();
+    expect(await escapeFuture, isFalse);
+  });
+
+  testWidgets('showPrompt validates input and submits only when valid',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(_testHost(anchors: [GlobalKey()]));
+    await tester.pump();
+
+    final context = tester.element(find.byType(CupertinoPageScaffold));
+
+    final future = CDKDialogsManager.showPrompt(
+      context: context,
+      title: 'Rename',
+      initialValue: 'ab',
+      validator: (value) {
+        if (value.trim().length < 3) {
+          return 'Must be at least 3 characters';
+        }
+        return null;
+      },
+    );
+    await tester.pump();
+
+    expect(find.text('Must be at least 3 characters'), findsOneWidget);
+
+    await tester.tap(find.text('Confirm'));
+    await tester.pump();
+    expect(find.text('Rename'), findsOneWidget);
+
+    await tester.enterText(find.byType(CupertinoTextField), 'Layer 1');
+    await tester.pump();
+    expect(find.text('Must be at least 3 characters'), findsNothing);
+
+    await tester.sendKeyDownEvent(LogicalKeyboardKey.enter);
+    await tester.sendKeyUpEvent(LogicalKeyboardKey.enter);
+    await tester.pump();
+    expect(await future, 'Layer 1');
+  });
+
+  testWidgets('showPrompt returns null when canceled with Escape',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(_testHost(anchors: [GlobalKey()]));
+    await tester.pump();
+
+    final context = tester.element(find.byType(CupertinoPageScaffold));
+
+    final future = CDKDialogsManager.showPrompt(
+      context: context,
+      title: 'Rename',
+      initialValue: 'Layer 1',
+    );
+    await tester.pump();
+
+    await tester.sendKeyDownEvent(LogicalKeyboardKey.escape);
+    await tester.sendKeyUpEvent(LogicalKeyboardKey.escape);
+    await tester.pump();
+
+    expect(await future, isNull);
+  });
+
+  testWidgets('CDKDialogConfirm ESC runs cancel action and closes',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(_testHost(anchors: [GlobalKey()]));
+    await tester.pump();
+
+    final context = tester.element(find.byType(CupertinoPageScaffold));
+    final controller = CDKDialogController();
+    var wasCanceled = false;
+
+    CDKDialogsManager.showModal(
+      context: context,
+      dismissOnEscape: false,
+      controller: controller,
+      child: CDKDialogConfirm(
+        message: 'Confirm close',
+        onCancel: () => wasCanceled = true,
+        onRequestClose: controller.close,
+      ),
+    );
+    await tester.pump();
+
+    await tester.sendKeyDownEvent(LogicalKeyboardKey.escape);
+    await tester.sendKeyUpEvent(LogicalKeyboardKey.escape);
+    await tester.pump();
+
+    expect(wasCanceled, isTrue);
+    expect(find.text('Confirm close'), findsNothing);
+  });
+
+  testWidgets('CDKDialogPrompt ESC runs cancel action and closes',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(_testHost(anchors: [GlobalKey()]));
+    await tester.pump();
+
+    final context = tester.element(find.byType(CupertinoPageScaffold));
+    final controller = CDKDialogController();
+    var wasCanceled = false;
+
+    CDKDialogsManager.showModal(
+      context: context,
+      dismissOnEscape: false,
+      controller: controller,
+      child: CDKDialogPrompt(
+        title: 'Rename Prompt',
+        onCancel: () => wasCanceled = true,
+        onRequestClose: controller.close,
+      ),
+    );
+    await tester.pump();
+
+    await tester.sendKeyDownEvent(LogicalKeyboardKey.escape);
+    await tester.sendKeyUpEvent(LogicalKeyboardKey.escape);
+    await tester.pump();
+
+    expect(wasCanceled, isTrue);
+    expect(find.text('Rename Prompt'), findsNothing);
+  });
 }
