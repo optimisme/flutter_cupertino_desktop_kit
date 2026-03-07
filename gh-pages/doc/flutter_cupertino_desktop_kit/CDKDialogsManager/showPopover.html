@@ -60,6 +60,7 @@
 <li><span class="parameter" id="showPopover-param-anchorKey"><span>required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/widgets/GlobalKey-class.html">GlobalKey</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/widgets/State-class.html">State</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/widgets/StatefulWidget-class.html">StatefulWidget</a></span>&gt;</span></span>&gt;</span></span> <span class="parameter-name">anchorKey</span>, </span></li>
 <li><span class="parameter" id="showPopover-param-type"><span class="type-annotation"><a href="../../flutter_cupertino_desktop_kit/CDKDialogPopoverType.html">CDKDialogPopoverType</a></span> <span class="parameter-name">type</span> = <span class="default-value">CDKDialogPopoverType.center</span>, </span></li>
 <li><span class="parameter" id="showPopover-param-isAnimated"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">isAnimated</span> = <span class="default-value">false</span>, </span></li>
+<li><span class="parameter" id="showPopover-param-animateContentResize"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">animateContentResize</span> = <span class="default-value">true</span>, </span></li>
 <li><span class="parameter" id="showPopover-param-isTranslucent"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">isTranslucent</span> = <span class="default-value">false</span>, </span></li>
 <li><span class="parameter" id="showPopover-param-dismissOnEscape"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">dismissOnEscape</span> = <span class="default-value">true</span>, </span></li>
 <li><span class="parameter" id="showPopover-param-dismissOnOutsideTap"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">dismissOnOutsideTap</span> = <span class="default-value">true</span>, </span></li>
@@ -84,6 +85,7 @@
   required GlobalKey anchorKey,
   CDKDialogPopoverType type = CDKDialogPopoverType.center,
   bool isAnimated = false,
+  bool animateContentResize = true,
   bool isTranslucent = false,
   bool dismissOnEscape = true,
   bool dismissOnOutsideTap = true,
@@ -111,6 +113,7 @@
     builder: (requestClose) =&gt; CDKDialogPopover(
       key: key,
       isAnimated: isAnimated,
+      animateContentResize: animateContentResize,
       type: type,
       isTranslucent: isTranslucent,
       anchorKey: anchorKey,
@@ -146,7 +149,7 @@
 <footer>
   <span class="no-break">
     flutter_cupertino_desktop_kit
-      0.0.15
+      0.0.18
   </span>
   
 </footer>

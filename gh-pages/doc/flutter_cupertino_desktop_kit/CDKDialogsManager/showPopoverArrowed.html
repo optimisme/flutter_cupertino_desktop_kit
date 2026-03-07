@@ -59,6 +59,7 @@
 <li><span class="parameter" id="showPopoverArrowed-param-context"><span>required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/widgets/BuildContext-class.html">BuildContext</a></span> <span class="parameter-name">context</span>, </span></li>
 <li><span class="parameter" id="showPopoverArrowed-param-anchorKey"><span>required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/widgets/GlobalKey-class.html">GlobalKey</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/widgets/State-class.html">State</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/widgets/StatefulWidget-class.html">StatefulWidget</a></span>&gt;</span></span>&gt;</span></span> <span class="parameter-name">anchorKey</span>, </span></li>
 <li><span class="parameter" id="showPopoverArrowed-param-isAnimated"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">isAnimated</span> = <span class="default-value">false</span>, </span></li>
+<li><span class="parameter" id="showPopoverArrowed-param-animateContentResize"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">animateContentResize</span> = <span class="default-value">true</span>, </span></li>
 <li><span class="parameter" id="showPopoverArrowed-param-isTranslucent"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">isTranslucent</span> = <span class="default-value">false</span>, </span></li>
 <li><span class="parameter" id="showPopoverArrowed-param-dismissOnEscape"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">dismissOnEscape</span> = <span class="default-value">true</span>, </span></li>
 <li><span class="parameter" id="showPopoverArrowed-param-dismissOnOutsideTap"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">dismissOnOutsideTap</span> = <span class="default-value">true</span>, </span></li>
@@ -82,6 +83,7 @@
   required BuildContext context,
   required GlobalKey anchorKey,
   bool isAnimated = false,
+  bool animateContentResize = true,
   bool isTranslucent = false,
   bool dismissOnEscape = true,
   bool dismissOnOutsideTap = true,
@@ -110,6 +112,7 @@
       key: key,
       anchorKey: anchorKey,
       isAnimated: isAnimated,
+      animateContentResize: animateContentResize,
       isTranslucent: isTranslucent,
       onHide: requestClose,
       child: child,
@@ -143,7 +146,7 @@
 <footer>
   <span class="no-break">
     flutter_cupertino_desktop_kit
-      0.0.15
+      0.0.18
   </span>
   
 </footer>

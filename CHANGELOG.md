@@ -1,3 +1,7 @@
+## 0.0.19
+
+* Fixed expanded CDKButtonSelect
+
 ## 0.0.18
 
 * Animate dialog size changes (2)

@@ -837,6 +837,107 @@ void main() {
     semanticsHandle.dispose();
   });
 
+  testWidgets('Button select uses natural width when unconstrained',
+      (WidgetTester tester) async {
+    int selectedIndex = 3;
+
+    await tester.pumpWidget(
+      _themeHost(
+        child: StatefulBuilder(
+          builder: (context, setState) {
+            return CDKButtonSelect(
+              options: const [
+                'Short',
+                'Medium width',
+                'Expanded width showcase',
+                'A much longer option for comparison',
+              ],
+              selectedIndex: selectedIndex,
+              onSelected: (index) {
+                setState(() {
+                  selectedIndex = index;
+                });
+              },
+            );
+          },
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    final expandedWidth = tester.getRect(find.byType(CDKButtonSelect)).width;
+
+    await tester.tap(find.byType(CDKButtonSelect));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Short').last);
+    await tester.pumpAndSettle();
+
+    final collapsedWidth = tester.getRect(find.byType(CDKButtonSelect)).width;
+    expect(collapsedWidth, lessThan(expandedWidth));
+  });
+
+  testWidgets(
+      'Button select popover stays at least as wide as an expanded trigger',
+      (WidgetTester tester) async {
+    int selectedIndex = 2;
+
+    await tester.pumpWidget(
+      _themeHost(
+        child: StatefulBuilder(
+          builder: (context, setState) {
+            return SizedBox(
+              width: 220,
+              child: CDKButtonSelect(
+                options: const [
+                  'Short',
+                  'Medium width',
+                  'Expanded width showcase',
+                  'A much longer option for comparison',
+                ],
+                selectedIndex: selectedIndex,
+                onSelected: (index) {
+                  setState(() {
+                    selectedIndex = index;
+                  });
+                },
+              ),
+            );
+          },
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    final triggerRect = tester.getRect(find.byType(CDKButtonSelect));
+    expect(triggerRect.width, closeTo(220.0, 0.001));
+
+    final labelRect = tester.getRect(find.text('Expanded width showcase'));
+    final iconRect =
+        tester.getRect(find.byIcon(CupertinoIcons.chevron_up_chevron_down));
+    final labelLeftGap = labelRect.left - triggerRect.left;
+    final labelRightGap = triggerRect.right - labelRect.right;
+    final iconLeftGap = iconRect.left - triggerRect.left;
+    final iconRightGap = triggerRect.right - iconRect.right;
+
+    expect(labelLeftGap, lessThan(labelRightGap));
+    expect(iconRightGap, lessThan(iconLeftGap));
+
+    await tester.tap(find.byType(CDKButtonSelect));
+    await tester.pumpAndSettle();
+
+    final popoverRect = _findDialogRectContaining(
+      tester,
+      find.text('A much longer option for comparison').last,
+    );
+    expect(popoverRect.width, greaterThanOrEqualTo(triggerRect.width));
+
+    await tester.tap(find.text('Short').last);
+    await tester.pumpAndSettle();
+
+    final updatedTriggerRect = tester.getRect(find.byType(CDKButtonSelect));
+    expect(updatedTriggerRect.width, closeTo(220.0, 0.001));
+  });
+
   testWidgets('showConfirm returns expected values for button actions',
       (WidgetTester tester) async {
     await tester.pumpWidget(_testHost(anchors: [GlobalKey()]));

@@ -54,13 +54,14 @@
 
     <section class="multi-line-signature">
       const
-      <span class="name ">CDKDialogPopover</span>(<wbr>{<ol class="parameter-list"> <li><span class="parameter" id="-param-key"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/foundation/Key-class.html">Key</a>?</span> <span class="parameter-name">key</span>, </span></li>
-<li><span class="parameter" id="-param-anchorKey"><span>required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/widgets/GlobalKey-class.html">GlobalKey</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/widgets/State-class.html">State</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/widgets/StatefulWidget-class.html">StatefulWidget</a></span>&gt;</span></span>&gt;</span></span> <span class="parameter-name">anchorKey</span>, </span></li>
-<li><span class="parameter" id="-param-type"><span class="type-annotation"><a href="../../flutter_cupertino_desktop_kit/CDKDialogPopoverType.html">CDKDialogPopoverType</a></span> <span class="parameter-name">type</span> = <span class="default-value">CDKDialogPopoverType.center</span>, </span></li>
-<li><span class="parameter" id="-param-isAnimated"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">isAnimated</span> = <span class="default-value">false</span>, </span></li>
-<li><span class="parameter" id="-param-isTranslucent"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">isTranslucent</span> = <span class="default-value">false</span>, </span></li>
-<li><span class="parameter" id="-param-onHide"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-ui/VoidCallback.html">VoidCallback</a>?</span> <span class="parameter-name">onHide</span>, </span></li>
-<li><span class="parameter" id="-param-child"><span>required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/widgets/Widget-class.html">Widget</a></span> <span class="parameter-name">child</span>, </span></li>
+      <span class="name ">CDKDialogPopover</span>(<wbr>{<ol class="parameter-list"> <li><span class="parameter" id="param-key"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/foundation/Key-class.html">Key</a>?</span> <span class="parameter-name">key</span>, </span></li>
+<li><span class="parameter" id="param-anchorKey"><span>required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/widgets/GlobalKey-class.html">GlobalKey</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/widgets/State-class.html">State</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/widgets/StatefulWidget-class.html">StatefulWidget</a></span>&gt;</span></span>&gt;</span></span> <span class="parameter-name">anchorKey</span>, </span></li>
+<li><span class="parameter" id="param-type"><span class="type-annotation"><a href="../../flutter_cupertino_desktop_kit/CDKDialogPopoverType.html">CDKDialogPopoverType</a></span> <span class="parameter-name">type</span> = <span class="default-value">CDKDialogPopoverType.center</span>, </span></li>
+<li><span class="parameter" id="param-isAnimated"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">isAnimated</span> = <span class="default-value">false</span>, </span></li>
+<li><span class="parameter" id="param-animateContentResize"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">animateContentResize</span> = <span class="default-value">true</span>, </span></li>
+<li><span class="parameter" id="param-isTranslucent"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">isTranslucent</span> = <span class="default-value">false</span>, </span></li>
+<li><span class="parameter" id="param-onHide"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-ui/VoidCallback.html">VoidCallback</a>?</span> <span class="parameter-name">onHide</span>, </span></li>
+<li><span class="parameter" id="param-child"><span>required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/widgets/Widget-class.html">Widget</a></span> <span class="parameter-name">child</span>, </span></li>
 </ol>})
     </section>
     
@@ -74,6 +75,7 @@
   required this.anchorKey,
   this.type = CDKDialogPopoverType.center,
   this.isAnimated = false,
+  this.animateContentResize = true,
   this.isTranslucent = false,
   this.onHide,
   required this.child,
@@ -105,7 +107,7 @@
 <footer>
   <span class="no-break">
     flutter_cupertino_desktop_kit
-      0.0.15
+      0.0.18
   </span>
   
 </footer>

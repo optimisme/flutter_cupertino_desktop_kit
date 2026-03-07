@@ -58,6 +58,7 @@
 <span class="name ">showModal</span>(<wbr>{<ol class="parameter-list"> <li><span class="parameter" id="showModal-param-key"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/foundation/Key-class.html">Key</a>?</span> <span class="parameter-name">key</span>, </span></li>
 <li><span class="parameter" id="showModal-param-context"><span>required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/widgets/BuildContext-class.html">BuildContext</a></span> <span class="parameter-name">context</span>, </span></li>
 <li><span class="parameter" id="showModal-param-isAnimated"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">isAnimated</span> = <span class="default-value">false</span>, </span></li>
+<li><span class="parameter" id="showModal-param-animateContentResize"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">animateContentResize</span> = <span class="default-value">true</span>, </span></li>
 <li><span class="parameter" id="showModal-param-isTranslucent"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">isTranslucent</span> = <span class="default-value">false</span>, </span></li>
 <li><span class="parameter" id="showModal-param-dismissOnEscape"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">dismissOnEscape</span> = <span class="default-value">true</span>, </span></li>
 <li><span class="parameter" id="showModal-param-dismissOnOutsideTap"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">dismissOnOutsideTap</span> = <span class="default-value">false</span>, </span></li>
@@ -80,6 +81,7 @@
   Key? key,
   required BuildContext context,
   bool isAnimated = false,
+  bool animateContentResize = true,
   bool isTranslucent = false,
   bool dismissOnEscape = true,
   bool dismissOnOutsideTap = false,
@@ -101,6 +103,7 @@
     builder: (requestClose) =&gt; CDKDialogModal(
       key: key,
       isAnimated: isAnimated,
+      animateContentResize: animateContentResize,
       isTranslucent: isTranslucent,
       onHide: requestClose,
       child: child,
@@ -134,7 +137,7 @@
 <footer>
   <span class="no-break">
     flutter_cupertino_desktop_kit
-      0.0.15
+      0.0.18
   </span>
   
 </footer>

@@ -13,6 +13,7 @@ class _LayoutButtonsState extends State<LayoutButtons> {
   int _selectedRadio = 1;
   int _indexButtonSelect0 = 1;
   int _indexButtonSelect1 = 1;
+  int _indexButtonSelectExpanded = 2;
   late Widget _preloadedColorPicker;
   final GlobalKey _anchorColorButton = GlobalKey();
   final ValueNotifier<Color> _valueColorNotifier =
@@ -275,6 +276,25 @@ class _LayoutButtonsState extends State<LayoutButtons> {
                   _indexButtonSelect1 = index;
                 });
               },
+            )),
+        Padding(
+            padding: const EdgeInsets.all(8),
+            child: SizedBox(
+              width: 220,
+              child: CDKButtonSelect(
+                options: const [
+                  'Short',
+                  'Medium width',
+                  'Expanded width showcase',
+                  'A much longer option for comparison',
+                ],
+                selectedIndex: _indexButtonSelectExpanded,
+                onSelected: (int index) {
+                  setState(() {
+                    _indexButtonSelectExpanded = index;
+                  });
+                },
+              ),
             )),
       ]),
       const SizedBox(height: 50),
